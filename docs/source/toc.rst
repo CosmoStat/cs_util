@@ -14,7 +14,7 @@
    :titlesonly:
    :caption: API Documentation
 
-   configure_package_name
+   cs_util
    scripts
    z_ref
 

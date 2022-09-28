@@ -23,8 +23,8 @@ For example, to calculate the luminosity of the Sun:
 import argparse as ap
 import sys
 
-from configure_package_name.example.classes import StefBoltz
-from configure_package_name.example.hello import hello_world
+from cs_util.example.classes import StefBoltz
+from cs_util.example.hello import hello_world
 
 line = '----------------'
 
@@ -56,7 +56,7 @@ def call_hello():
 
     See Also
     --------
-    configure_package_name.example.hello.hello_world : Implementation of the
+    cs_util.example.hello.hello_world : Implementation of the
         ``hello_world`` function.
 
     """
@@ -82,7 +82,7 @@ def call_stefboltz(radius: float, eff_temp: float):
 
     See Also
     --------
-    configure_package_name.example.classes.StefBoltz : Implementation of the ``StefBoltz``
+    cs_util.example.classes.StefBoltz : Implementation of the ``StefBoltz``
         class.
 
     """

@@ -9,12 +9,12 @@ Installation
 Users
 -----
 
-You can install the latest release from `PyPi <https://pypi.org/project/configure_package_name/>`_
+You can install the latest release from `PyPi <https://pypi.org/project/cs_util/>`_
 as follows:
 
 .. code-block:: bash
 
-  pip install configure_package_name
+  pip install cs_util
 
 
 Alternatively clone the repository and build the package locally as follows:
