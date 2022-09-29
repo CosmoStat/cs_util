@@ -162,3 +162,35 @@ def mad(input_data: np.ndarray) -> float:
 
     """
     return np.median(np.abs(input_data - np.median(input_data)))
+
+
+def add_two_floats(first_value: float, second_value: float) -> float:
+    """Add Two Floats.
+
+    Add two float values.
+
+    Parameters
+    ----------
+    first_value : float
+        First float value
+    second_value : float
+        Second float value
+
+    Returns
+    -------
+    float
+        Result of addition
+
+    Raises
+    ------
+    TypeError
+        For invalid input types.
+
+    """
+    fv_is_float = isinstance(first_value, float)
+    sv_is_float = isinstance(second_value, float)
+
+    if not all((fv_is_float, sv_is_float)):
+        raise TypeError('Inputs must be floats.')
+
+    return first_value + second_value
