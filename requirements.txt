@@ -1,7 +1,7 @@
+astropy
+datetime
 importlib_metadata
 numpy
-astropy
 matplotlib
 pycodestyle==2.9.0
 vos
-datetime
