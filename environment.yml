@@ -1,0 +1,8 @@
+name: cs_util
+channels:
+  - conda-forge
+dependencies:
+  - python==3.10
+  - pip>=21
+  - pip:
+    - -r requirements.txt

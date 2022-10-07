@@ -1,6 +1,7 @@
-importlib_metadata==3.1.1
+importlib_metadata
 numpy
 astropy
 matplotlib
+pycodestyle==2.9.0
 vos
 datetime
