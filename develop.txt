@@ -1,5 +1,6 @@
 coverage
 isort
+jinjia2==3.0
 numpydoc
 pytest
 pytest-cov
