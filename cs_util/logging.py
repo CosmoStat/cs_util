@@ -34,29 +34,33 @@ def log_command(argv, name=None, close_no_return=True):
         log file handler (if close_no_return is False)
 
     """
+    # Set log file path
     if name is None:
         name = 'log_' + os.path.basename(argv[0])
-
-    if name == 'sys.stdout':
+    elif name == 'sys.stdout':
         f = sys.stdout
     elif name == 'sys.stderr':
         f = sys.stderr
     else:
         f = open(name, 'w')
 
+    # Loop over arguments
+    log = ''
     for a in argv:
 
         # Quote argument if special characters
         if '[' in a or ']' in a:
             a = f'\"{a}\"'
 
-        print(a, end='', file=f)
-        print(' ', end='', file=f)
+        log = f'{log}{a} '
 
-    print('', file=f)
+    # Write to file except last character (space)
+    print(log[:-1], file=f)
 
+    # Return file handle if required
     if not close_no_return:
         return f
 
+    # Close if proper file
     if name != 'sys.stdout' and name != 'sys.stderr':
         f.close()
