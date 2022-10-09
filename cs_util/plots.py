@@ -13,31 +13,31 @@ import numpy as np
 from matplotlib import pylab as plt
 
 
-def figure(figsize=(30, 30)):                                                   
-    """Figure.                                                                  
-                                                                                
-    Create figure                                                               
-                                                                                
-    Parameters                                                                  
-    ----------                                                                  
-    figsize : tuple, optional                                                   
-        figure size, default is (30, 30)                                        
-                                                                                
-    """                                                                         
-    plt.figure(figsize=figsize, facecolor='none')                               
-                                                                                
-                                                                                
-def savefig(fname):                                                             
-    """Save Figure.                                                             
-                                                                                
-    Save figure to file.                                                        
-                                                                                
-    Parameters                                                                  
-    ----------                                                                  
-    fname : str                                                                 
-        output file name                                                        
-                                                                                
-    """                                                                         
+def figure(figsize=(30, 30)):
+    """Figure.
+
+    Create figure
+
+    Parameters
+    ----------
+    figsize : tuple, optional
+        figure size, default is (30, 30)
+
+    """
+    plt.figure(figsize=figsize, facecolor='none')
+
+
+def savefig(fname):
+    """Save Figure.
+
+    Save figure to file.
+
+    Parameters
+    ----------
+    fname : str
+        output file name
+
+    """
     plt.savefig(fname, facecolor='w', bbox_inches='tight')
 
 
@@ -87,6 +87,12 @@ def plot_histograms(
         labels of vertical lines if not None
     density : bool, optional, default=True
         (normalised) density histogram if True
+
+    Returns
+    -------
+    list
+        values, bins for each histogram call
+
     """
     if weights is None:
         weights = [np.ones_like(x) for x in xs]
@@ -98,13 +104,28 @@ def plot_histograms(
 
     figure(figsize=(15, 10))
 
-    # Histogramsh
+    # Return lists
+    n_arr = []
+    bins_arr = []
+
+    # Histograms
     for x, w, label, color, linestyle in zip(
             xs, weights, labels, colors, linestyles
     ):
-        plt.hist(x, n_bin, weights=w, range=x_range, histtype='step',
-                 color=color, linestyle=linestyle,
-                 linewidth=1, density=density, label=label)
+        n, bins, _ = plt.hist(
+            x,
+            n_bin,
+            weights=w,
+            range=x_range,
+            histtype='step',
+            color=color,
+            linestyle=linestyle,
+            linewidth=1,
+            density=density,
+            label=label
+        )
+        n_arr.append(n)
+        bins_arr.append(bins)
 
     # Horizontal lines
     if vline_x:
@@ -126,141 +147,142 @@ def plot_histograms(
     plt.legend()
     savefig(out_path)
 
+    return n_arr, bins_arr
 
 
-def plot_data_1d(                                                               
-    x,                                                                          
-    y,                                                                          
-    yerr,                                                                       
-    title,                                                                      
-    xlabel,                                                                     
-    ylabel,                                                                     
-    out_path,                                                                   
-    xlog=False,                                                                 
-    ylog=False,                                                                 
-    log=False,                                                                  
-    labels=None,                                                                
-    colors=None,                                                                
-    linestyles=None,                                                            
-    eb_linestyles=None,                                                         
-    linewidths=None,                                                            
-    xlim=None,                                                                  
-    ylim=None                                                                   
-):                                                                              
-    """Plot Data 1D.                                                            
-                                                                                
-    Plot one-dimensional data points with errorbars.                            
-                                                                                
-    Parameters                                                                  
-    ----------                                                                  
-    x, y, yerr : array of array of float                                        
-        data                                                                    
-    title, xlabel, ylabel : string                                              
-        title and labels                                                        
-    out_path : string                                                           
-        output file path                                                        
-    xlog, ylog : bool, optional, default=False                                  
-        logscale on x, y if True                                                
-    labels : list, optional, default=None                                       
-        plot labels, no labels if None                                          
-    color : list, optional, default=None                                        
-        line colors, matplotlib default colors if None                          
-    linestyle : list, optional, default=None                                    
-        linestyle indicators, '-' if None                                       
-    linewidths : list                                                           
-        line widths, default is `2`                                             
-    eb_linestyle : array of string, optional, default=None                      
-        errorbar linestyle indicators, '-' if None                              
-    xlim : array(float, 2), optional, default=None                              
-        x-axis limits, automatic if None                                        
-    ylim : array(float, 2), optional, default=None                              
-        y-axis limits, automatic if None                                        
-    """                                                                         
-    if labels is None:                                                          
-        labels = [''] * len(x)                                                  
-        do_legend = False                                                       
-    else:                                                                       
-        do_legend = True                                                        
-    if colors is None:                                                          
-        prop_cycle = plt.rcParams['axes.prop_cycle']                            
-        colors = prop_cycle.by_key()['color']                                   
-    if linestyles is None:                                                      
-        linestyles = ['-'] * len(x)                                             
-    if eb_linestyles is None:                                                   
-        eb_linestyles = ['-'] * len(x)                                          
-    if linewidths is None:                                                      
+def plot_data_1d(
+    x,
+    y,
+    yerr,
+    title,
+    xlabel,
+    ylabel,
+    out_path,
+    xlog=False,
+    ylog=False,
+    log=False,
+    labels=None,
+    colors=None,
+    linestyles=None,
+    eb_linestyles=None,
+    linewidths=None,
+    xlim=None,
+    ylim=None
+):
+    """Plot Data 1D.
+
+    Plot one-dimensional data points with errorbars.
+
+    Parameters
+    ----------
+    x, y, yerr : array of array of float
+        data
+    title, xlabel, ylabel : string
+        title and labels
+    out_path : string
+        output file path
+    xlog, ylog : bool, optional, default=False
+        logscale on x, y if True
+    labels : list, optional, default=None
+        plot labels, no labels if None
+    color : list, optional, default=None
+        line colors, matplotlib default colors if None
+    linestyle : list, optional, default=None
+        linestyle indicators, '-' if None
+    linewidths : list
+        line widths, default is `2`
+    eb_linestyle : array of string, optional, default=None
+        errorbar linestyle indicators, '-' if None
+    xlim : array(float, 2), optional, default=None
+        x-axis limits, automatic if None
+    ylim : array(float, 2), optional, default=None
+        y-axis limits, automatic if None
+    """
+    if labels is None:
+        labels = [''] * len(x)
+        do_legend = False
+    else:
+        do_legend = True
+    if colors is None:
+        prop_cycle = plt.rcParams['axes.prop_cycle']
+        colors = prop_cycle.by_key()['color']
+    if linestyles is None:
+        linestyles = ['-'] * len(x)
+    if eb_linestyles is None:
+        eb_linestyles = ['-'] * len(x)
+    if linewidths is None:
         linewidths = [2] * len(x)
 
-    figure(figsize=(15, 10))                                                    
-                                                                                
-    for i in range(len(x)):                                                     
-        if np.isnan(yerr[i]).all():                                             
-            eb = plt.plot(                                                      
-                x[i],                                                           
-                y[i],                                                           
-                label=labels[i],                                                
-                color=colors[i],                                                
-                linestyle=linestyles[i],                                        
-            )                                                                   
-        else:                                                                   
-            eb = plt.errorbar(                                                  
-                x[i],                                                           
-                y[i],                                                           
-                yerr=yerr[i],                                                   
-                label=labels[i],                                                
-                color=colors[i],                                                
-                linestyle=linestyles[i],                                        
-                marker='o',                                                     
-                markerfacecolor='none',                                         
-                capsize=4,                                                      
-            )                                                                   
-            eb[-1][0].set_linestyle(eb_linestyles[i])                           
-                                                                                
-    plt.hlines(                                                                 
-        y=0,                                                                    
-        xmin=plt.xlim()[0],                                                     
-        xmax=plt.xlim()[1],                                                     
-        linestyles='dashed',                                                    
-    )                                                                           
-                                                                                
-    if xlog:                                                                    
-        plt.xscale('log')                                                       
-        plt.xticks(                                                             
-            [0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500],                
-            labels=[                                                            
-                '0.1',                                                          
-                '0.2',                                                          
-                '0.5',                                                          
-                '1',                                                            
-                '2',                                                            
-                '5',                                                            
-                '10',                                                           
-                '20',                                                           
-                '50',                                                           
-                '100',                                                          
-                '200',                                                          
-                '500',                                                          
-            ]                                                                   
-        )                                                                       
-    if ylog:                                                                    
-        plt.yscale('log')                                                       
-                                                                                
-    if xlim:                                                                    
-        plt.xlim(xlim)                                                          
-    if ylim:                                                                    
-        plt.ylim(ylim)                                                          
-                                                                                
-    plt.hlines(                                                                 
-        y=0,                                                                    
+    figure(figsize=(15, 10))
+
+    for i in range(len(x)):
+        if np.isnan(yerr[i]).all():
+            eb = plt.plot(
+                x[i],
+                y[i],
+                label=labels[i],
+                color=colors[i],
+                linestyle=linestyles[i],
+            )
+        else:
+            eb = plt.errorbar(
+                x[i],
+                y[i],
+                yerr=yerr[i],
+                label=labels[i],
+                color=colors[i],
+                linestyle=linestyles[i],
+                marker='o',
+                markerfacecolor='none',
+                capsize=4,
+            )
+            eb[-1][0].set_linestyle(eb_linestyles[i])
+
+    plt.hlines(
+        y=0,
         xmin=plt.xlim()[0],
-        xmax=plt.xlim()[1],                                                     
-        linestyles='dashed'                                                     
-    )                                                                           
-                                                                                
-    plt.title(title)                                                            
-    plt.xlabel(xlabel)                                                          
-    plt.ylabel(ylabel)                                                          
-    if do_legend:                                                               
-        plt.legend()                                                            
-                                                                                
+        xmax=plt.xlim()[1],
+        linestyles='dashed',
+    )
+
+    if xlog:
+        plt.xscale('log')
+        plt.xticks(
+            [0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500],
+            labels=[
+                '0.1',
+                '0.2',
+                '0.5',
+                '1',
+                '2',
+                '5',
+                '10',
+                '20',
+                '50',
+                '100',
+                '200',
+                '500',
+            ]
+        )
+    if ylog:
+        plt.yscale('log')
+
+    if xlim:
+        plt.xlim(xlim)
+    if ylim:
+        plt.ylim(ylim)
+
+    plt.hlines(
+        y=0,
+        xmin=plt.xlim()[0],
+        xmax=plt.xlim()[1],
+        linestyles='dashed'
+    )
+
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    if do_legend:
+        plt.legend()
+
     savefig(out_path)
