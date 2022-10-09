@@ -7,6 +7,7 @@
 """
 
 
+import os
 import sys
 
 
@@ -37,12 +38,11 @@ def log_command(argv, name=None, close_no_return=True):
     # Set log file path
     if name is None:
         name = 'log_' + os.path.basename(argv[0])
+        f = open(name, 'w')
     elif name == 'sys.stdout':
         f = sys.stdout
     elif name == 'sys.stderr':
         f = sys.stderr
-    else:
-        f = open(name, 'w')
 
     # Loop over arguments
     log = ''
