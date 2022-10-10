@@ -157,7 +157,7 @@ def plot_data_1d(
     title,
     xlabel,
     ylabel,
-    out_path,
+    out_path=None,
     xlog=False,
     ylog=False,
     log=False,
@@ -179,24 +179,24 @@ def plot_data_1d(
         data
     title, xlabel, ylabel : string
         title and labels
-    out_path : string
-        output file path
-    xlog, ylog : bool, optional, default=False
+    out_path : string, optional
+        output file path, default is ``None``
+    xlog, ylog : bool, optional, default is ``False``
         logscale on x, y if True
-    labels : list, optional, default=None
+    labels : list, optional, default is ``None``
         plot labels, no labels if None
-    color : list, optional, default=None
-        line colors, matplotlib default colors if None
-    linestyle : list, optional, default=None
-        linestyle indicators, '-' if None
+    color : list, optional, default is ``None``
+        line colors, matplotlib default colors if ``None``
+    linestyle : list, optional, default is ``None``
+        linestyle indicators, '-' if ``None``
     linewidths : list
         line widths, default is `2`
-    eb_linestyle : array of string, optional, default=None
-        errorbar linestyle indicators, '-' if None
+    eb_linestyle : array of string, optional, default is ``None``
+        errorbar linestyle indicators, '-' if ``None``
     xlim : array(float, 2), optional, default=None
-        x-axis limits, automatic if None
-    ylim : array(float, 2), optional, default=None
-        y-axis limits, automatic if None
+        x-axis limits, automatic if ``None``
+    ylim : array(float, 2), optional, default is ``None``
+        y-axis limits, automatic if ``None``
     """
     if labels is None:
         labels = [''] * len(x)
@@ -285,4 +285,5 @@ def plot_data_1d(
     if do_legend:
         plt.legend()
 
-    savefig(out_path)
+    if out_path:
+        savefig(out_path)

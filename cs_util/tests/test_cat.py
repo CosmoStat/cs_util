@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""UNIT TESTS FOR LOGGING SUBPACKAGE.
+"""UNIT TESTS FOR CAT SUBPACKAGE.
 
-This module contains unit tests for the logging subpackage.
+This module contains unit tests for the cat subpackage.
 
 """
 
