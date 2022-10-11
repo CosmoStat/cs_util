@@ -31,8 +31,6 @@ class CatTestCase(TestCase):
         self._R_select = np.array([[0.1, 0.2], [0.0, -0.15]])
         self._c = np.array([-0.001, 2.1e-5])
 
-        self._out_path = 'test.fits'
-
 
     def tearDown(self):
         """Unset test parameter values."""
@@ -44,7 +42,6 @@ class CatTestCase(TestCase):
         self._R_select = None
         self._c = None
 
-        os.remove(self._out_path)
         self._out_path = None
 
     def test_write_header_info_sp(self):

@@ -13,7 +13,7 @@ from numpy import testing as npt
 
 from unittest import TestCase
 
-from cs_util import cat
+from cs_util import calc
 
 
 class CatTestCase(TestCase):
@@ -30,11 +30,8 @@ class CatTestCase(TestCase):
         self._x = None
         self._w = None
 
-        os.remove(self._out_path)
-        self._out_path = None
-
     def test_weighted_avg_and_std(self):
         """Test ``cs_util.weighted_avg_and_std`` method.
 
         """
-        mean, std = calc.weighted_mean_and_std(self._x, self._w)
+        mean, std = calc.weighted_avg_and_std(self._x, self._w)
