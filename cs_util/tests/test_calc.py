@@ -37,4 +37,4 @@ class CatTestCase(TestCase):
         """Test ``cs_util.weighted_avg_and_std`` method.
 
         """
-       mean, std = calc.weighted_mean_and_std(self._x, self._w)
+        mean, std = calc.weighted_mean_and_std(self._x, self._w)
