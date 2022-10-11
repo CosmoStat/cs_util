@@ -8,10 +8,12 @@
 
 """
 
+import os
+from datetime import datetime                                                   
 from astropy.io import fits
 
 
-def write_header_info_sp(primary_header):
+def write_header_info_sp(primary_header, name='unknown', version='unknown'):
     """Write Header Info sp_validation.
 
     Write information about software and run to FITS header
@@ -20,6 +22,15 @@ def write_header_info_sp(primary_header):
     ----------
     primary_header : dict
        FITS header information
+    name : str
+        software name, default is 'unknown'
+    version : str
+        version, default is 'unknown'
+
+    Returns
+    -------
+    dict
+        updated FITS header information
 
     """
     if 'USER' in os.environ:
@@ -27,8 +38,8 @@ def write_header_info_sp(primary_header):
     else:
         author = 'unknown'
     primary_header['AUTHOR'] = (author, 'Who ran the software')
-    primary_header['SOFTNAME'] = (__name__, 'Name of the software')
-    primary_header['SOFTVERS'] = (__version__, 'Version of the software')
+    primary_header['SOFTNAME'] = (name, 'Name of the software')
+    primary_header['SOFTVERS'] = (version, 'Version of the software')
     primary_header['DATE'] = (
         datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
         'When it was started',

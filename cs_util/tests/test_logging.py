@@ -1,22 +1,22 @@
-# -*- coding: utf-8 -*-                                                         
-                                                                                
+# -*- coding: utf-8 -*-
+
 """UNIT TESTS FOR LOGGING SUBPACKAGE.
-                                                                                
-This module contains unit tests for the logging subpackage.                     
-                                                                                
-"""                                                                             
-                                                                                
-from unittest import TestCase                                                   
-                                                                                
-from numpy import testing as npt                                                
+
+This module contains unit tests for the logging subpackage.
+
+"""
+
+from unittest import TestCase
+
+from numpy import testing as npt
 import os
 import sys
-                                                                                
+
 from cs_util import logging
 
 
-class ClassesTestCase(TestCase):                                                
-    """Test case for the ``logging`` module.""" 
+class LoggingTestCase(TestCase):
+    """Test case for the ``logging`` module."""
 
     def setUp(self):
         """Set test parameter values."""
@@ -34,16 +34,16 @@ class ClassesTestCase(TestCase):
         self._log_file_path = 'log_test'
 
 
-    def tearDown(self):                                                         
+    def tearDown(self):
         """Unset test parameter values."""
         self._argv = None
         os.remove(self._log_file_path)
         self._log_file_path = None
 
-    def test_argv(self):
-        """Test ``cs_util.logging.log_command`` method with 
+    def test_log_command(self):
+        """Test ``cs_util.logging.log_command`` method with
             argument string.
-        
+
         """
         # Test log file content
 
@@ -61,7 +61,7 @@ class ClassesTestCase(TestCase):
         # Mask special characters
         argv_list = []
         for a in self._argv:
-            if '[' in a or ']' in a:                                                
+            if '[' in a or ']' in a:
                 a = f'\"{a}\"'
             argv_list.append(a)
 
