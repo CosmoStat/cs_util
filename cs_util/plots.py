@@ -39,6 +39,7 @@ def savefig(fname):
 
     """
     plt.savefig(fname, facecolor='w', bbox_inches='tight')
+    plt.close()
 
 
 def plot_histograms(
