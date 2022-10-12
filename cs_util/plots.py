@@ -9,8 +9,8 @@
 """
 
 
+import matplotlib.pylab as plt
 import numpy as np
-from matplotlib import pylab as plt
 
 
 def figure(figsize=(30, 30)):
@@ -205,6 +205,7 @@ def plot_data_1d(
         x-axis limits, automatic if ``None``
     ylim : array(float, 2), optional, default is ``None``
         y-axis limits, automatic if ``None``
+
     """
     if labels is None:
         labels = [''] * len(x)

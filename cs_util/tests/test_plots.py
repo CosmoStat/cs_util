@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""UNIT TESTS FOR CALC SUBPACKAGE.
+"""UNIT TESTS FOR PLOTS SUBPACKAGE.
 
-This module contains unit tests for the calc subpackage.
+This module contains unit tests for the plotsw subpackage.
 
 """
 
@@ -13,7 +13,7 @@ from numpy import testing as npt
 
 from unittest import TestCase
 
-from cs_util import calc
+from cs_util import calc, plots
 
 
 class CalcTestCase(TestCase):
