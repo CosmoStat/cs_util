@@ -1,6 +1,7 @@
 astropy
 datetime
 importlib_metadata
+jinja2
 numpy
 matplotlib
 pycodestyle==2.9.0
