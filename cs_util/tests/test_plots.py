@@ -69,7 +69,9 @@ class PlotsTestCase(TestCase):
         """Test ``cs_util.plot_histograms`` method.
 
         """
-        for vline_x, vline_lab in ((None, 1.2), (None, 'vlab')):
+        vline_x_arr = [None, [1.2]]
+        vline_lab_arr = [None, ['vlab']]
+        for vline_x, vline_lab in zip(vline_x_arr, vline_lab_arr):
             n_arr, bins = plots.plot_histograms(
                 [self._x],
                 ['hist 1'],
