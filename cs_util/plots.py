@@ -23,8 +23,15 @@ def figure(figsize=(30, 30)):
     figsize : tuple, optional
         figure size, default is (30, 30)
 
+    Returns
+    -------
+    matplotlib.figure.Figure
+        figure object
+
     """
-    plt.figure(figsize=figsize, facecolor='none')
+    fig = plt.figure(figsize=figsize, facecolor='none')
+
+    return fig
 
 
 def savefig(fname):
