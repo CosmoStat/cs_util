@@ -1,8 +1,8 @@
 coverage
 isort
-jinja2==3.0
+jinja2==2.11
 numpydoc
 pytest
 pytest-cov
-pytest-pycodestyle
+pytest-pycodestyle==2.9.0
 pytest-pydocstyle
