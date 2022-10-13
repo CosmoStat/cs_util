@@ -4,5 +4,5 @@ importlib_metadata
 jinja2==2.11
 numpy
 matplotlib
-pycodestyle==2.9.0
+pycodestyle
 vos
