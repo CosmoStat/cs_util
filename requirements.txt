@@ -3,6 +3,7 @@ datetime
 importlib_metadata
 jinja2==2.11
 numpy
+markupsafe==2.0.1                                                               
 matplotlib
 pycodestyle
 sphinxawesome_theme
