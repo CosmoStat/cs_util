@@ -6,7 +6,7 @@ numpy
 matplotlib
 pycodestyle
 sphinxawesome_theme
-sphinxcontrib.bibtex
+#sphinxcontrib.bibtex
 nbsphinx
 nbsphinx_link
 numpydoc
