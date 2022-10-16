@@ -75,7 +75,7 @@ docs/source/fortuna.*
 docs/source/scripts.*
 docs/source/*.nblink
 docs/source/modules.rst
-docs/source/cs_util.*.rst
+docs/source/cs_util*.rst
 
 # PyBuilder
 .pybuilder/
