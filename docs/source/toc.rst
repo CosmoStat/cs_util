@@ -23,8 +23,6 @@
   :titlesonly:
   :caption: Examples
 
-  notebooks
-
 .. toctree::
   :hidden:
   :titlesonly:

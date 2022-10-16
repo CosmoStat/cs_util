@@ -169,7 +169,7 @@ def add_notebooks(nb_path='../../notebooks'):
 
 
 # Add notebooks
-add_notebooks()
+#add_notebooks()
 
 binder = 'https://mybinder.org/v2/gh'
 binder_badge = 'https://mybinder.org/badge_logo.svg'
