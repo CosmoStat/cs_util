@@ -1,0 +1,16 @@
+scripts
+=======
+
+
+.. automodule:: scripts
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+List of Scripts
+---------------
+
+.. toctree::
+   :maxdepth: 4
+
+   scripts.example_script

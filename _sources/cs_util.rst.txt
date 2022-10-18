@@ -1,0 +1,27 @@
+cs\_util
+========
+
+
+.. automodule:: cs_util
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cs_util.tests
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cs_util.calc
+   cs_util.cat
+   cs_util.logging
+   cs_util.plots

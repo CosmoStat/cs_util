@@ -1,0 +1,7 @@
+scripts.example\_script
+-----------------------
+
+.. automodule:: scripts.example_script
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,18 @@
+cs\_util.tests
+==============
+
+
+.. automodule:: cs_util.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cs_util.tests.test_cat
+   cs_util.tests.test_logging
+   cs_util.tests.test_plots

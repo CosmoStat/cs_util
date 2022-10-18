@@ -1,0 +1,7 @@
+cs\_util.tests.test\_plots
+--------------------------
+
+.. automodule:: cs_util.tests.test_plots
+   :members:
+   :undoc-members:
+   :show-inheritance:

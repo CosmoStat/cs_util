@@ -1,0 +1,7 @@
+cs\_util.tests.test\_cat
+------------------------
+
+.. automodule:: cs_util.tests.test_cat
+   :members:
+   :undoc-members:
+   :show-inheritance:

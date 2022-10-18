@@ -1,0 +1,7 @@
+cs\_util.tests.test\_logging
+----------------------------
+
+.. automodule:: cs_util.tests.test_logging
+   :members:
+   :undoc-members:
+   :show-inheritance:

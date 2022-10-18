@@ -1,0 +1,7 @@
+cs\_util.calc
+-------------
+
+.. automodule:: cs_util.calc
+   :members:
+   :undoc-members:
+   :show-inheritance:
