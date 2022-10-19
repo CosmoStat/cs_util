@@ -77,6 +77,13 @@ docs/source/*.nblink
 docs/source/modules.rst
 docs/source/cs_util*.rst
 
+docs/.*
+docs/_*
+docs/*.html
+docs/*.js
+install_for_api_doc
+
+
 # PyBuilder
 .pybuilder/
 target/
