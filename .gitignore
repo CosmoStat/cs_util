@@ -82,6 +82,7 @@ docs/_*
 docs/*.html
 docs/*.js
 install_for_api_doc
+docs/objects.inv
 
 
 # PyBuilder
