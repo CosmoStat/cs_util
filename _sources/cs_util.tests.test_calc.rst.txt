@@ -1,0 +1,7 @@
+cs\_util.tests.test\_calc
+-------------------------
+
+.. automodule:: cs_util.tests.test_calc
+   :members:
+   :undoc-members:
+   :show-inheritance:

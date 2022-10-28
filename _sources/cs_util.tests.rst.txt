@@ -13,6 +13,7 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   cs_util.tests.test_calc
    cs_util.tests.test_cat
    cs_util.tests.test_logging
    cs_util.tests.test_plots
