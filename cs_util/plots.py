@@ -223,7 +223,8 @@ def plot_data_1d(
     if linewidths is None:
         linewidths = [2] * len(x)
 
-    figure(figsize=(15, 10))
+    if out_path:
+        figure(figsize=(15, 10))
 
     for i in range(len(x)):
         if np.isnan(yerr[i]).all():
