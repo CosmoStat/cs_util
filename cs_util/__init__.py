@@ -35,3 +35,4 @@ except Exception:  # pragma: no cover
         'Could not extract package metadata. Make sure the package is '
         + 'correctly installed.',
     )
+__version__ = _version
