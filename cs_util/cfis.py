@@ -64,9 +64,9 @@ def get_tile_coord_from_nixy(nix, niy):
 
     Parameters
     ----------
-    nix : str, int, or list
+    nix : str or list
         tile number(s) for x
-    niy : str, int, or list
+    niy : str or list
         tile number(s) for y
 
     See also
@@ -79,8 +79,9 @@ def get_tile_coord_from_nixy(nix, niy):
         right ascension and declination
 
     """
+    # Transform to int
     if not np.isscalar(nix):
-        # Transform to int
+        # Transform to list
         xi = np.array(nix).astype(int)
         yi = np.array(niy).astype(int)
     else:
