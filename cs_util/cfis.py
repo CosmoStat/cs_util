@@ -31,7 +31,7 @@ def get_tile_number(tile_name):
 
     Parameters
     ----------
-    str
+    str : tile_name
         tile name
 
     Raises
@@ -64,10 +64,10 @@ def get_tile_coord_from_nixy(nix, niy):
 
     Parameters
     ----------
-    nix : str or int
-        tile number for x, can be list
-    niy : str or int
-        tile number for y, can be list
+    nix : str, int, or list
+        tile number(s) for x
+    niy : str, int, or list
+        tile number(s) for y
 
     See also
     --------

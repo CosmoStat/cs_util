@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """UNIT TESTS FOR CFIS SUBPACKAGE.
 
 This module contains unit tests for the cfis subpackage.
@@ -45,15 +43,11 @@ class CfisTestCase(TestCase):
         self._tile_number_nok = None
 
     def test_Cfis(self):
-        """Test ``cs_util.Cfis`` class.
-
-        """
+        """Test ``cs_util.Cfis`` class."""
         self.assertTrue(self._size_tile == cfis.Cfis().size['tile'])
 
     def test_get_tile_number(self):
-        """Test ``cs_util.get_tile_number`` method.
-
-        """
+        """Test ``cs_util.get_tile_number`` method."""
 
         # Test return values for valid input tile numbers
         for idx, tile_number_ok in enumerate(self._tile_number_ok):
@@ -70,9 +64,7 @@ class CfisTestCase(TestCase):
         )
 
     def test_get_tile_coord_from_nixy(self):
-        """Test ``cs_util.get_tile_coord_from_nixy`` method.
-
-        """
+        """Test ``cs_util.get_tile_coord_from_nixy`` method."""
 
         # Call with scalar arguments
         for idx in range(len(self._nix)):
