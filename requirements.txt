@@ -1,6 +1,5 @@
 astropy
 datetime
-jinja2==3.0
 numpy
 matplotlib
 vos
