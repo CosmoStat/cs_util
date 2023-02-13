@@ -213,9 +213,10 @@ class CosmoTestCase(TestCase):
         # Test return unit
         npt.assert_equal(
             sigma_crit_m1_eff.unit,
-            (1 / self._sigma_crit_unit).unit)
+            (1 / self._sigma_crit_unit).unit
+        )
 
-        # Test exception
+        # Test exception when redshift array lengths inconsistent
         self.assertRaises(
             IndexError,
             cosmo.sigma_crit_m1_eff,
@@ -263,4 +264,3 @@ class CosmoTestCase(TestCase):
             self._sigma_crit_value_eff_m1,
             decimal=3,
         )
-
