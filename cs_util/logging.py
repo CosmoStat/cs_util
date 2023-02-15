@@ -1,6 +1,7 @@
 """LOGGING.
 
-:Description: This script contains utility methods for job execution and progress logging.
+:Description: This script contains utility methods for job execution and
+progress logging.
 
 :Author: Martin Kilbinger <martin.kilblinger@cea.fr>
 

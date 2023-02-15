@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """UNIT TESTS FOR COSMO SUBPACKAGE.
 
 This module contains unit tests for the cosmo subpackage.

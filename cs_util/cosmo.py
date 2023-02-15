@@ -15,6 +15,7 @@ from astropy import constants
 from astropy import units
 
 
+
 def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
     """Critical surface mass density.
 
@@ -26,16 +27,16 @@ def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
         source redshift
     cosmo : pyccl.core.Cosmology
         cosmological parameters
-    d_lens : astropy.Quantity, optional
+    d_lens : astropy.units.Quantity, optional
         precomputed anguar diameter distance to lens, computed from z_lens
         if ``None`` (default)
-    d_source : astropy.Quantity, optional
+    d_source : astropy.units.Quantity, optional
         precomputed anguar diameter distance to sourcce, computed from z_source
         if ``None`` (default)
 
     Returns
     -------
-    astropy.Quantity
+    astropy.units.Quantity
         critical surface mass density with units of M_sol / pc^2
 
     """
@@ -86,13 +87,13 @@ def sigma_crit_eff(
         number of galaxies at z_source
     cosmo : pyccl.core.Cosmology
         cosmological parameters
-    d_lens : astropy.Quantity, optional
+    d_lens : astropy.units.Quantity, optional
         precomputed anguar diameter distance to lens;
         computed from z_lens if ``None`` (default)
     d_source_arr : list, optional
         precompuated angular diameter distances to sources;
         computed from z_source_arr if ``None`` (default);
-        needs to be list of astropy.Quantity
+        needs to be list of astropy.units.Quantity
 
     Raises
     ------
@@ -102,7 +103,7 @@ def sigma_crit_eff(
 
     Returns
     -------
-    astropy.Quantity
+    astropy.units.Quantity
         effective critical surface mass density with units of M_sol / pc^2
 
     """
@@ -160,13 +161,13 @@ def sigma_crit_m1_eff(
         number of galaxies at z_source
     cosmo : pyccl.core.Cosmology
         cosmological parameters
-    d_lens : astropy.Quantity, optional
+    d_lens : astropy.units.Quantity, optional
         precomputed anguar diameter distance to lens;
         computed from z_lens if ``None`` (default)
     d_source_arr : float, optional
         precomputed anguar diameter distance to sources;
         computed from z_source_arr if ``None`` (default);
-        needs to be list of astropy.Quantity
+        needs to be list of astropy.units.Quantity
 
     Raises
     ------
@@ -176,7 +177,7 @@ def sigma_crit_m1_eff(
 
     Returns
     -------
-    astropy.Quantity
+    astropy.units.Quantity
         effective inverse critical surface mass density with units of
         M_sol / pc^2
 
