@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """UNIT TESTS FOR CANFAR SUBPACKAGE.
 
 This module contains unit tests for the canfar subpackage.
