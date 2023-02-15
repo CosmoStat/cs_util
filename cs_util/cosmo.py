@@ -1,4 +1,4 @@
-"""COSMO
+"""COSMO.
 
 :Name: cosmo.py
 
