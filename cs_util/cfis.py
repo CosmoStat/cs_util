@@ -31,7 +31,7 @@ def get_tile_number(tile_name):
 
     Parameters
     ----------
-    str : tile_name
+    tile_name : str
         tile name
 
     Raises
