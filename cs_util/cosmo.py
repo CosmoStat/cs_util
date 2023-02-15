@@ -150,6 +150,7 @@ def sigma_crit_m1_eff(
 ):
     """Effective inverse critical surface mass density, which
     is sigma_crit^{-1}(z_lens, z_source) weighted by nz_source.
+    See Eq. (17) in :cite:`2004AJ....127.2544S`.
 
     Parameters
     ----------
