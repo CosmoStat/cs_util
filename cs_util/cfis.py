@@ -65,9 +65,9 @@ def get_tile_coord_from_nixy(nix, niy):
     Parameters
     ----------
     nix : str or list
-        tile number(s) for x
+        tile number(s) for x coordinate(s);
     niy : str or list
-        tile number(s) for y
+        tile number(s) for y coordinate(s)
 
     See also
     --------
@@ -79,12 +79,25 @@ def get_tile_coord_from_nixy(nix, niy):
         right ascension and declination
 
     """
-    # Transform to int
+    number_pattern = re.compile(r'\d{3}')
+
+    # Transform from str to int
     if not np.isscalar(nix):
+        # Check input numbers
+        if not all(
+            [bool(number_pattern.fullmatch(number)) for number in nix + niy]
+        ):
+            raise ValueError('Input needs to be three-digit numbers')
+
         # Transform to list
         xi = np.array(nix).astype(int)
         yi = np.array(niy).astype(int)
     else:
+        if not all(
+            [bool(number_pattern.fullmatch(number)) for number in [nix, niy]]
+        ):
+            raise ValueError('Input needs to be three-digit numbers')
+
         xi = int(nix)
         yi = int(niy)
 

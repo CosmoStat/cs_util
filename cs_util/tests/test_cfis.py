@@ -30,6 +30,7 @@ class CfisTestCase(TestCase):
         self._ra = [216.86237, 214.43017]
         self._unit = units.deg
 
+        self._nix_nok = ['23x', '1234']
         self._tile_number_nok = '12x.456'
 
     def tearDown(self):
@@ -109,3 +110,23 @@ class CfisTestCase(TestCase):
             # Test units
             self.assertTrue(ra[idx].unit == self._unit)
             self.assertTrue(dec[idx].unit == self._unit)
+
+        # Test exception for invalid input
+        self.assertRaises(
+            ValueError,
+            cfis.get_tile_coord_from_nixy,
+            self._nix_nok,
+            self._niy,
+        )
+        self.assertRaises(
+            ValueError,
+            cfis.get_tile_coord_from_nixy,
+            self._niy,
+            self._nix_nok,
+        )
+        self.assertRaises(
+            ValueError,
+            cfis.get_tile_coord_from_nixy,
+            self._nix_nok[0],
+            self._niy[0],
+        )
