@@ -7,7 +7,7 @@ import os
 # Set the package release version
 major = 0
 minor = 0
-patch = 4
+patch = 3
 
 # Set the package details
 name = 'cs_util'
