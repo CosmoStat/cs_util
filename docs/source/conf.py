@@ -214,9 +214,10 @@ nbsphinx_prolog = nb_header_pt1 + nb_header_pt2
 # Refer to the package libraries for type definitions
 intersphinx_mapping = {
     'python': ('http://docs.python.org/3', None),
+    'astropy': ('https://docs.astropy.org/en/stable/index.html', None),
     'numpy': ('https://numpy.org/doc/stable/', None),
     'scipy': ('https://docs.scipy.org/doc/scipy/reference', None),
-    'matplotlib': ('https://matplotlib.org', None)
+    'matplotlib': ('https://matplotlib.org', None),
 }
 
 # -- BibTeX Setting  ----------------------------------------------
