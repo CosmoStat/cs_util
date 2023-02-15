@@ -190,8 +190,6 @@ class CosmoTestCase(TestCase):
         )
 
 
-
-
     def test_sigma_crit_m1_eff(self):
         """Test ``cs_util.cosmo.sigma_crit_m1_eff`` method.
 
