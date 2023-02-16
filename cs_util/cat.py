@@ -4,7 +4,7 @@
 
 :Description: This script contains methods to read and write galaxy catalogues.
 
-:Author: Martin Kilbinger
+:Author: Martin Kilbinger <martin.kilbinger@cea.fr>
 
 """
 
