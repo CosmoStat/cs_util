@@ -1,4 +1,4 @@
-"""COSMO
+"""COSMO.
 
 :Name: cosmo.py
 
@@ -15,6 +15,7 @@ from astropy import constants
 from astropy import units
 
 
+
 def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
     """Critical surface mass density.
 
@@ -26,16 +27,16 @@ def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
         source redshift
     cosmo : pyccl.core.Cosmology
         cosmological parameters
-    d_lens : float, optional
+    d_lens : astropy.units.Quantity, optional
         precomputed anguar diameter distance to lens, computed from z_lens
-        if `None` (default)
-    d_source : float, optional
+        if ``None`` (default)
+    d_source : astropy.units.Quantity, optional
         precomputed anguar diameter distance to sourcce, computed from z_source
-        if `None` (default)
+        if ``None`` (default)
 
     Returns
     -------
-    Quantity
+    astropy.units.Quantity
         critical surface mass density with units of M_sol / pc^2
 
     """
@@ -67,11 +68,11 @@ def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
 
 def sigma_crit_eff(
     z_lens,
-    z_source,
-    nz_source,
+    z_source_arr,
+    nz_source_arr,
     cosmo,
     d_lens=None,
-    d_source=None
+    d_source_arr=None,
 ):
     """Effective critical surface mass density, which
     is sigma_crit(z_lens, z_source) weighted by nz_source.
@@ -80,33 +81,51 @@ def sigma_crit_eff(
     ----------
     z_lens : float
         lens redshift
-    z_source : list
+    z_source_arr : list
         source redshifts
-    nz_source : list
+    nz_source_arr : list
         number of galaxies at z_source
     cosmo : pyccl.core.Cosmology
         cosmological parameters
-    d_lens : float, optional
-        precomputed anguar diameter distance to lens, computed from z_lens
-        if `None` (default)
+    d_lens : astropy.units.Quantity, optional
+        precomputed anguar diameter distance to lens;
+        computed from z_lens if ``None`` (default)
+    d_source_arr : list, optional
+        precompuated angular diameter distances to sources;
+        computed from z_source_arr if ``None`` (default);
+        needs to be list of astropy.units.Quantity
 
     Raises
     ------
     IndexError
-        If lists ``z_source`` and ``nz_source`` do not match
+        If lists ``z_source_arr``, ``nz_source_arr``, and d_source_arr
+        do not match
 
     Returns
     -------
-    Quantity
+    astropy.units.Quantity
         effective critical surface mass density with units of M_sol / pc^2
 
     """
-    if len(z_source) != len(nz_source):
-        raise IndexError('Lists for source z an n(z) have different lenghts')
+    n_source = len(z_source_arr)
+
+    if d_source_arr is None:
+        d_source_arr = [None] * n_source
+
+    if (len(nz_source_arr) != n_source) or (len(d_source_arr) != n_source):
+        raise IndexError(
+            'Lists for source z, n(z), and/or d_ang have different lenghts'
+        )
 
     sigma_cr_arr = []
-    for z_s, nz_s in zip(z_source, nz_source):
-        sigma_cr = sigma_crit(z_lens, z_s, cosmo, d_lens=d_lens)
+    for idx in range(n_source):
+        sigma_cr = sigma_crit(
+            z_lens,
+            z_source_arr[idx],
+            cosmo,
+            d_lens=d_lens,
+            d_source=d_source_arr[idx]
+        )
 
         # Get unit
         if len(sigma_cr_arr) == 0:
@@ -116,59 +135,75 @@ def sigma_crit_eff(
 
     # Mean sigma_cr weighted by source redshifts.
     # np.average can only deal with unitless quantities.
-    sigma_cr_eff = np.average(sigma_cr_arr, weights=nz_source)
+    sigma_cr_eff = np.average(sigma_cr_arr, weights=nz_source_arr)
 
     return sigma_cr_eff * unit
 
 
 def sigma_crit_m1_eff(
     z_lens,
-    z_source,
-    nz_source,
+    z_source_arr,
+    nz_source_arr,
     cosmo,
     d_lens=None,
-    d_source=None
+    d_source_arr=None,
 ):
     """Effective inverse critical surface mass density, which
     is sigma_crit^{-1}(z_lens, z_source) weighted by nz_source.
+    See Eq. (17) in :cite:`2004AJ....127.2544S`.
 
     Parameters
     ----------
     z_lens : float
         lens redshift
-    z_source : list
+    z_source_arr : list
         source redshifts
-    nz_source : list
+    nz_source_arr : list
         number of galaxies at z_source
     cosmo : pyccl.core.Cosmology
         cosmological parameters
-    d_lens : float, optional
-        precomputed anguar diameter distance to lens, computed from z_lens
-        if `None` (default)
-    d_source : float, optional
-        precomputed anguar diameter distance to sourcce, computed from z_source
-        if `None` (default)
+    d_lens : astropy.units.Quantity, optional
+        precomputed anguar diameter distance to lens;
+        computed from z_lens if ``None`` (default)
+    d_source_arr : float, optional
+        precomputed anguar diameter distance to sources;
+        computed from z_source_arr if ``None`` (default);
+        needs to be list of astropy.units.Quantity
 
     Raises
     ------
     IndexError
-        If lists ``z_source`` and ``nz_source`` do not match
+        If lists ``z_source_arr``, ``nz_source_arr``, and ``d_source_arr``
+        do not match
 
     Returns
     -------
-    Quantity
+    astropy.units.Quantity
         effective inverse critical surface mass density with units of
         M_sol / pc^2
 
     """
-    if len(z_source) != len(nz_source):
-        raise IndexError('Lists for source z an n(z) have different lenghts')
+    n_source = len(z_source_arr)
+
+    if d_source_arr is None:
+        d_source_arr = [None] * n_source
+
+    if (len(nz_source_arr) != n_source) or (len(d_source_arr) != n_source):
+        raise IndexError(
+            'Lists for source z, n(z), and/or d_ang have different lenghts'
+        )
 
     sigma_cr_m1_arr = []
     weights = []
 
-    for z_s, nz_s in zip(z_source, nz_source):
-        sigma_cr = sigma_crit(z_lens, z_s, cosmo)
+    for idx in range(n_source):
+        sigma_cr = sigma_crit(
+            z_lens,
+            z_source_arr[idx],
+            cosmo,
+            d_lens=d_lens,
+            d_source=d_source_arr[idx]
+        )
 
         # Get unit
         if len(sigma_cr_m1_arr) == 0:
@@ -181,7 +216,7 @@ def sigma_crit_m1_eff(
         sigma_cr_m1 = 1 / sigma_cr
 
         sigma_cr_m1_arr.append(sigma_cr_m1.value)
-        weights.append(nz_s)
+        weights.append(nz_source_arr[idx])
 
     sigma_cr_m1_eff = np.average(sigma_cr_m1_arr, weights=weights)
 
