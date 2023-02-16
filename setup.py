@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
 import os
@@ -7,7 +6,7 @@ import os
 # Set the package release version
 major = 0
 minor = 0
-patch = 2
+patch = 3
 
 # Set the package details
 name = 'cs_util'
