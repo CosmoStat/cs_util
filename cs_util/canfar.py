@@ -12,12 +12,7 @@ import sys
 from contextlib import redirect_stdout
 from io import StringIO
 
-try:
-    import vos.commands as vosc
-except ImportError:  # pragma: no cover
-    import_fail = True
-else:
-    import_fail = False
+import vos.commands as vosc
 
 
 class vosError(Exception):
@@ -162,8 +157,8 @@ def dir_list(path, verbose=False):
 
     Returns
     -------
-    vls_out : array of str
-        file or directory at path
+    list
+        file or directory at path, type is str
 
     """
     cmd = 'vls'
