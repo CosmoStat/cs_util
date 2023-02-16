@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """UNIT TESTS FOR COSMO SUBPACKAGE.
 
 This module contains unit tests for the cosmo subpackage.
@@ -12,7 +10,6 @@ import numpy as np
 import pyccl as ccl
 
 from astropy import units
-from astropy.cosmology import FlatLambdaCDM
 
 from numpy import testing as npt
 
@@ -40,6 +37,13 @@ class CosmoTestCase(TestCase):
         self._sigma_crit_unit = units.Msun / units.pc**2
         self._d_source = 1617.9195 * units.Mpc
         self._d_lens = 1315.3937 * units.Mpc
+
+        self._d_source_arr = [
+            1157.82363726,
+            1440.63922894,
+            1617.91952285,
+            1678.82870081
+        ] * units.Mpc
 
     def tearDown(self):
         """Unset test parameter values."""
@@ -78,7 +82,7 @@ class CosmoTestCase(TestCase):
         )
         npt.assert_equal(sigma_crit, 0 * self._sigma_crit_unit)
 
-        # Test without default arguments
+        # Test changing default arguments
         sigma_crit = cosmo.sigma_crit(
             self._z_lens,
             self._z_source,
@@ -137,14 +141,54 @@ class CosmoTestCase(TestCase):
         npt.assert_equal(sigma_crit_eff.unit, self._sigma_crit_unit)
 
         # Test exception
-        self.assertRaises(                                                      
-            IndexError,                                                         
+        self.assertRaises(
+            IndexError,
             cosmo.sigma_crit_eff,
             self._z_lens,
-            self._z_source_arr[:-1],                                                 
-            self._nz_source_arr,                                                
+            self._z_source_arr[:-1],
+            self._nz_source_arr,
             self._cosmo,
         )
+        
+        # Test changing default arguments
+        sigma_crit_eff = cosmo.sigma_crit_eff(
+            self._z_lens,
+            self._z_source_arr,
+            self._nz_source_arr,
+            self._cosmo,
+            d_source_arr=self._d_source_arr,
+        )
+        npt.assert_almost_equal(
+            sigma_crit_eff.value,
+            self._sigma_crit_value_eff,
+            decimal=3,
+        )
+        sigma_crit_eff = cosmo.sigma_crit_eff(
+            self._z_lens,
+            self._z_source_arr,
+            self._nz_source_arr,
+            self._cosmo,
+            d_lens=self._d_lens,
+        )
+        npt.assert_almost_equal(
+            sigma_crit_eff.value,
+            self._sigma_crit_value_eff,
+            decimal=3,
+        )
+        sigma_crit_eff = cosmo.sigma_crit_eff(
+            self._z_lens,
+            self._z_source_arr,
+            self._nz_source_arr,
+            self._cosmo,
+            d_lens=self._d_lens,
+            d_source_arr=self._d_source_arr,
+        )
+        npt.assert_almost_equal(
+            sigma_crit_eff.value,
+            self._sigma_crit_value_eff,
+            decimal=3,
+        )
+
 
     def test_sigma_crit_m1_eff(self):
         """Test ``cs_util.cosmo.sigma_crit_m1_eff`` method.
@@ -165,14 +209,54 @@ class CosmoTestCase(TestCase):
         # Test return unit
         npt.assert_equal(
             sigma_crit_m1_eff.unit,
-            (1 / self._sigma_crit_unit).unit)
+            (1 / self._sigma_crit_unit).unit
+        )
 
-        # Test exception
-        self.assertRaises(                                                      
-            IndexError,                                                         
+        # Test exception when redshift array lengths inconsistent
+        self.assertRaises(
+            IndexError,
             cosmo.sigma_crit_m1_eff,
             self._z_lens,
-            self._z_source_arr[:-1],                                                 
-            self._nz_source_arr,                                                
+            self._z_source_arr[:-1],
+            self._nz_source_arr,
             self._cosmo,
+        )
+
+        # Test changing default arguments
+        sigma_crit_m1_eff = cosmo.sigma_crit_m1_eff(
+            self._z_lens,
+            self._z_source_arr,
+            self._nz_source_arr,
+            self._cosmo,
+            d_source_arr=self._d_source_arr,
+        )
+        npt.assert_almost_equal(
+            sigma_crit_m1_eff.value,
+            self._sigma_crit_value_eff_m1,
+            decimal=3,
+        )
+        sigma_crit_m1_eff = cosmo.sigma_crit_m1_eff(
+            self._z_lens,
+            self._z_source_arr,
+            self._nz_source_arr,
+            self._cosmo,
+            d_lens=self._d_lens,
+        )
+        npt.assert_almost_equal(
+            sigma_crit_m1_eff.value,
+            self._sigma_crit_value_eff_m1,
+            decimal=3,
+        )
+        sigma_crit_m1_eff = cosmo.sigma_crit_m1_eff(
+            self._z_lens,
+            self._z_source_arr,
+            self._nz_source_arr,
+            self._cosmo,
+            d_lens=self._d_lens,
+            d_source_arr=self._d_source_arr,
+        )
+        npt.assert_almost_equal(
+            sigma_crit_m1_eff.value,
+            self._sigma_crit_value_eff_m1,
+            decimal=3,
         )
