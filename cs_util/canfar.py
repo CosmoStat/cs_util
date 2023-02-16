@@ -39,24 +39,8 @@ class vosHandler:
 
     def __init__(self, command):
 
-        self._check_vos_install()
         self._avail_commands = tuple(vosc.__all__)
         self.command = command
-
-    @staticmethod
-    def _check_vos_install():
-        """Check VOS Install.
-
-        Check if VOS is correctly installed.
-
-        Raises
-        ------
-        ImportError
-            if vos package cannot be imported
-
-        """
-        if import_fail:
-            raise ImportError('vos package not found')
 
     @property
     def command(self):
