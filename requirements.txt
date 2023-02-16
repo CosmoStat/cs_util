@@ -2,4 +2,5 @@ astropy
 datetime
 numpy
 matplotlib
+pyccl
 vos
