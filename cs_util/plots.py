@@ -200,7 +200,7 @@ def plot_data_1d(
         linestyle indicators, '-' if ``None``
     linewidths : list
         line widths, default is `2`
-    eb_linestyle : array of string, optional, default is ``None``
+    eb_linestyles : array of string, optional, default is ``None``
         errorbar linestyle indicators, '-' if ``None``
     xlim : array(float, 2), optional, default=None
         x-axis limits, automatic if ``None``
