@@ -58,8 +58,6 @@ line-length = 88
 
 [tool.pydocstyle]
 convention = "numpy"
-# Only run docstyle tests on module init files until documentation cleaned up
-match = "__init__.py"
 
 [tool.pytest.ini_options]
 addopts = "--verbose --black --pydocstyle --cov=cs_util"
