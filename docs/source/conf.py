@@ -9,12 +9,8 @@ from importlib_metadata import metadata
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-<<<<<<< HEAD
 sys.path.insert(0, os.path.abspath('../..'))
-=======
-sys.path.insert(0, os.path.abspath("../.."))
-sys.path.insert(0, os.path.abspath("../../scripts"))
->>>>>>> ef280f928cd930c825aced97580ebb2123e06a73
+sys.path.insert(0, os.path.abspath('../..'))
 
 # -- General configuration ------------------------------------------------
 
