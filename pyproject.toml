@@ -1,0 +1,69 @@
+[project]
+name = "cs_util"
+readme = "README.md"
+requires-python = ">=3.7"
+authors = [
+    { "name" = "The CosmoStat Lab" },
+]
+maintainers = [
+    { "name" = "Martin Kilbinger", "email" = "martin.kilbinger@cea.fr" },
+]
+dynamic = ["version"] #, "description"]
+license = { "file" = "LICENSE" }
+keywords = ["CosmoStat", "cosmology", "weak gravitational lensing"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "astropy>=4.0",
+    "datetime>=4.7",
+    "jinja2==3.0",
+    "matplotlib>=3.3",
+    "numpy>=1.19",
+    "vos>=3.3",
+]
+
+[project.optional-dependencies]
+lint = [
+    "black",
+]
+release = [
+    "build",
+    "twine",
+]
+test = [
+  "pytest",
+  "pytest-black",
+  "pytest-cov",
+  "pytest-pydocstyle",
+]
+
+# Install for development
+dev = ["cs_util[lint,release,test]"]
+
+[project.urls]
+Source = "https://github.com/CosmoStat/cs_util"
+Documentation = "https://github.com/CosmoStat/cs_util"
+Tracker = "https://github.com/CosmoStat/cs_util/issues"
+
+[tool.black]
+line-length = 88
+
+[tool.pydocstyle]
+convention = "numpy"
+
+[tool.pytest.ini_options]
+addopts = "--verbose --black --pydocstyle --cov=cs_util"
+testpaths = ["cs_util"]
+
+[tool.setuptools.dynamic]
+version = {attr = "cs_util.__version__"}
