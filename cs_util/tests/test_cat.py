@@ -20,15 +20,14 @@ class CatTestCase(TestCase):
     def setUp(self):
         """Set test parameter values."""
         self._primary_header = {}
-        self._keys = ['AUTHOR', 'SOFTNAME', 'SOFTVERS', 'DATE']
+        self._keys = ["AUTHOR", "SOFTNAME", "SOFTVERS", "DATE"]
 
-        self._keys_matrix = ['R_', 'R_g', 'R_S']
-        self._keys_c = ['c']
+        self._keys_matrix = ["R_", "R_g", "R_S"]
+        self._keys_c = ["c"]
         self._R = np.array([[0.5, 0.7], [-0.2, 1.2]])
         self._R_shear = np.array([[0.4, 0.6], [-0.1, 1.1]])
         self._R_select = np.array([[0.1, 0.2], [0.0, -0.15]])
         self._c = np.array([-0.001, 2.1e-5])
-
 
     def tearDown(self):
         """Unset test parameter values."""
@@ -43,42 +42,34 @@ class CatTestCase(TestCase):
         self._out_path = None
 
     def test_write_header_info_sp(self):
-        """Test ``cs_util.write_header_info_sp`` method.
-
-        """
+        """Test ``cs_util.write_header_info_sp`` method."""
         primary_header = cat.write_header_info_sp(self._primary_header)
         for key in self._keys:
             self.assertTrue(key in primary_header, msg=key)
 
     def test_add_shear_bias_to_header(self):
-        """Test ``cs_util.add_shear_bias_to_header`` method.
-
-        """
+        """Test ``cs_util.add_shear_bias_to_header`` method."""
         primary_header = self._primary_header
         cat.add_shear_bias_to_header(
-            primary_header,
-            self._R,
-            self._R_shear,
-            self._R_select,
-            self._c
+            primary_header, self._R, self._R_shear, self._R_select, self._c
         )
 
         for key_base in self._keys_matrix:
-            if key_base == 'R_':
-                key = 'R'
+            if key_base == "R_":
+                key = "R"
             else:
                 key = key_base
             self.assertTrue(key in primary_header, msg=key)
             for idx in (1, 2):
                 for jdx in (1, 2):
-                    key = f'{key_base}{idx}{jdx}'
+                    key = f"{key_base}{idx}{jdx}"
                     self.assertTrue(key in primary_header, msg=key)
 
             for idx in (1, 2):
                 for jdx in (1, 2):
-                    key = f'R_{idx}{jdx}'
+                    key = f"R_{idx}{jdx}"
                     npt.assert_equal(
-                        self._R[idx-1, jdx-1],
+                        self._R[idx - 1, jdx - 1],
                         primary_header[key][0],
-                        f'Incorrect value for {key}'
+                        f"Incorrect value for {key}",
                     )
