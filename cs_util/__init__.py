@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """cs_util PACKAGE.
 
 Provide a basic description of what your package contains.

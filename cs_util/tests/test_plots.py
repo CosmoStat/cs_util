@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """UNIT TESTS FOR PLOTS SUBPACKAGE.
 
 This module contains unit tests for the plots subpackage.

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """UNIT TESTS FOR CAT SUBPACKAGE.
 
 This module contains unit tests for the cat subpackage.
