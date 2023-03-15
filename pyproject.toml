@@ -62,7 +62,7 @@ convention = "numpy"
 match = "__init__.py"
 
 [tool.pytest.ini_options]
-addopts = "--verbose --black --pydocstyle --cov=pycs"
+addopts = "--verbose --black --pydocstyle --cov=cs_util"
 testpaths = ["pycs"]
 
 [tool.setuptools.dynamic]
