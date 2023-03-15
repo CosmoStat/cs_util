@@ -26,7 +26,7 @@ import sys
 from cs_util.example.classes import StefBoltz
 from cs_util.example.hello import hello_world
 
-line = '----------------'
+line = "----------------"
 
 
 def get_args():
@@ -40,10 +40,14 @@ def get_args():
     """
     parser = ap.ArgumentParser()
     parser.add_argument(
-        '--radius', type=float, help='Radius in meters.',
+        "--radius",
+        type=float,
+        help="Radius in meters.",
     )
     parser.add_argument(
-        '--eff_temp', type=float, help='Effective temperature in Kelvin.',
+        "--eff_temp",
+        type=float,
+        help="Effective temperature in Kelvin.",
     )
 
     return parser.parse_args()
@@ -61,10 +65,10 @@ def call_hello():
 
     """
     print(line)
-    print('Example 1')
-    print('Call hello_world')
+    print("Example 1")
+    print("Call hello_world")
     print(line)
-    print('Result:', hello_world())
+    print("Result:", hello_world())
 
 
 def call_stefboltz(radius: float, eff_temp: float):
@@ -89,10 +93,10 @@ def call_stefboltz(radius: float, eff_temp: float):
     luminosity = StefBoltz(radius, eff_temp).luminosity()
 
     print(line)
-    print('Example 2')
-    print('Call StefBoltz')
+    print("Example 2")
+    print("Call StefBoltz")
     print(line)
-    print('Result:', 'The luminosity is {0:.2e}w.'.format(luminosity))
+    print("Result:", "The luminosity is {0:.2e}w.".format(luminosity))
 
 
 def run_steps():

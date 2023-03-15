@@ -33,25 +33,19 @@ class CatTestCase(TestCase):
         self._w = None
 
     def test_weighted_avg_and_std(self):
-        """Test ``cs_util.calc.weighted_avg_and_std`` method.
-
-        """
+        """Test ``cs_util.calc.weighted_avg_and_std`` method."""
         mean_w, std_w_uncor = calc.weighted_avg_and_std(self._x, self._w)
-        npt.assert_almost_equal(mean_w, self._mean_w, err_msg='weighted means differ')
+        npt.assert_almost_equal(mean_w, self._mean_w, err_msg="weighted means differ")
         npt.assert_almost_equal(
             std_w_uncor,
             self._std_w_uncor,
-            err_msg='uncorrected weighted std differ',
+            err_msg="uncorrected weighted std differ",
         )
 
-        mean_w, std_w_cor = calc.weighted_avg_and_std(
-            self._x,
-            self._w,
-            corrected=True
-        )
-        npt.assert_almost_equal(mean_w, self._mean_w, err_msg='weighted means differ')
+        mean_w, std_w_cor = calc.weighted_avg_and_std(self._x, self._w, corrected=True)
+        npt.assert_almost_equal(mean_w, self._mean_w, err_msg="weighted means differ")
         npt.assert_almost_equal(
             std_w_cor,
             self._std_w_cor,
-            err_msg='corrected weighted std differ',
+            err_msg="corrected weighted std differ",
         )

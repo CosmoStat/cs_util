@@ -36,24 +36,23 @@ def log_command(argv, name=None, close_no_return=True):
 
     """
     # Set log file path
-    if name == 'sys.stdout':
+    if name == "sys.stdout":
         f = sys.stdout
-    elif name == 'sys.stderr':
+    elif name == "sys.stderr":
         f = sys.stderr
     else:
         if name is None:
-            name = 'log_' + os.path.basename(argv[0])
-        f = open(name, 'w')
+            name = "log_" + os.path.basename(argv[0])
+        f = open(name, "w")
 
     # Loop over arguments
-    log = ''
+    log = ""
     for a in argv:
-
         # Quote argument if special characters
-        if '[' in a or ']' in a:
-            a = f'\"{a}\"'
+        if "[" in a or "]" in a:
+            a = f'"{a}"'
 
-        log = f'{log}{a} '
+        log = f"{log}{a} "
 
     # Write to file except last character (space)
     print(log[:-1], file=f)
@@ -63,5 +62,5 @@ def log_command(argv, name=None, close_no_return=True):
         return f
 
     # Close if proper file
-    if not name in ('sys.stdout', 'sys.stderr'):
+    if not name in ("sys.stdout", "sys.stderr"):
         f.close()

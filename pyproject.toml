@@ -46,12 +46,14 @@ test = [
   "pytest-cov",
   "pytest-pydocstyle",
 ]
+
+# Install for development
 dev = ["cs_util[lint,release,test]"]
 
 [project.urls]
-Source = "https://github.com/CosmoStat/cosmostat"
-Documentation = "https://github.com/CosmoStat/cosmostat"
-Tracker = "https://github.com/CosmoStat/cosmostat/issues"
+Source = "https://github.com/CosmoStat/cs_util"
+Documentation = "https://github.com/CosmoStat/cs_util"
+Tracker = "https://github.com/CosmoStat/cs_util/issues"
 
 [tool.black]
 line-length = 88
@@ -61,7 +63,7 @@ convention = "numpy"
 
 [tool.pytest.ini_options]
 addopts = "--verbose --black --pydocstyle --cov=cs_util"
-testpaths = ["pycs"]
+testpaths = ["cs_util"]
 
 [tool.setuptools.dynamic]
 version = {attr = "cs_util.__version__"}
