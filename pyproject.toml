@@ -46,7 +46,7 @@ test = [
   "pytest-cov",
   "pytest-pydocstyle",
 ]
-dev = ["pycs[lint,release,test]"]
+dev = ["cs_util[lint,release,test]"]
 
 [project.urls]
 Source = "https://github.com/CosmoStat/cosmostat"
