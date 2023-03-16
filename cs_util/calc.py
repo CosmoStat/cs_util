@@ -1,10 +1,10 @@
-"""CALC.                                                                       
-                                                                                
-:Name: calc.py                                                                 
-                                                                                
+"""CALC.
+
+:Name: calc.py
+
 :Description: This file contains methods for general calculations
               and statistics.
-                                                                                
+
 :Author: Martin Kilbinger <martin.kilbinger@cea.fr>
 
 """
