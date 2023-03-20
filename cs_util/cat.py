@@ -11,6 +11,7 @@
 import os
 from datetime import datetime
 from astropy.io import fits
+from astropy.io import ascii
 
 
 def write_header_info_sp(primary_header, name="unknown", version="unknown"):
@@ -129,3 +130,33 @@ def write_fits_BinTable_file(
 
     hdu_list = fits.HDUList([primary_hdu, table_hdu])
     hdu_list.writeto(output_path, overwrite=True)
+
+
+def read_dndz(file_path):                                                       
+    """Read Dndz.                                                               
+                                                                                
+    Read redshift histogram from file.                                          
+                                                                                
+    Parameters                                                                  
+    ----------                                                                  
+    file_path : str                                                             
+        input file path                                                         
+                                                                                
+    Returns                                                                     
+    -------                                                                     
+    list :                                                                      
+        redshift bin centers                                                    
+    list :                                                                      
+        number densities                                                        
+    list :                                                                      
+        redshift bin edges                                                      
+                                                                                
+    """                                                                         
+    dat = ascii.read(file_path, format='commented_header')                      
+                                                                                
+    # Remove last n(z) value which is zero, to match bin centers                
+    nz = dat['dn_dz'][:-1]                                                      
+    z_edges = dat['z']                                                          
+    z_centers = bin_edges2centers(z_edges)                                      
+                                                                                
+    return z_centers, nz, z_edges
