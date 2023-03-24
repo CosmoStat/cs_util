@@ -117,7 +117,9 @@ def plot_histograms(
     bins_arr = []
 
     # Histograms
-    for x, w, label, color, linestyle in zip(xs, weights, labels, colors, linestyles):
+    for x, w, label, color, linestyle in zip(
+        xs, weights, labels, colors, linestyles
+    ):
         n, bins, _ = plt.hist(
             x,
             n_bin,
@@ -138,7 +140,9 @@ def plot_histograms(
         ylim = plt.ylim()
         for x, lab in zip(vline_x, vline_lab):
             print("MKDEBUG", x, lab)
-            plt.vlines(x=x, ymax=ylim[1], ymin=ylim[0], linestyles="--", colors="k")
+            plt.vlines(
+                x=x, ymax=ylim[1], ymin=ylim[0], linestyles="--", colors="k"
+            )
             plt.text(x * 1.5, ylim[1] * 0.95, lab)
         plt.ylim(ylim)
 

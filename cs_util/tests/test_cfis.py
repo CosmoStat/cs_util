@@ -23,15 +23,15 @@ class CfisTestCase(TestCase):
 
         self._size_tile = 0.5 * units.deg
 
-        self._tile_number_ok = ['270.283', '188-308']
-        self._nix = ['270', '188']
-        self._niy = ['283', '308']
+        self._tile_number_ok = ["270.283", "188-308"]
+        self._nix = ["270", "188"]
+        self._niy = ["283", "308"]
         self._dec = [51.5, 64]
         self._ra = [216.86237, 214.43017]
         self._unit = units.deg
 
-        self._nix_nok = ['23x', '1234']
-        self._tile_number_nok = '12x.456'
+        self._nix_nok = ["23x", "1234"]
+        self._tile_number_nok = "12x.456"
 
     def tearDown(self):
         """Unset test parameter values."""
@@ -45,7 +45,7 @@ class CfisTestCase(TestCase):
 
     def test_Cfis(self):
         """Test ``cs_util.Cfis`` class."""
-        self.assertTrue(self._size_tile == cfis.Cfis().size['tile'])
+        self.assertTrue(self._size_tile == cfis.Cfis().size["tile"])
 
     def test_get_tile_number(self):
         """Test ``cs_util.get_tile_number`` method."""
@@ -55,13 +55,11 @@ class CfisTestCase(TestCase):
             nix, niy = cfis.get_tile_number(tile_number_ok)
             self.assertTrue(
                 (nix == self._nix[idx]) and (niy == self._niy[idx]),
-                msg=f'{nix}!={self._nix[idx]} or {niy}!={self._niy[idx]}',
+                msg=f"{nix}!={self._nix[idx]} or {niy}!={self._niy[idx]}",
             )
 
         self.assertRaises(
-            ValueError,
-            cfis.get_tile_number,
-            self._tile_number_nok
+            ValueError, cfis.get_tile_number, self._tile_number_nok
         )
 
     def test_get_tile_coord_from_nixy(self):
@@ -78,13 +76,13 @@ class CfisTestCase(TestCase):
             npt.assert_almost_equal(
                 ra.value,
                 self._ra[idx],
-                err_msg=f'{ra}!={self._ra[idx]}',
+                err_msg=f"{ra}!={self._ra[idx]}",
                 decimal=5,
             )
             npt.assert_almost_equal(
                 dec.value,
                 self._dec[idx],
-                err_msg=f'{dec}!={self._dec[idx]}',
+                err_msg=f"{dec}!={self._dec[idx]}",
             )
 
             # Test units
@@ -94,18 +92,17 @@ class CfisTestCase(TestCase):
         # Call with list arguments
         ra, dec = cfis.get_tile_coord_from_nixy(self._nix, self._niy)
         for idx in range(len(self._nix)):
-
             # Test values
             npt.assert_almost_equal(
                 ra[idx].value,
                 self._ra[idx],
-                err_msg=f'{ra[idx]}!={self._ra[idx]}',
+                err_msg=f"{ra[idx]}!={self._ra[idx]}",
                 decimal=5,
             )
             npt.assert_almost_equal(
                 dec[idx].value,
                 self._dec[idx],
-                err_msg=f'{dec[idx]}!={self._dec[idx]}',
+                err_msg=f"{dec[idx]}!={self._dec[idx]}",
             )
             # Test units
             self.assertTrue(ra[idx].unit == self._unit)
