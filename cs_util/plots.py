@@ -159,6 +159,7 @@ def plot_data_1d(
     xlabel,
     ylabel,
     out_path=None,
+    create_figure=True,
     xlog=False,
     ylog=False,
     log=False,
@@ -182,6 +183,8 @@ def plot_data_1d(
         title and labels
     out_path : string, optional
         output file path, default is ``None``
+    create_figure : bool, optional
+        create figure if ``True`` (default)
     xlog, ylog : bool, optional, default is ``False``
         logscale on x, y if True
     labels : list, optional, default is ``None``
@@ -215,7 +218,7 @@ def plot_data_1d(
     if linewidths is None:
         linewidths = [2] * len(x)
 
-    if out_path:
+    if create_figure:
         figure(figsize=(15, 10))
 
     for i in range(len(x)):
