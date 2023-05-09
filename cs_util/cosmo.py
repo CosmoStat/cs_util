@@ -15,7 +15,6 @@ from astropy import constants
 from astropy import units
 
 
-
 def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
     """Critical surface mass density.
 
@@ -53,15 +52,14 @@ def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
     if not d_source:
         d_source = cosmo.angular_diameter_distance(a_source) * units.Mpc
 
-    d_lens_source = cosmo.angular_diameter_distance(
-        a_lens,
-        a_source
-    ) * units.Mpc
+    d_lens_source = (
+        cosmo.angular_diameter_distance(a_lens, a_source) * units.Mpc
+    )
 
     frac = d_source / (d_lens_source * d_lens)
     pref = constants.c**2 / (4 * np.pi * constants.G)
 
-    sigma_cr =  (pref * frac).to(unit_return)
+    sigma_cr = (pref * frac).to(unit_return)
 
     return sigma_cr
 
@@ -74,7 +72,9 @@ def sigma_crit_eff(
     d_lens=None,
     d_source_arr=None,
 ):
-    """Effective critical surface mass density, which
+    """Sigma Crit eff.
+
+    Effective critical surface mass density, which
     is sigma_crit(z_lens, z_source) weighted by nz_source.
 
     Parameters
@@ -114,7 +114,7 @@ def sigma_crit_eff(
 
     if (len(nz_source_arr) != n_source) or (len(d_source_arr) != n_source):
         raise IndexError(
-            'Lists for source z, n(z), and/or d_ang have different lenghts'
+            "Lists for source z, n(z), and/or d_ang have different lenghts"
         )
 
     sigma_cr_arr = []
@@ -124,7 +124,7 @@ def sigma_crit_eff(
             z_source_arr[idx],
             cosmo,
             d_lens=d_lens,
-            d_source=d_source_arr[idx]
+            d_source=d_source_arr[idx],
         )
 
         # Get unit
@@ -148,7 +148,9 @@ def sigma_crit_m1_eff(
     d_lens=None,
     d_source_arr=None,
 ):
-    """Effective inverse critical surface mass density, which
+    """Sigma Crit M1 Eff.
+
+    Effective inverse critical surface mass density, which
     is sigma_crit^{-1}(z_lens, z_source) weighted by nz_source.
     See Eq. (17) in :cite:`2004AJ....127.2544S`.
 
@@ -190,7 +192,7 @@ def sigma_crit_m1_eff(
 
     if (len(nz_source_arr) != n_source) or (len(d_source_arr) != n_source):
         raise IndexError(
-            'Lists for source z, n(z), and/or d_ang have different lenghts'
+            "Lists for source z, n(z), and/or d_ang have different lenghts"
         )
 
     sigma_cr_m1_arr = []
@@ -202,7 +204,7 @@ def sigma_crit_m1_eff(
             z_source_arr[idx],
             cosmo,
             d_lens=d_lens,
-            d_source=d_source_arr[idx]
+            d_source=d_source_arr[idx],
         )
 
         # Get unit

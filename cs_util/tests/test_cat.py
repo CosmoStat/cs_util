@@ -29,6 +29,9 @@ class CatTestCase(TestCase):
         self._R_select = np.array([[0.1, 0.2], [0.0, -0.15]])
         self._c = np.array([-0.001, 2.1e-5])
 
+        self._bin_edges = np.array([0, 1, 1.3])
+        self._bin_centers = np.array([0.5, 1.15])
+
     def tearDown(self):
         """Unset test parameter values."""
         self._primary_header = None
@@ -42,13 +45,13 @@ class CatTestCase(TestCase):
         self._out_path = None
 
     def test_write_header_info_sp(self):
-        """Test ``cs_util.write_header_info_sp`` method."""
+        """Test ``cs_util.cat.write_header_info_sp`` method."""
         primary_header = cat.write_header_info_sp(self._primary_header)
         for key in self._keys:
             self.assertTrue(key in primary_header, msg=key)
 
     def test_add_shear_bias_to_header(self):
-        """Test ``cs_util.add_shear_bias_to_header`` method."""
+        """Test ``cs_util.cat.add_shear_bias_to_header`` method."""
         primary_header = self._primary_header
         cat.add_shear_bias_to_header(
             primary_header, self._R, self._R_shear, self._R_select, self._c
@@ -73,3 +76,8 @@ class CatTestCase(TestCase):
                         primary_header[key][0],
                         f"Incorrect value for {key}",
                     )
+
+    def test_bin_edges2centers(self):
+        """Test ``cs_util.cat.bin_edges2centers`` method."""
+        bin_centers = cat.bin_edges2centers(self._bin_edges)
+        self.assertTrue(all(bin_centers == self._bin_centers))

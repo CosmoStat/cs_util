@@ -47,6 +47,7 @@ test = [
   "pytest-pydocstyle",
 ]
 
+
 # Install for development
 dev = ["cs_util[lint,release,test]"]
 
@@ -56,7 +57,7 @@ Documentation = "https://github.com/CosmoStat/cs_util"
 Tracker = "https://github.com/CosmoStat/cs_util/issues"
 
 [tool.black]
-line-length = 88
+line-length = 80
 
 [tool.pydocstyle]
 convention = "numpy"
