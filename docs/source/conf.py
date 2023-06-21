@@ -9,8 +9,8 @@ from importlib_metadata import metadata
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('../..'))
-sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath("../.."))
+sys.path.insert(0, os.path.abspath("../.."))
 
 # -- General configuration ------------------------------------------------
 
@@ -211,11 +211,11 @@ nbsphinx_prolog = nb_header_pt1 + nb_header_pt2
 
 # Refer to the package libraries for type definitions
 intersphinx_mapping = {
-    'python': ('http://docs.python.org/3', None),
-    'astropy': ('http://docs.astropy.org/en/latest/', None),
-    'numpy': ('https://numpy.org/doc/stable/', None),
-    'scipy': ('https://docs.scipy.org/doc/scipy/reference', None),
-    'matplotlib': ('https://matplotlib.org', None),
+    "python": ("http://docs.python.org/3", None),
+    "astropy": ("http://docs.astropy.org/en/latest/", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "scipy": ("https://docs.scipy.org/doc/scipy/reference", None),
+    "matplotlib": ("https://matplotlib.org", None),
 }
 
 # -- BibTeX Setting  ----------------------------------------------
