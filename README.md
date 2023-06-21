@@ -22,4 +22,10 @@ Utility library for CosmoStat
 
 ### Library
 
-### Scripts
+- Galaxy catalogue handling
+- Weak-lensing related cosmological quantities (e.g. surface mass density)
+- VOS (Virtual Observatory Software)
+- Command line logging
+- Plotting
+- Basic statistic calculations
+- UNIONS/CFIS weak-lensing survey handling

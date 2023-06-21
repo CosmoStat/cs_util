@@ -18,8 +18,8 @@ class CanfarTestCase(TestCase):
 
     def setUp(self):
         """Set test parameter values."""
-        self._cmd_ok = 'vcp'
-        self._cmd_nok = 'vxx'
+        self._cmd_ok = "vcp"
+        self._cmd_nok = "vxx"
 
     def tearDown(self):
         """Unset test parameter values."""
@@ -28,7 +28,7 @@ class CanfarTestCase(TestCase):
 
     def test_init_vos(self):
         """Test ``cs_util.canfar.vosHandler()`` with
-            vos command strings.
+        vos command strings.
 
         """
         # Test whether command is set
@@ -36,7 +36,7 @@ class CanfarTestCase(TestCase):
         npt.assert_equal(
             vos.command.__name__,
             self._cmd_ok,
-            'vos command not set',
+            "vos command not set",
         )
 
         # Test error for invalid command
