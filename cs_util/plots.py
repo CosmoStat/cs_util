@@ -34,7 +34,7 @@ def figure(figsize=(30, 30)):
     return fig
 
 
-def savefig(fname):
+def savefig(fname, close_fig=True):
     """Save Figure.
 
     Save figure to file.
@@ -43,10 +43,13 @@ def savefig(fname):
     ----------
     fname : str
         output file name
+    close_fig : bool, optional
+        closes figure if True (default)
 
     """
     plt.savefig(fname, facecolor='w', bbox_inches='tight')
-    plt.close()
+    if close_fig:
+        plt.close()
 
 
 def plot_histograms(
@@ -176,7 +179,8 @@ def plot_data_1d(
     eb_linestyles=None,
     linewidths=None,
     xlim=None,
-    ylim=None
+    ylim=None,
+    close_fig=True,
 ):
     """Plot Data 1D.
 
@@ -206,6 +210,8 @@ def plot_data_1d(
         x-axis limits, automatic if ``None``
     ylim : array(float, 2), optional, default is ``None``
         y-axis limits, automatic if ``None``
+    close_fig : bool, optional
+        closes figure if True (default)
 
     """
     if labels is None:
@@ -297,4 +303,4 @@ def plot_data_1d(
         plt.legend()
 
     if out_path:
-        savefig(out_path)
+        savefig(out_path, close_fig=close_fig)
