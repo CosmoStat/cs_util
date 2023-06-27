@@ -58,13 +58,9 @@ class CfisTestCase(TestCase):
                 msg=f"{nix}!={self._nix[idx]} or {niy}!={self._niy[idx]}",
             )
 
-<<<<<<< HEAD
         self.assertRaises(
             ValueError, cfis.get_tile_number, self._tile_number_nok
         )
-=======
-        self.assertRaises(ValueError, cfis.get_tile_number, self._tile_number_nok)
->>>>>>> upstream/develop
 
     def test_get_tile_coord_from_nixy(self):
         """Test ``cs_util.get_tile_coord_from_nixy`` method."""
