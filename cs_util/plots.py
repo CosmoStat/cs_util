@@ -121,7 +121,9 @@ def plot_histograms(
     bins_arr = []
 
     # Histograms
-    for x, w, label, color, linestyle in zip(xs, weights, labels, colors, linestyles):
+    for x, w, label, color, linestyle in zip(
+        xs, weights, labels, colors, linestyles
+    ):
         n, bins, _ = plt.hist(
             x,
             n_bin,
@@ -142,7 +144,9 @@ def plot_histograms(
         ylim = plt.ylim()
         for x, lab in zip(vline_x, vline_lab):
             print("MKDEBUG", x, lab)
-            plt.vlines(x=x, ymax=ylim[1], ymin=ylim[0], linestyles="--", colors="k")
+            plt.vlines(
+                x=x, ymax=ylim[1], ymin=ylim[0], linestyles="--", colors="k"
+            )
             plt.text(x * 1.5, ylim[1] * 0.95, lab)
         plt.ylim(ylim)
 
@@ -163,6 +167,7 @@ def plot_data_1d(
     xlabel,
     ylabel,
     out_path=None,
+    create_figure=True,
     xlog=False,
     ylog=False,
     log=False,
@@ -187,6 +192,8 @@ def plot_data_1d(
         title and labels
     out_path : string, optional
         output file path, default is ``None``
+    create_figure : bool, optional
+        create figure if ``True`` (default)
     xlog, ylog : bool, optional, default is ``False``
         logscale on x, y if True
     labels : list, optional, default is ``None``
@@ -222,7 +229,7 @@ def plot_data_1d(
     if linewidths is None:
         linewidths = [2] * len(x)
 
-    if out_path:
+    if create_figure:
         figure(figsize=(15, 10))
 
     for i in range(len(x)):

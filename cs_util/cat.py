@@ -11,6 +11,7 @@
 import os
 from datetime import datetime
 from astropy.io import fits
+from astropy.io import ascii
 
 
 def write_header_info_sp(primary_header, name="unknown", version="unknown"):
@@ -80,11 +81,26 @@ def add_shear_bias_to_header(primary_header, R, R_shear, R_select, c):
     primary_header["R_g21"] = (R_shear[1, 0], "Mean shear resp matrix comp 2 1")
     primary_header["R_g22"] = (R_shear[1, 1], "Mean shear resp matrix comp 2 2")
 
-    primary_header["R_S"] = (r"<R_S>", r"Global selection response matrix <R_select>")
-    primary_header["R_S11"] = (R_select[0, 0], "Global selection resp matrix comp 1 1")
-    primary_header["R_S12"] = (R_select[0, 1], "Global selection resp matrix comp 1 2")
-    primary_header["R_S21"] = (R_select[1, 0], "Global selection resp matrix comp 2 1")
-    primary_header["R_S22"] = (R_select[1, 1], "Global selection resp matrix comp 2 2")
+    primary_header["R_S"] = (
+        r"<R_S>",
+        r"Global selection response matrix <R_select>",
+    )
+    primary_header["R_S11"] = (
+        R_select[0, 0],
+        "Global selection resp matrix comp 1 1",
+    )
+    primary_header["R_S12"] = (
+        R_select[0, 1],
+        "Global selection resp matrix comp 1 2",
+    )
+    primary_header["R_S21"] = (
+        R_select[1, 0],
+        "Global selection resp matrix comp 2 1",
+    )
+    primary_header["R_S22"] = (
+        R_select[1, 1],
+        "Global selection resp matrix comp 2 2",
+    )
 
     primary_header["c_1"] = (c[0], "Additive bias 1st comp")
     primary_header["c_2"] = (c[1], "Additive bias 2nd comp")
@@ -129,3 +145,54 @@ def write_fits_BinTable_file(
 
     hdu_list = fits.HDUList([primary_hdu, table_hdu])
     hdu_list.writeto(output_path, overwrite=True)
+
+
+def bin_edges2centers(bin_edges):
+    """Bin Edges To Centers.
+
+    Transform bin edge values to central values.
+
+    Parameters
+    ----------
+    bin_edges : list
+        bin edge values
+
+    Returns
+    -------
+    list
+        bin central values
+
+    """
+    bin_means = 0.5 * (bin_edges[1:] + bin_edges[:-1])
+
+    return bin_means
+
+
+def read_dndz(file_path):
+    """Read Dndz.
+
+    Read redshift histogram from file.
+
+    Parameters
+    ----------
+    file_path : str
+        input file path
+
+    Returns
+    -------
+    list :
+        redshift bin centers
+    list :
+        number densities
+    list :
+        redshift bin edges
+
+    """
+    dat = ascii.read(file_path, format="commented_header")
+
+    # Remove last n(z) value which is zero, to match bin centers
+    nz = dat["dn_dz"][:-1]
+    z_edges = dat["z"]
+    z_centers = bin_edges2centers(z_edges)
+
+    return z_centers, nz, z_edges

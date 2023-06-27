@@ -58,7 +58,9 @@ class vosHandler:
     @command.setter
     def command(self, value):
         if value not in self._avail_commands:
-            raise ValueError(f"vos command must be one of {self._avail_commands}")
+            raise ValueError(
+                f"vos command must be one of {self._avail_commands}"
+            )
 
         self._command = getattr(vosc, value)
 

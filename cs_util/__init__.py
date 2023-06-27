@@ -1,6 +1,6 @@
 """cs_util PACKAGE.
 
-Provide a basic description of what your package contains.
+CosmoStat utilities for weak lensing and cosmology.
 
 References
 ----------

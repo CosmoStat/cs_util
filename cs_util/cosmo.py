@@ -54,7 +54,9 @@ def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
     if not d_source:
         d_source = cosmo.angular_diameter_distance(a_source) * units.Mpc
 
-    d_lens_source = cosmo.angular_diameter_distance(a_lens, a_source) * units.Mpc
+    d_lens_source = (
+        cosmo.angular_diameter_distance(a_lens, a_source) * units.Mpc
+    )
 
     frac = d_source / (d_lens_source * d_lens)
     pref = constants.c**2 / (4 * np.pi * constants.G)

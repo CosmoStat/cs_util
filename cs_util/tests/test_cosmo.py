@@ -73,7 +73,9 @@ class CosmoTestCase(TestCase):
         npt.assert_equal(sigma_crit.unit, self._sigma_crit_unit)
 
         # Test with lens behind source
-        sigma_crit = cosmo.sigma_crit(self._z_lens, self._z_lens / 2, self._cosmo)
+        sigma_crit = cosmo.sigma_crit(
+            self._z_lens, self._z_lens / 2, self._cosmo
+        )
         npt.assert_equal(sigma_crit, 0 * self._sigma_crit_unit)
 
         # Test changing default arguments
@@ -196,7 +198,9 @@ class CosmoTestCase(TestCase):
             decimal=4,
         )
         # Test return unit
-        npt.assert_equal(sigma_crit_m1_eff.unit, (1 / self._sigma_crit_unit).unit)
+        npt.assert_equal(
+            sigma_crit_m1_eff.unit, (1 / self._sigma_crit_unit).unit
+        )
 
         # Test exception when redshift array lengths inconsistent
         self.assertRaises(
