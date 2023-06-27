@@ -47,8 +47,7 @@ def savefig(fname, close_fig=True):
         closes figure if True (default)
 
     """
-
-    plt.savefig(fname, facecolor='w', bbox_inches='tight')
+    plt.savefig(fname, facecolor="w", bbox_inches="tight")
     if close_fig:
         plt.close()
 
