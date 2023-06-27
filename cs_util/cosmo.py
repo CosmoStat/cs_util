@@ -16,7 +16,9 @@ from astropy import units
 
 
 def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
-    """Critical surface mass density.
+    """Sigma Crit.
+
+    Critical surface mass density.
 
     Parameters
     ----------
@@ -72,7 +74,7 @@ def sigma_crit_eff(
     d_lens=None,
     d_source_arr=None,
 ):
-    """Sigma Crit eff.
+    """Sigma Crit Eff.
 
     Effective critical surface mass density, which
     is sigma_crit(z_lens, z_source) weighted by nz_source.

@@ -48,9 +48,13 @@ def get_tile_number(tile_name):
     """
     m = re.search(r"(\d{3})[\.-](\d{3})", tile_name)
     if m is None or len(m.groups()) != 2:
+<<<<<<< HEAD
         raise ValueError(
             f"Image name '{tile_name}' does not match tile name syntax"
         )
+=======
+        raise ValueError(f"Image name '{tile_name}' does not match tile name syntax")
+>>>>>>> upstream/develop
 
     nix = m.groups()[0]
     niy = m.groups()[1]
@@ -85,18 +89,26 @@ def get_tile_coord_from_nixy(nix, niy):
     # Transform from str to int
     if not np.isscalar(nix):
         # Check input numbers
+<<<<<<< HEAD
         if not all(
             [bool(number_pattern.fullmatch(number)) for number in nix + niy]
         ):
+=======
+        if not all([bool(number_pattern.fullmatch(number)) for number in nix + niy]):
+>>>>>>> upstream/develop
             raise ValueError("Input needs to be three-digit numbers")
 
         # Transform to list
         xi = np.array(nix).astype(int)
         yi = np.array(niy).astype(int)
     else:
+<<<<<<< HEAD
         if not all(
             [bool(number_pattern.fullmatch(number)) for number in [nix, niy]]
         ):
+=======
+        if not all([bool(number_pattern.fullmatch(number)) for number in [nix, niy]]):
+>>>>>>> upstream/develop
             raise ValueError("Input needs to be three-digit numbers")
 
         xi = int(nix)
