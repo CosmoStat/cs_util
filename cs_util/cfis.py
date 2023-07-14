@@ -16,12 +16,13 @@ from astropy import coordinates as coords
 
 
 class Cfis(object):
-    """Cfis
+    """Cfis.
 
     Class for CFIS image properties.
 
     """
-    size = {'tile' : 0.5 * units.deg}
+
+    size = {"tile": 0.5 * units.deg}
 
 
 def get_tile_number(tile_name):
@@ -45,10 +46,10 @@ def get_tile_number(tile_name):
         tile number for x and tile number for y
 
     """
-    m = re.search(r'(\d{3})[\.-](\d{3})', tile_name)
+    m = re.search(r"(\d{3})[\.-](\d{3})", tile_name)
     if m is None or len(m.groups()) != 2:
         raise ValueError(
-            f'Image name \'{tile_name}\' does not match tile name syntax'
+            f"Image name '{tile_name}' does not match tile name syntax"
         )
 
     nix = m.groups()[0]
@@ -69,7 +70,7 @@ def get_tile_coord_from_nixy(nix, niy):
     niy : str or list
         tile number(s) for y coordinate(s)
 
-    See also
+    See Also
     --------
     get_tile_number_from_coord
 
@@ -79,7 +80,7 @@ def get_tile_coord_from_nixy(nix, niy):
         right ascension and declination
 
     """
-    number_pattern = re.compile(r'\d{3}')
+    number_pattern = re.compile(r"\d{3}")
 
     # Transform from str to int
     if not np.isscalar(nix):
@@ -87,7 +88,7 @@ def get_tile_coord_from_nixy(nix, niy):
         if not all(
             [bool(number_pattern.fullmatch(number)) for number in nix + niy]
         ):
-            raise ValueError('Input needs to be three-digit numbers')
+            raise ValueError("Input needs to be three-digit numbers")
 
         # Transform to list
         xi = np.array(nix).astype(int)
@@ -96,17 +97,17 @@ def get_tile_coord_from_nixy(nix, niy):
         if not all(
             [bool(number_pattern.fullmatch(number)) for number in [nix, niy]]
         ):
-            raise ValueError('Input needs to be three-digit numbers')
+            raise ValueError("Input needs to be three-digit numbers")
 
         xi = int(nix)
         yi = int(niy)
 
     # Declination
     d = yi / 2 - 90
-    dec = coords.Angle(d, unit='deg')
+    dec = coords.Angle(d, unit="deg")
 
     # Right ascension
     r = xi / 2 / np.cos(dec.radian)
-    ra = coords.Angle(r, unit='deg')
+    ra = coords.Angle(r, unit="deg")
 
     return ra, dec

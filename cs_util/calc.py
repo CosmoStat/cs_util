@@ -1,10 +1,10 @@
-"""CALC.                                                                       
-                                                                                
-:Name: calc.py                                                                 
-                                                                                
+"""CALC.
+
+:Name: calc.py
+
 :Description: This file contains methods for general calculations
               and statistics.
-                                                                                
+
 :Author: Martin Kilbinger <martin.kilbinger@cea.fr>
 
 """
@@ -36,10 +36,10 @@ def weighted_avg_and_std(values, weights, corrected=False):
     average = np.average(values, weights=weights)
 
     # Fast and numerically precise:
-    variance = np.average((values-average)**2, weights=weights)
-    
+    variance = np.average((values - average) ** 2, weights=weights)
+
     if corrected:
         n = len(values)
-        variance  = variance * n / (n - 1)
+        variance = variance * n / (n - 1)
 
     return average, np.sqrt(variance)

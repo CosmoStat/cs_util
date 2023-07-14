@@ -1,6 +1,6 @@
 """cs_util PACKAGE.
 
-Provide a basic description of what your package contains.
+CosmoStat utilities for weak lensing and cosmology.
 
 References
 ----------
@@ -23,14 +23,4 @@ This package makes use of the following third-party packages:
 
 from warnings import warn
 
-from importlib_metadata import version
-
-try:
-    _version = version('cs_util')
-except Exception:  # pragma: no cover
-    _version = 'Unkown'
-    warn(
-        'Could not extract package metadata. Make sure the package is '
-        + 'correctly installed.',
-    )
-__version__ = _version
+__version__ = "0.0.4"

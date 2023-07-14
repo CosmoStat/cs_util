@@ -29,12 +29,12 @@ def figure(figsize=(30, 30)):
         figure object
 
     """
-    fig = plt.figure(figsize=figsize, facecolor='none')
+    fig = plt.figure(figsize=figsize, facecolor="none")
 
     return fig
 
 
-def savefig(fname):
+def savefig(fname, close_fig=True):
     """Save Figure.
 
     Save figure to file.
@@ -43,10 +43,13 @@ def savefig(fname):
     ----------
     fname : str
         output file name
+    close_fig : bool, optional
+        closes figure if True (default)
 
     """
-    plt.savefig(fname, facecolor='w', bbox_inches='tight')
-    plt.close()
+    plt.savefig(fname, facecolor="w", bbox_inches="tight")
+    if close_fig:
+        plt.close()
 
 
 def plot_histograms(
@@ -105,10 +108,10 @@ def plot_histograms(
     if weights is None:
         weights = [np.ones_like(x) for x in xs]
     if colors is None:
-        prop_cycle = plt.rcParams['axes.prop_cycle']
-        colors = prop_cycle.by_key()['color']
+        prop_cycle = plt.rcParams["axes.prop_cycle"]
+        colors = prop_cycle.by_key()["color"]
     if linestyles is None:
-        linestyles = ['-'] * len(labels)
+        linestyles = ["-"] * len(labels)
 
     figure(figsize=(15, 10))
 
@@ -118,19 +121,19 @@ def plot_histograms(
 
     # Histograms
     for x, w, label, color, linestyle in zip(
-            xs, weights, labels, colors, linestyles
+        xs, weights, labels, colors, linestyles
     ):
         n, bins, _ = plt.hist(
             x,
             n_bin,
             weights=w,
             range=x_range,
-            histtype='step',
+            histtype="step",
             color=color,
             linestyle=linestyle,
             linewidth=1,
             density=density,
-            label=label
+            label=label,
         )
         n_arr.append(n)
         bins_arr.append(bins)
@@ -139,13 +142,9 @@ def plot_histograms(
     if vline_x:
         ylim = plt.ylim()
         for x, lab in zip(vline_x, vline_lab):
-            print('MKDEBUG', x, lab)
+            print("MKDEBUG", x, lab)
             plt.vlines(
-                x=x,
-                ymax=ylim[1],
-                ymin=ylim[0],
-                linestyles='--',
-                colors='k'
+                x=x, ymax=ylim[1], ymin=ylim[0], linestyles="--", colors="k"
             )
             plt.text(x * 1.5, ylim[1] * 0.95, lab)
         plt.ylim(ylim)
@@ -167,6 +166,7 @@ def plot_data_1d(
     xlabel,
     ylabel,
     out_path=None,
+    create_figure=True,
     xlog=False,
     ylog=False,
     log=False,
@@ -176,7 +176,8 @@ def plot_data_1d(
     eb_linestyles=None,
     linewidths=None,
     xlim=None,
-    ylim=None
+    ylim=None,
+    close_fig=True,
 ):
     """Plot Data 1D.
 
@@ -190,6 +191,8 @@ def plot_data_1d(
         title and labels
     out_path : string, optional
         output file path, default is ``None``
+    create_figure : bool, optional
+        create figure if ``True`` (default)
     xlog, ylog : bool, optional, default is ``False``
         logscale on x, y if True
     labels : list, optional, default is ``None``
@@ -200,30 +203,32 @@ def plot_data_1d(
         linestyle indicators, '-' if ``None``
     linewidths : list
         line widths, default is `2`
-    eb_linestyle : array of string, optional, default is ``None``
+    eb_linestyles : array of string, optional, default is ``None``
         errorbar linestyle indicators, '-' if ``None``
     xlim : array(float, 2), optional, default=None
         x-axis limits, automatic if ``None``
     ylim : array(float, 2), optional, default is ``None``
         y-axis limits, automatic if ``None``
+    close_fig : bool, optional
+        closes figure if True (default)
 
     """
     if labels is None:
-        labels = [''] * len(x)
+        labels = [""] * len(x)
         do_legend = False
     else:
         do_legend = True
     if colors is None:
-        prop_cycle = plt.rcParams['axes.prop_cycle']
-        colors = prop_cycle.by_key()['color']
+        prop_cycle = plt.rcParams["axes.prop_cycle"]
+        colors = prop_cycle.by_key()["color"]
     if linestyles is None:
-        linestyles = ['-'] * len(x)
+        linestyles = ["-"] * len(x)
     if eb_linestyles is None:
-        eb_linestyles = ['-'] * len(x)
+        eb_linestyles = ["-"] * len(x)
     if linewidths is None:
         linewidths = [2] * len(x)
 
-    if out_path:
+    if create_figure:
         figure(figsize=(15, 10))
 
     for i in range(len(x)):
@@ -243,8 +248,8 @@ def plot_data_1d(
                 label=labels[i],
                 color=colors[i],
                 linestyle=linestyles[i],
-                marker='o',
-                markerfacecolor='none',
+                marker="o",
+                markerfacecolor="none",
                 capsize=4,
             )
             eb[-1][0].set_linestyle(eb_linestyles[i])
@@ -253,42 +258,37 @@ def plot_data_1d(
         y=0,
         xmin=plt.xlim()[0],
         xmax=plt.xlim()[1],
-        linestyles='dashed',
+        linestyles="dashed",
     )
 
     if xlog:
-        plt.xscale('log')
+        plt.xscale("log")
         plt.xticks(
             [0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500],
             labels=[
-                '0.1',
-                '0.2',
-                '0.5',
-                '1',
-                '2',
-                '5',
-                '10',
-                '20',
-                '50',
-                '100',
-                '200',
-                '500',
-            ]
+                "0.1",
+                "0.2",
+                "0.5",
+                "1",
+                "2",
+                "5",
+                "10",
+                "20",
+                "50",
+                "100",
+                "200",
+                "500",
+            ],
         )
     if ylog:
-        plt.yscale('log')
+        plt.yscale("log")
 
     if xlim:
         plt.xlim(xlim)
     if ylim:
         plt.ylim(ylim)
 
-    plt.hlines(
-        y=0,
-        xmin=plt.xlim()[0],
-        xmax=plt.xlim()[1],
-        linestyles='dashed'
-    )
+    plt.hlines(y=0, xmin=plt.xlim()[0], xmax=plt.xlim()[1], linestyles="dashed")
 
     plt.title(title)
     plt.xlabel(xlabel)
@@ -297,4 +297,4 @@ def plot_data_1d(
         plt.legend()
 
     if out_path:
-        savefig(out_path)
+        savefig(out_path, close_fig=close_fig)

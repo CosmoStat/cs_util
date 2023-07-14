@@ -19,18 +19,18 @@ class LoggingTestCase(TestCase):
     def setUp(self):
         """Set test parameter values."""
         self._argv = [
-            'test_cmd arg',
-             '-s',
-             'opt_short',
-             '--long',
-             'opt_long',
-             '-l',
-             '"opt 1 2 list"',
-             '-c',
-             'opt_special_char[x]',
+            "test_cmd arg",
+            "-s",
+            "opt_short",
+            "--long",
+            "opt_long",
+            "-l",
+            '"opt 1 2 list"',
+            "-c",
+            "opt_special_char[x]",
         ]
-        self._log_file_path = 'log_test'
-
+        self._log_file_path = "log_test"
+        self._log_file_path_default = "log_test_cmd arg"
 
     def tearDown(self):
         """Unset test parameter values."""
@@ -40,41 +40,42 @@ class LoggingTestCase(TestCase):
 
     def test_log_command(self):
         """Test ``cs_util.logging.log_command`` method with
-            argument string.
+        argument string.
 
         """
         # Test log file content
 
-        # Create log command file with no return
-        fh_none = logging.log_command(
-            self._argv,
-            name=self._log_file_path,
-            close_no_return=True,
-        )
+        names_output = [self._log_file_path, None]
+        names_input = [self._log_file_path, self._log_file_path_default]
 
-        # Read log command file
-        with open(self._log_file_path, 'r') as file:
-            log_str = file.read().replace('\n', '')
+        for name_out, name_in in zip(names_output, names_input):
+            # Create log command file with no return
+            fh_none = logging.log_command(
+                self._argv,
+                name=name_out,
+                close_no_return=True,
+            )
 
-        # Mask special characters
-        argv_list = []
-        for a in self._argv:
-            if '[' in a or ']' in a:
-                a = f'\"{a}\"'
-            argv_list.append(a)
+            # Read log command file
+            with open(name_in, "r") as file:
+                log_str = file.read().replace("\n", "")
+            os.unlink(name_in)
 
-        # Transform argv list to str
-        argv_str = ' '.join(argv_list)
+            # Mask special characters
+            argv_list = []
+            for a in self._argv:
+                if "[" in a or "]" in a:
+                    a = f'"{a}"'
+                argv_list.append(a)
 
-        # Test for equality with input
-        npt.assert_equal(
-            argv_str,
-            log_str,
-            'Incorrect log file output'
-        )
+            # Transform argv list to str
+            argv_str = " ".join(argv_list)
 
-        # Test return type ``None``
-        npt.assert_equal(fh_none, None, 'Incorrect return type')
+            # Test for equality with input
+            npt.assert_equal(argv_str, log_str, "Incorrect log file output")
+
+            # Test return type ``None``
+            npt.assert_equal(fh_none, None, "Incorrect return type")
 
         # Test return type is file handler: read and test type string
         # Create log command file with no return
@@ -83,21 +84,26 @@ class LoggingTestCase(TestCase):
             name=self._log_file_path,
             close_no_return=False,
         )
-        self.assertIsNotNone(fh_open, msg='Incorrect return object')
+        self.assertIsNotNone(fh_open, msg="Incorrect return object")
 
         # Test return object is stdout
         fh_stdout = logging.log_command(
             self._argv,
-            name='sys.stdout',
+            name="sys.stdout",
             close_no_return=False,
         )
-        npt.assert_equal(fh_stdout, sys.stdout, 'Incorrect return object')
+        npt.assert_equal(fh_stdout, sys.stdout, "Incorrect return object")
 
         # Test return object is stderr
         fh_stderr = logging.log_command(
             self._argv,
-            name='sys.stderr',
+            name="sys.stderr",
             close_no_return=False,
         )
-        npt.assert_equal(fh_stderr, sys.stderr, 'Incorrect return object')
+        npt.assert_equal(fh_stderr, sys.stderr, "Incorrect return object")
 
+        # Test logging with default log file name
+        fh_none = logging.log_command(
+            self._argv,
+            close_no_return=True,
+        )

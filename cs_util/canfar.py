@@ -38,7 +38,6 @@ class vosHandler:
     """
 
     def __init__(self, command):
-
         self._avail_commands = tuple(vosc.__all__)
         self.command = command
 
@@ -58,10 +57,9 @@ class vosHandler:
 
     @command.setter
     def command(self, value):
-
         if value not in self._avail_commands:
             raise ValueError(
-                f'vos command must be one of {self._avail_commands}'
+                f"vos command must be one of {self._avail_commands}"
             )
 
         self._command = getattr(vosc, value)
@@ -81,9 +79,7 @@ class vosHandler:
             self._command()
 
         except Exception:
-            raise vosError(
-                f'Error in VOs command: {self._command.__name__}'
-            )
+            raise vosError(f"Error in VOs command: {self._command.__name__}")
 
 
 def download(source, target, verbose=False):
@@ -106,20 +102,20 @@ def download(source, target, verbose=False):
         status, True/False or success/failure
 
     """
-    cmd = 'vcp'
+    cmd = "vcp"
 
     if not os.path.exists(target):
         sys.argv = [cmd, source, target]
         if verbose:
-            print(f'Downloading file {source} to {target}...')
+            print(f"Downloading file {source} to {target}...")
         vcp = vosHandler(cmd)
 
         vcp()
         if verbose:
-            print('Download finished.')
+            print("Download finished.")
     else:
         if verbose:
-            print(f'Target file {target} exists, skipping download.')
+            print(f"Target file {target} exists, skipping download.")
 
 
 def dir_list(path, verbose=False):
@@ -145,12 +141,12 @@ def dir_list(path, verbose=False):
         file or directory at path, type is str
 
     """
-    cmd = 'vls'
+    cmd = "vls"
     sys.argv = [cmd, path]
     vls = vosHandler(cmd)
 
     if verbose:
-        print('Getting vos directory content from vls...')
+        print("Getting vos directory content from vls...")
 
     f = StringIO()
 
@@ -158,9 +154,9 @@ def dir_list(path, verbose=False):
         with redirect_stdout(f):
             vls()
     except Exception:
-        print('Error during vls command')
+        print("Error during vls command")
         raise
 
     vls_out = f.getvalue()
 
-    return vls_out.split('\n')
+    return vls_out.split("\n")

@@ -42,7 +42,7 @@ class CosmoTestCase(TestCase):
             1157.82363726,
             1440.63922894,
             1617.91952285,
-            1678.82870081
+            1678.82870081,
         ] * units.Mpc
 
     def tearDown(self):
@@ -57,9 +57,7 @@ class CosmoTestCase(TestCase):
         self._ds_cosmo = None
 
     def test_sigma_crit(self):
-        """Test ``cs_util.cosmo.sigma_crit`` method.
-
-        """
+        """Test ``cs_util.cosmo.sigma_crit`` method."""
         sigma_crit = cosmo.sigma_crit(
             self._z_lens,
             self._z_source,
@@ -76,9 +74,7 @@ class CosmoTestCase(TestCase):
 
         # Test with lens behind source
         sigma_crit = cosmo.sigma_crit(
-            self._z_lens,
-            self._z_lens / 2,
-            self._cosmo
+            self._z_lens, self._z_lens / 2, self._cosmo
         )
         npt.assert_equal(sigma_crit, 0 * self._sigma_crit_unit)
 
@@ -121,9 +117,7 @@ class CosmoTestCase(TestCase):
         )
 
     def test_sigma_crit_eff(self):
-        """Test ``cs_util.cosmo.sigma_crit_eff`` method.
-
-        """
+        """Test ``cs_util.cosmo.sigma_crit_eff`` method."""
         sigma_crit_eff = cosmo.sigma_crit_eff(
             self._z_lens,
             self._z_source_arr,
@@ -149,7 +143,7 @@ class CosmoTestCase(TestCase):
             self._nz_source_arr,
             self._cosmo,
         )
-        
+
         # Test changing default arguments
         sigma_crit_eff = cosmo.sigma_crit_eff(
             self._z_lens,
@@ -189,11 +183,8 @@ class CosmoTestCase(TestCase):
             decimal=3,
         )
 
-
     def test_sigma_crit_m1_eff(self):
-        """Test ``cs_util.cosmo.sigma_crit_m1_eff`` method.
-
-        """
+        """Test ``cs_util.cosmo.sigma_crit_m1_eff`` method."""
         sigma_crit_m1_eff = cosmo.sigma_crit_m1_eff(
             self._z_lens,
             self._z_source_arr,
@@ -208,8 +199,7 @@ class CosmoTestCase(TestCase):
         )
         # Test return unit
         npt.assert_equal(
-            sigma_crit_m1_eff.unit,
-            (1 / self._sigma_crit_unit).unit
+            sigma_crit_m1_eff.unit, (1 / self._sigma_crit_unit).unit
         )
 
         # Test exception when redshift array lengths inconsistent
