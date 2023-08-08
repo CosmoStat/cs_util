@@ -14,6 +14,38 @@ import numpy as np
 from astropy import constants
 from astropy import units
 
+import pyccl as ccl
+
+
+# Set ell_max to large value, for spline interpolation (in integral over
+# C_ell to get real-space correlation functions). Avoid aliasing
+# (oscillations)
+ccl.spline_params.ELL_MAX_CORR = 10_000_000
+
+ccl.spline_params.N_ELL_CORR = 5_000
+
+
+def get_cosmo_default():
+    """Get Cosmo Default.
+
+    Return default cosmology.
+
+    Returns
+    -------
+    Cosmology
+        pyccl cosmology object
+
+    """
+    cosmo = ccl.Cosmology(
+        Omega_c=0.27,
+        Omega_b=0.045,
+        h=0.67,
+        sigma8=0.83,
+        n_s=0.96,
+    )
+
+    return cosmo
+
 
 def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
     """Sigma Crit.
@@ -225,3 +257,65 @@ def sigma_crit_m1_eff(
     sigma_cr_m1_eff = np.average(sigma_cr_m1_arr, weights=weights)
 
     return sigma_cr_m1_eff * unit
+
+
+def xipm_theo(
+    theta,
+    cosmo,
+    z,
+    nz,
+):
+    """Xipm Theo.
+
+    Return theoretical prediction of the shear two-point correlation function.
+
+    Parameters
+    ----------
+    theta : list
+        angular scales, list of type astropy.units.Quantity
+    cosmo : pyccl.core.Cosmology
+        cosmological parameters
+    z : list
+        redshift centers
+    dndz : list
+        number of galaxies for each z (arbitrary normalisation)
+
+    Returns
+    -------
+    numpy.ndarray
+        xi_+
+    numpy.ndarray
+        xi_-
+
+    """
+
+    # Create objects to represent tracers of the weak lensing signal with this
+    # number density (with has_intrinsic_alignment=False)
+    lens_tr = ccl.WeakLensingTracer(cosmo, dndz=(z, dndz))
+
+    # Calculate the angular cross-spectrum of the two tracers as a function
+    # of ell
+    # MKDEBUG TODO: vary, use unions-shear-ustc-cea/unions_wl/defaults.py
+    ell = np.logspace(0, np.log10(10000), 1000)
+    cl = ccl.angular_cl(cosmo, lens_tr, lens_tr, ell)
+
+    method = "Bessel"
+
+    xip = ccl.correlation(
+        cosmo,
+        ell,
+        cl,
+        theta.to("deg"),
+        corr_type='L+',
+        method=method,
+    )
+    xim = ccl.correlation(
+        cosmo,
+        ell,
+        cl,
+        theta.to("deg"),
+        corr_type='L-',
+        method=method,
+    )
+
+    return xip, xim
