@@ -14,8 +14,40 @@ import numpy as np
 from astropy import constants
 from astropy import units
 
+import pyccl as ccl
 
-def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
+
+# Set ell_max to large value, for spline interpolation (in integral over
+# C_ell to get real-space correlation functions). Avoid aliasing
+# (oscillations)
+ccl.spline_params.ELL_MAX_CORR = 10_000_000
+
+ccl.spline_params.N_ELL_CORR = 5_000
+
+
+def get_cosmo_default():
+    """Get Cosmo Default.
+
+    Return default cosmology.
+
+    Returns
+    -------
+    Cosmology
+        pyccl cosmology object
+
+    """
+    cos = ccl.Cosmology(
+        Omega_c=0.27,
+        Omega_b=0.045,
+        h=0.67,
+        sigma8=0.83,
+        n_s=0.96,
+    )
+
+    return cos
+
+
+def sigma_crit(z_lens, z_source, cos, d_lens=None, d_source=None):
     """Sigma Crit.
 
     Critical surface mass density.
@@ -26,7 +58,7 @@ def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
         lens redshift
     z_source : float
         source redshift
-    cosmo : pyccl.core.Cosmology
+    cos : pyccl.core.Cosmology
         cosmological parameters
     d_lens : astropy.units.Quantity, optional
         precomputed anguar diameter distance to lens, computed from z_lens
@@ -50,13 +82,11 @@ def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
     a_lens = 1 / (1 + z_lens)
     a_source = 1 / (1 + z_source)
     if not d_lens:
-        d_lens = cosmo.angular_diameter_distance(a_lens) * units.Mpc
+        d_lens = cos.angular_diameter_distance(a_lens) * units.Mpc
     if not d_source:
-        d_source = cosmo.angular_diameter_distance(a_source) * units.Mpc
+        d_source = cos.angular_diameter_distance(a_source) * units.Mpc
 
-    d_lens_source = (
-        cosmo.angular_diameter_distance(a_lens, a_source) * units.Mpc
-    )
+    d_lens_source = cos.angular_diameter_distance(a_lens, a_source) * units.Mpc
 
     frac = d_source / (d_lens_source * d_lens)
     pref = constants.c**2 / (4 * np.pi * constants.G)
@@ -70,7 +100,7 @@ def sigma_crit_eff(
     z_lens,
     z_source_arr,
     nz_source_arr,
-    cosmo,
+    cos,
     d_lens=None,
     d_source_arr=None,
 ):
@@ -87,7 +117,7 @@ def sigma_crit_eff(
         source redshifts
     nz_source_arr : list
         number of galaxies at z_source
-    cosmo : pyccl.core.Cosmology
+    cos : pyccl.core.Cosmology
         cosmological parameters
     d_lens : astropy.units.Quantity, optional
         precomputed anguar diameter distance to lens;
@@ -124,7 +154,7 @@ def sigma_crit_eff(
         sigma_cr = sigma_crit(
             z_lens,
             z_source_arr[idx],
-            cosmo,
+            cos,
             d_lens=d_lens,
             d_source=d_source_arr[idx],
         )
@@ -146,7 +176,7 @@ def sigma_crit_m1_eff(
     z_lens,
     z_source_arr,
     nz_source_arr,
-    cosmo,
+    cos,
     d_lens=None,
     d_source_arr=None,
 ):
@@ -164,7 +194,7 @@ def sigma_crit_m1_eff(
         source redshifts
     nz_source_arr : list
         number of galaxies at z_source
-    cosmo : pyccl.core.Cosmology
+    cos : pyccl.core.Cosmology
         cosmological parameters
     d_lens : astropy.units.Quantity, optional
         precomputed anguar diameter distance to lens;
@@ -204,7 +234,7 @@ def sigma_crit_m1_eff(
         sigma_cr = sigma_crit(
             z_lens,
             z_source_arr[idx],
-            cosmo,
+            cos,
             d_lens=d_lens,
             d_source=d_source_arr[idx],
         )
@@ -225,3 +255,57 @@ def sigma_crit_m1_eff(
     sigma_cr_m1_eff = np.average(sigma_cr_m1_arr, weights=weights)
 
     return sigma_cr_m1_eff * unit
+
+
+def xipm_theo(
+    theta,
+    cos,
+    z,
+    dndz,
+):
+    """Xipm Theo.
+
+    Return theoretical prediction of the shear two-point correlation function.
+
+    Parameters
+    ----------
+    theta : list
+        angular scales, list of type astropy.units.Quantity
+    cos : pyccl.core.Cosmology
+        cosmological parameters
+    z : list
+        redshift centers
+    dndz : list
+        number of galaxies for each z (arbitrary normalisation)
+
+    Returns
+    -------
+    numpy.ndarray
+        xi_+
+    numpy.ndarray
+        xi_-
+
+    """
+    # Create objects to represent tracers of the weak lensing signal with this
+    # number density (with has_intrinsic_alignment=False)
+    lens_tr = ccl.WeakLensingTracer(cos, dndz=(z, dndz))
+
+    # Calculate the angular cross-spectrum of the two tracers as a function
+    # of ell
+    # MKDEBUG TODO: vary, use unions-shear-ustc-cea/unions_wl/defaults.py
+    ell = np.logspace(0, np.log10(10000), 1000)
+    cl = ccl.angular_cl(cos, lens_tr, lens_tr, ell)
+
+    method = "Bessel"
+
+    xipm = {}
+    for corr_type in ("GG+", "GG-"):
+        xipm[corr_type] = ccl.correlation(
+            cos,
+            ell,
+            cl,
+            theta.to("deg"),
+            type=corr_type,
+        )
+
+    return xipm["GG+"], xipm["GG-"]

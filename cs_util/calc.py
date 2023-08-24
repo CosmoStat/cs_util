@@ -43,3 +43,29 @@ def weighted_avg_and_std(values, weights, corrected=False):
         variance = variance * n / (n - 1)
 
     return average, np.sqrt(variance)
+
+
+def transform_nan(value):
+    """Transform Nan.
+
+    Transform a ``nan`` to a very large number.
+
+    Parameters
+    ----------
+    value : float
+        input value
+
+    Returns
+    -------
+    float
+        output value
+
+    """
+    large = 1e30
+
+    if np.isnan(value) or np.isinf(value):
+        res = 1e30
+    else:
+        res = value
+
+    return res
