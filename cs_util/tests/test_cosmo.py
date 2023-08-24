@@ -5,13 +5,13 @@ This module contains unit tests for the cosmo subpackage.
 """
 
 import os
-
-import numpy as np
-import pyccl as ccl
-
-from astropy import units
+import pickle
 
 from numpy import testing as npt
+import numpy as np
+
+from astropy import units
+import pyccl as ccl
 
 from unittest import TestCase
 
@@ -19,7 +19,7 @@ from cs_util import cosmo
 
 
 class CosmoTestCase(TestCase):
-    """Test case for the ``cosmo` module."""
+    """Test case for the ``cosmo`` module."""
 
     def setUp(self):
         """Set test parameter values."""
@@ -45,6 +45,18 @@ class CosmoTestCase(TestCase):
             1678.82870081,
         ] * units.Mpc
 
+        self._cos_def = cosmo = ccl.Cosmology(
+            Omega_c=0.27,
+            Omega_b=0.045,
+            h=0.67,
+            sigma8=0.83,
+            n_s=0.96,
+        )
+
+        self._theta = [1, 10, 100] * units.arcmin
+        self._z = np.array([0.6, 0.7, 0.8])
+        self._nz = np.array([1, 1.3, 0.9])
+
     def tearDown(self):
         """Unset test parameter values."""
         self._z_source = None
@@ -55,6 +67,10 @@ class CosmoTestCase(TestCase):
         self._d_source = None
         self._d_lens = None
         self._ds_cosmo = None
+        self._cos_def = None
+        self._theta = None
+        self._z = None
+        self._nz = None
 
     def test_sigma_crit(self):
         """Test ``cs_util.cosmo.sigma_crit`` method."""
@@ -250,3 +266,17 @@ class CosmoTestCase(TestCase):
             self._sigma_crit_value_eff_m1,
             decimal=3,
         )
+
+    def test_get_cosmo_default(self):
+        """Test ``cs_util.get_cosmo_default`` method."""
+
+        cos_def = cosmo.get_cosmo_default()
+
+        npt.assert_equal(pickle.dumps(cos_def), pickle.dumps(self._cos_def))
+
+    def test_xipm_theo(self):
+        xip, xim = cosmo.xipm_theo(
+            self._theta, self._cos_def, self._z, self._nz
+        )
+
+        npt.assert_equal(len(xip) == len(self._theta))

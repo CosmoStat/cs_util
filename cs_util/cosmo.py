@@ -36,7 +36,7 @@ def get_cosmo_default():
         pyccl cosmology object
 
     """
-    cosmo = ccl.Cosmology(
+    cos = ccl.Cosmology(
         Omega_c=0.27,
         Omega_b=0.045,
         h=0.67,
@@ -44,10 +44,10 @@ def get_cosmo_default():
         n_s=0.96,
     )
 
-    return cosmo
+    return cos
 
 
-def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
+def sigma_crit(z_lens, z_source, cos, d_lens=None, d_source=None):
     """Sigma Crit.
 
     Critical surface mass density.
@@ -58,7 +58,7 @@ def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
         lens redshift
     z_source : float
         source redshift
-    cosmo : pyccl.core.Cosmology
+    cos : pyccl.core.Cosmology
         cosmological parameters
     d_lens : astropy.units.Quantity, optional
         precomputed anguar diameter distance to lens, computed from z_lens
@@ -82,12 +82,12 @@ def sigma_crit(z_lens, z_source, cosmo, d_lens=None, d_source=None):
     a_lens = 1 / (1 + z_lens)
     a_source = 1 / (1 + z_source)
     if not d_lens:
-        d_lens = cosmo.angular_diameter_distance(a_lens) * units.Mpc
+        d_lens = cos.angular_diameter_distance(a_lens) * units.Mpc
     if not d_source:
-        d_source = cosmo.angular_diameter_distance(a_source) * units.Mpc
+        d_source = cos.angular_diameter_distance(a_source) * units.Mpc
 
     d_lens_source = (
-        cosmo.angular_diameter_distance(a_lens, a_source) * units.Mpc
+        cos.angular_diameter_distance(a_lens, a_source) * units.Mpc
     )
 
     frac = d_source / (d_lens_source * d_lens)
@@ -102,7 +102,7 @@ def sigma_crit_eff(
     z_lens,
     z_source_arr,
     nz_source_arr,
-    cosmo,
+    cos,
     d_lens=None,
     d_source_arr=None,
 ):
@@ -119,7 +119,7 @@ def sigma_crit_eff(
         source redshifts
     nz_source_arr : list
         number of galaxies at z_source
-    cosmo : pyccl.core.Cosmology
+    cos : pyccl.core.Cosmology
         cosmological parameters
     d_lens : astropy.units.Quantity, optional
         precomputed anguar diameter distance to lens;
@@ -156,7 +156,7 @@ def sigma_crit_eff(
         sigma_cr = sigma_crit(
             z_lens,
             z_source_arr[idx],
-            cosmo,
+            cos,
             d_lens=d_lens,
             d_source=d_source_arr[idx],
         )
@@ -178,7 +178,7 @@ def sigma_crit_m1_eff(
     z_lens,
     z_source_arr,
     nz_source_arr,
-    cosmo,
+    cos,
     d_lens=None,
     d_source_arr=None,
 ):
@@ -196,7 +196,7 @@ def sigma_crit_m1_eff(
         source redshifts
     nz_source_arr : list
         number of galaxies at z_source
-    cosmo : pyccl.core.Cosmology
+    cos : pyccl.core.Cosmology
         cosmological parameters
     d_lens : astropy.units.Quantity, optional
         precomputed anguar diameter distance to lens;
@@ -236,7 +236,7 @@ def sigma_crit_m1_eff(
         sigma_cr = sigma_crit(
             z_lens,
             z_source_arr[idx],
-            cosmo,
+            cos,
             d_lens=d_lens,
             d_source=d_source_arr[idx],
         )
@@ -261,9 +261,9 @@ def sigma_crit_m1_eff(
 
 def xipm_theo(
     theta,
-    cosmo,
+    cos,
     z,
-    nz,
+    dndz,
 ):
     """Xipm Theo.
 
@@ -273,7 +273,7 @@ def xipm_theo(
     ----------
     theta : list
         angular scales, list of type astropy.units.Quantity
-    cosmo : pyccl.core.Cosmology
+    cos : pyccl.core.Cosmology
         cosmological parameters
     z : list
         redshift centers
@@ -288,34 +288,26 @@ def xipm_theo(
         xi_-
 
     """
-
     # Create objects to represent tracers of the weak lensing signal with this
     # number density (with has_intrinsic_alignment=False)
-    lens_tr = ccl.WeakLensingTracer(cosmo, dndz=(z, dndz))
+    lens_tr = ccl.WeakLensingTracer(cos, dndz=(z, dndz))
 
     # Calculate the angular cross-spectrum of the two tracers as a function
     # of ell
     # MKDEBUG TODO: vary, use unions-shear-ustc-cea/unions_wl/defaults.py
     ell = np.logspace(0, np.log10(10000), 1000)
-    cl = ccl.angular_cl(cosmo, lens_tr, lens_tr, ell)
+    cl = ccl.angular_cl(cos, lens_tr, lens_tr, ell)
 
     method = "Bessel"
 
-    xip = ccl.correlation(
-        cosmo,
-        ell,
-        cl,
-        theta.to("deg"),
-        corr_type='L+',
-        method=method,
-    )
-    xim = ccl.correlation(
-        cosmo,
-        ell,
-        cl,
-        theta.to("deg"),
-        corr_type='L-',
-        method=method,
-    )
+    xipm = {}
+    for corr_type in ("GG+", "GG-"):
+        xipm[corr_type] = ccl.correlation(
+            cos,
+            ell,
+            cl,
+            theta.to("deg"),
+            type=corr_type,
+        )
 
-    return xip, xim
+    return xipm["GG+"], xipm["GG-"]
