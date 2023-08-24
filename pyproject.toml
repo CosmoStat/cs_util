@@ -31,6 +31,14 @@ dependencies = [
     "vos>=3.3",
 ]
 
+[build-system]
+requires = [
+    "setuptools",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+
 [project.optional-dependencies]
 lint = [
     "black",
@@ -39,6 +47,7 @@ lint = [
 release = [
     "build",
     "twine",
+    "sdist",
 ]
 test = [
   "pytest",
@@ -68,3 +77,6 @@ testpaths = ["cs_util"]
 
 [tool.setuptools.dynamic]
 version = {attr = "cs_util.__version__"}
+
+[tools.setuptools]
+packages = ["cs_util"]
