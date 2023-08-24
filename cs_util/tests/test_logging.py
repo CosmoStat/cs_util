@@ -36,6 +36,7 @@ class LoggingTestCase(TestCase):
         """Unset test parameter values."""
         self._argv = None
         os.remove(self._log_file_path)
+        os.remove(self._log_file_path_default)
         self._log_file_path = None
 
     def test_log_command(self):
