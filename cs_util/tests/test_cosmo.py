@@ -54,8 +54,10 @@ class CosmoTestCase(TestCase):
         )
 
         self._theta = [1, 10, 100] * units.arcmin
-        self._z = np.array([0.6, 0.7, 0.8])
-        self._nz = np.array([1, 1.3, 0.9])
+        self._z = np.linspace(0.2, 1.2, 50)
+        self._nz = (self._z / 0.8) ** 2 * np.exp(-((self._z / 0.8) ** 1.5))
+        self._xip = [1.33045991e-04, 2.13181640e-05, 2.13598131e-06]
+        self._xim = [1.97627462e-05, 1.23127046e-05, 2.17498675e-06]
 
     def tearDown(self):
         """Unset test parameter values."""
@@ -71,6 +73,8 @@ class CosmoTestCase(TestCase):
         self._theta = None
         self._z = None
         self._nz = None
+        self._xip = None
+        self._xim = None
 
     def test_sigma_crit(self):
         """Test ``cs_util.cosmo.sigma_crit`` method."""
@@ -276,7 +280,12 @@ class CosmoTestCase(TestCase):
 
     def test_xipm_theo(self):
         xip, xim = cosmo.xipm_theo(
-            self._theta, self._cos_def, self._z, self._nz
+            self._theta,
+            self._cosmo,
+            self._z,
+            self._nz,
         )
-
-        npt.assert_equal(len(xip) == len(self._theta))
+        npt.assert_equal(len(xip), len(self._theta))
+        for idx in range(len(self._theta)):
+            npt.assert_almost_equal(xip[idx], self._xip[idx], decimal=4)
+            npt.assert_almost_equal(xim[idx], self._xim[idx], decimal=4)
