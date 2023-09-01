@@ -12,6 +12,7 @@ import os
 from datetime import datetime
 from astropy.io import fits
 from astropy.io import ascii
+from astropy.table import Table
 
 
 def write_header_info_sp(primary_header, name="unknown", version="unknown"):
@@ -104,6 +105,26 @@ def add_shear_bias_to_header(primary_header, R, R_shear, R_select, c):
 
     primary_header["c_1"] = (c[0], "Additive bias 1st comp")
     primary_header["c_2"] = (c[1], "Additive bias 2nd comp")
+
+
+def write_ascii_table_file(cols, names, fname):
+    """Write Ascii Table File.
+
+    Write ASCII file with table data.
+
+    Parameters
+    ----------
+    cols : list
+        data columns
+    names : list of str
+        column names
+    fname : str
+        output file name
+
+    """
+    t = Table(cols, names=names)
+    with open(fname, "w") as fout:
+        ascii.write(t, fout, delimiter="\t")
 
 
 def write_fits_BinTable_file(

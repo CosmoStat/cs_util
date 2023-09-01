@@ -302,9 +302,9 @@ def xipm_theo(
     for corr_type in ("GG+", "GG-"):
         xipm[corr_type] = ccl.correlation(
             cos,
-            ell,
-            cl,
-            theta.to("deg"),
+            ell=ell,
+            C_ell=cl,
+            theta=theta.to("deg"),
             type=corr_type,
         )
 
