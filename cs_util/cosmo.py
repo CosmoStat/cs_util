@@ -17,14 +17,6 @@ from astropy import units
 import pyccl as ccl
 
 
-# Set ell_max to large value, for spline interpolation (in integral over
-# C_ell to get real-space correlation functions). Avoid aliasing
-# (oscillations)
-ccl.spline_params.ELL_MAX_CORR = 10_000_000
-
-ccl.spline_params.N_ELL_CORR = 5_000
-
-
 def get_cosmo_default():
     """Get Cosmo Default.
 
@@ -43,6 +35,12 @@ def get_cosmo_default():
         sigma8=0.83,
         n_s=0.96,
     )
+
+    # Set ell_max to large value, for spline interpolation (in integral over
+    # C _ell to get real-space correlation functions). Avoid aliasing
+    # ( oscillations)
+    cos.cosmo.spline_params.ELL_MAX_CORR = 10_000_000
+    cos.cosmo.spline_params.N_ELL_CORR = 5_000
 
     return cos
 
@@ -302,9 +300,9 @@ def xipm_theo(
     for corr_type in ("GG+", "GG-"):
         xipm[corr_type] = ccl.correlation(
             cos,
-            ell,
-            cl,
-            theta.to("deg"),
+            ell=ell,
+            C_ell=cl,
+            theta=theta.to("deg"),
             type=corr_type,
         )
 
