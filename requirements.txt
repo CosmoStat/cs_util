@@ -2,5 +2,5 @@ astropy
 datetime
 numpy
 matplotlib
-pyccl
+pyccl==2.6.1
 vos
