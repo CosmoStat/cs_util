@@ -175,6 +175,7 @@ def plot_data_1d(
     linestyles=None,
     eb_linestyles=None,
     linewidths=None,
+    markers=None,
     xlim=None,
     ylim=None,
     close_fig=True,
@@ -203,6 +204,8 @@ def plot_data_1d(
         linestyle indicators, '-' if ``None``
     linewidths : list
         line widths, default is `2`
+    markers : list
+        marker types, default is `o`
     eb_linestyles : array of string, optional, default is ``None``
         errorbar linestyle indicators, '-' if ``None``
     xlim : array(float, 2), optional, default=None
@@ -227,6 +230,8 @@ def plot_data_1d(
         eb_linestyles = ["-"] * len(x)
     if linewidths is None:
         linewidths = [2] * len(x)
+    if markers is None:
+        markers = ['o'] * len(x)
 
     if create_figure:
         figure(figsize=(15, 10))
@@ -248,18 +253,19 @@ def plot_data_1d(
                 label=labels[i],
                 color=colors[i],
                 linestyle=linestyles[i],
-                marker="o",
+                marker=markers[i],
                 markerfacecolor="none",
                 capsize=4,
             )
             eb[-1][0].set_linestyle(eb_linestyles[i])
 
-    plt.hlines(
-        y=0,
-        xmin=plt.xlim()[0],
-        xmax=plt.xlim()[1],
-        linestyles="dashed",
-    )
+    plt.axhline(color="k", linestyle="dashed", linewidth=linewidth[0]/2)
+    #plt.hlines(
+    #    y=0,
+    #    xmin=plt.xlim()[0],
+    #    xmax=plt.xlim()[1],
+    #    linestyles="dashed",
+    #)
 
     if xlog:
         plt.xscale("log")
@@ -287,8 +293,6 @@ def plot_data_1d(
         plt.xlim(xlim)
     if ylim:
         plt.ylim(ylim)
-
-    plt.hlines(y=0, xmin=plt.xlim()[0], xmax=plt.xlim()[1], linestyles="dashed")
 
     plt.title(title)
     plt.xlabel(xlabel)
