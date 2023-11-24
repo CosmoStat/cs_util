@@ -60,13 +60,14 @@ def plot_histograms(
     y_label,
     x_range,
     n_bin,
-    out_path,
+    out_path=None,
     weights=None,
     colors=None,
     linestyles=None,
     vline_x=None,
     vline_lab=None,
     density=True,
+    close_fig=True,
 ):
     """Plot Histograms.
 
@@ -84,8 +85,8 @@ def plot_histograms(
         x-/y-axis label
     n_bin : int
         number of histogram bins
-    out_path : string
-        output file path
+    out_path : string, optional
+        output file path, default is ``None``
     weights : array of float, optional, default=None
         weights
     colors : array of string, optional, default=None
@@ -98,6 +99,8 @@ def plot_histograms(
         labels of vertical lines if not None
     density : bool, optional, default=True
         (normalised) density histogram if True
+    close_fig : bool, optional
+        closes figure if True (default)
 
     Returns
     -------
@@ -153,7 +156,9 @@ def plot_histograms(
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.legend()
-    savefig(out_path)
+
+    if out_path:
+        savefig(out_path, close_fig=close_fig)
 
     return n_arr, bins_arr
 
@@ -234,7 +239,7 @@ def plot_data_1d(
         markers = ['o'] * len(x)
 
     if create_figure:
-        figure(figsize=(15, 10))
+        figure(figsize=(10, 10))
 
     for i in range(len(x)):
         if np.isnan(yerr[i]).all():
@@ -259,13 +264,7 @@ def plot_data_1d(
             )
             eb[-1][0].set_linestyle(eb_linestyles[i])
 
-    plt.axhline(color="k", linestyle="dashed", linewidth=linewidth[0]/2)
-    #plt.hlines(
-    #    y=0,
-    #    xmin=plt.xlim()[0],
-    #    xmax=plt.xlim()[1],
-    #    linestyles="dashed",
-    #)
+    plt.axhline(color="k", linestyle="dashed", linewidth=linewidths[0]/2)
 
     if xlog:
         plt.xscale("log")
