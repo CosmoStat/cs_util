@@ -52,6 +52,28 @@ def savefig(fname, close_fig=True):
         plt.close()
 
 
+def dx(idx, nx=3, fx=1.025, log=True):
+    """Dx Plot.
+    Return small shift useful to diplace points along the the x-axis
+    for a more readable plot.
+
+    Parameters
+    ----------
+    idx : int
+        dataset index
+    nx : int, optional
+        total number of datasets to plot; default is 3
+    fx : float, optional
+        shift, default is 1.025
+    log : bool, optional
+        if True (False), shift is logarithmic (linear); default is ``True``
+
+    """
+    if log:
+        return fx ** (idx - (nx - 1) / 2)
+    else:
+        return fx * (idx - (nx - 1) / 2)
+
 def plot_histograms(
     xs,
     labels,
