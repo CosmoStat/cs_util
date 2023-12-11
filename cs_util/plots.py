@@ -205,6 +205,7 @@ def plot_data_1d(
     markers=None,
     xlim=None,
     ylim=None,
+    shift_x=True,
     close_fig=True,
 ):
     """Plot Data 1D.
@@ -239,6 +240,8 @@ def plot_data_1d(
         x-axis limits, automatic if ``None``
     ylim : array(float, 2), optional, default is ``None``
         y-axis limits, automatic if ``None``
+    shift_x : bool, optional
+        shift datasets by small amount along x if ``True``; default is ``False``
     close_fig : bool, optional
         closes figure if True (default)
 
@@ -263,28 +266,31 @@ def plot_data_1d(
     if create_figure:
         figure(figsize=(10, 10))
 
-    for i in range(len(x)):
-        if np.isnan(yerr[i]).all():
+    for idx in range(len(x)):
+        this_x = x[idx]
+        if shift_x:
+            this_x *= dx(idx, len(x), log=xlog)
+        if np.isnan(yerr[idx]).all():
             eb = plt.plot(
-                x[i],
-                y[i],
-                label=labels[i],
-                color=colors[i],
-                linestyle=linestyles[i],
+                this_x,
+                y[idx],
+                label=labels[idx],
+                color=colors[idx],
+                linestyle=linestyles[idx],
             )
         else:
             eb = plt.errorbar(
-                x[i],
-                y[i],
-                yerr=yerr[i],
-                label=labels[i],
-                color=colors[i],
-                linestyle=linestyles[i],
-                marker=markers[i],
+                this_x,
+                y[idx],
+                yerr=yerr[idx],
+                label=labels[idx],
+                color=colors[idx],
+                linestyle=linestyles[idx],
+                marker=markers[idx],
                 markerfacecolor="none",
                 capsize=4,
             )
-            eb[-1][0].set_linestyle(eb_linestyles[i])
+            eb[-1][0].set_linestyle(eb_linestyles[idx])
 
     plt.axhline(color="k", linestyle="dashed", linewidth=linewidths[0]/2)
 
