@@ -52,6 +52,28 @@ def savefig(fname, close_fig=True):
         plt.close()
 
 
+def dx(idx, nx=3, fx=1.025, log=True):
+    """Dx Plot.
+    Return small shift useful to diplace points along the the x-axis
+    for a more readable plot.
+
+    Parameters
+    ----------
+    idx : int
+        dataset index
+    nx : int, optional
+        total number of datasets to plot; default is 3
+    fx : float, optional
+        shift, default is 1.025
+    log : bool, optional
+        if True (False), shift is logarithmic (linear); default is ``True``
+
+    """
+    if log:
+        return fx ** (idx - (nx - 1) / 2)
+    else:
+        return fx * (idx - (nx - 1) / 2)
+
 def plot_histograms(
     xs,
     labels,
@@ -60,13 +82,14 @@ def plot_histograms(
     y_label,
     x_range,
     n_bin,
-    out_path,
+    out_path=None,
     weights=None,
     colors=None,
     linestyles=None,
     vline_x=None,
     vline_lab=None,
     density=True,
+    close_fig=True,
 ):
     """Plot Histograms.
 
@@ -84,8 +107,8 @@ def plot_histograms(
         x-/y-axis label
     n_bin : int
         number of histogram bins
-    out_path : string
-        output file path
+    out_path : string, optional
+        output file path, default is ``None``
     weights : array of float, optional, default=None
         weights
     colors : array of string, optional, default=None
@@ -98,6 +121,8 @@ def plot_histograms(
         labels of vertical lines if not None
     density : bool, optional, default=True
         (normalised) density histogram if True
+    close_fig : bool, optional
+        closes figure if True (default)
 
     Returns
     -------
@@ -153,7 +178,9 @@ def plot_histograms(
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.legend()
-    savefig(out_path)
+
+    if out_path:
+        savefig(out_path, close_fig=close_fig)
 
     return n_arr, bins_arr
 
@@ -175,8 +202,10 @@ def plot_data_1d(
     linestyles=None,
     eb_linestyles=None,
     linewidths=None,
+    markers=None,
     xlim=None,
     ylim=None,
+    shift_x=True,
     close_fig=True,
 ):
     """Plot Data 1D.
@@ -203,12 +232,16 @@ def plot_data_1d(
         linestyle indicators, '-' if ``None``
     linewidths : list
         line widths, default is `2`
+    markers : list
+        marker types, default is `o`
     eb_linestyles : array of string, optional, default is ``None``
         errorbar linestyle indicators, '-' if ``None``
     xlim : array(float, 2), optional, default=None
         x-axis limits, automatic if ``None``
     ylim : array(float, 2), optional, default is ``None``
         y-axis limits, automatic if ``None``
+    shift_x : bool, optional
+        shift datasets by small amount along x if ``True``; default is ``False``
     close_fig : bool, optional
         closes figure if True (default)
 
@@ -227,39 +260,39 @@ def plot_data_1d(
         eb_linestyles = ["-"] * len(x)
     if linewidths is None:
         linewidths = [2] * len(x)
+    if markers is None:
+        markers = ['o'] * len(x)
 
     if create_figure:
-        figure(figsize=(15, 10))
+        figure(figsize=(10, 10))
 
-    for i in range(len(x)):
-        if np.isnan(yerr[i]).all():
+    for idx in range(len(x)):
+        this_x = x[idx]
+        if shift_x:
+            this_x *= dx(idx, len(x), log=xlog)
+        if np.isnan(yerr[idx]).all():
             eb = plt.plot(
-                x[i],
-                y[i],
-                label=labels[i],
-                color=colors[i],
-                linestyle=linestyles[i],
+                this_x,
+                y[idx],
+                label=labels[idx],
+                color=colors[idx],
+                linestyle=linestyles[idx],
             )
         else:
             eb = plt.errorbar(
-                x[i],
-                y[i],
-                yerr=yerr[i],
-                label=labels[i],
-                color=colors[i],
-                linestyle=linestyles[i],
-                marker="o",
+                this_x,
+                y[idx],
+                yerr=yerr[idx],
+                label=labels[idx],
+                color=colors[idx],
+                linestyle=linestyles[idx],
+                marker=markers[idx],
                 markerfacecolor="none",
                 capsize=4,
             )
-            eb[-1][0].set_linestyle(eb_linestyles[i])
+            eb[-1][0].set_linestyle(eb_linestyles[idx])
 
-    plt.hlines(
-        y=0,
-        xmin=plt.xlim()[0],
-        xmax=plt.xlim()[1],
-        linestyles="dashed",
-    )
+    plt.axhline(color="k", linestyle="dashed", linewidth=linewidths[0]/2)
 
     if xlog:
         plt.xscale("log")
@@ -287,8 +320,6 @@ def plot_data_1d(
         plt.xlim(xlim)
     if ylim:
         plt.ylim(ylim)
-
-    plt.hlines(y=0, xmin=plt.xlim()[0], xmax=plt.xlim()[1], linestyles="dashed")
 
     plt.title(title)
     plt.xlabel(xlabel)
