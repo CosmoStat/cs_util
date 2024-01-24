@@ -23,4 +23,4 @@ This package makes use of the following third-party packages:
 
 from warnings import warn
 
-__version__ = "0.0.6"
+__version__ = "0.0.7"
