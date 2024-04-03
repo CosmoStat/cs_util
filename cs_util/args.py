@@ -24,6 +24,9 @@ def parse_options(p_def, short_options, types, help_strings, args=None):
         command line options types
     help_strings : dict
         command line options help strings
+    args : list, optional
+        list of arguments, default is None, in which case sys.args[1:]
+        is used
 
     Returns
     -------
@@ -84,78 +87,88 @@ def parse_options(p_def, short_options, types, help_strings, args=None):
         help=f"verbose output",
     )
 
-    options, my_args = parser.parse_args(args)
+    options_values, my_args = parser.parse_args(args)
+
+    # Transform parameter values to dict
+    options = {}
+    for key in vars(options_values):
+        options[key] = getattr(options_values, key)
+
+    # Add other default values which do not have argument option
+    for key in p_def:
+        if key not in options:
+            options[key] = p_def[key]
 
     return options
 
 
-def my_string_split(string, num=-1, verbose=False, stop=False, sep=None):        
-    """My String Split.                                                          
-                                                                                 
-    Split a *string* into a list of strings. Choose as separator                 
-    the first in the list [space, underscore] that occurs in the string.         
-    (Thus, if both occur, use space.)                                            
-                                                                                 
-    Parameters                                                                   
-    ----------                                                                   
-    string : str                                                                 
-        Input string                                                             
-    num : int                                                                    
-        Required length of output list of strings, -1 if no requirement.         
-    verbose : bool                                                               
-        Verbose output                                                           
-    stop : bool                                                                  
-        Stop programs with error if True, return None and continues otherwise    
-    sep : bool                                                                   
-        Separator, try ' ', '_', and '.' if None (default)                       
-                                                                                 
-    Raises                                                                       
-    ------                                                                       
-    ValueError                                                                   
-        If number of elements in string and num are different, for stop=True     
-        If no separator found in string                                          
-                                                                                 
-    Returns                                                                      
-    -------                                                                      
-    list                                                                         
-        List of string on success, and None if failed                            
-                                                                                 
-    """                                                                          
-    if string is None:                                                           
-        return None                                                              
-                                                                                 
-    if sep is None:                                                              
-        has_space = string.find(" ")                                             
-        has_underscore = string.find("_")                                        
-        has_dot = string.find(".")                                               
-                                                                                 
-        if has_space != -1:                                                      
-            my_sep = " "                                                         
-        elif has_underscore != -1:                                               
-            my_sep = "_"                                                         
-        elif has_dot != -1:                                                      
-            my_sep = "."                                                         
-        else:                                                                    
+def my_string_split(string, num=-1, verbose=False, stop=False, sep=None):
+    """My String Split.
+
+    Split a *string* into a list of strings. Choose as separator
+    the first in the list [space, underscore] that occurs in the string.
+    (Thus, if both occur, use space.)
+
+    Parameters
+    ----------
+    string : str
+        Input string
+    num : int
+        Required length of output list of strings, -1 if no requirement.
+    verbose : bool
+        Verbose output
+    stop : bool
+        Stop programs with error if True, return None and continues otherwise
+    sep : bool
+        Separator, try ' ', '_', and '.' if None (default)
+
+    Raises
+    ------
+    ValueError
+        If number of elements in string and num are different, for stop=True
+        If no separator found in string
+
+    Returns
+    -------
+    list
+        List of string on success, and None if failed
+
+    """
+    if string is None:
+        return None
+
+    if sep is None:
+        has_space = string.find(" ")
+        has_underscore = string.find("_")
+        has_dot = string.find(".")
+
+        if has_space != -1:
+            my_sep = " "
+        elif has_underscore != -1:
+            my_sep = "_"
+        elif has_dot != -1:
+            my_sep = "."
+        else:
             # no separator found, does string consist of only one element?
-            if num == -1 or num == 1:                                            
-                my_sep = None                                                    
-            else:                                                                
-                raise ValueError(                                                
-                    "No separator (' ', '_', or '.') found in string"            
-                    + f" '{string}', cannot split"                               
-                )                                                                
-    else:                                                                        
-        if not string.find(sep):                                                 
-            raise ValueError(                                                    
+            if num == -1 or num == 1:
+                my_sep = None
+            else:
+                raise ValueError(
+                    "No separator (' ', '_', or '.') found in string"
+                    + f" '{string}', cannot split"
+                )
+    else:
+        if not string.find(sep):
+            raise ValueError(
                 f"No separator '{sep}' found in string '{string}' cannot split"
-            )                                                                    
-        my_sep = sep                                                             
-                                                                                 
-    res = string.split(my_sep)                                                   
-                                                                                 
-    if num != -1 and num != len(res) and stop:                                   
+            )
+        my_sep = sep
+
+    res = string.split(my_sep)
+
+    if num != -1 and num != len(res) and stop:
         raise ValueError(
             f"String '{len(res)}' has length {num}, required is {num}"
         )
-                                                                                 
+
     return res

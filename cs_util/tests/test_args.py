@@ -8,6 +8,8 @@ import os
 
 import numpy as np
 from numpy import testing as npt
+import optparse
+import pytest
 
 from unittest import TestCase
 
@@ -22,8 +24,9 @@ class ArgsTestCase(TestCase):
         self._params_def = {
             "p_int": 1,
             "p_float": 0.612,
-            "p_bool": True,
             "p_str": "some_string",
+            "p_bool": -1,
+            "p_Bool": -1,
             "p_str_def": "second_string",
             "p_none": "",
         }
@@ -31,18 +34,21 @@ class ArgsTestCase(TestCase):
             "p_int": "int",
             "p_float": "float",
             "p_bool": "bool",
+            "p_Bool": "bool",
             "p_str": "str",
         }
         self._short_options = {
             "p_int": "-i",
             "p_float": "-f",
             "p_bool": "-b",
+            "p_Bool": "-B",
             "p_str": "-s",
         }
         self._help_strings = {
             "p_int": "integer option, default={}",
             "p_float": "float option, default={}",
-            "p_bool": "bool option, default={}",
+            "p_bool": "bool option, set to True if given",
+            "p_Bool": "bool option, set to True if given",
             "p_str": "string option, default={}",
         }
 
@@ -60,6 +66,17 @@ class ArgsTestCase(TestCase):
             self._short_options,
             self._types,
             self._help_strings,
-            args=["-i", "2", "-s", "test"],
+            args=["-i", "2", "-s", "test", "-b"],
         )
-        print(self._options)
+
+        # Test updated options
+        npt.assert_equal(self._options["p_int"], 2)
+        npt.assert_equal(self._options["p_str"], "test")
+        npt.assert_equal(self._options["p_bool"], True)
+
+        # Test unchanged (default) options
+        npt.assert_equal(self._options["p_float"], 0.612)
+        npt.assert_equal(self._options["p_Bool"], False)
+        npt.assert_equal(self._options["p_str_def"], "second_string")
+
+        # Test exceptions TBD
