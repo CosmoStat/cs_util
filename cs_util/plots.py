@@ -53,7 +53,8 @@ def savefig(fname, close_fig=True):
 
 
 def dx(idx, nx=3, fx=1.025, log=True):
-    """Dx Plot.
+    """Dx.
+
     Return small shift useful to diplace points along the the x-axis
     for a more readable plot.
 
@@ -73,6 +74,7 @@ def dx(idx, nx=3, fx=1.025, log=True):
         return fx ** (idx - (nx - 1) / 2)
     else:
         return fx * (idx - (nx - 1) / 2)
+
 
 def plot_histograms(
     xs,
@@ -261,7 +263,7 @@ def plot_data_1d(
     if linewidths is None:
         linewidths = [2] * len(x)
     if markers is None:
-        markers = ['o'] * len(x)
+        markers = ["o"] * len(x)
 
     if create_figure:
         figure(figsize=(10, 10))
@@ -292,7 +294,7 @@ def plot_data_1d(
             )
             eb[-1][0].set_linestyle(eb_linestyles[idx])
 
-    plt.axhline(color="k", linestyle="dashed", linewidth=linewidths[0]/2)
+    plt.axhline(color="k", linestyle="dashed", linewidth=linewidths[0] / 2)
 
     if xlog:
         plt.xscale("log")
