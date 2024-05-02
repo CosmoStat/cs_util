@@ -207,7 +207,7 @@ def plot_data_1d(
     markers=None,
     xlim=None,
     ylim=None,
-    shift_x=True,
+    shift_x=False,
     close_fig=True,
 ):
     """Plot Data 1D.
@@ -271,7 +271,10 @@ def plot_data_1d(
     for idx in range(len(x)):
         this_x = x[idx]
         if shift_x:
-            this_x *= dx(idx, len(x), log=xlog)
+            if xlog:
+                this_x *= dx(idx, len(x), log=xlog)
+            else:
+                raise ValueError("shift_x without log not implemented yet")
         if np.isnan(yerr[idx]).all():
             eb = plt.plot(
                 this_x,
