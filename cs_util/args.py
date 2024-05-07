@@ -8,6 +8,8 @@
 """
 
 import sys
+import os
+
 from optparse import OptionParser
 
 
@@ -45,18 +47,10 @@ def parse_options(p_def, short_options, types, help_strings, args=None):
         # Process if help string exists
         if key in help_strings:
             # Set short option
-            if key in short_options:
-                short = short_options[key]
-            else:
-                # Default is no short option
-                short = ""
+            short = short_options[key] if key in short_options else ""
 
             # Set type
-            if key in types:
-                typ = types[key]
-            else:
-                # Default is str
-                typ = "string"
+            typ = types[key] if key in types else "string"
 
             # Special case: bool type
             if typ == "bool":
@@ -84,15 +78,15 @@ def parse_options(p_def, short_options, types, help_strings, args=None):
         "--verbose",
         dest="verbose",
         action="store_true",
-        help=f"verbose output",
+        help="verbose output",
     )
 
     options_values, my_args = parser.parse_args(args)
 
     # Transform parameter values to dict
-    options = {}
-    for key in vars(options_values):
-        options[key] = getattr(options_values, key)
+    options = {
+        key: getattr(options_values, key) for key in vars(options_values)
+    }
 
     # Add other default values which do not have argument option
     for key in p_def:
@@ -172,3 +166,51 @@ def my_string_split(string, num=-1, verbose=False, stop=False, sep=None):
         )
 
     return res
+
+
+def read_param_script(params_in_path, params_def, verbose=False):
+    """Read Params Scritpt.
+
+    Reads a python parameter script, or prompts user for input if file does not
+    exist.
+    Returns updated parameters.
+
+    Parameters
+    ----------
+    params_in_path : str
+        input file path
+    params : dict
+        default parameters
+    verbose : bool, optional
+        verbose output if ``True``; default is ``False``
+
+    Returns
+    -------
+    dict :
+        updated parameters
+
+    """
+    params_in = {}
+    params_out = {}
+    for key in params_def:
+        params_out[key] = params_def[key]
+
+    if os.path.exists(params_in_path):
+        if verbose:
+            print(f"Reading parameter script {params_in_path}")
+        with open(params_in_path) as f:
+            exec(f.read())
+        # Set instance parameters, copy from above
+        for key in params_in:
+            params_out[key] = params_in[key]
+    else:
+        print(
+            f"Configuration script {params_in_path} not found, asking for user input"
+        )
+        for key in params_def:
+            msg = f"{key}? [{params_def[key]}] "
+            val_user = input(msg)
+            if val_user != "":
+                params_out[key] = val_user
+
+    return params_out
