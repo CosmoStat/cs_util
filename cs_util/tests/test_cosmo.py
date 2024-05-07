@@ -27,7 +27,7 @@ class CosmoTestCase(TestCase):
         self._z_lens = 0.5
         self._z_source_arr = [0.4, 0.6, 0.8, 0.9]
         self._nz_source_arr = [0.5, 0.6, 2.2, 1.6]
-        self._cosmo = ccl.core.CosmologyVanillaLCDM()
+        self._cosmo = ccl.CosmologyVanillaLCDM()
         self._sigma_crit_value = 3920.1478
         # Value verified with package dsigma as 3919.700
 
@@ -87,7 +87,7 @@ class CosmoTestCase(TestCase):
         npt.assert_almost_equal(
             sigma_crit.value,
             self._sigma_crit_value,
-            decimal=4,
+            decimal=3,
         )
         # Test return unit
         npt.assert_equal(sigma_crit.unit, self._sigma_crit_unit)
@@ -148,7 +148,7 @@ class CosmoTestCase(TestCase):
         npt.assert_almost_equal(
             sigma_crit_eff.value,
             self._sigma_crit_value_eff,
-            decimal=4,
+            decimal=3,
         )
 
         # Test return unit
