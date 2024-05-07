@@ -7,7 +7,6 @@ progress logging.
 
 """
 
-
 import os
 import sys
 
