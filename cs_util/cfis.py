@@ -8,7 +8,6 @@
 
 """
 
-
 import re
 import numpy as np
 from astropy import units

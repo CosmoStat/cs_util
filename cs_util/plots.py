@@ -8,7 +8,6 @@
 
 """
 
-
 import matplotlib.pylab as plt
 import numpy as np
 
@@ -207,7 +206,7 @@ def plot_data_1d(
     markers=None,
     xlim=None,
     ylim=None,
-    shift_x=True,
+    shift_x=False,
     close_fig=True,
 ):
     """Plot Data 1D.
