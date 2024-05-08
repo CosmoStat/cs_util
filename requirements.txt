@@ -1,9 +1,0 @@
-astropy
-camb
-datetime
-numpy
-matplotlib
-swig
-pyccl==2.6.1
-scipy
-vos
