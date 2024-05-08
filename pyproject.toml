@@ -16,6 +16,7 @@ swig = "^4.2.1"
 scipy = "^1.13.0"
 # Install pyccl via pip
 vos = "^3.6.1"
+keyring = "^25.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
