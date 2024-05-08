@@ -23,4 +23,6 @@ This package makes use of the following third-party packages:
 
 from warnings import warn
 
-__version__ = "0.1.0"
+from importlib.metadata import version
+
+__version__ = version("cs_util")
