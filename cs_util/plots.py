@@ -43,7 +43,8 @@ def savefig(fname, close_fig=True):
     fname : str
         output file name
     close_fig : bool, optional
-        closes figure if True (default)
+        closes figure if ``True`` (default); chose ``False``
+        to display figure in a jupyter notebook
 
     """
     plt.savefig(fname, facecolor="w", bbox_inches="tight")
