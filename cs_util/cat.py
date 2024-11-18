@@ -10,6 +10,9 @@
 
 import os
 from datetime import datetime
+
+import healpy as hp
+
 from astropy.io import fits
 from astropy.io import ascii
 from astropy.table import Table
@@ -217,3 +220,60 @@ def read_dndz(file_path):
     z_centers = bin_edges2centers(z_edges)
 
     return z_centers, nz, z_edges
+
+
+def read_hp_mask(input_path, verbose=False):
+    """Read Hp Mask.
+
+    Read healpix mask FITS file.
+
+        Parameters
+        ----------
+        input_path : str
+                input file path
+        verbose : bool, optional
+                verbose output if ``True``; default is ``False``
+
+        Returns
+        -------
+        array
+                mask information
+        bool
+                NEST (RING) ordering if ``True`` (``False``)
+        int
+                nside
+
+    """
+    if verbose:
+        print(f"Reading mask {input_path}...")
+
+    nest = False
+
+    # Open input mask
+    mask, header = hp.read_map(
+        input_path,
+        h=True,
+        nest=nest,
+    )
+    for key, value in header:
+        if key == "ORDERING":
+            if value == "RING":
+                if nest:
+                    raise ValueError(
+                        "input mask has ORDENING=RING, set nest to False"
+                    )
+            elif value == "NEST":
+                if not nest:
+                    raise ValueError(
+                        "input mask has ORDENING=NEST, set nest to True"
+                    )
+
+    # Get nside from header
+    nside = None
+    for key, value in header:
+        if key == "NSIDE":
+            nside = int(value)
+    if not nside:
+        raise KeyError("NSIDE not found in FITS mask header")
+
+    return mask, nest, nside
