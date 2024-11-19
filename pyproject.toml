@@ -6,17 +6,17 @@ authors = ["Martin Kilbinger <martin.kilbinger@cea.fr>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.12"
-astropy = "5.2"
+python = ">=3.9,<3.13"
+astropy = "^5.0"
 camb = "1.5.4"
 datetime = "^5.5"
 numpy = "^1.26.4"
 matplotlib = "^3.8.4"
 swig = "^4.2.1"
 scipy = "^1.13.0"
-# Install pyccl via pip
 vos = "^3.6.1"
 keyring = "^25.2.0"
+pyccl = "^3.0.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
