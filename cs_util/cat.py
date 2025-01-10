@@ -10,12 +10,19 @@
 
 import os
 from datetime import datetime
+from importlib.metadata import version
+
 from astropy.io import fits
 from astropy.io import ascii
 from astropy.table import Table
 
 
-def write_header_info_sp(primary_header, name="unknown", version="unknown"):
+def write_header_info_sp(
+    primary_header,
+    software_name="cs_util",
+    software_version="unknown",
+    author=None,
+):
     """Write Header Info sp_validation.
 
     Write information about software and run to FITS header
@@ -24,10 +31,13 @@ def write_header_info_sp(primary_header, name="unknown", version="unknown"):
     ----------
     primary_header : dict
        FITS header information
-    name : str
-        software name, default is 'unknown'
-    version : str
-        version, default is 'unknown'
+    software_name : str, optional
+        software name; default is "cs_util"
+    software_version : str, optional
+        version; default is current cs_util version
+    author : str, optional
+        author name; if ``None`` (default), read from os.environ["USER"],
+        or if not set in env, "unknown"
 
     Returns
     -------
@@ -35,16 +45,23 @@ def write_header_info_sp(primary_header, name="unknown", version="unknown"):
         updated FITS header information
 
     """
-    if "USER" in os.environ:
-        author = os.environ["USER"]
+    if software_version is None:
+        software_version = version("cs_util")
+
+    if author is None:
+        if "USER" in os.environ:
+            author = os.environ["USER"]
+        else:
+            author = "unknown"
     else:
         author = "unknown"
+
     primary_header["AUTHOR"] = (author, "Who ran the software")
-    primary_header["SOFTNAME"] = (name, "Name of the software")
-    primary_header["SOFTVERS"] = (version, "Version of the software")
+    primary_header["SOFTNAME"] = (software_name, "Software name")
+    primary_header["SOFTVERS"] = (software_version, "software version")
     primary_header["DATE"] = (
         datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
-        "When it was started",
+        "Creation date",
     )
 
     return primary_header
