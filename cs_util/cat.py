@@ -185,6 +185,39 @@ def write_fits_BinTable_file(
     hdu_list.writeto(output_path, overwrite=True)
 
 
+def read_fits_to_dict(file_path):
+    """Read Fits To Dict.
+
+    Read FITS file and return dictionary.
+
+    Parameters
+    ----------
+    file_path : str
+        input file path
+
+    Returns
+    -------
+    dict
+        file content
+
+    Raises
+    ------
+    IOError
+        if input file is not found
+    """
+    if not os.path.exists(file_path):
+        raise IOError(f"Input file '{file_path}' not found")
+
+    hdu_list = fits.open(file_path)
+    data_input = hdu_list[1].data
+    col_names = hdu_list[1].data.dtype.names
+    data = {}
+    for col_name in col_names:
+        data[col_name] = data_input[col_name]
+
+    return data
+
+
 def bin_edges2centers(bin_edges):
     """Bin Edges To Centers.
 

@@ -79,9 +79,9 @@ def sigma_crit(z_lens, z_source, cos, d_lens=None, d_source=None):
 
     a_lens = 1 / (1 + z_lens)
     a_source = 1 / (1 + z_source)
-    if not d_lens:
+    if d_lens is None:
         d_lens = cos.angular_diameter_distance(a_lens) * units.Mpc
-    if not d_source:
+    if d_source is None:
         d_source = cos.angular_diameter_distance(a_source) * units.Mpc
 
     d_lens_source = cos.angular_diameter_distance(a_lens, a_source) * units.Mpc
