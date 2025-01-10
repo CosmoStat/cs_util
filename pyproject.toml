@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cs_util"
-version = "0.1.1"
+version = "0.1.2"
 description = "Utility library for CosmoStat"
 authors = ["Martin Kilbinger <martin.kilbinger@cea.fr>"]
 readme = "README.md"
