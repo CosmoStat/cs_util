@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python-version: [3.8]
+        python-version: [3.10.12]
 
     steps:
       - name: Checkout
@@ -29,29 +29,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up Conda with Python ${{ matrix.python-version }}
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          auto-update-conda: true
-          python-version: ${{ matrix.python-version }}
-          auto-activate-base: false
-
-      - name: Check Conda
-        shell: bash -l {0}
-        run: |
-          conda info
-          conda list
-          python --version
+      - name: Install Poetry
+        run: pip install poetry
 
       - name: Install Dependencies
         shell: bash -l {0}
-        run: |
-          python --version
-          python -m pip install --upgrade pip
-          python -m pip install -r develop.txt
-          python -m pip install -r docs/requirements.txt
-          python -m pip install twine
-          python -m pip install .
+        run: poetry install
+
+      - name: Build Package
+        run: poetry build
 
       - name: Run Tests
         shell: bash -l {0}
@@ -65,12 +51,6 @@ jobs:
         with:
           name: unit-test-results-${{ matrix.os }}-${{ matrix.python-version }}
           path: pytest.xml
-
-      - name: Check Distribution
-        shell: bash -l {0}
-        run: |
-          python setup.py sdist
-          twine check dist/*
 
       - name: Check API Documentation build
         shell: bash -l {0}
