@@ -8,6 +8,7 @@
 
 """
 
+import matplotlib
 import matplotlib.pylab as plt
 import numpy as np
 
@@ -50,6 +51,13 @@ def savefig(fname, close_fig=True):
     plt.savefig(fname, facecolor="w", bbox_inches="tight")
     if close_fig:
         plt.close()
+
+
+def show():
+    backend = matplotlib.get_backend()
+    if 'inline' in backend.lower() or 'nbagg' in backend.lower():
+        plt.show()  # Works in notebooks
+    plt.close()
 
 
 def dx(idx, nx=3, fx=1.025, log=True):
