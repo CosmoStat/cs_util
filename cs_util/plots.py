@@ -177,7 +177,6 @@ def plot_histograms(
     if vline_x:
         ylim = plt.ylim()
         for x, lab in zip(vline_x, vline_lab):
-            print("MKDEBUG", x, lab)
             plt.vlines(
                 x=x, ymax=ylim[1], ymin=ylim[0], linestyles="--", colors="k"
             )
