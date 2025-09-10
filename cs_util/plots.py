@@ -60,7 +60,7 @@ def show():
     plt.close()
 
 
-def dx(idx, nx=3, fx=1.025, log=True):
+def dx(idx, nx=3, fx=1.015, log=True):
     """Dx.
 
     Return small shift useful to diplace points along the the x-axis
