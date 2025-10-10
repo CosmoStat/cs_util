@@ -10,6 +10,7 @@
 
 import matplotlib
 import matplotlib.pylab as plt
+import matplotlib.ticker as ticker
 import numpy as np
 
 
@@ -60,7 +61,7 @@ def show():
     plt.close()
 
 
-def dx(idx, nx=3, fx=1.025, log=True):
+def dx(idx, nx=3, fx=1.015, log=True):
     """Dx.
 
     Return small shift useful to diplace points along the the x-axis
@@ -203,7 +204,7 @@ def plot_data_1d(
     xlabel,
     ylabel,
     out_path=None,
-    create_figure=True,
+    ax=None,
     xlog=False,
     ylog=False,
     log=False,
@@ -217,6 +218,9 @@ def plot_data_1d(
     ylim=None,
     shift_x=False,
     close_fig=True,
+    second_x_axis=None,
+    second_x_label=None,
+    second_x_every=1,
 ):
     """Plot Data 1D.
 
@@ -230,8 +234,8 @@ def plot_data_1d(
         title and labels
     out_path : string, optional
         output file path, default is ``None``
-    create_figure : bool, optional
-        create figure if ``True`` (default)
+    ax : matplotlib.axes, optional
+        use this axis object if given; it not (default) create a new figure
     xlog, ylog : bool, optional, default is ``False``
         logscale on x, y if True
     labels : list, optional, default is ``None``
@@ -254,6 +258,12 @@ def plot_data_1d(
         shift datasets by small amount along x if ``True``; default is ``False``
     close_fig : bool, optional
         closes figure if True (default)
+    second_x_axis : array of float, optional, default is ``None``
+        values for second x-axis on top, if not None
+    second_x_label : string, optional, default is ``None``
+        label for second x-axis on top
+    second_x_every: int, optional
+        plot only one in every `every` point on second x-axis; default is 1
 
     """
     if labels is None:
@@ -273,8 +283,10 @@ def plot_data_1d(
     if markers is None:
         markers = ["o"] * len(x)
 
-    if create_figure:
-        figure(figsize=(10, 10))
+    if ax is None:
+        fig, ax = plt.subplots(figsize=(10, 10))
+    else:
+        fig = ax.figure
 
     for idx in range(len(x)):
         this_x = x[idx]
@@ -284,7 +296,7 @@ def plot_data_1d(
             else:
                 raise ValueError("shift_x without log not implemented yet")
         if np.isnan(yerr[idx]).all():
-            eb = plt.plot(
+            eb = ax.plot(
                 this_x,
                 y[idx],
                 label=labels[idx],
@@ -292,7 +304,7 @@ def plot_data_1d(
                 linestyle=linestyles[idx],
             )
         else:
-            eb = plt.errorbar(
+            eb = ax.errorbar(
                 this_x,
                 y[idx],
                 yerr=yerr[idx],
@@ -305,40 +317,83 @@ def plot_data_1d(
             )
             eb[-1][0].set_linestyle(eb_linestyles[idx])
 
-    plt.axhline(color="k", linestyle="dashed", linewidth=linewidths[0] / 2)
+    ax.axhline(color="k", linestyle="dashed", linewidth=linewidths[0] / 2)
 
     if xlog:
-        plt.xscale("log")
-        plt.xticks(
-            [0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500],
-            labels=[
-                "0.1",
-                "0.2",
-                "0.5",
-                "1",
-                "2",
-                "5",
-                "10",
-                "20",
-                "50",
-                "100",
-                "200",
-                "500",
-            ],
-        )
+        ax.set_xscale("log")
+        #plt.gca().xaxis.set_major_locator(ticker.LogLocator(base=10, subs=(1,2,5), numticks=15)
+        ax.xaxis.set_major_locator(ticker.LogLocator(base=10, subs=(1,2,5), numticks=15))
+        ax.xaxis.set_major_formatter(ticker.LogFormatter(labelOnlyBase=False))
+
     if ylog:
-        plt.yscale("log")
+        ax.set_yscale("log")
 
     if xlim:
-        plt.xlim(xlim)
+        ax.set_xlim(xlim)
     if ylim:
-        plt.ylim(ylim)
+        ax.set_ylim(ylim)
 
-    plt.title(title)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
+    ax.set_title(title)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
     if do_legend:
-        plt.legend()
+        ax.legend()
+
+    # Add second x-axis on top if requested
+    if second_x_axis is not None:
+        ax2 = ax.twiny()
+        
+        # Set second x-axis with provided values
+        ax2.set_xlim(ax.get_xlim())
+        if xlog:
+            ax2.set_xscale('log')
+        
+        if second_x_label is not None:
+            ax2.set_xlabel(second_x_label)
+        
+        # Create tick positions that correspond to the main x-axis values
+        # Map from main x values to second x-axis values
+        main_x_values = x[0] if len(x) > 0 else []
+        if len(main_x_values) > 0 and len(second_x_axis) == len(main_x_values):
+            # Find values within the plot range
+            xlim_current = ax.get_xlim()
+            tick_positions = []
+            tick_labels = []
+            
+            for i, main_x_val in enumerate(main_x_values):
+                if (
+                    xlim_current[0] <= main_x_val <= xlim_current[1]
+                ):
+                    tick_positions.append(main_x_val)
+                    if i % second_x_every == 0:
+                        my_label = f'{second_x_axis[i]:.2g}'
+                    else:
+                        my_label = ""
+                    tick_labels.append(my_label)
+            
+            if tick_positions:
+                ax2.set_xticks(tick_positions)
+                ax2.set_xticklabels(tick_labels)
+                ax2.tick_params(axis='x', labelrotation=45)
 
     if out_path:
         savefig(out_path, close_fig=close_fig)
+
+
+def log_ticks(x):
+
+    x = np.asarray(x)
+    xmin, xmax = np.nanmin(x), np.nanmax(x)
+
+    # figure out the exponent range
+    exp_min = int(np.floor(np.log10(xmin)))
+    exp_max = int(np.ceil(np.log10(xmax)))
+
+    ticks = []
+    for exp in range(exp_min, exp_max + 1):
+        for base in [1, 2, 5]:
+            val = base * 10**exp
+            if xmin <= val <= xmax:
+                ticks.append(val)
+
+    return np.array(ticks)
