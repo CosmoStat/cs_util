@@ -61,7 +61,20 @@ def show():
     plt.close()
 
 
-def dx(idx, nx=3, fx=1.015, log=True):
+def get_x_dx(x_arr, shift_x, idx, log=True):
+
+    if shift_x:
+        if log:
+            this_x = x_arr[idx] * dx(idx, len(x_arr), log=log)
+        else:
+            raise ValueError("shift_x without log not implemented yet")
+    else:
+        this_x = x_arr[idx]
+
+    return this_x
+
+
+def dx(idx, nx=3, fx=1.03, log=True):
     """Dx.
 
     Return small shift useful to diplace points along the the x-axis
@@ -288,12 +301,8 @@ def plot_data_1d(
         fig = ax.figure
 
     for idx in range(len(x)):
-        this_x = x[idx]
-        if shift_x:
-            if xlog:
-                this_x *= dx(idx, len(x), log=xlog)
-            else:
-                raise ValueError("shift_x without log not implemented yet")
+        this_x = get_x_dx(x, shift_x, idx, log=xlog)
+
         if np.isnan(yerr[idx]).all():
             eb = ax.plot(
                 this_x,
