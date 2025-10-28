@@ -268,6 +268,8 @@ def plot_data_1d(
         y-axis limits, automatic if ``None``
     shift_x : bool, optional
         shift datasets by small amount along x if ``True``; default is ``False``
+    neg_dash: bool, optional
+        if ylog is True, add negative points with dashed lines
     close_fig : bool, optional
         closes figure if True (default)
     second_x_axis : array of float, optional, default is ``None``
@@ -300,6 +302,25 @@ def plot_data_1d(
     else:
         fig = ax.figure
 
+    # Add negative points with dashed lines
+    if neg_dash:
+        if not ylog:
+            raise ValueError("neg_dash only valid if ylog is True")
+
+        n = len(x)
+
+        # Duplicate the following lists
+        x = x * 2
+        yerr = yerr * 2
+        colors = colors * 2
+        labels = labels + [""] * n
+
+        # Add negative y-values
+        y = y + [-arr for arr in y]
+
+        # Add dashed lines
+        linestyles = linestyles + ["--"] * n
+
     for idx in range(len(x)):
         this_x = get_x_dx(x, shift_x, idx, log=xlog)
 
@@ -329,7 +350,6 @@ def plot_data_1d(
 
     if xlog:
         ax.set_xscale("log")
-        #plt.gca().xaxis.set_major_locator(ticker.LogLocator(base=10, subs=(1,2,5), numticks=15)
         ax.xaxis.set_major_locator(ticker.LogLocator(base=10, subs=(1,2,5), numticks=15))
         ax.xaxis.set_major_formatter(ticker.LogFormatter(labelOnlyBase=False))
 
