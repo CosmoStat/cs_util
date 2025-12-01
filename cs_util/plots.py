@@ -229,6 +229,7 @@ def plot_data_1d(
     xlim=None,
     ylim=None,
     shift_x=False,
+    neg_dash=False,
     close_fig=True,
     second_x_axis=None,
     second_x_label=None,
@@ -280,6 +281,25 @@ def plot_data_1d(
         plot only one in every `every` point on second x-axis; default is 1
 
     """
+    # Add negative points with dashed lines
+    if neg_dash:
+        if not ylog:
+            raise ValueError("neg_dash only valid if ylog is True")
+
+        n = len(x)
+
+        # Duplicate the following lists
+        x = x * 2
+        yerr = yerr * 2
+        colors = colors * 2
+        labels = labels + [""] * n
+
+        # Add negative y-values
+        y = y + [-arr for arr in y]
+
+        # Add dashed lines
+        linestyles = linestyles + ["--"] * n
+
     if labels is None:
         labels = [""] * len(x)
         do_legend = False
@@ -301,25 +321,6 @@ def plot_data_1d(
         fig, ax = plt.subplots(figsize=(10, 10))
     else:
         fig = ax.figure
-
-    # Add negative points with dashed lines
-    if neg_dash:
-        if not ylog:
-            raise ValueError("neg_dash only valid if ylog is True")
-
-        n = len(x)
-
-        # Duplicate the following lists
-        x = x * 2
-        yerr = yerr * 2
-        colors = colors * 2
-        labels = labels + [""] * n
-
-        # Add negative y-values
-        y = y + [-arr for arr in y]
-
-        # Add dashed lines
-        linestyles = linestyles + ["--"] * n
 
     for idx in range(len(x)):
         this_x = get_x_dx(x, shift_x, idx, log=xlog)
