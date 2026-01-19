@@ -449,9 +449,9 @@ class FootprintPlotter:
 
     # Dictionary storing region parameters
     _regions = {
-        "NGC": {"ra_0": 180, "extend": [120, 270, 20, 70], "vmax": 60},
-        "SGC": {"ra_0": 15, "extend": [-20, 45, 20, 45], "vmax": 60},
-        "fullsky": {"ra_0": 150, "extend": [0, 360, -90, 90], "vmax": 60},
+        "NGC": {"ra_0": 180, "extend": [120, 270, 20, 70], "vmin": 0, "vmax": 60},
+        "SGC": {"ra_0": 15, "extend": [-20, 45, 20, 45], "vmin": 0, "vmax": 60},
+        "fullsky": {"ra_0": 150, "extend": [0, 360, -90, 90], "vmin": 0, "vmax": 60},
     }
 
     def __init__(self, nside_coverage=32, nside_map=2048):
@@ -504,6 +504,7 @@ class FootprintPlotter:
         hsp_map,
         ra_0=0,
         extend=[120, 270, 29, 70],
+        vmin=0,
         vmax=60,
         projection=None,
         outpath=None,
@@ -524,6 +525,8 @@ class FootprintPlotter:
         extend : list, optional
             sky region, extend=[ra_low, ra_high, dec_low, dec_high];
             default is [120, 270, 29, 70]
+        vmin : float, optional
+            minimum pixel value to plot with color; default is 0 
         vmax : float, optional
             maximum pixel value to plot with color; default is 60
         projection : skyproj.McBrydeSkyproj
@@ -557,7 +560,12 @@ class FootprintPlotter:
 
             # Create new projection
             projection = skyproj.McBrydeSkyproj(
-                ax=ax, lon_0=ra_0, extent=extend, autorescale=True, vmax=vmax
+                ax=ax,
+                lon_0=ra_0,
+                extent=extend,
+                autorescale=True,
+                vmin=vmin,
+                vmax=vmax,
             )
         else:
             ax = None
@@ -596,7 +604,7 @@ class FootprintPlotter:
         hsp_map : hsp_HealSparseMap
             input map
         region : dict
-            region dictionary with keys 'ra_0', 'extend', 'vmax'
+            region dictionary with keys 'ra_0', 'extend', 'vmin', 'vmax'
         projection : skyproj.McBrydeSkyproj, optional
             if ``None`` (default), a new plot is created
         outpath : str, optional
@@ -620,6 +628,7 @@ class FootprintPlotter:
             hsp_map,
             region["ra_0"],
             region["extend"],
+            region["vmin"],
             region["vmax"],
             projection=projection,
             outpath=outpath,
