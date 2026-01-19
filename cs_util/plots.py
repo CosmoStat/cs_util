@@ -63,7 +63,7 @@ def savefig(fname, close_fig=True):
 
 def show():
     backend = matplotlib.get_backend()
-    if 'inline' in backend.lower() or 'nbagg' in backend.lower():
+    if "inline" in backend.lower() or "nbagg" in backend.lower():
         plt.show()  # Works in notebooks
     plt.close()
 
@@ -358,7 +358,9 @@ def plot_data_1d(
 
     if xlog:
         ax.set_xscale("log")
-        ax.xaxis.set_major_locator(ticker.LogLocator(base=10, subs=(1,2,5), numticks=15))
+        ax.xaxis.set_major_locator(
+            ticker.LogLocator(base=10, subs=(1, 2, 5), numticks=15)
+        )
         ax.xaxis.set_major_formatter(ticker.LogFormatter(labelOnlyBase=False))
 
     if ylog:
@@ -378,15 +380,15 @@ def plot_data_1d(
     # Add second x-axis on top if requested
     if second_x_axis is not None:
         ax2 = ax.twiny()
-        
+
         # Set second x-axis with provided values
         ax2.set_xlim(ax.get_xlim())
         if xlog:
-            ax2.set_xscale('log')
-        
+            ax2.set_xscale("log")
+
         if second_x_label is not None:
             ax2.set_xlabel(second_x_label)
-        
+
         # Create tick positions that correspond to the main x-axis values
         # Map from main x values to second x-axis values
         main_x_values = x[0] if len(x) > 0 else []
@@ -395,22 +397,20 @@ def plot_data_1d(
             xlim_current = ax.get_xlim()
             tick_positions = []
             tick_labels = []
-            
+
             for i, main_x_val in enumerate(main_x_values):
-                if (
-                    xlim_current[0] <= main_x_val <= xlim_current[1]
-                ):
+                if xlim_current[0] <= main_x_val <= xlim_current[1]:
                     tick_positions.append(main_x_val)
                     if i % second_x_every == 0:
-                        my_label = f'{second_x_axis[i]:.2g}'
+                        my_label = f"{second_x_axis[i]:.2g}"
                     else:
                         my_label = ""
                     tick_labels.append(my_label)
-            
+
             if tick_positions:
                 ax2.set_xticks(tick_positions)
                 ax2.set_xticklabels(tick_labels)
-                ax2.tick_params(axis='x', labelrotation=45)
+                ax2.tick_params(axis="x", labelrotation=45)
 
     if out_path:
         savefig(out_path, close_fig=close_fig)
@@ -479,7 +479,10 @@ class FootprintPlotter:
         """
         # Create empty map
         hsp_map = hsp.HealSparseMap.make_empty(
-            self._nside_coverage, self._nside_map, dtype=np.float32, sentinel=np.nan
+            self._nside_coverage,
+            self._nside_map,
+            dtype=np.float32,
+            sentinel=np.nan,
         )
 
         # Get pixel list corresponding to coordinates
@@ -570,13 +573,29 @@ class FootprintPlotter:
         except ValueError:
             msg = "No object found in region to draw"
             print(f"{msg}, continuing...")
-            # raise ValueError(msg)
 
-        projection.draw_milky_way(width=25, linewidth=1.5, color="black", linestyle="-")
+        projection.draw_milky_way(
+            width=25, linewidth=1.5, color="black", linestyle="-"
+        )
+
+        # Set axis labels
+        if ax:
+            ax.set_xlabel("R.A. [deg]")
+            ax.set_ylabel("Dec [deg]")
+        else:
+            projection.ax.set_xlabel("R.A. [deg]")
+            projection.ax.set_ylabel("Dec [deg]")
 
         # Add colorbar if requested and image was drawn
         if colorbar and im is not None:
-            plt.colorbar(im, ax=ax if ax else projection.ax, label=colorbar_label)
+            plt.colorbar(
+                im,
+                ax=ax if ax else projection.ax,
+                label=colorbar_label,
+                orientation="horizontal",
+                location="top",
+                pad=0.05,
+            )
 
         if title:
             plt.title(title, pad=5)
@@ -586,7 +605,16 @@ class FootprintPlotter:
 
         return projection, ax
 
-    def plot_region(self, hsp_map, region, projection=None, outpath=None, title=None, colorbar=True, colorbar_label="Coverage depth"):
+    def plot_region(
+        self,
+        hsp_map,
+        region,
+        projection=None,
+        outpath=None,
+        title=None,
+        colorbar=True,
+        colorbar_label="Coverage depth",
+    ):
         """Plot Region.
 
         Plot catalogue in a predefined region on the sky.
@@ -667,7 +695,9 @@ class FootprintPlotter:
         # Define the Galactic Plane: l = [0, 360], b = 0°
         for l0, ls in zip((-5, 0, 5), (":", "-", ":")):
             l_values = np.linspace(0, 360, 500)  # 500 points along the plane
-            b_values = np.zeros_like(l_values)  # Galactic latitude is 0 (the plane)
+            b_values = np.zeros_like(
+                l_values
+            )  # Galactic latitude is 0 (the plane)
 
             # Convert (l, b) to (λ, β) - Ecliptic coordinates
             coords = SkyCoord(
@@ -691,12 +721,16 @@ class FootprintPlotter:
             )  # Plot the outline
 
         # Apply mask
-        mask_values = hsp_map.get_values_pos(ra, dec, valid_mask=True, lonlat=True)
+        mask_values = hsp_map.get_values_pos(
+            ra, dec, valid_mask=True, lonlat=True
+        )
 
         ok = np.where(mask_values == False)[0]
         # nok = np.where(mask_values == False)[0]
 
-        hp.projscatter(ra[ok], dec[ok], lonlat=True, color="green", s=1, marker=".")
+        hp.projscatter(
+            ra[ok], dec[ok], lonlat=True, color="green", s=1, marker="."
+        )
         # hp.projscatter(ra[nok], dec[nok], lonlat=True, color="red", s=1, marker=".")
 
         plt.tight_layout()
@@ -732,7 +766,9 @@ def hsp_map_logical_or(maps, verbose=False):
             raise ValueError(f"Data type {m.dtype} does not match {dtype}")
 
     # Create an empty HealSparse map
-    map_comb = hsp.HealSparseMap.make_empty(nside_coverage, nside_sparse, dtype=dtype)
+    map_comb = hsp.HealSparseMap.make_empty(
+        nside_coverage, nside_sparse, dtype=dtype
+    )
     for idx, m in enumerate(maps):
         map_comb |= m
 
