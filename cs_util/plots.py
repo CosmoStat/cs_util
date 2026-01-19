@@ -563,9 +563,7 @@ class FootprintPlotter:
                 ax=ax,
                 lon_0=ra_0,
                 extent=extend,
-                autorescale=True,
-                vmin=vmin,
-                vmax=vmax,
+                autorescale=False,
             )
         else:
             ax = None
@@ -573,7 +571,7 @@ class FootprintPlotter:
         im = None
         try:
             im, lon_raster, lat_raster, values_raster = projection.draw_hspmap(
-                hsp_map, lon_range=extend[0:2], lat_range=extend[2:]
+                hsp_map, lon_range=extend[0:2], lat_range=extend[2:], vmin=vmin, vmax=vmax
             )
         except ValueError:
             msg = "No object found in region to draw"
