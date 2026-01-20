@@ -563,7 +563,10 @@ class FootprintPlotter:
 
             # Create new projection
             projection = skyproj.McBrydeSkyproj(
-                ax=ax, lon_0=ra_0, extent=extend, autorescale=False
+                ax=ax,
+                lon_0=ra_0,
+                extent=extend,
+                autorescale=False,
             )
         else:
             ax = None
