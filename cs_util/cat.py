@@ -11,6 +11,8 @@
 import os
 from datetime import datetime
 from importlib.metadata import version
+import numpy as np
+import healpy as hp
 
 from astropy.io import fits
 from astropy.io import ascii
@@ -267,3 +269,102 @@ def read_dndz(file_path):
     z_centers = bin_edges2centers(z_edges)
 
     return z_centers, nz, z_edges
+
+
+def read_hp_mask(input_name, verbose=False):
+    """Read Hp Mask.
+
+    Read healpy mask.
+
+    Parameters
+    ----------
+    input_name : str
+        input file name
+    verbose : bool, optional
+        verbose output if ``True``;; default is ``False``
+
+    Returns
+    -------
+    array
+        mask values
+    bool
+        nest value (always ``False``)
+    int
+        nside
+
+    """
+    if verbose:
+        print(f'Reading mask {input_name}...')
+
+    nest = False
+
+    # Open input mask                                                           
+    mask, header= hp.read_map(
+        input_name,
+        h=True,
+        nest=nest,
+    )
+    for (key, value) in header:
+        if key == 'ORDERING':
+            if value == 'RING':
+                if nest:
+                    raise ValueError(
+                        'input mask has ORDENING=RING, set nest to False'
+                    )
+            elif value == 'NEST':
+                if not nest:
+                    raise ValueError(
+                        'input mask has ORDENING=NEST, set nest to True'
+                    )
+
+    # Get nside from header                                                     
+    nside = None
+    for key, value in header:
+        if key == 'NSIDE':
+            nside = int(value)
+    if not nside:
+        raise KeyError('NSIDE not found in FITS mask header')
+
+    return mask, nest, nside
+
+
+def get_binned_area(ra, dec, nside=512, return_pix=False):                                         
+    """Get Binned Area.                                                          
+                                                                                 
+    Return sky area corresponding to occupied pixels of binned catalogue.        
+
+    Parameters
+    ----------
+    ra : np.ndarray
+        Right Ascension coordinates
+    dec : np.ndarray
+        Declination coordinates
+    nside : int, optional
+        nside for binning; default is 512
+    return_pix: bool, optional
+        return valid pixel list if ``True``; default is ``False``
+                                                                                 
+    Returns                                                                      
+    -------                                                                      
+    float                                                                        
+        area in square degrees                                                   
+    list
+        pixels of input data positions
+                                                                                 
+    """                                                                          
+    # Pixel list of input data                                                   
+    pix = hp.ang2pix(nside, ra, dec, lonlat=True)                               
+                                                                                 
+    # Number of occupied pixels                                                  
+    Nocc = np.unique(pix).size                                                  
+                                                                                 
+    # Pixel area in square degrees                                               
+    pix_area_deg2 = hp.nside2pixarea(nside, degrees=True)                        
+                                                                                 
+    # Footprint area in square degrees                                           
+    area_deg2 = Nocc * pix_area_deg2                                             
+
+    if return_pix:
+        return area_deg2, pix
+    else:
+        return area_deg2
