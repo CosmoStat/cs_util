@@ -253,19 +253,36 @@ def read_dndz(file_path):
 
     Returns
     -------
-    list :
+    np.array :
         redshift bin centers
-    list :
+    np.array :
         number densities
-    list :
-        redshift bin edges
+    np.array :
+        redshift bin edges; one less than centers and density arrays
 
     """
-    dat = ascii.read(file_path, format="commented_header")
+    try:
+        # Expecting header line "# z dn_dz"
+        dat = ascii.read(file_path, format="commented_header")
+        missing = [col for col in ("z", "dn_dz") if col not in dat.dtype.names]
+        if missing:
+            raise ValueError(
+                f"Missing columns in dndz path {file_path}: {missing}"
+            )
+    except:
+        # No header line
+        dat = ascii.read(file_path)
+        dat.rename_column("col1", "z")
+        dat.rename_column("col2", "dn_dz")
 
-    # Remove last n(z) value which is zero, to match bin centers
+    # Remove last n(z) value which should be zero, to match bin centers
+    tolerance = 1e-5
+    if dat["dn_dz"][-1] / sum(dat["dn_dz"]) > tolerance:
+        raise ValueError("dn_dz at last z-edge = {dat['dn_dz'][-1]}, no zero")
+
     nz = dat["dn_dz"][:-1]
     z_edges = dat["z"]
+
     z_centers = bin_edges2centers(z_edges)
 
     return z_centers, nz, z_edges
