@@ -10,6 +10,7 @@
 
 import os
 from datetime import datetime
+
 from importlib.metadata import version
 import numpy as np
 import healpy as hp
@@ -253,118 +254,93 @@ def read_dndz(file_path):
 
     Returns
     -------
-    list :
+    np.array
         redshift bin centers
-    list :
+    np.array
         number densities
-    list :
-        redshift bin edges
+    np.array
+        redshift bin edges; one less than centers and density arrays
 
     """
-    dat = ascii.read(file_path, format="commented_header")
+    try:
+        # Expecting header line "# z dn_dz"
+        dat = ascii.read(file_path, format="commented_header")
+        missing = [col for col in ("z", "dn_dz") if col not in dat.dtype.names]
+        if missing:
+            raise ValueError(
+                f"Missing columns in dndz path {file_path}: {missing}"
+            )
+    except:
+        # No header line
+        dat = ascii.read(file_path)
+        dat.rename_column("col1", "z")
+        dat.rename_column("col2", "dn_dz")
 
-    # Remove last n(z) value which is zero, to match bin centers
+    # Remove last n(z) value which should be zero, to match bin centers
+    tolerance = 1e-5
+    if dat["dn_dz"][-1] / sum(dat["dn_dz"]) > tolerance:
+        raise ValueError("dn_dz at last z-edge = {dat['dn_dz'][-1]}, no zero")
+
     nz = dat["dn_dz"][:-1]
     z_edges = dat["z"]
+
     z_centers = bin_edges2centers(z_edges)
 
     return z_centers, nz, z_edges
 
 
-def read_hp_mask(input_name, verbose=False):
+def read_hp_mask(input_path, verbose=False):
     """Read Hp Mask.
 
-    Read healpy mask.
+    Read healpix mask FITS file.
 
-    Parameters
-    ----------
-    input_name : str
-        input file name
-    verbose : bool, optional
-        verbose output if ``True``;; default is ``False``
+        Parameters
+        ----------
+        input_path : str
+                input file path
+        verbose : bool, optional
+                verbose output if ``True``; default is ``False``
 
-    Returns
-    -------
-    array
-        mask values
-    bool
-        nest value (always ``False``)
-    int
-        nside
+        Returns
+        -------
+        array
+                mask information
+        bool
+                NEST (RING) ordering if ``True`` (``False``)
+        int
+                nside
 
     """
     if verbose:
-        print(f'Reading mask {input_name}...')
+        print(f"Reading mask {input_path}...")
 
     nest = False
 
-    # Open input mask                                                           
-    mask, header= hp.read_map(
-        input_name,
+    # Open input mask
+    mask, header = hp.read_map(
+        input_path,
         h=True,
         nest=nest,
     )
-    for (key, value) in header:
-        if key == 'ORDERING':
-            if value == 'RING':
+    for key, value in header:
+        if key == "ORDERING":
+            if value == "RING":
                 if nest:
                     raise ValueError(
-                        'input mask has ORDENING=RING, set nest to False'
+                        "input mask has ORDENING=RING, set nest to False"
                     )
-            elif value == 'NEST':
+            elif value == "NEST":
                 if not nest:
                     raise ValueError(
-                        'input mask has ORDENING=NEST, set nest to True'
+                        "input mask has ORDENING=NEST, set nest to True"
                     )
 
-    # Get nside from header                                                     
+    # Get nside from header
     nside = None
     for key, value in header:
-        if key == 'NSIDE':
+        if key == "NSIDE":
             nside = int(value)
     if not nside:
-        raise KeyError('NSIDE not found in FITS mask header')
+        raise KeyError("NSIDE not found in FITS mask header")
 
     return mask, nest, nside
-
-
-def get_binned_area(ra, dec, nside=512, return_pix=False):                                         
-    """Get Binned Area.                                                          
-                                                                                 
-    Return sky area corresponding to occupied pixels of binned catalogue.        
-
-    Parameters
-    ----------
-    ra : np.ndarray
-        Right Ascension coordinates
-    dec : np.ndarray
-        Declination coordinates
-    nside : int, optional
-        nside for binning; default is 512
-    return_pix: bool, optional
-        return valid pixel list if ``True``; default is ``False``
-                                                                                 
-    Returns                                                                      
-    -------                                                                      
-    float                                                                        
-        area in square degrees                                                   
-    list
-        pixels of input data positions
-                                                                                 
-    """                                                                          
-    # Pixel list of input data                                                   
-    pix = hp.ang2pix(nside, ra, dec, lonlat=True)                               
-                                                                                 
-    # Number of occupied pixels                                                  
-    Nocc = np.unique(pix).size                                                  
-                                                                                 
-    # Pixel area in square degrees                                               
-    pix_area_deg2 = hp.nside2pixarea(nside, degrees=True)                        
-                                                                                 
-    # Footprint area in square degrees                                           
-    area_deg2 = Nocc * pix_area_deg2                                             
-
-    if return_pix:
-        return area_deg2, pix
-    else:
-        return area_deg2

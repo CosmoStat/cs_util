@@ -9,6 +9,7 @@
 
 import sys
 import os
+import shlex
 
 from optparse import OptionParser
 
@@ -103,6 +104,9 @@ def my_string_split(string, num=-1, verbose=False, stop=False, sep=None):
     the first in the list [space, underscore] that occurs in the string.
     (Thus, if both occur, use space.)
 
+    Handles quoted strings: entries containing spaces can be enclosed
+    in double quotes, e.g., 'value1 "entry with spaces" value3'.
+
     Parameters
     ----------
     string : str
@@ -130,6 +134,19 @@ def my_string_split(string, num=-1, verbose=False, stop=False, sep=None):
     """
     if string is None:
         return None
+
+    # Handle quoted strings with shlex
+    if '"' in string or "'" in string:
+        try:
+            res = shlex.split(string)
+            if num != -1 and num != len(res) and stop:
+                raise ValueError(
+                    f"String has {len(res)} elements, required is {num}"
+                )
+            return res
+        except ValueError:
+            # Fall through to regular splitting if shlex fails
+            pass
 
     if sep is None:
         has_space = string.find(" ")
@@ -162,7 +179,7 @@ def my_string_split(string, num=-1, verbose=False, stop=False, sep=None):
 
     if num != -1 and num != len(res) and stop:
         raise ValueError(
-            f"String '{len(res)}' has length {num}, required is {num}"
+            f"String has {len(res)} elements, required is {num}"
         )
 
     return res
