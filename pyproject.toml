@@ -1,6 +1,6 @@
 [project]
 name = "cs_util"
-version = "0.1.8"
+version = "0.1.9"
 description = "Utility library for CosmoStat"
 authors = [
 	{ name = "Martin Kilbinger", email = "martin.kilbinger@cea.fr" },

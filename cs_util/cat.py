@@ -253,11 +253,11 @@ def read_dndz(file_path):
 
     Returns
     -------
-    np.array :
+    np.array
         redshift bin centers
-    np.array :
+    np.array
         number densities
-    np.array :
+    np.array
         redshift bin edges; one less than centers and density arrays
 
     """
