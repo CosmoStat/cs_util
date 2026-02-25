@@ -11,6 +11,8 @@
 import os
 from datetime import datetime
 
+from importlib.metadata import version
+import numpy as np
 import healpy as hp
 
 from astropy.io import fits
@@ -18,7 +20,12 @@ from astropy.io import ascii
 from astropy.table import Table
 
 
-def write_header_info_sp(primary_header, name="unknown", version="unknown"):
+def write_header_info_sp(
+    primary_header,
+    software_name="cs_util",
+    software_version="unknown",
+    author=None,
+):
     """Write Header Info sp_validation.
 
     Write information about software and run to FITS header
@@ -27,10 +34,13 @@ def write_header_info_sp(primary_header, name="unknown", version="unknown"):
     ----------
     primary_header : dict
        FITS header information
-    name : str
-        software name, default is 'unknown'
-    version : str
-        version, default is 'unknown'
+    software_name : str, optional
+        software name; default is "cs_util"
+    software_version : str, optional
+        version; default is current cs_util version
+    author : str, optional
+        author name; if ``None`` (default), read from os.environ["USER"],
+        or if not set in env, "unknown"
 
     Returns
     -------
@@ -38,16 +48,23 @@ def write_header_info_sp(primary_header, name="unknown", version="unknown"):
         updated FITS header information
 
     """
-    if "USER" in os.environ:
-        author = os.environ["USER"]
+    if software_version is None:
+        software_version = version("cs_util")
+
+    if author is None:
+        if "USER" in os.environ:
+            author = os.environ["USER"]
+        else:
+            author = "unknown"
     else:
         author = "unknown"
+
     primary_header["AUTHOR"] = (author, "Who ran the software")
-    primary_header["SOFTNAME"] = (name, "Name of the software")
-    primary_header["SOFTVERS"] = (version, "Version of the software")
+    primary_header["SOFTNAME"] = (software_name, "Software name")
+    primary_header["SOFTVERS"] = (software_version, "software version")
     primary_header["DATE"] = (
         datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
-        "When it was started",
+        "Creation date",
     )
 
     return primary_header
@@ -171,6 +188,39 @@ def write_fits_BinTable_file(
     hdu_list.writeto(output_path, overwrite=True)
 
 
+def read_fits_to_dict(file_path):
+    """Read Fits To Dict.
+
+    Read FITS file and return dictionary.
+
+    Parameters
+    ----------
+    file_path : str
+        input file path
+
+    Returns
+    -------
+    dict
+        file content
+
+    Raises
+    ------
+    IOError
+        if input file is not found
+    """
+    if not os.path.exists(file_path):
+        raise IOError(f"Input file '{file_path}' not found")
+
+    hdu_list = fits.open(file_path)
+    data_input = hdu_list[1].data
+    col_names = hdu_list[1].data.dtype.names
+    data = {}
+    for col_name in col_names:
+        data[col_name] = data_input[col_name]
+
+    return data
+
+
 def bin_edges2centers(bin_edges):
     """Bin Edges To Centers.
 
@@ -204,19 +254,36 @@ def read_dndz(file_path):
 
     Returns
     -------
-    list :
+    np.array
         redshift bin centers
-    list :
+    np.array
         number densities
-    list :
-        redshift bin edges
+    np.array
+        redshift bin edges; one less than centers and density arrays
 
     """
-    dat = ascii.read(file_path, format="commented_header")
+    try:
+        # Expecting header line "# z dn_dz"
+        dat = ascii.read(file_path, format="commented_header")
+        missing = [col for col in ("z", "dn_dz") if col not in dat.dtype.names]
+        if missing:
+            raise ValueError(
+                f"Missing columns in dndz path {file_path}: {missing}"
+            )
+    except:
+        # No header line
+        dat = ascii.read(file_path)
+        dat.rename_column("col1", "z")
+        dat.rename_column("col2", "dn_dz")
 
-    # Remove last n(z) value which is zero, to match bin centers
+    # Remove last n(z) value which should be zero, to match bin centers
+    tolerance = 1e-5
+    if dat["dn_dz"][-1] / sum(dat["dn_dz"]) > tolerance:
+        raise ValueError("dn_dz at last z-edge = {dat['dn_dz'][-1]}, no zero")
+
     nz = dat["dn_dz"][:-1]
     z_edges = dat["z"]
+
     z_centers = bin_edges2centers(z_edges)
 
     return z_centers, nz, z_edges
