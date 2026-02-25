@@ -1,40 +1,41 @@
-[tool.poetry]
+[project]
 name = "cs_util"
-version = "0.1.4"
+version = "0.1.9"
 description = "Utility library for CosmoStat"
-authors = ["Martin Kilbinger <martin.kilbinger@cea.fr>"]
+authors = [
+	{ name = "Martin Kilbinger", email = "martin.kilbinger@cea.fr" },
+]
 readme = "README.md"
 
-[tool.poetry.dependencies]
-python = ">=3.11,<3.13"
-astropy = "^7.0"
-datetime = "^5.5"
-numpy = "^1.26.4"
-matplotlib = "^3.8.4"
-swig = "^4.2.1"
-scipy = "^1.13.0"
-vos = "^3.6.1"
-keyring = "^25.2.0"
-pyccl = "^3.0.2"
-camb = "^1.5.9"
+requires-python = ">=3.10"
 
-[tool.poetry.dev-dependencies]
-pytest = "^6.2.5"
-pydocstyle = "^6.3.0"
-pytest-cov = "^4.1.0"
-black = "^23.7.0"
+dependencies = [
+	"astropy>=6.1",
+	"datetime>=5.5",
+	"numpy>=1.26.4",
+	"matplotlib>=3.8.4",
+	"swig>=4.2.1",
+	"scipy>=1.13.0",
+	"vos>=3.6.1",
+	"keyring>=25.2.0",
+	"pyccl>=3.0.2",
+	"camb>=1.5.9",
+	"healpy>=1.16.0",
+	"healsparse>=1.8.0",
+	"skyproj>=1.0.0",
+]
 
-[tool.black]
-line-length = 80
+[project.optional-dependencies]
+lint = [
+	"black",
+]
+release = [
+	"build",
+    	"twine",
+]
+test = [
+	"pytest",
+	"pytest-pydocstyle",
+	"pytest-cov",
+]
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-[project.urls]
-Source = "https://github.com/CosmoStat/cs_util"
-Documentation = "https://github.com/CosmoStat/cs_util"
-Tracker = "https://github.com/CosmoStat/cs_util/issues"
-
-[tool.pydocstyle]
-convention = "numpy"
