@@ -16,7 +16,11 @@ import matplotlib
 import matplotlib.pylab as plt
 import matplotlib.ticker as ticker
 import numpy as np
-import skyproj
+from typing import Any
+try:
+    import skyproj
+except ImportError:
+    skyproj = None
 from astropy import units as u
 from astropy.coordinates import SkyCoord
 
@@ -502,123 +506,7 @@ class FootprintPlotter:
 
         return hsp_map
 
-    def plot_area(
-        self,
-        hsp_map,
-        ra_0=0,
-        extend=[120, 270, 29, 70],
-        vmin=0,
-        vmax=60,
-        projection=None,
-        outpath=None,
-        title=None,
-        colorbar=True,
-        colorbar_label="Coverage depth",
-    ):
-        """Plot Area.
-
-        Plot catalogue in an area on the sky.
-
-        Parameters
-        ----------
-        hsp_map : hsp_HealSparseMap
-            input map
-        ra_0 : float, optional
-            anchor point in R.A.; default is 0
-        extend : list, optional
-            sky region, extend=[ra_low, ra_high, dec_low, dec_high];
-            default is [120, 270, 29, 70]
-        vmin : float, optional
-            minimum pixel value to plot with color; default is 0
-        vmax : float, optional
-            maximum pixel value to plot with color; default is 60
-        projection : skyproj.McBrydeSkyproj
-            if ``None`` (default), a new plot is created
-        outpath : str, optional
-            output path, default is ``None``
-        title : str, optional
-            print title if not ``None`` (default)
-        colorbar : bool, optional
-            add colorbar; default is ``True``
-        colorbar_label : str, optional
-            colorbar label; default is "Coverage depth"
-
-        Returns
-        --------
-        skyproj.McBrydeSkyproj
-            projection instance
-        plt.axes.Axes
-            axes instance
-
-        Raises
-        ------
-        ValueError
-            if no object found in region
-
-        """
-        if not projection:
-
-            # Create new figure and axes
-            fig, ax = plt.subplots(figsize=(10, 10))
-
-            # Create new projection
-            projection = skyproj.McBrydeSkyproj(
-                ax=ax,
-                lon_0=ra_0,
-                extent=extend,
-                autorescale=False,
-            )
-        else:
-            ax = None
-
-        im = None
-        try:
-            im, lon_raster, lat_raster, values_raster = projection.draw_hspmap(
-                hsp_map, lon_range=extend[0:2], lat_range=extend[2:], vmin=vmin, vmax=vmax
-            )
-        except ValueError:
-            msg = "No object found in region to draw"
-            print(f"{msg}, continuing...")
-
-        projection.draw_milky_way(
-            width=25, linewidth=1.5, color="black", linestyle="-"
-        )
-
-        # Use skyproj's own methods to enforce extent
-        projection.set_autorescale(False)
-        projection.set_extent(extend)
-
-        # Set axis labels
-        if ax:
-            ax.set_xlabel("R.A. [deg]")
-            ax.set_ylabel("Dec [deg]")
-        else:
-            projection.ax.set_xlabel("R.A. [deg]")
-            projection.ax.set_ylabel("Dec [deg]")
-
-        # Add colorbar if requested and image was drawn
-        if colorbar and im is not None:
-            plt.colorbar(
-                im,
-                ax=ax if ax else projection.ax,
-                label=colorbar_label,
-                orientation="horizontal",
-                location="top",
-                pad=0.05,
-            )
-
-        if title:
-            plt.title(title, pad=5)
-
-        # Force extent again after all plotting operations to ensure it's respected
-        projection.set_autorescale(False)
-        projection.set_extent(extend)
-
-        if outpath:
-            plt.savefig(outpath)
-
-        return projection, ax
-
+    
     def plot_region(
         self,
         hsp_map,
@@ -639,7 +527,7 @@ class FootprintPlotter:
             input map
         region : dict
             region dictionary with keys 'ra_0', 'extend', 'vmin', 'vmax'
-        projection : skyproj.McBrydeSkyproj, optional
+        projection : Any, optional
             if ``None`` (default), a new plot is created
         outpath : str, optional
             output path, default is ``None``
