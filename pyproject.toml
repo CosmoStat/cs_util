@@ -1,6 +1,6 @@
 [project]
 name = "cs_util"
-version = "0.1.9"
+version = "0.2.1"
 description = "Utility library for CosmoStat"
 authors = [
 	{ name = "Martin Kilbinger", email = "martin.kilbinger@cea.fr" },
@@ -22,10 +22,12 @@ dependencies = [
 	"camb>=1.5.9",
 	"healpy>=1.16.0",
 	"healsparse>=1.8.0",
-	"skyproj>=1.0.0",
-]
+	]
 
 [project.optional-dependencies]
+skyproj = [
+    "skyproj>=1.0.0",
+]
 lint = [
 	"black",
 ]
