@@ -51,6 +51,20 @@ class SizeTestCase(TestCase):
         T = np.array([0.05, 0.18, 2.0, 10.0])
         npt.assert_allclose(size.T_to_r50(T), np.sqrt(np.log(2) * T))
 
+    def test_inverse_direct_values(self):
+        """Test each inverse converter directly on the unit-sigma case."""
+        npt.assert_almost_equal(size.r50_to_sigma(self._r50), self._sigma)
+        npt.assert_almost_equal(size.fwhm_to_sigma(self._fwhm), self._sigma)
+        npt.assert_almost_equal(size.r50_to_T(self._r50), self._T)
+
+    def test_nonpositive_T(self):
+        """Test that T = 0 maps to size 0 and negative T to NaN."""
+        npt.assert_equal(size.T_to_sigma(0.0), 0.0)
+        npt.assert_equal(size.T_to_r50(0.0), 0.0)
+        npt.assert_equal(size.T_to_fwhm(0.0), 0.0)
+        with np.errstate(invalid="ignore"):
+            self.assertTrue(np.isnan(size.T_to_r50(-1.0)))
+
     def test_round_trips(self):
         """Test that inverse pairs compose to the identity."""
         values = np.array([0.01, 0.1, 1.0, 7.5])

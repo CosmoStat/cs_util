@@ -17,7 +17,7 @@
     producers (ShapePipe) and consumers (sp_validation) should import
     from here rather than re-deriving the factors locally.
 
-:Author: Cail Daley
+:Author: Cail Daley <cailmdaley@gmail.com>
 
 """
 
