@@ -1,0 +1,7 @@
+cs\_util.size
+-------------
+
+.. automodule:: cs_util.size
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -4,8 +4,8 @@ scripts
 
 .. automodule:: scripts
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 List of Scripts
 ---------------

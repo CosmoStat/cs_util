@@ -1,0 +1,7 @@
+cs\_util.tests.test\_cosmo
+--------------------------
+
+.. automodule:: cs_util.tests.test_cosmo
+   :members:
+   :show-inheritance:
+   :undoc-members:

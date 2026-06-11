@@ -1,0 +1,7 @@
+cs\_util.cfis
+-------------
+
+.. automodule:: cs_util.cfis
+   :members:
+   :show-inheritance:
+   :undoc-members:

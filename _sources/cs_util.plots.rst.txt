@@ -3,5 +3,5 @@ cs\_util.plots
 
 .. automodule:: cs_util.plots
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,7 @@
+cs\_util.tests.test\_size
+-------------------------
+
+.. automodule:: cs_util.tests.test_size
+   :members:
+   :show-inheritance:
+   :undoc-members:

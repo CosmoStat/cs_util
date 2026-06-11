@@ -1,0 +1,7 @@
+cs\_util.treecorr\_aux
+----------------------
+
+.. automodule:: cs_util.treecorr_aux
+   :members:
+   :show-inheritance:
+   :undoc-members:

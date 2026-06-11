@@ -4,8 +4,8 @@ cs\_util
 
 .. automodule:: cs_util
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Subpackages
 -----------
@@ -21,7 +21,13 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   cs_util.args
    cs_util.calc
+   cs_util.canfar
    cs_util.cat
+   cs_util.cfis
+   cs_util.cosmo
    cs_util.logging
    cs_util.plots
+   cs_util.size
+   cs_util.treecorr_aux

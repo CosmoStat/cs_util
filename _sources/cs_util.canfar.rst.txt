@@ -1,0 +1,7 @@
+cs\_util.canfar
+---------------
+
+.. automodule:: cs_util.canfar
+   :members:
+   :show-inheritance:
+   :undoc-members:

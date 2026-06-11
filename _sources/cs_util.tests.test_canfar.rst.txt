@@ -1,0 +1,7 @@
+cs\_util.tests.test\_canfar
+---------------------------
+
+.. automodule:: cs_util.tests.test_canfar
+   :members:
+   :show-inheritance:
+   :undoc-members:

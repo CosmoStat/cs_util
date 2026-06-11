@@ -4,8 +4,8 @@ cs\_util.tests
 
 .. automodule:: cs_util.tests
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Submodules
 ----------
@@ -13,7 +13,12 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   cs_util.tests.test_args
    cs_util.tests.test_calc
+   cs_util.tests.test_canfar
    cs_util.tests.test_cat
+   cs_util.tests.test_cfis
+   cs_util.tests.test_cosmo
    cs_util.tests.test_logging
    cs_util.tests.test_plots
+   cs_util.tests.test_size

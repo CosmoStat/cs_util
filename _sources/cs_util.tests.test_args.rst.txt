@@ -1,0 +1,7 @@
+cs\_util.tests.test\_args
+-------------------------
+
+.. automodule:: cs_util.tests.test_args
+   :members:
+   :show-inheritance:
+   :undoc-members:

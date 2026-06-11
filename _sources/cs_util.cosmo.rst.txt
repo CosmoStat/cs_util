@@ -1,0 +1,7 @@
+cs\_util.cosmo
+--------------
+
+.. automodule:: cs_util.cosmo
+   :members:
+   :show-inheritance:
+   :undoc-members:
