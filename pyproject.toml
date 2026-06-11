@@ -40,4 +40,13 @@ test = [
 	"pytest-pydocstyle",
 	"pytest-cov",
 ]
+docs = [
+	"sphinx>=8.0",
+	"numpydoc>=1.8",
+	"sphinxcontrib-bibtex>=2.6",
+	# 6.0.3 is a broken wheel on PyPI (dist-info only, no python module)
+	"sphinxawesome-theme>=5.3,!=6.0.3",
+	"nbsphinx>=0.9",
+	"nbsphinx-link>=1.3",
+]
 
