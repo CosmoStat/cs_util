@@ -4,7 +4,7 @@
 # Import relevant modules
 import sys
 import os
-from importlib_metadata import metadata
+from importlib.metadata import metadata
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath("../.."))
 project = "cs_util"
 
 mdata = metadata(project)
-author = mdata["Author"]
+author = mdata["Author"] or mdata["Author-email"]
 version = mdata["Version"]
 copyright = "2022, {}".format(author)
 gh_user = "martinkilbinger"
