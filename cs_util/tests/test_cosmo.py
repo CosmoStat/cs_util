@@ -9,6 +9,7 @@ import pickle
 
 from numpy import testing as npt
 import numpy as np
+import pytest
 
 from astropy import units
 import pyccl as ccl
@@ -278,7 +279,19 @@ class CosmoTestCase(TestCase):
 
         npt.assert_equal(pickle.dumps(cos_def), pickle.dumps(self._cos_def))
 
+    @pytest.mark.xfail(
+        np.lib.NumpyVersion(np.__version__) >= "2.5.0",
+        reason=(
+            "pyccl 3.3.4 calls float() on a non-0-d array in boltzmann.py, "
+            "which numpy>=2.5 turns into a hard TypeError; not a cs_util bug. "
+            "Stopgap, not the real fix. Tracked in CosmoStat/cs_util#71 "
+            "(revisit the pyccl/numpy pin and where cosmology code should "
+            "live)."
+        ),
+        strict=False,
+    )
     def test_xipm_theo(self):
+        """Test ``cs_util.xipm_theo``: xi+/- theory against stored values."""
         xip, xim = cosmo.xipm_theo(
             self._theta,
             self._cosmo,
