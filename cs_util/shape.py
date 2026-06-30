@@ -54,8 +54,7 @@ def e_to_g(e1, e2):
         Reduced-shear components ``(g1, g2)``
 
     """
-    e = np.hypot(e1, e2)
-    factor = 1 / (1 + np.sqrt(1 - e ** 2))
+    factor = 1 / (1 + np.sqrt(1 - e1 ** 2 - e2 ** 2))
     return e1 * factor, e2 * factor
 
 
@@ -79,6 +78,5 @@ def g_to_e(g1, g2):
         Distortion components ``(e1, e2)``
 
     """
-    g = np.hypot(g1, g2)
-    factor = 2 / (1 + g ** 2)
+    factor = 2 / (1 + g1 ** 2 + g2 ** 2)
     return g1 * factor, g2 * factor
