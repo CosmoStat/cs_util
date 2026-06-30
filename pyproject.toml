@@ -36,8 +36,11 @@ release = [
     	"twine",
 ]
 test = [
+	# pytest-pydocstyle removed: its upstream is archived and incompatible
+	# with the pytest 9.1 collect-file hookspec (it crashed CI at startup).
+	# Docstring linting, if wanted, should move to a maintained tool (ruff's
+	# pydocstyle `D` rules).
 	"pytest",
-	"pytest-pydocstyle",
 	"pytest-cov",
 ]
 docs = [
