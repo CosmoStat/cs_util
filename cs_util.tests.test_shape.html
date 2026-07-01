@@ -21,15 +21,15 @@
 <meta content="#ffffff" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="#030711" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>cs_util.tests.test_canfar | cs_util v0.2.1</title>
-<meta content="cs_util.tests.test_canfar | cs_util v0.2.1" property="og:title"/>
-<meta content="cs_util.tests.test_canfar | cs_util v0.2.1" name="twitter:title"/>
+<title>cs_util.tests.test_shape | cs_util v0.2.1</title>
+<meta content="cs_util.tests.test_shape | cs_util v0.2.1" property="og:title"/>
+<meta content="cs_util.tests.test_shape | cs_util v0.2.1" name="twitter:title"/>
 <link href="_static/pygments.css?v=b86133f3" rel="stylesheet" type="text/css"/>
 <link href="_static/theme.css?v=d6d7c91b" rel="stylesheet" type="text/css"/>
 <link href="search.html" rel="search" title="Search"/>
 <link href="genindex.html" rel="index" title="Index"/>
-<link href="cs_util.tests.test_cat.html" rel="next" title="cs_util.tests.test_cat"/>
-<link href="cs_util.tests.test_calc.html" rel="prev" title="cs_util.tests.test_calc"/>
+<link href="cs_util.tests.test_size.html" rel="next" title="cs_util.tests.test_size"/>
+<link href="cs_util.tests.test_plots.html" rel="prev" title="cs_util.tests.test_plots"/>
 </head>
 <body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false, showScrollTop: false }">
 <div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
@@ -82,13 +82,13 @@
 <li class="toctree-l2 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="cs_util.tests.html">cs_util.tests<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_args.html">cs_util.tests.test_args</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_calc.html">cs_util.tests.test_calc</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">cs_util.tests.test_canfar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_canfar.html">cs_util.tests.test_canfar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_cat.html">cs_util.tests.test_cat</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_cfis.html">cs_util.tests.test_cfis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_cosmo.html">cs_util.tests.test_cosmo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_logging.html">cs_util.tests.test_logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_plots.html">cs_util.tests.test_plots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_shape.html">cs_util.tests.test_shape</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cs_util.tests.test_shape</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_size.html">cs_util.tests.test_size</a></li>
 </ul>
 </li>
@@ -128,40 +128,78 @@
 <main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
 <div class="w-full min-w-0 mx-auto">
 <div id="content" role="main">
-<section id="module-cs_util.tests.test_canfar">
-<span id="cs-util-tests-test-canfar"></span><h1>cs_util.tests.test_canfar<a class="headerlink" href="#module-cs_util.tests.test_canfar" title="Link to this heading">¶</a></h1>
-<p>UNIT TESTS FOR CANFAR SUBPACKAGE.</p>
-<p>This module contains unit tests for the canfar subpackage.</p>
+<section id="module-cs_util.tests.test_shape">
+<span id="cs-util-tests-test-shape"></span><h1>cs_util.tests.test_shape<a class="headerlink" href="#module-cs_util.tests.test_shape" title="Link to this heading">¶</a></h1>
+<p>UNIT TESTS FOR SHAPE SUBPACKAGE.</p>
+<p>This module contains unit tests for the shape subpackage.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="cs_util.tests.test_canfar.CanfarTestCase">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">CanfarTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_canfar.html#CanfarTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_canfar.CanfarTestCase" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_canfar.CanfarTestCase'">¶</a></dt>
+<dt class="sig sig-object py" id="cs_util.tests.test_shape.ShapeTestCase">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ShapeTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_shape.html#ShapeTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_shape.ShapeTestCase" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_shape.ShapeTestCase'">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
-<p>Test case for the <code class="docutils literal notranslate"><span class="pre">canfar</span></code> module.</p>
+<p>Test case for the <code class="docutils literal notranslate"><span class="pre">shape</span></code> module.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="cs_util.tests.test_canfar.CanfarTestCase.setUp">
-<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_canfar.html#CanfarTestCase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_canfar.CanfarTestCase.setUp" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_canfar.CanfarTestCase.setUp'">¶</a></dt>
+<dt class="sig sig-object py" id="cs_util.tests.test_shape.ShapeTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_shape.html#ShapeTestCase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_shape.ShapeTestCase.setUp" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_shape.ShapeTestCase.setUp'">¶</a></dt>
 <dd><p>Set test parameter values.</p>
+<p>Axis ratio q = 1/3 gives the clean pair
+<a href="#id1"><span class="problematic" id="id2">|e|</span></a> = (1 - q^2) / (1 + q^2) = 0.8,
+<a href="#id3"><span class="problematic" id="id4">|g|</span></a> = (1 - q)   / (1 + q)   = 0.5.</p>
 </dd></dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="cs_util.tests.test_canfar.CanfarTestCase.tearDown">
-<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_canfar.html#CanfarTestCase.tearDown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_canfar.CanfarTestCase.tearDown" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_canfar.CanfarTestCase.tearDown'">¶</a></dt>
+<dt class="sig sig-object py" id="cs_util.tests.test_shape.ShapeTestCase.tearDown">
+<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_shape.html#ShapeTestCase.tearDown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_shape.ShapeTestCase.tearDown" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_shape.ShapeTestCase.tearDown'">¶</a></dt>
 <dd><p>Unset test parameter values.</p>
 </dd></dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="cs_util.tests.test_canfar.CanfarTestCase.test_init_vos">
-<span class="sig-name descname"><span class="pre">test_init_vos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_canfar.html#CanfarTestCase.test_init_vos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_canfar.CanfarTestCase.test_init_vos" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_canfar.CanfarTestCase.test_init_vos'">¶</a></dt>
-<dd><p>Test <code class="docutils literal notranslate"><span class="pre">cs_util.canfar.vosHandler()</span></code> with
-vos command strings.</p>
+<dt class="sig sig-object py" id="cs_util.tests.test_shape.ShapeTestCase.test_known_pair">
+<span class="sig-name descname"><span class="pre">test_known_pair</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_shape.html#ShapeTestCase.test_known_pair"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_shape.ShapeTestCase.test_known_pair" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_shape.ShapeTestCase.test_known_pair'">¶</a></dt>
+<dd><p>Test the q = 1/3 distortion/shear pair, both directions.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cs_util.tests.test_shape.ShapeTestCase.test_axis_ratio_magnitudes">
+<span class="sig-name descname"><span class="pre">test_axis_ratio_magnitudes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_shape.html#ShapeTestCase.test_axis_ratio_magnitudes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_shape.ShapeTestCase.test_axis_ratio_magnitudes" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_shape.ShapeTestCase.test_axis_ratio_magnitudes'">¶</a></dt>
+<dd><p>Test <a href="#id5"><span class="problematic" id="id6">|e|</span></a> and <a href="#id7"><span class="problematic" id="id8">|g|</span></a> against their axis-ratio closed forms.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cs_util.tests.test_shape.ShapeTestCase.test_round_trips">
+<span class="sig-name descname"><span class="pre">test_round_trips</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_shape.html#ShapeTestCase.test_round_trips"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_shape.ShapeTestCase.test_round_trips" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_shape.ShapeTestCase.test_round_trips'">¶</a></dt>
+<dd><p>Test that the converters compose to the identity, component-wise.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cs_util.tests.test_shape.ShapeTestCase.test_orientation_preserved">
+<span class="sig-name descname"><span class="pre">test_orientation_preserved</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_shape.html#ShapeTestCase.test_orientation_preserved"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_shape.ShapeTestCase.test_orientation_preserved" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_shape.ShapeTestCase.test_orientation_preserved'">¶</a></dt>
+<dd><p>Test that the conversion scales both components by one factor.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cs_util.tests.test_shape.ShapeTestCase.test_zero_maps_to_zero">
+<span class="sig-name descname"><span class="pre">test_zero_maps_to_zero</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_shape.html#ShapeTestCase.test_zero_maps_to_zero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_shape.ShapeTestCase.test_zero_maps_to_zero" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_shape.ShapeTestCase.test_zero_maps_to_zero'">¶</a></dt>
+<dd><p>Test that a round object stays round under both converters.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cs_util.tests.test_shape.ShapeTestCase.test_small_ellipticity_limit">
+<span class="sig-name descname"><span class="pre">test_small_ellipticity_limit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_shape.html#ShapeTestCase.test_small_ellipticity_limit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_shape.ShapeTestCase.test_small_ellipticity_limit" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_shape.ShapeTestCase.test_small_ellipticity_limit'">¶</a></dt>
+<dd><p>Test <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">-&gt;</span> <span class="pre">2</span> <span class="pre">g</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">-&gt;</span> <span class="pre">e</span> <span class="pre">/</span> <span class="pre">2</span></code> in the round-object limit.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cs_util.tests.test_shape.ShapeTestCase.test_array_input">
+<span class="sig-name descname"><span class="pre">test_array_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/tests/test_shape.html#ShapeTestCase.test_array_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.tests.test_shape.ShapeTestCase.test_array_input" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.tests.test_shape.ShapeTestCase.test_array_input'">¶</a></dt>
+<dd><p>Test that array input returns arrays of the same shape.</p>
 </dd></dl>
 </dd></dl>
 </section>
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] h-full overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#cs_util.tests.test_canfar.CanfarTestCase'" class="reference internal" href="#cs_util.tests.test_canfar.CanfarTestCase"><code class="docutils literal notranslate"><span class="pre">CanfarTestCase</span></code></a><ul>
-<li><a :data-current="activeSection === '#cs_util.tests.test_canfar.CanfarTestCase.setUp'" class="reference internal" href="#cs_util.tests.test_canfar.CanfarTestCase.setUp"><code class="docutils literal notranslate"><span class="pre">CanfarTestCase.setUp()</span></code></a></li>
-<li><a :data-current="activeSection === '#cs_util.tests.test_canfar.CanfarTestCase.tearDown'" class="reference internal" href="#cs_util.tests.test_canfar.CanfarTestCase.tearDown"><code class="docutils literal notranslate"><span class="pre">CanfarTestCase.tearDown()</span></code></a></li>
-<li><a :data-current="activeSection === '#cs_util.tests.test_canfar.CanfarTestCase.test_init_vos'" class="reference internal" href="#cs_util.tests.test_canfar.CanfarTestCase.test_init_vos"><code class="docutils literal notranslate"><span class="pre">CanfarTestCase.test_init_vos()</span></code></a></li>
+<li><a :data-current="activeSection === '#cs_util.tests.test_shape.ShapeTestCase'" class="reference internal" href="#cs_util.tests.test_shape.ShapeTestCase"><code class="docutils literal notranslate"><span class="pre">ShapeTestCase</span></code></a><ul>
+<li><a :data-current="activeSection === '#cs_util.tests.test_shape.ShapeTestCase.setUp'" class="reference internal" href="#cs_util.tests.test_shape.ShapeTestCase.setUp"><code class="docutils literal notranslate"><span class="pre">ShapeTestCase.setUp()</span></code></a></li>
+<li><a :data-current="activeSection === '#cs_util.tests.test_shape.ShapeTestCase.tearDown'" class="reference internal" href="#cs_util.tests.test_shape.ShapeTestCase.tearDown"><code class="docutils literal notranslate"><span class="pre">ShapeTestCase.tearDown()</span></code></a></li>
+<li><a :data-current="activeSection === '#cs_util.tests.test_shape.ShapeTestCase.test_known_pair'" class="reference internal" href="#cs_util.tests.test_shape.ShapeTestCase.test_known_pair"><code class="docutils literal notranslate"><span class="pre">ShapeTestCase.test_known_pair()</span></code></a></li>
+<li><a :data-current="activeSection === '#cs_util.tests.test_shape.ShapeTestCase.test_axis_ratio_magnitudes'" class="reference internal" href="#cs_util.tests.test_shape.ShapeTestCase.test_axis_ratio_magnitudes"><code class="docutils literal notranslate"><span class="pre">ShapeTestCase.test_axis_ratio_magnitudes()</span></code></a></li>
+<li><a :data-current="activeSection === '#cs_util.tests.test_shape.ShapeTestCase.test_round_trips'" class="reference internal" href="#cs_util.tests.test_shape.ShapeTestCase.test_round_trips"><code class="docutils literal notranslate"><span class="pre">ShapeTestCase.test_round_trips()</span></code></a></li>
+<li><a :data-current="activeSection === '#cs_util.tests.test_shape.ShapeTestCase.test_orientation_preserved'" class="reference internal" href="#cs_util.tests.test_shape.ShapeTestCase.test_orientation_preserved"><code class="docutils literal notranslate"><span class="pre">ShapeTestCase.test_orientation_preserved()</span></code></a></li>
+<li><a :data-current="activeSection === '#cs_util.tests.test_shape.ShapeTestCase.test_zero_maps_to_zero'" class="reference internal" href="#cs_util.tests.test_shape.ShapeTestCase.test_zero_maps_to_zero"><code class="docutils literal notranslate"><span class="pre">ShapeTestCase.test_zero_maps_to_zero()</span></code></a></li>
+<li><a :data-current="activeSection === '#cs_util.tests.test_shape.ShapeTestCase.test_small_ellipticity_limit'" class="reference internal" href="#cs_util.tests.test_shape.ShapeTestCase.test_small_ellipticity_limit"><code class="docutils literal notranslate"><span class="pre">ShapeTestCase.test_small_ellipticity_limit()</span></code></a></li>
+<li><a :data-current="activeSection === '#cs_util.tests.test_shape.ShapeTestCase.test_array_input'" class="reference internal" href="#cs_util.tests.test_shape.ShapeTestCase.test_array_input"><code class="docutils literal notranslate"><span class="pre">ShapeTestCase.test_array_input()</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -29,5 +29,6 @@ Submodules
    cs_util.cosmo
    cs_util.logging
    cs_util.plots
+   cs_util.shape
    cs_util.size
    cs_util.treecorr_aux

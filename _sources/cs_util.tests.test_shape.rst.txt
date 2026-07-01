@@ -1,0 +1,7 @@
+cs\_util.tests.test\_shape
+--------------------------
+
+.. automodule:: cs_util.tests.test_shape
+   :members:
+   :show-inheritance:
+   :undoc-members:

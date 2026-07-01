@@ -1,0 +1,7 @@
+cs\_util.shape
+--------------
+
+.. automodule:: cs_util.shape
+   :members:
+   :show-inheritance:
+   :undoc-members:
