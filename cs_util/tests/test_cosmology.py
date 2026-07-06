@@ -275,7 +275,7 @@ class TestGetTheoCell:
         z, nz = fast_redshift_data
         cosmo = cosmology.get_cosmo()
 
-        cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl", cosmo=cosmo)
+        cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl", cosmo=cosmo)["W1xW1"]
 
         # Check output shape and positivity
         assert len(cl) == len(fast_ell_array)
@@ -286,7 +286,7 @@ class TestGetTheoCell:
         z, nz = fast_redshift_data
         cl = cosmology.get_theo_c_ell(
             fast_ell_array, z, nz, backend="ccl", **TEST_COSMOLOGY
-        )
+        )["W1xW1"]
 
         # Check output shape and positivity
         assert len(cl) == len(fast_ell_array)
@@ -295,7 +295,7 @@ class TestGetTheoCell:
     def test_ccl_backend_default_params(self, fast_ell_array, fast_redshift_data):
         """Test C_ell calculation with CCL backend using default parameters."""
         z, nz = fast_redshift_data
-        cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl")
+        cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl")["W1xW1"]
 
         # Check output shape and positivity
         assert len(cl) == len(fast_ell_array)
@@ -305,7 +305,7 @@ class TestGetTheoCell:
         """Test C_ell calculation with CAMB backend."""
         z, nz = fast_redshift_data
         try:
-            cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="camb")
+            cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="camb")["W1xW1"]
 
             # Check output shape and positivity
             assert len(cl) == len(fast_ell_array)
@@ -323,7 +323,7 @@ class TestGetTheoCell:
         """Test behavior with small ell array."""
         z, nz = fast_redshift_data
         small_ell = np.array([10, 100])
-        cl = cosmology.get_theo_c_ell(small_ell, z, nz, backend="ccl")
+        cl = cosmology.get_theo_c_ell(small_ell, z, nz, backend="ccl")["W1xW1"]
 
         assert len(cl) == 2
         assert np.all(cl > 0)
@@ -334,8 +334,8 @@ class TestGetTheoCell:
         z, nz = fast_redshift_data
         try:
             # Calculate with both backends using fast parameters
-            cl_ccl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl")
-            cl_camb = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="camb")
+            cl_ccl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl")["W1xW1"]
+            cl_camb = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="camb")["W1xW1"]
 
             # Check that both have same shape
             assert len(cl_ccl) == len(cl_camb) == len(fast_ell_array)
@@ -374,7 +374,7 @@ class TestGetTheoXi:
             ell_max=FAST_ELL_MAX,
             n_ell=FAST_N_ELL,
             backend="ccl",
-        )
+        )["W1xW1"]
 
         # Check output shapes
         assert len(xip) == len(fast_theta_array)
@@ -388,7 +388,7 @@ class TestGetTheoXi:
         z, nz = fast_redshift_data
         xip, xim = cosmology.get_theo_xi(
             fast_theta_array, z, nz, ell_min=10, ell_max=FAST_ELL_MAX, n_ell=FAST_N_ELL
-        )
+        )["W1xW1"]
 
         # Check output shapes
         assert len(xip) == len(fast_theta_array)
@@ -402,12 +402,12 @@ class TestGetTheoXi:
         # Coarse integration (lower ell_max)
         xip1, xim1 = cosmology.get_theo_xi(
             fast_theta_array, z, nz, ell_min=10, ell_max=1000, n_ell=50
-        )
+        )["W1xW1"]
 
         # Fine integration (higher ell_max)
         xip2, xim2 = cosmology.get_theo_xi(
             fast_theta_array, z, nz, ell_min=10, ell_max=FAST_ELL_MAX, n_ell=FAST_N_ELL
-        )
+        )["W1xW1"]
 
         # Scale-dependent tolerance:
         # Xi+ converges well at all scales (~4% max differences)
@@ -451,7 +451,7 @@ class TestCosmologyIntegration:
 
         # Calculate C_ell with fast parameters
         ell = np.logspace(1, 3, 15)  # Reduced from 30 points
-        cl = cosmology.get_theo_c_ell(ell, z, nz, cosmo=cosmo)
+        cl = cosmology.get_theo_c_ell(ell, z, nz, cosmo=cosmo)["W1xW1"]
 
         # Calculate xi
         theta = np.array([5.0, 10.0, 20.0])
@@ -473,7 +473,7 @@ class TestCosmologyIntegration:
 
         # Calculate C_ell with realistic precision
         ell = np.logspace(1, np.log10(REALISTIC_ELL_MAX), REALISTIC_N_ELL)
-        cl = cosmology.get_theo_c_ell(ell, z, nz, cosmo=cosmo)
+        cl = cosmology.get_theo_c_ell(ell, z, nz, cosmo=cosmo)["W1xW1"]
 
         # Test xi calculation with realistic theta range
         theta = np.geomspace(1, 300, 20)  # 1 to 300 arcmin, 20 points
@@ -485,7 +485,7 @@ class TestCosmologyIntegration:
             ell_max=REALISTIC_ELL_MAX,
             n_ell=REALISTIC_N_ELL,
             **TEST_COSMOLOGY,
-        )
+        )["W1xW1"]
 
         # Comprehensive checks for realistic test
         assert len(cl) == len(ell)

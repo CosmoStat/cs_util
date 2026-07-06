@@ -680,6 +680,9 @@ def get_theo_c_ell(
         )
 
     n_tomo_bins = nz.shape[1] if len(nz.shape) > 1 else 1
+    # Add a new axis to nz if it's a single tomographic bin for consistent indexing
+    if n_tomo_bins == 1 and len(nz.shape) == 1:
+        nz = nz[:, np.newaxis]
     tomo_bin_pairs = list(itertools.combinations_with_replacement(range(1, n_tomo_bins + 1), 2))
     cl = {}
 
@@ -688,7 +691,7 @@ def get_theo_c_ell(
 
         # Create lensing tracer
         for bin_key in range(1, n_tomo_bins + 1):
-            tracers[f"W{bin_key}"]= ccl.WeakLensingTracer(cosmo, dndz=(z, nz[:, bin_key]))
+            tracers[f"W{bin_key}"]= ccl.WeakLensingTracer(cosmo, dndz=(z, nz[:, bin_key - 1]))
 
         for bin_key1, bin_key2 in tomo_bin_pairs:
             cl[f"W{bin_key1}xW{bin_key2}"] = ccl.angular_cl(
