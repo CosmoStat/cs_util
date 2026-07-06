@@ -665,8 +665,8 @@ def get_theo_c_ell(
 
     Returns
     -------
-    cl : array
-        Angular power spectrum
+    cl : dict
+        Angular power spectrum in dictionnary indexed by the tomographic bin keys.
     """
     if cosmo is None:
         cosmo = get_cosmo(
@@ -799,7 +799,7 @@ def get_theo_xi(
     z : array
         Redshift array
     nz : array
-        n(z) redshift distribution
+        n(z) redshift distribution. If nz.shape[1] > 1, assumes multiple tomographic bins.
     Omega_m : float, default=None
         Matter density parameter (defaults to Planck 2018)
     h : float, default=None
@@ -823,8 +823,8 @@ def get_theo_xi(
 
     Returns
     -------
-    xip, xim : arrays
-        Theoretical xi+ and xi- correlation functions
+    dict
+        Theoretical xi+ and xi- correlation functions per tomographic bin combinations
     """
     # Create ell array for C_ell calculation
     ell = np.geomspace(ell_min, ell_max, n_ell)
