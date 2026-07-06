@@ -21,15 +21,15 @@
 <meta content="#ffffff" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="#030711" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>scripts | cs_util v0.2.2</title>
-<meta content="scripts | cs_util v0.2.2" property="og:title"/>
-<meta content="scripts | cs_util v0.2.2" name="twitter:title"/>
+<title>cs_util.tests.test_cosmology | cs_util v0.2.2</title>
+<meta content="cs_util.tests.test_cosmology | cs_util v0.2.2" property="og:title"/>
+<meta content="cs_util.tests.test_cosmology | cs_util v0.2.2" name="twitter:title"/>
 <link href="_static/pygments.css?v=b86133f3" rel="stylesheet" type="text/css"/>
 <link href="_static/theme.css?v=d6d7c91b" rel="stylesheet" type="text/css"/>
 <link href="search.html" rel="search" title="Search"/>
 <link href="genindex.html" rel="index" title="Index"/>
-<link href="scripts.example_script.html" rel="next" title="scripts.example_script"/>
-<link href="cs_util.treecorr_aux.html" rel="prev" title="cs_util.treecorr_aux"/>
+<link href="cs_util.tests.test_logging.html" rel="next" title="cs_util.tests.test_logging"/>
+<link href="cs_util.tests.test_cosmo.html" rel="prev" title="cs_util.tests.test_cosmo"/>
 </head>
 <body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false, showScrollTop: false }">
 <div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
@@ -78,15 +78,15 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="cs_util.html">cs_util<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-cloak="" x-show="expanded">
-<li class="toctree-l2" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="cs_util.tests.html">cs_util.tests<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-cloak="" x-show="expanded">
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="cs_util.html">cs_util<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l2 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="cs_util.tests.html">cs_util.tests<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_args.html">cs_util.tests.test_args</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_calc.html">cs_util.tests.test_calc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_canfar.html">cs_util.tests.test_canfar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_cat.html">cs_util.tests.test_cat</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_cfis.html">cs_util.tests.test_cfis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_cosmo.html">cs_util.tests.test_cosmo</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_cosmology.html">cs_util.tests.test_cosmology</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cs_util.tests.test_cosmology</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_logging.html">cs_util.tests.test_logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_plots.html">cs_util.tests.test_plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cs_util.tests.test_shape.html">cs_util.tests.test_shape</a></li>
@@ -106,7 +106,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cs_util.treecorr_aux.html">cs_util.treecorr_aux</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="current reference internal expandable" href="#">scripts<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-cloak="" x-show="expanded">
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="scripts.html">scripts<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-cloak="" x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="scripts.example_script.html">scripts.example_script</a></li>
 </ul>
 </li>
@@ -129,38 +129,10 @@
 <main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
 <div class="w-full min-w-0 mx-auto">
 <div id="content" role="main">
-<section id="module-scripts">
-<span id="scripts"></span><h1>scripts<a class="headerlink" href="#module-scripts" title="Link to this heading">¶</a></h1>
-<p>SCRIPTS.</p>
-<p>A series of command line scripts making use of the package API.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Any <code class="docutils literal notranslate"><span class="pre">.py</span></code> file placed in the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> directory will be automatically
-included in the documentation. Links to these scripts will also be placed
-in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory for the environment in which the package is
-installed.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The <a class="reference external" href="https://wemake-python-stylegui.de/en/latest/pages/usage/violations/best_practices.html#wemake_python_styleguide.violations.best_practices.WrongFunctionCallViolation">WPS421</a> error is supressed for all scripts to allow
-print statements in functions.</p>
-</div>
-<section id="list-of-scripts">
-<h2>List of Scripts<a class="headerlink" href="#list-of-scripts" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#list-of-scripts'">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="scripts.example_script.html">scripts.example_script</a></li>
-</ul>
-</div>
+<section id="cs-util-tests-test-cosmology">
+<h1>cs_util.tests.test_cosmology<a class="headerlink" href="#cs-util-tests-test-cosmology" title="Link to this heading">¶</a></h1>
 </section>
-</section>
-</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
-<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] h-full overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
-<ul>
-<li><a :data-current="activeSection === '#list-of-scripts'" class="reference internal" href="#list-of-scripts">List of Scripts</a></li>
-</ul>
-</div>
-</aside>
+</div></div>
 </main>
 </div>
 </div><footer class="py-6 border-t border-border md:py-0">

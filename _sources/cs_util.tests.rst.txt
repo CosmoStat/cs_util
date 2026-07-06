@@ -19,6 +19,7 @@ Submodules
    cs_util.tests.test_cat
    cs_util.tests.test_cfis
    cs_util.tests.test_cosmo
+   cs_util.tests.test_cosmology
    cs_util.tests.test_logging
    cs_util.tests.test_plots
    cs_util.tests.test_shape
