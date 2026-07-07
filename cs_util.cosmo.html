@@ -150,7 +150,8 @@ single home for the collaboration’s cosmology primitives.</p>
 <dt class="field-odd">Authors<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Martin Kilbinger &lt;<a class="reference external" href="mailto:martin.kilbinger%40cea.fr">martin<span>.</span>kilbinger<span>@</span>cea<span>.</span>fr</a>&gt;
 Axel Guinot
-Cail Daley</p>
+Cail Daley
+Sacha Guerrini</p>
 </dd>
 </dl>
 <dl class="py function">
@@ -326,7 +327,7 @@ cosmocov_params.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ell</strong> (<em>array</em>) – Multipole moments (e.g., np.arange(2, 2000))</p></li>
 <li><p><strong>z</strong> (<em>array</em>) – Redshifts for n(z) distribution</p></li>
-<li><p><strong>nz</strong> (<em>array</em>) – n(z) redshift distribution</p></li>
+<li><p><strong>nz</strong> (<em>array</em>) – n(z) redshift distribution. If nz.shape[1] &gt; 1, assumes multiple tomographic bins. Input shape (n_z, n_tomo_bins).</p></li>
 <li><p><strong>backend</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default="ccl"</em>) – Backend to use: “ccl” or “camb”</p></li>
 <li><p><strong>cosmo</strong> (<em>ccl.Cosmology</em><em>, </em><em>optional</em>) – CCL cosmology object. If None, will create using individual parameters.</p></li>
 <li><p><strong>Omega_b</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Baryon density parameter (defaults to Planck 2018)</p></li>
@@ -339,10 +340,10 @@ cosmocov_params.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>cl</strong> – Angular power spectrum</p>
+<dd class="field-even"><p><strong>cl</strong> – Angular power spectrum in dictionary indexed by the tomographic bin keys.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -376,7 +377,7 @@ cosmocov_params.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>theta</strong> (<em>array</em>) – Angular separations in arcminutes</p></li>
 <li><p><strong>z</strong> (<em>array</em>) – Redshift array</p></li>
-<li><p><strong>nz</strong> (<em>array</em>) – n(z) redshift distribution</p></li>
+<li><p><strong>nz</strong> (<em>array</em>) – n(z) redshift distribution. If nz.shape[1] &gt; 1, assumes multiple tomographic bins. Input shape: (n_z, n_tomo_bins)</p></li>
 <li><p><strong>Omega_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Matter density parameter (defaults to Planck 2018)</p></li>
 <li><p><strong>h</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Reduced Hubble constant (defaults to Planck 2018)</p></li>
 <li><p><strong>Omega_b</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Baryon density parameter (defaults to Planck 2018)</p></li>
@@ -390,10 +391,10 @@ cosmocov_params.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>xip, xim</strong> – Theoretical xi+ and xi- correlation functions</p>
+<dd class="field-even"><p>Theoretical xi+ and xi- correlation functions per tomographic bin combinations</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>arrays</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -418,7 +419,7 @@ cosmocov_params.</p></li>
 </div><footer class="py-6 border-t border-border md:py-0">
 <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
 <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt; Last updated: 06 Jul, 2026. Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 9.1.0</a></p>
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt; Last updated: 07 Jul, 2026. Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 9.1.0</a></p>
 </div>
 </div>
 </footer>
