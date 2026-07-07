@@ -607,7 +607,7 @@ class TestGetTheoXi:
                 npt.assert_allclose(xim1[small_scale_mask], xim2[small_scale_mask], rtol=0.18)
 
             if np.any(large_scale_mask):
-                npt.assert_allclose(xim1[large_scale_mask], xim2[large_scale_mask], rtol=0.18)
+                npt.assert_allclose(xim1[large_scale_mask], xim2[large_scale_mask], rtol=0.05)
 
 class TestCosmologyIntegration:
     """Integration tests for cosmology functions."""

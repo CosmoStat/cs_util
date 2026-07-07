@@ -643,7 +643,7 @@ def get_theo_c_ell(
     z : array
         Redshifts for n(z) distribution
     nz : array
-        n(z) redshift distribution. If nz.shape[1] > 1, assumes multiple tomographic bins.
+        n(z) redshift distribution. If nz.shape[1] > 1, assumes multiple tomographic bins. Input shape (n_z, n_tomo_bins).
     backend : str, default="ccl"
         Backend to use: "ccl" or "camb"
     cosmo : ccl.Cosmology, optional
@@ -666,7 +666,7 @@ def get_theo_c_ell(
     Returns
     -------
     cl : dict
-        Angular power spectrum in dictionnary indexed by the tomographic bin keys.
+        Angular power spectrum in dictionary indexed by the tomographic bin keys.
     """
     if cosmo is None:
         cosmo = get_cosmo(
@@ -679,6 +679,7 @@ def get_theo_c_ell(
             wa=wa,
         )
 
+    assert nz.shape[0] == len(z), f"nz first axis ({nz.shape[0]}) must match z ({len(z)})"
     n_tomo_bins = nz.shape[1] if len(nz.shape) > 1 else 1
     # Add a new axis to nz if it's a single tomographic bin for consistent indexing
     if n_tomo_bins == 1 and len(nz.shape) == 1:
@@ -687,11 +688,10 @@ def get_theo_c_ell(
     cl = {}
 
     if backend == "ccl":
-        tracers = {}
-
-        # Create lensing tracer
-        for bin_key in range(1, n_tomo_bins + 1):
-            tracers[f"W{bin_key}"]= ccl.WeakLensingTracer(cosmo, dndz=(z, nz[:, bin_key - 1]))
+        tracers = {
+            f"W{bin_key}": ccl.WeakLensingTracer(cosmo, dndz=(z, nz[:, bin_key - 1]))
+            for bin_key in range(1, n_tomo_bins + 1)
+        }
 
         for bin_key1, bin_key2 in tomo_bin_pairs:
             cl[f"W{bin_key1}xW{bin_key2}"] = ccl.angular_cl(
@@ -719,15 +719,11 @@ def get_theo_c_ell(
         # Set up lensing source window
         pars.min_l = ell.min()
         pars.set_for_lmax(ell.max())
-        if len(nz.shape) == 1:
-            pars.SourceWindows = [
-                camb.sources.SplinedSourceWindow(z=z, W=nz, source_type="lensing")
-            ]
-        else:
-            pars.SourceWindows = [
-                camb.sources.SplinedSourceWindow(z=z, W=nz[:, i], source_type="lensing")
-                for i in range(nz.shape[1])
-            ]
+
+        pars.SourceWindows = [
+            camb.sources.SplinedSourceWindow(z=z, W=nz[:, i], source_type="lensing")
+            for i in range(nz.shape[1])
+        ]
 
         # Calculate power spectrum
         results = camb.get_results(pars)
@@ -802,7 +798,7 @@ def get_theo_xi(
     z : array
         Redshift array
     nz : array
-        n(z) redshift distribution. If nz.shape[1] > 1, assumes multiple tomographic bins.
+        n(z) redshift distribution. If nz.shape[1] > 1, assumes multiple tomographic bins. Input shape: (n_z, n_tomo_bins)
     Omega_m : float, default=None
         Matter density parameter (defaults to Planck 2018)
     h : float, default=None
