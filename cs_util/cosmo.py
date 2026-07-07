@@ -15,8 +15,10 @@
 :Authors: Martin Kilbinger <martin.kilbinger@cea.fr>
           Axel Guinot
           Cail Daley
-
+          Sacha Guerrini
 """
+
+import itertools
 
 import camb
 import numpy as np
@@ -641,7 +643,7 @@ def get_theo_c_ell(
     z : array
         Redshifts for n(z) distribution
     nz : array
-        n(z) redshift distribution
+        n(z) redshift distribution. If nz.shape[1] > 1, assumes multiple tomographic bins. Input shape (n_z, n_tomo_bins).
     backend : str, default="ccl"
         Backend to use: "ccl" or "camb"
     cosmo : ccl.Cosmology, optional
@@ -663,8 +665,8 @@ def get_theo_c_ell(
 
     Returns
     -------
-    cl : array
-        Angular power spectrum
+    cl : dict
+        Angular power spectrum in dictionary indexed by the tomographic bin keys.
     """
     if cosmo is None:
         cosmo = get_cosmo(
@@ -677,12 +679,24 @@ def get_theo_c_ell(
             wa=wa,
         )
 
-    if backend == "ccl":
-        # Create lensing tracer
-        lens = ccl.WeakLensingTracer(cosmo, dndz=(z, nz))
+    assert nz.shape[0] == len(z), f"nz first axis ({nz.shape[0]}) must match z ({len(z)})"
+    n_tomo_bins = nz.shape[1] if len(nz.shape) > 1 else 1
+    # Add a new axis to nz if it's a single tomographic bin for consistent indexing
+    if n_tomo_bins == 1 and len(nz.shape) == 1:
+        nz = nz[:, np.newaxis]
+    tomo_bin_pairs = list(itertools.combinations_with_replacement(range(1, n_tomo_bins + 1), 2))
+    cl = {}
 
-        # Calculate power spectrum
-        cl = ccl.angular_cl(cosmo, lens, lens, ell)
+    if backend == "ccl":
+        tracers = {
+            f"W{bin_key}": ccl.WeakLensingTracer(cosmo, dndz=(z, nz[:, bin_key - 1]))
+            for bin_key in range(1, n_tomo_bins + 1)
+        }
+
+        for bin_key1, bin_key2 in tomo_bin_pairs:
+            cl[f"W{bin_key1}xW{bin_key2}"] = ccl.angular_cl(
+                cosmo, tracers[f"W{bin_key1}"], tracers[f"W{bin_key2}"], ell
+            )
 
     elif backend == "camb":
         # Convert CCL cosmology to CAMB parameters
@@ -705,19 +719,22 @@ def get_theo_c_ell(
         # Set up lensing source window
         pars.min_l = ell.min()
         pars.set_for_lmax(ell.max())
+
         pars.SourceWindows = [
-            camb.sources.SplinedSourceWindow(z=z, W=nz, source_type="lensing")
+            camb.sources.SplinedSourceWindow(z=z, W=nz[:, i], source_type="lensing")
+            for i in range(nz.shape[1])
         ]
 
         # Calculate power spectrum
         results = camb.get_results(pars)
         theory_cls = results.get_source_cls_dict(lmax=ell.max(), raw_cl=True)
-        cl_full = theory_cls["W1xW1"]
 
         # Interpolate to match input ell array
         # CAMB returns C_ell for ell = 0, 1, 2, ..., lmax
-        ell_camb = np.arange(len(cl_full))
-        cl = np.interp(ell, ell_camb, cl_full)
+        ell_camb = np.arange(len(theory_cls["W1xW1"]))
+        for bin_key1, bin_key2 in tomo_bin_pairs:
+            cl_full = theory_cls[f"W{bin_key1}xW{bin_key2}"]
+            cl[f"W{bin_key1}xW{bin_key2}"] = np.interp(ell, ell_camb, cl_full)
 
     else:
         raise ValueError(f"Unknown backend: {backend}. Must be 'ccl' or 'camb'")
@@ -781,7 +798,7 @@ def get_theo_xi(
     z : array
         Redshift array
     nz : array
-        n(z) redshift distribution
+        n(z) redshift distribution. If nz.shape[1] > 1, assumes multiple tomographic bins. Input shape: (n_z, n_tomo_bins)
     Omega_m : float, default=None
         Matter density parameter (defaults to Planck 2018)
     h : float, default=None
@@ -805,8 +822,8 @@ def get_theo_xi(
 
     Returns
     -------
-    xip, xim : arrays
-        Theoretical xi+ and xi- correlation functions
+    dict
+        Theoretical xi+ and xi- correlation functions per tomographic bin combinations
     """
     # Create ell array for C_ell calculation
     ell = np.geomspace(ell_min, ell_max, n_ell)
@@ -821,4 +838,4 @@ def get_theo_xi(
     cl = get_theo_c_ell(ell, z, nz, backend=backend, cosmo=cosmo)
 
     # Convert to xi
-    return c_ell_to_xi(cosmo, theta, ell, cl)
+    return {k: c_ell_to_xi(cosmo, theta, ell, v) for k, v in cl.items()}

@@ -251,6 +251,16 @@ def fast_redshift_data():
     nz /= np.trapezoid(nz, z)  # Normalize
     return z, nz
 
+@pytest.fixture
+def fast_two_bins_data():
+    """Fast two bin redshift distribution for more tests."""
+    z = np.linspace(0.1, 2.0, FAST_Z_POINTS)
+    nz = np.exp(-(((z - 0.8) / 0.2) ** 2))  # Gaussian around z=0.8
+    nz /= np.trapezoid(nz, z)  # Normalize
+    nz2 = np.exp(-(((z - 1.2) / 0.2) ** 2))  # Gaussian around z=1.2
+    nz2 /= np.trapezoid(nz2, z)
+    nz = np.vstack([nz, nz2])  # Stack to create two bins
+    return z, nz.T
 
 @pytest.fixture
 def fast_ell_array():
@@ -266,6 +276,17 @@ def realistic_redshift_data():
     nz /= np.trapezoid(nz, z)
     return z, nz
 
+@pytest.fixture
+def realistic_two_bins_data():
+    """Realistic two-bin redshift distribution for integration tests."""
+    z = np.linspace(0.1, 2.0, 50)
+    nz1 = np.exp(-(((z - 0.8) / 0.2) ** 2))
+    nz1 /= np.trapezoid(nz1, z)
+    nz2 = np.exp(-(((z - 1.2) / 0.2) ** 2))
+    nz2 /= np.trapezoid(nz2, z)
+    nz = np.vstack([nz1, nz2])  # Stack to create two bins
+    return z, nz.T
+
 
 class TestGetTheoCell:
     """Test get_theo_c_ell function."""
@@ -275,41 +296,94 @@ class TestGetTheoCell:
         z, nz = fast_redshift_data
         cosmo = cosmology.get_cosmo()
 
-        cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl", cosmo=cosmo)
+        cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl", cosmo=cosmo)["W1xW1"]
 
         # Check output shape and positivity
         assert len(cl) == len(fast_ell_array)
         assert np.all(cl > 0)
+
+    def test_ccl_backend_tomo(self, fast_ell_array, fast_two_bins_data):
+        """Test C_ell calculation with CCL backend for two tomographic bins."""
+        z, nz = fast_two_bins_data
+        cosmo = cosmology.get_cosmo()
+
+        cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl", cosmo=cosmo)
+
+        # Check that output is a dictionary with correct keys
+        assert isinstance(cl, dict)
+        assert "W1xW1" in cl and "W1xW2" in cl and "W2xW2" in cl
+
+        # Check output shapes and positivity
+        for key in cl:
+            assert len(cl[key]) == len(fast_ell_array)
+            assert np.all(cl[key] > 0)
 
     def test_ccl_backend_with_params(self, fast_ell_array, fast_redshift_data):
         """Test C_ell calculation with CCL backend using individual parameters."""
         z, nz = fast_redshift_data
         cl = cosmology.get_theo_c_ell(
             fast_ell_array, z, nz, backend="ccl", **TEST_COSMOLOGY
-        )
+        )["W1xW1"]
 
         # Check output shape and positivity
         assert len(cl) == len(fast_ell_array)
         assert np.all(cl > 0)
+
+    def test_ccl_backend_with_params_tomo(self, fast_ell_array, fast_two_bins_data):
+        """Test C_ell calculation with CCL backend using individual parameters for tomographic bins."""
+        z, nz = fast_two_bins_data
+        cl = cosmology.get_theo_c_ell(
+            fast_ell_array, z, nz, backend="ccl", **TEST_COSMOLOGY
+        )
+
+        # Check output shape and positivity
+        for key in cl:
+            assert len(cl[key]) == len(fast_ell_array)
+            assert np.all(cl[key] > 0)
 
     def test_ccl_backend_default_params(self, fast_ell_array, fast_redshift_data):
         """Test C_ell calculation with CCL backend using default parameters."""
         z, nz = fast_redshift_data
-        cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl")
+        cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl")["W1xW1"]
 
         # Check output shape and positivity
         assert len(cl) == len(fast_ell_array)
         assert np.all(cl > 0)
+
+    def test_ccl_backend_default_params_tomo(self, fast_ell_array, fast_two_bins_data):
+        """Test C_ell calculation with CCL backend using default parameters for tomographic bins."""
+        z, nz = fast_two_bins_data
+        cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl")
+
+        # Check output shape and positivity
+        for key in cl:
+            assert len(cl[key]) == len(fast_ell_array)
+            assert np.all(cl[key] > 0)
 
     def test_camb_backend(self, fast_ell_array, fast_redshift_data):
         """Test C_ell calculation with CAMB backend."""
         z, nz = fast_redshift_data
         try:
-            cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="camb")
+            cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="camb")["W1xW1"]
 
             # Check output shape and positivity
             assert len(cl) == len(fast_ell_array)
             assert np.all(cl > 0)
+        except ImportError:
+            pytest.skip("CAMB not available")
+
+    def test_camb_backend_tomo(self, fast_ell_array, fast_two_bins_data):
+        """Test C_ell calculation with CAMB backend for two tomographic bins."""
+        z, nz = fast_two_bins_data
+        try:
+            cl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="camb")
+
+            assert isinstance(cl, dict)
+            assert "W1xW1" in cl and "W1xW2" in cl and "W2xW2" in cl
+            # Check output shape and positivity
+            for key in cl:
+                assert len(cl[key]) == len(fast_ell_array)
+                assert np.all(cl[key] > 0)
         except ImportError:
             pytest.skip("CAMB not available")
 
@@ -323,7 +397,7 @@ class TestGetTheoCell:
         """Test behavior with small ell array."""
         z, nz = fast_redshift_data
         small_ell = np.array([10, 100])
-        cl = cosmology.get_theo_c_ell(small_ell, z, nz, backend="ccl")
+        cl = cosmology.get_theo_c_ell(small_ell, z, nz, backend="ccl")["W1xW1"]
 
         assert len(cl) == 2
         assert np.all(cl > 0)
@@ -334,8 +408,8 @@ class TestGetTheoCell:
         z, nz = fast_redshift_data
         try:
             # Calculate with both backends using fast parameters
-            cl_ccl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl")
-            cl_camb = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="camb")
+            cl_ccl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl")["W1xW1"]
+            cl_camb = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="camb")["W1xW1"]
 
             # Check that both have same shape
             assert len(cl_ccl) == len(cl_camb) == len(fast_ell_array)
@@ -349,6 +423,33 @@ class TestGetTheoCell:
             assert max_rel_diff < 0.08, (
                 f"CCL and CAMB backends differ by >8%: {max_rel_diff:.1%}"
             )
+        except ImportError:
+            pytest.skip("CAMB not available")
+
+    @pytest.mark.slow
+    def test_backend_consistency_fast_tomo(self, fast_ell_array, fast_two_bins_data):
+        """Test that CCL and CAMB backends give consistent results (fast version) for tomographic bins."""
+        z, nz = fast_two_bins_data
+        try:
+            # Calculate with both backends using fast parameters
+            cl_ccl = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="ccl")
+            cl_camb = cosmology.get_theo_c_ell(fast_ell_array, z, nz, backend="camb")
+
+            # Check that both backend have the same keys
+            assert cl_ccl.keys() == cl_camb.keys()
+
+            # Check that both have same shape
+            for key in cl_ccl:
+                assert len(cl_ccl[key]) == len(cl_camb[key]) == len(fast_ell_array)
+
+                # Check relative differences between cosmology codes
+                # CCL and CAMB should agree well since they compute the same physics
+                rel_diff = np.abs(cl_camb[key] - cl_ccl[key]) / cl_ccl[key]
+                max_rel_diff = rel_diff.max()
+
+                assert max_rel_diff < 0.08, (
+                    f"CCL and CAMB backends differ by >8%: {max_rel_diff:.1%}"
+                )
         except ImportError:
             pytest.skip("CAMB not available")
 
@@ -374,7 +475,7 @@ class TestGetTheoXi:
             ell_max=FAST_ELL_MAX,
             n_ell=FAST_N_ELL,
             backend="ccl",
-        )
+        )["W1xW1"]
 
         # Check output shapes
         assert len(xip) == len(fast_theta_array)
@@ -383,16 +484,58 @@ class TestGetTheoXi:
         # Check that xi+ is positive for typical scales
         assert np.any(xip > 0)
 
+    def test_backwards_compatibility_tomo(self, fast_theta_array, fast_two_bins_data):
+        """Test backwards compatible parameter interface with fast parameters."""
+        z, nz = fast_two_bins_data
+        xis = cosmology.get_theo_xi(
+            fast_theta_array,
+            z,
+            nz,
+            **TEST_COSMOLOGY,
+            ell_min=10,
+            ell_max=FAST_ELL_MAX,
+            n_ell=FAST_N_ELL,
+            backend="ccl",
+        )
+
+        assert isinstance(xis, dict)
+        assert "W1xW1" in xis and "W1xW2" in xis and "W2xW2" in xis
+
+        for key in xis:
+            xip, xim = xis[key]
+            # Check output shapes
+            assert len(xip) == len(fast_theta_array)
+            assert len(xim) == len(fast_theta_array)
+
+            # Check that xi+ is positive for typical scales
+            assert np.any(xip > 0)
+
     def test_default_parameters(self, fast_theta_array, fast_redshift_data):
         """Test with default cosmological parameters using fast settings."""
         z, nz = fast_redshift_data
         xip, xim = cosmology.get_theo_xi(
             fast_theta_array, z, nz, ell_min=10, ell_max=FAST_ELL_MAX, n_ell=FAST_N_ELL
-        )
+        )["W1xW1"]
 
         # Check output shapes
         assert len(xip) == len(fast_theta_array)
         assert len(xim) == len(fast_theta_array)
+
+    def test_default_parameters_tomo(self, fast_theta_array, fast_two_bins_data):
+        """Test with default cosmological parameters using fast settings."""
+        z, nz = fast_two_bins_data
+        xis = cosmology.get_theo_xi(
+            fast_theta_array, z, nz, ell_min=10, ell_max=FAST_ELL_MAX, n_ell=FAST_N_ELL
+        )
+
+        assert isinstance(xis, dict)
+        assert "W1xW1" in xis and "W1xW2" in xis and "W2xW2" in xis
+
+        for key in xis:
+            xip, xim = xis[key]
+            # Check output shapes
+            assert len(xip) == len(fast_theta_array)
+            assert len(xim) == len(fast_theta_array)
 
     @pytest.mark.slow
     def test_different_ell_ranges(self, fast_theta_array, fast_redshift_data):
@@ -402,12 +545,12 @@ class TestGetTheoXi:
         # Coarse integration (lower ell_max)
         xip1, xim1 = cosmology.get_theo_xi(
             fast_theta_array, z, nz, ell_min=10, ell_max=1000, n_ell=50
-        )
+        )["W1xW1"]
 
         # Fine integration (higher ell_max)
         xip2, xim2 = cosmology.get_theo_xi(
             fast_theta_array, z, nz, ell_min=10, ell_max=FAST_ELL_MAX, n_ell=FAST_N_ELL
-        )
+        )["W1xW1"]
 
         # Scale-dependent tolerance:
         # Xi+ converges well at all scales (~4% max differences)
@@ -434,6 +577,37 @@ class TestGetTheoXi:
                 xim1[large_scale_mask], xim2[large_scale_mask], rtol=0.05
             )  # 5% tolerance for xi- at large scales
 
+    @pytest.mark.slow
+    def test_different_ell_ranges_tomo(self, fast_theta_array, fast_two_bins_data):
+        """Test that different ell ranges give consistent results."""
+        z, nz = fast_two_bins_data
+
+        # Coarse integration (lower ell_max)
+        xis1 = cosmology.get_theo_xi(
+            fast_theta_array, z, nz, ell_min=10, ell_max=1000, n_ell=50
+        )
+
+        # Fine integration (higher ell_max)
+        xis2 = cosmology.get_theo_xi(
+            fast_theta_array, z, nz, ell_min=10, ell_max=FAST_ELL_MAX, n_ell=FAST_N_ELL
+        )
+
+        # Check that all keys are consistent
+        for key in xis1:
+            assert key in xis2
+            xip1, xim1 = xis1[key]
+            xip2, xim2 = xis2[key]
+
+            npt.assert_allclose(xip1, xip2, rtol=0.06)
+
+            small_scale_mask = fast_theta_array <= 10.0  # arcmin
+            large_scale_mask = fast_theta_array > 10.0  # arcmin
+
+            if np.any(small_scale_mask):
+                npt.assert_allclose(xim1[small_scale_mask], xim2[small_scale_mask], rtol=0.18)
+
+            if np.any(large_scale_mask):
+                npt.assert_allclose(xim1[large_scale_mask], xim2[large_scale_mask], rtol=0.05)
 
 class TestCosmologyIntegration:
     """Integration tests for cosmology functions."""
@@ -451,7 +625,7 @@ class TestCosmologyIntegration:
 
         # Calculate C_ell with fast parameters
         ell = np.logspace(1, 3, 15)  # Reduced from 30 points
-        cl = cosmology.get_theo_c_ell(ell, z, nz, cosmo=cosmo)
+        cl = cosmology.get_theo_c_ell(ell, z, nz, cosmo=cosmo)["W1xW1"]
 
         # Calculate xi
         theta = np.array([5.0, 10.0, 20.0])
@@ -463,6 +637,35 @@ class TestCosmologyIntegration:
         assert len(xim) == len(theta)
         assert np.all(cl > 0)
 
+    def test_end_to_end_pipeline_fast_tomo(self, fast_two_bins_data):
+        """Test complete pipeline from parameters to xi with tomography (fast version)"""
+        z, nz = fast_two_bins_data
+
+        # Create cosmology using TEST_CAMB parameters
+        camb_subset = {
+            k: v
+            for k, v in TEST_CAMB.items()
+            if k in ["H0", "ombh2", "omch2", "ns", "sigma8"]
+        }
+        cosmo = cosmology.get_cosmo(camb_params=camb_subset)
+
+        # Calculate C_ell with fast parameters
+        ell = np.logspace(1, 3, 15)  # Reduced from 30 points
+        cl = cosmology.get_theo_c_ell(ell, z, nz, cosmo=cosmo)
+
+        # Calculate xi
+        theta = np.array([5.0, 10.0, 20.0])
+        xis = {k: cosmology.c_ell_to_xi(cosmo, theta, ell, v) for k, v in cl.items()}
+
+        for key in cl:
+            xip, xim = xis[key]
+            cl_ = cl[key]
+            # Sanity checks
+            assert len(cl_) == len(ell)
+            assert len(xip) == len(theta)
+            assert len(xim) == len(theta)
+            assert np.all(cl_ > 0)
+
     @pytest.mark.slow
     def test_realistic_precision_pipeline(self, realistic_redshift_data):
         """Test complete pipeline with realistic precision for production use."""
@@ -473,7 +676,7 @@ class TestCosmologyIntegration:
 
         # Calculate C_ell with realistic precision
         ell = np.logspace(1, np.log10(REALISTIC_ELL_MAX), REALISTIC_N_ELL)
-        cl = cosmology.get_theo_c_ell(ell, z, nz, cosmo=cosmo)
+        cl = cosmology.get_theo_c_ell(ell, z, nz, cosmo=cosmo)["W1xW1"]
 
         # Test xi calculation with realistic theta range
         theta = np.geomspace(1, 300, 20)  # 1 to 300 arcmin, 20 points
@@ -485,7 +688,7 @@ class TestCosmologyIntegration:
             ell_max=REALISTIC_ELL_MAX,
             n_ell=REALISTIC_N_ELL,
             **TEST_COSMOLOGY,
-        )
+        )["W1xW1"]
 
         # Comprehensive checks for realistic test
         assert len(cl) == len(ell)
@@ -500,6 +703,51 @@ class TestCosmologyIntegration:
         # Check that xi+ amplitude is reasonable (order of magnitude check)
         max_xip = np.max(np.abs(xip))
         assert 1e-6 < max_xip < 1e-2, f"xi+ amplitude unrealistic: {max_xip}"
+
+    @pytest.mark.slow
+    def test_realistic_precision_pipeline_tomo(self, realistic_two_bins_data):
+        """Test complete pipeline with realistic precision for production use."""
+        z, nz = realistic_two_bins_data
+
+        # Create cosmology with realistic parameters
+        cosmo = cosmology.get_cosmo(**TEST_COSMOLOGY)
+
+        # Calculate C_ell with realistic precision
+        ell = np.logspace(1, np.log10(REALISTIC_ELL_MAX), REALISTIC_N_ELL)
+        cl = cosmology.get_theo_c_ell(ell, z, nz, cosmo=cosmo)
+
+        # Test xi calculation with realistic theta range
+        theta = np.geomspace(1, 300, 20)  # 1 to 300 arcmin, 20 points
+        xis = cosmology.get_theo_xi(
+            theta,
+            z,
+            nz,
+            ell_min=10,
+            ell_max=REALISTIC_ELL_MAX,
+            n_ell=REALISTIC_N_ELL,
+            **TEST_COSMOLOGY,
+        )
+
+        for key in cl:
+            assert key in xis
+
+            xip, xim = xis[key]
+            cl_ = cl[key]
+
+            # Comprehensive checks for realistic test
+            assert len(cl_) == len(ell)
+            assert len(xip) == len(theta)
+            assert len(xim) == len(theta)
+            assert np.all(cl_ > 0)
+
+            # Check that xi+ is positive at small scales (expected for cosmic shear)
+            small_scale_mask = theta < 10  # arcmin
+            assert np.any(xip[small_scale_mask] > 0)
+
+            # Check that xi+ amplitude is reasonable (order of magnitude check)
+            max_xip = np.max(np.abs(xip))
+            assert 1e-6 < max_xip < 1e-2, f"xi+ amplitude unrealistic: {max_xip}"
+
 
     def test_parameter_format_consistency(self):
         """Test that different parameter formats give consistent results."""
