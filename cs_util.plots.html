@@ -156,7 +156,7 @@
 <dd class="field-even"><p>figure object</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.11.0)">matplotlib.figure.Figure</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.11.1)">matplotlib.figure.Figure</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -306,6 +306,42 @@ for a more readable plot.</p>
 </dl>
 </dd></dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="cs_util.plots.FootprintPlotter.plot_area">
+<span class="sig-name descname"><span class="pre">plot_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hsp_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ra_0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[120,</span> <span class="pre">270,</span> <span class="pre">29,</span> <span class="pre">70]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Coverage</span> <span class="pre">depth'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/plots.html#FootprintPlotter.plot_area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.plots.FootprintPlotter.plot_area" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.plots.FootprintPlotter.plot_area'">¶</a></dt>
+<dd><p>Plot Area.</p>
+<p>Plot catalogue in an area on the sky.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hsp_map</strong> (<em>hsp_HealSparseMap</em>) – input map</p></li>
+<li><p><strong>ra_0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – anchor point in R.A.; default is 0</p></li>
+<li><p><strong>extend</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>, </em><em>optional</em>) – sky region, extend=[ra_low, ra_high, dec_low, dec_high];
+default is [120, 270, 29, 70]</p></li>
+<li><p><strong>vmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – minimum pixel value to plot with color; default is 0</p></li>
+<li><p><strong>vmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – maximum pixel value to plot with color; default is 60</p></li>
+<li><p><strong>projection</strong> (<em>skyproj.McBrydeSkyproj</em>) – if <code class="docutils literal notranslate"><span class="pre">None</span></code> (default), a new plot is created</p></li>
+<li><p><strong>outpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – output path, default is <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – print title if not <code class="docutils literal notranslate"><span class="pre">None</span></code> (default)</p></li>
+<li><p><strong>colorbar</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>optional</em>) – add colorbar; default is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p><strong>colorbar_label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – colorbar label; default is “Coverage depth”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>skyproj.McBrydeSkyproj</em> – projection instance</p></li>
+<li><p><em>plt.axes.Axes</em> – axes instance</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ImportError" title="(in Python v3.14)"><strong>ImportError</strong></a> – if <code class="docutils literal notranslate"><span class="pre">skyproj</span></code> is not installed</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – if no object found in region</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
 <dt class="sig sig-object py" id="cs_util.plots.FootprintPlotter.plot_region">
 <span class="sig-name descname"><span class="pre">plot_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hsp_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Coverage</span> <span class="pre">depth'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cs_util/plots.html#FootprintPlotter.plot_region"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cs_util.plots.FootprintPlotter.plot_region" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cs_util.plots.FootprintPlotter.plot_region'">¶</a></dt>
 <dd><p>Plot Region.</p>
@@ -315,7 +351,7 @@ for a more readable plot.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>hsp_map</strong> (<em>hsp_HealSparseMap</em>) – input map</p></li>
 <li><p><strong>region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a>) – region dictionary with keys ‘ra_0’, ‘extend’, ‘vmin’, ‘vmax’</p></li>
-<li><p><strong>projection</strong> (<em>Any</em><em>, </em><em>optional</em>) – if <code class="docutils literal notranslate"><span class="pre">None</span></code> (default), a new plot is created</p></li>
+<li><p><strong>projection</strong> (<em>skyproj.McBrydeSkyproj</em><em>, </em><em>optional</em>) – if <code class="docutils literal notranslate"><span class="pre">None</span></code> (default), a new plot is created</p></li>
 <li><p><strong>outpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – output path, default is <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
 <li><p><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – print title if not <code class="docutils literal notranslate"><span class="pre">None</span></code> (default)</p></li>
 <li><p><strong>colorbar</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>optional</em>) – add colorbar; default is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
@@ -364,6 +400,7 @@ for a more readable plot.</p>
 <li><a :data-current="activeSection === '#cs_util.plots.log_ticks'" class="reference internal" href="#cs_util.plots.log_ticks"><code class="docutils literal notranslate"><span class="pre">log_ticks()</span></code></a></li>
 <li><a :data-current="activeSection === '#cs_util.plots.FootprintPlotter'" class="reference internal" href="#cs_util.plots.FootprintPlotter"><code class="docutils literal notranslate"><span class="pre">FootprintPlotter</span></code></a><ul>
 <li><a :data-current="activeSection === '#cs_util.plots.FootprintPlotter.create_hsp_map'" class="reference internal" href="#cs_util.plots.FootprintPlotter.create_hsp_map"><code class="docutils literal notranslate"><span class="pre">FootprintPlotter.create_hsp_map()</span></code></a></li>
+<li><a :data-current="activeSection === '#cs_util.plots.FootprintPlotter.plot_area'" class="reference internal" href="#cs_util.plots.FootprintPlotter.plot_area"><code class="docutils literal notranslate"><span class="pre">FootprintPlotter.plot_area()</span></code></a></li>
 <li><a :data-current="activeSection === '#cs_util.plots.FootprintPlotter.plot_region'" class="reference internal" href="#cs_util.plots.FootprintPlotter.plot_region"><code class="docutils literal notranslate"><span class="pre">FootprintPlotter.plot_region()</span></code></a></li>
 <li><a :data-current="activeSection === '#cs_util.plots.FootprintPlotter.plot_all_regions'" class="reference internal" href="#cs_util.plots.FootprintPlotter.plot_all_regions"><code class="docutils literal notranslate"><span class="pre">FootprintPlotter.plot_all_regions()</span></code></a></li>
 <li><a :data-current="activeSection === '#cs_util.plots.FootprintPlotter.hp_pixel_centers'" class="reference internal" href="#cs_util.plots.FootprintPlotter.hp_pixel_centers"><code class="docutils literal notranslate"><span class="pre">FootprintPlotter.hp_pixel_centers()</span></code></a></li>
@@ -379,7 +416,7 @@ for a more readable plot.</p>
 </div><footer class="py-6 border-t border-border md:py-0">
 <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
 <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt; Last updated: 07 Jul, 2026. Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 9.1.0</a></p>
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt; Last updated: 05 Sep, 2026. Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 9.1.0</a></p>
 </div>
 </div>
 </footer>

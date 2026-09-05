@@ -167,7 +167,7 @@
 
     <div id="content" role="main">
       <h1>Source code for cs_util.cat</h1><div class="highlight"><pre>
-<span></span><code><span id="line-1"><span class="sd">&quot;&quot;&quot;CAT.</span>
+<span></span><code><span id="line-1"><span class="sd">"""CAT.</span>
 </span><span id="line-2">
 </span><span id="line-3"><span class="sd">:Name: cat.py</span>
 </span><span id="line-4">
@@ -175,7 +175,7 @@
 </span><span id="line-6">
 </span><span id="line-7"><span class="sd">:Author: Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;</span>
 </span><span id="line-8">
-</span><span id="line-9"><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-9"><span class="sd">"""</span>
 </span><span id="line-10">
 </span><span id="line-11"><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 </span><span id="line-12"><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
@@ -193,11 +193,11 @@
 <a class="viewcode-back" href="../../cs_util.cat.html#cs_util.cat.write_header_info_sp">[docs]</a>
 </span><span id="line-23"><span class="k">def</span><span class="w"> </span><span class="nf">write_header_info_sp</span><span class="p">(</span>
 </span><span id="line-24">    <span class="n">primary_header</span><span class="p">,</span>
-</span><span id="line-25">    <span class="n">software_name</span><span class="o">=</span><span class="s2">&quot;cs_util&quot;</span><span class="p">,</span>
-</span><span id="line-26">    <span class="n">software_version</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+</span><span id="line-25">    <span class="n">software_name</span><span class="o">=</span><span class="s2">"cs_util"</span><span class="p">,</span>
+</span><span id="line-26">    <span class="n">software_version</span><span class="o">=</span><span class="s2">"unknown"</span><span class="p">,</span>
 </span><span id="line-27">    <span class="n">author</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-28"><span class="p">):</span>
-</span><span id="line-29"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Write Header Info sp_validation.</span>
+</span><span id="line-29"><span class="w">    </span><span class="sd">"""Write Header Info sp_validation.</span>
 </span><span id="line-30">
 </span><span id="line-31"><span class="sd">    Write information about software and run to FITS header</span>
 </span><span id="line-32">
@@ -206,36 +206,36 @@
 </span><span id="line-35"><span class="sd">    primary_header : dict</span>
 </span><span id="line-36"><span class="sd">       FITS header information</span>
 </span><span id="line-37"><span class="sd">    software_name : str, optional</span>
-</span><span id="line-38"><span class="sd">        software name; default is &quot;cs_util&quot;</span>
+</span><span id="line-38"><span class="sd">        software name; default is "cs_util"</span>
 </span><span id="line-39"><span class="sd">    software_version : str, optional</span>
 </span><span id="line-40"><span class="sd">        version; default is current cs_util version</span>
 </span><span id="line-41"><span class="sd">    author : str, optional</span>
-</span><span id="line-42"><span class="sd">        author name; if ``None`` (default), read from os.environ[&quot;USER&quot;],</span>
-</span><span id="line-43"><span class="sd">        or if not set in env, &quot;unknown&quot;</span>
+</span><span id="line-42"><span class="sd">        author name; if ``None`` (default), read from os.environ["USER"],</span>
+</span><span id="line-43"><span class="sd">        or if not set in env, "unknown"</span>
 </span><span id="line-44">
 </span><span id="line-45"><span class="sd">    Returns</span>
 </span><span id="line-46"><span class="sd">    -------</span>
 </span><span id="line-47"><span class="sd">    dict</span>
 </span><span id="line-48"><span class="sd">        updated FITS header information</span>
 </span><span id="line-49">
-</span><span id="line-50"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-50"><span class="sd">    """</span>
 </span><span id="line-51">    <span class="k">if</span> <span class="n">software_version</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="line-52">        <span class="n">software_version</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="s2">&quot;cs_util&quot;</span><span class="p">)</span>
+</span><span id="line-52">        <span class="n">software_version</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="s2">"cs_util"</span><span class="p">)</span>
 </span><span id="line-53">
 </span><span id="line-54">    <span class="k">if</span> <span class="n">author</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="line-55">        <span class="k">if</span> <span class="s2">&quot;USER&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
-</span><span id="line-56">            <span class="n">author</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;USER&quot;</span><span class="p">]</span>
+</span><span id="line-55">        <span class="k">if</span> <span class="s2">"USER"</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+</span><span id="line-56">            <span class="n">author</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"USER"</span><span class="p">]</span>
 </span><span id="line-57">        <span class="k">else</span><span class="p">:</span>
-</span><span id="line-58">            <span class="n">author</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
+</span><span id="line-58">            <span class="n">author</span> <span class="o">=</span> <span class="s2">"unknown"</span>
 </span><span id="line-59">    <span class="k">else</span><span class="p">:</span>
-</span><span id="line-60">        <span class="n">author</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
+</span><span id="line-60">        <span class="n">author</span> <span class="o">=</span> <span class="s2">"unknown"</span>
 </span><span id="line-61">
-</span><span id="line-62">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;AUTHOR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="s2">&quot;Who ran the software&quot;</span><span class="p">)</span>
-</span><span id="line-63">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;SOFTNAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">software_name</span><span class="p">,</span> <span class="s2">&quot;Software name&quot;</span><span class="p">)</span>
-</span><span id="line-64">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;SOFTVERS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">software_version</span><span class="p">,</span> <span class="s2">&quot;software version&quot;</span><span class="p">)</span>
-</span><span id="line-65">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;DATE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="line-66">        <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">_%H-%M-%S&quot;</span><span class="p">),</span>
-</span><span id="line-67">        <span class="s2">&quot;Creation date&quot;</span><span class="p">,</span>
+</span><span id="line-62">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"AUTHOR"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="s2">"Who ran the software"</span><span class="p">)</span>
+</span><span id="line-63">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"SOFTNAME"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">software_name</span><span class="p">,</span> <span class="s2">"Software name"</span><span class="p">)</span>
+</span><span id="line-64">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"SOFTVERS"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">software_version</span><span class="p">,</span> <span class="s2">"software version"</span><span class="p">)</span>
+</span><span id="line-65">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"DATE"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="line-66">        <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">_%H-%M-%S"</span><span class="p">),</span>
+</span><span id="line-67">        <span class="s2">"Creation date"</span><span class="p">,</span>
 </span><span id="line-68">    <span class="p">)</span>
 </span><span id="line-69">
 </span><span id="line-70">    <span class="k">return</span> <span class="n">primary_header</span></div>
@@ -245,7 +245,7 @@
 <div class="viewcode-block" id="add_shear_bias_to_header">
 <a class="viewcode-back" href="../../cs_util.cat.html#cs_util.cat.add_shear_bias_to_header">[docs]</a>
 </span><span id="line-73"><span class="k">def</span><span class="w"> </span><span class="nf">add_shear_bias_to_header</span><span class="p">(</span><span class="n">primary_header</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">R_shear</span><span class="p">,</span> <span class="n">R_select</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-</span><span id="line-74"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Add Shear Bias To Header.</span>
+</span><span id="line-74"><span class="w">    </span><span class="sd">"""Add Shear Bias To Header.</span>
 </span><span id="line-75">
 </span><span id="line-76"><span class="sd">    Add information about multiplicative and additive shear bias</span>
 </span><span id="line-77"><span class="sd">    from metacalibration to FITS header.</span>
@@ -263,49 +263,49 @@
 </span><span id="line-89"><span class="sd">    c : 2-tuple</span>
 </span><span id="line-90"><span class="sd">        additive bias</span>
 </span><span id="line-91">
-</span><span id="line-92"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="line-93">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;R&gt;&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Mean full response &lt;R_shear&gt; + &lt;R_select&gt;&quot;</span><span class="p">)</span>
-</span><span id="line-94">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_11&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Full response matrix comp 1 1&quot;</span><span class="p">)</span>
-</span><span id="line-95">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_12&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Full response matrix comp 1 2&quot;</span><span class="p">)</span>
-</span><span id="line-96">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_21&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Full response matrix comp 2 1&quot;</span><span class="p">)</span>
-</span><span id="line-97">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_22&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Full response matrix comp 2 2&quot;</span><span class="p">)</span>
+</span><span id="line-92"><span class="sd">    """</span>
+</span><span id="line-93">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s2">"&lt;R&gt;"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"Mean full response &lt;R_shear&gt; + &lt;R_select&gt;"</span><span class="p">)</span>
+</span><span id="line-94">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_11"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">"Full response matrix comp 1 1"</span><span class="p">)</span>
+</span><span id="line-95">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_12"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">"Full response matrix comp 1 2"</span><span class="p">)</span>
+</span><span id="line-96">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_21"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">"Full response matrix comp 2 1"</span><span class="p">)</span>
+</span><span id="line-97">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_22"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">"Full response matrix comp 2 2"</span><span class="p">)</span>
 </span><span id="line-98">
-</span><span id="line-99">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_g&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;R_g&gt;&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Mean shear response matrix &lt;R_shear&gt;&quot;</span><span class="p">)</span>
-</span><span id="line-100">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_g11&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R_shear</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Mean shear resp matrix comp 1 1&quot;</span><span class="p">)</span>
-</span><span id="line-101">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_g12&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R_shear</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Mean shear resp matrix comp 1 2&quot;</span><span class="p">)</span>
-</span><span id="line-102">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_g21&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R_shear</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Mean shear resp matrix comp 2 1&quot;</span><span class="p">)</span>
-</span><span id="line-103">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_g22&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R_shear</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Mean shear resp matrix comp 2 2&quot;</span><span class="p">)</span>
+</span><span id="line-99">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_g"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s2">"&lt;R_g&gt;"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"Mean shear response matrix &lt;R_shear&gt;"</span><span class="p">)</span>
+</span><span id="line-100">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_g11"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R_shear</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">"Mean shear resp matrix comp 1 1"</span><span class="p">)</span>
+</span><span id="line-101">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_g12"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R_shear</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">"Mean shear resp matrix comp 1 2"</span><span class="p">)</span>
+</span><span id="line-102">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_g21"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R_shear</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">"Mean shear resp matrix comp 2 1"</span><span class="p">)</span>
+</span><span id="line-103">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_g22"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R_shear</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">"Mean shear resp matrix comp 2 2"</span><span class="p">)</span>
 </span><span id="line-104">
-</span><span id="line-105">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_S&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="line-106">        <span class="sa">r</span><span class="s2">&quot;&lt;R_S&gt;&quot;</span><span class="p">,</span>
-</span><span id="line-107">        <span class="sa">r</span><span class="s2">&quot;Global selection response matrix &lt;R_select&gt;&quot;</span><span class="p">,</span>
+</span><span id="line-105">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_S"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="line-106">        <span class="sa">r</span><span class="s2">"&lt;R_S&gt;"</span><span class="p">,</span>
+</span><span id="line-107">        <span class="sa">r</span><span class="s2">"Global selection response matrix &lt;R_select&gt;"</span><span class="p">,</span>
 </span><span id="line-108">    <span class="p">)</span>
-</span><span id="line-109">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_S11&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="line-109">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_S11"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
 </span><span id="line-110">        <span class="n">R_select</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-</span><span id="line-111">        <span class="s2">&quot;Global selection resp matrix comp 1 1&quot;</span><span class="p">,</span>
+</span><span id="line-111">        <span class="s2">"Global selection resp matrix comp 1 1"</span><span class="p">,</span>
 </span><span id="line-112">    <span class="p">)</span>
-</span><span id="line-113">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_S12&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="line-113">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_S12"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
 </span><span id="line-114">        <span class="n">R_select</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-</span><span id="line-115">        <span class="s2">&quot;Global selection resp matrix comp 1 2&quot;</span><span class="p">,</span>
+</span><span id="line-115">        <span class="s2">"Global selection resp matrix comp 1 2"</span><span class="p">,</span>
 </span><span id="line-116">    <span class="p">)</span>
-</span><span id="line-117">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_S21&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="line-117">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_S21"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
 </span><span id="line-118">        <span class="n">R_select</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-</span><span id="line-119">        <span class="s2">&quot;Global selection resp matrix comp 2 1&quot;</span><span class="p">,</span>
+</span><span id="line-119">        <span class="s2">"Global selection resp matrix comp 2 1"</span><span class="p">,</span>
 </span><span id="line-120">    <span class="p">)</span>
-</span><span id="line-121">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;R_S22&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="line-121">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"R_S22"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
 </span><span id="line-122">        <span class="n">R_select</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-</span><span id="line-123">        <span class="s2">&quot;Global selection resp matrix comp 2 2&quot;</span><span class="p">,</span>
+</span><span id="line-123">        <span class="s2">"Global selection resp matrix comp 2 2"</span><span class="p">,</span>
 </span><span id="line-124">    <span class="p">)</span>
 </span><span id="line-125">
-</span><span id="line-126">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;c_1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Additive bias 1st comp&quot;</span><span class="p">)</span>
-</span><span id="line-127">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">&quot;c_2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Additive bias 2nd comp&quot;</span><span class="p">)</span></div>
+</span><span id="line-126">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"c_1"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"Additive bias 1st comp"</span><span class="p">)</span>
+</span><span id="line-127">    <span class="n">primary_header</span><span class="p">[</span><span class="s2">"c_2"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"Additive bias 2nd comp"</span><span class="p">)</span></div>
 
 </span><span id="line-128">
 </span><span id="line-129">
 <div class="viewcode-block" id="write_ascii_table_file">
 <a class="viewcode-back" href="../../cs_util.cat.html#cs_util.cat.write_ascii_table_file">[docs]</a>
 </span><span id="line-130"><span class="k">def</span><span class="w"> </span><span class="nf">write_ascii_table_file</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
-</span><span id="line-131"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Write Ascii Table File.</span>
+</span><span id="line-131"><span class="w">    </span><span class="sd">"""Write Ascii Table File.</span>
 </span><span id="line-132">
 </span><span id="line-133"><span class="sd">    Write ASCII file with table data.</span>
 </span><span id="line-134">
@@ -318,10 +318,10 @@
 </span><span id="line-141"><span class="sd">    fname : str</span>
 </span><span id="line-142"><span class="sd">        output file name</span>
 </span><span id="line-143">
-</span><span id="line-144"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-144"><span class="sd">    """</span>
 </span><span id="line-145">    <span class="n">t</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
-</span><span id="line-146">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
-</span><span id="line-147">        <span class="n">ascii</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">fout</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span></div>
+</span><span id="line-146">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+</span><span id="line-147">        <span class="n">ascii</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">fout</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span></div>
 
 </span><span id="line-148">
 </span><span id="line-149">
@@ -335,7 +335,7 @@
 </span><span id="line-155">    <span class="n">R_select</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-156">    <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-157"><span class="p">):</span>
-</span><span id="line-158"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Write Fits Bin Table File.</span>
+</span><span id="line-158"><span class="w">    </span><span class="sd">"""Write Fits Bin Table File.</span>
 </span><span id="line-159">
 </span><span id="line-160"><span class="sd">    Write columns to FITS file as BinaryTable</span>
 </span><span id="line-161">
@@ -354,7 +354,7 @@
 </span><span id="line-174"><span class="sd">    c : np.array(2), optional</span>
 </span><span id="line-175"><span class="sd">        additive bias components</span>
 </span><span id="line-176">
-</span><span id="line-177"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-177"><span class="sd">    """</span>
 </span><span id="line-178">    <span class="n">table_hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">BinTableHDU</span><span class="o">.</span><span class="n">from_columns</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
 </span><span id="line-179">
 </span><span id="line-180">    <span class="c1"># Primary HDU with information in header</span>
@@ -372,7 +372,7 @@
 <div class="viewcode-block" id="read_fits_to_dict">
 <a class="viewcode-back" href="../../cs_util.cat.html#cs_util.cat.read_fits_to_dict">[docs]</a>
 </span><span id="line-191"><span class="k">def</span><span class="w"> </span><span class="nf">read_fits_to_dict</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
-</span><span id="line-192"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read Fits To Dict.</span>
+</span><span id="line-192"><span class="w">    </span><span class="sd">"""Read Fits To Dict.</span>
 </span><span id="line-193">
 </span><span id="line-194"><span class="sd">    Read FITS file and return dictionary.</span>
 </span><span id="line-195">
@@ -390,9 +390,9 @@
 </span><span id="line-207"><span class="sd">    ------</span>
 </span><span id="line-208"><span class="sd">    IOError</span>
 </span><span id="line-209"><span class="sd">        if input file is not found</span>
-</span><span id="line-210"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-210"><span class="sd">    """</span>
 </span><span id="line-211">    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
-</span><span id="line-212">        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input file &#39;</span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+</span><span id="line-212">        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Input file '</span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">' not found"</span><span class="p">)</span>
 </span><span id="line-213">
 </span><span id="line-214">    <span class="n">hdu_list</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 </span><span id="line-215">    <span class="n">data_input</span> <span class="o">=</span> <span class="n">hdu_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
@@ -408,7 +408,7 @@
 <div class="viewcode-block" id="bin_edges2centers">
 <a class="viewcode-back" href="../../cs_util.cat.html#cs_util.cat.bin_edges2centers">[docs]</a>
 </span><span id="line-224"><span class="k">def</span><span class="w"> </span><span class="nf">bin_edges2centers</span><span class="p">(</span><span class="n">bin_edges</span><span class="p">):</span>
-</span><span id="line-225"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Bin Edges To Centers.</span>
+</span><span id="line-225"><span class="w">    </span><span class="sd">"""Bin Edges To Centers.</span>
 </span><span id="line-226">
 </span><span id="line-227"><span class="sd">    Transform bin edge values to central values.</span>
 </span><span id="line-228">
@@ -422,7 +422,7 @@
 </span><span id="line-236"><span class="sd">    list</span>
 </span><span id="line-237"><span class="sd">        bin central values</span>
 </span><span id="line-238">
-</span><span id="line-239"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-239"><span class="sd">    """</span>
 </span><span id="line-240">    <span class="n">bin_means</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">bin_edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">bin_edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </span><span id="line-241">
 </span><span id="line-242">    <span class="k">return</span> <span class="n">bin_means</span></div>
@@ -432,7 +432,7 @@
 <div class="viewcode-block" id="read_dndz">
 <a class="viewcode-back" href="../../cs_util.cat.html#cs_util.cat.read_dndz">[docs]</a>
 </span><span id="line-245"><span class="k">def</span><span class="w"> </span><span class="nf">read_dndz</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
-</span><span id="line-246"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read Dndz.</span>
+</span><span id="line-246"><span class="w">    </span><span class="sd">"""Read Dndz.</span>
 </span><span id="line-247">
 </span><span id="line-248"><span class="sd">    Read redshift histogram from file.</span>
 </span><span id="line-249">
@@ -450,28 +450,28 @@
 </span><span id="line-261"><span class="sd">    np.array</span>
 </span><span id="line-262"><span class="sd">        redshift bin edges; one less than centers and density arrays</span>
 </span><span id="line-263">
-</span><span id="line-264"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-264"><span class="sd">    """</span>
 </span><span id="line-265">    <span class="k">try</span><span class="p">:</span>
-</span><span id="line-266">        <span class="c1"># Expecting header line &quot;# z dn_dz&quot;</span>
-</span><span id="line-267">        <span class="n">dat</span> <span class="o">=</span> <span class="n">ascii</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;commented_header&quot;</span><span class="p">)</span>
-</span><span id="line-268">        <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;dn_dz&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dat</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">]</span>
+</span><span id="line-266">        <span class="c1"># Expecting header line "# z dn_dz"</span>
+</span><span id="line-267">        <span class="n">dat</span> <span class="o">=</span> <span class="n">ascii</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"commented_header"</span><span class="p">)</span>
+</span><span id="line-268">        <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"z"</span><span class="p">,</span> <span class="s2">"dn_dz"</span><span class="p">)</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dat</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">]</span>
 </span><span id="line-269">        <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
 </span><span id="line-270">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="line-271">                <span class="sa">f</span><span class="s2">&quot;Missing columns in dndz path </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="line-271">                <span class="sa">f</span><span class="s2">"Missing columns in dndz path </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">"</span>
 </span><span id="line-272">            <span class="p">)</span>
 </span><span id="line-273">    <span class="k">except</span><span class="p">:</span>
 </span><span id="line-274">        <span class="c1"># No header line</span>
 </span><span id="line-275">        <span class="n">dat</span> <span class="o">=</span> <span class="n">ascii</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
-</span><span id="line-276">        <span class="n">dat</span><span class="o">.</span><span class="n">rename_column</span><span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">)</span>
-</span><span id="line-277">        <span class="n">dat</span><span class="o">.</span><span class="n">rename_column</span><span class="p">(</span><span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="s2">&quot;dn_dz&quot;</span><span class="p">)</span>
+</span><span id="line-276">        <span class="n">dat</span><span class="o">.</span><span class="n">rename_column</span><span class="p">(</span><span class="s2">"col1"</span><span class="p">,</span> <span class="s2">"z"</span><span class="p">)</span>
+</span><span id="line-277">        <span class="n">dat</span><span class="o">.</span><span class="n">rename_column</span><span class="p">(</span><span class="s2">"col2"</span><span class="p">,</span> <span class="s2">"dn_dz"</span><span class="p">)</span>
 </span><span id="line-278">
 </span><span id="line-279">    <span class="c1"># Remove last n(z) value which should be zero, to match bin centers</span>
 </span><span id="line-280">    <span class="n">tolerance</span> <span class="o">=</span> <span class="mf">1e-5</span>
-</span><span id="line-281">    <span class="k">if</span> <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;dn_dz&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dat</span><span class="p">[</span><span class="s2">&quot;dn_dz&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>
-</span><span id="line-282">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dn_dz at last z-edge = </span><span class="si">{dat[&#39;dn_dz&#39;][-1]}</span><span class="s2">, no zero&quot;</span><span class="p">)</span>
+</span><span id="line-281">    <span class="k">if</span> <span class="n">dat</span><span class="p">[</span><span class="s2">"dn_dz"</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dat</span><span class="p">[</span><span class="s2">"dn_dz"</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>
+</span><span id="line-282">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"dn_dz at last z-edge = </span><span class="si">{dat['dn_dz'][-1]}</span><span class="s2">, no zero"</span><span class="p">)</span>
 </span><span id="line-283">
-</span><span id="line-284">    <span class="n">nz</span> <span class="o">=</span> <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;dn_dz&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</span><span id="line-285">    <span class="n">z_edges</span> <span class="o">=</span> <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;z&quot;</span><span class="p">]</span>
+</span><span id="line-284">    <span class="n">nz</span> <span class="o">=</span> <span class="n">dat</span><span class="p">[</span><span class="s2">"dn_dz"</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span><span id="line-285">    <span class="n">z_edges</span> <span class="o">=</span> <span class="n">dat</span><span class="p">[</span><span class="s2">"z"</span><span class="p">]</span>
 </span><span id="line-286">
 </span><span id="line-287">    <span class="n">z_centers</span> <span class="o">=</span> <span class="n">bin_edges2centers</span><span class="p">(</span><span class="n">z_edges</span><span class="p">)</span>
 </span><span id="line-288">
@@ -482,7 +482,7 @@
 <div class="viewcode-block" id="read_hp_mask">
 <a class="viewcode-back" href="../../cs_util.cat.html#cs_util.cat.read_hp_mask">[docs]</a>
 </span><span id="line-292"><span class="k">def</span><span class="w"> </span><span class="nf">read_hp_mask</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-</span><span id="line-293"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read Hp Mask.</span>
+</span><span id="line-293"><span class="w">    </span><span class="sd">"""Read Hp Mask.</span>
 </span><span id="line-294">
 </span><span id="line-295"><span class="sd">    Read healpix mask FITS file.</span>
 </span><span id="line-296">
@@ -502,9 +502,9 @@
 </span><span id="line-310"><span class="sd">        int</span>
 </span><span id="line-311"><span class="sd">                nside</span>
 </span><span id="line-312">
-</span><span id="line-313"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-313"><span class="sd">    """</span>
 </span><span id="line-314">    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-</span><span id="line-315">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reading mask </span><span class="si">{</span><span class="n">input_path</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+</span><span id="line-315">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Reading mask </span><span class="si">{</span><span class="n">input_path</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
 </span><span id="line-316">
 </span><span id="line-317">    <span class="n">nest</span> <span class="o">=</span> <span class="kc">False</span>
 </span><span id="line-318">
@@ -515,25 +515,25 @@
 </span><span id="line-323">        <span class="n">nest</span><span class="o">=</span><span class="n">nest</span><span class="p">,</span>
 </span><span id="line-324">    <span class="p">)</span>
 </span><span id="line-325">    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
-</span><span id="line-326">        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;ORDERING&quot;</span><span class="p">:</span>
-</span><span id="line-327">            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;RING&quot;</span><span class="p">:</span>
+</span><span id="line-326">        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">"ORDERING"</span><span class="p">:</span>
+</span><span id="line-327">            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">"RING"</span><span class="p">:</span>
 </span><span id="line-328">                <span class="k">if</span> <span class="n">nest</span><span class="p">:</span>
 </span><span id="line-329">                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="line-330">                        <span class="s2">&quot;input mask has ORDENING=RING, set nest to False&quot;</span>
+</span><span id="line-330">                        <span class="s2">"input mask has ORDENING=RING, set nest to False"</span>
 </span><span id="line-331">                    <span class="p">)</span>
-</span><span id="line-332">            <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;NEST&quot;</span><span class="p">:</span>
+</span><span id="line-332">            <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">"NEST"</span><span class="p">:</span>
 </span><span id="line-333">                <span class="k">if</span> <span class="ow">not</span> <span class="n">nest</span><span class="p">:</span>
 </span><span id="line-334">                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="line-335">                        <span class="s2">&quot;input mask has ORDENING=NEST, set nest to True&quot;</span>
+</span><span id="line-335">                        <span class="s2">"input mask has ORDENING=NEST, set nest to True"</span>
 </span><span id="line-336">                    <span class="p">)</span>
 </span><span id="line-337">
 </span><span id="line-338">    <span class="c1"># Get nside from header</span>
 </span><span id="line-339">    <span class="n">nside</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="line-340">    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
-</span><span id="line-341">        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;NSIDE&quot;</span><span class="p">:</span>
+</span><span id="line-341">        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">"NSIDE"</span><span class="p">:</span>
 </span><span id="line-342">            <span class="n">nside</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </span><span id="line-343">    <span class="k">if</span> <span class="ow">not</span> <span class="n">nside</span><span class="p">:</span>
-</span><span id="line-344">        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;NSIDE not found in FITS mask header&quot;</span><span class="p">)</span>
+</span><span id="line-344">        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">"NSIDE not found in FITS mask header"</span><span class="p">)</span>
 </span><span id="line-345">
 </span><span id="line-346">    <span class="k">return</span> <span class="n">mask</span><span class="p">,</span> <span class="n">nest</span><span class="p">,</span> <span class="n">nside</span></div>
 
@@ -544,7 +544,7 @@
       </div><footer class="py-6 border-t border-border md:py-0">
     <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
       <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 07 Jul, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
+        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 05 Sep, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
     href="https://www.sphinx-doc.org"
     rel="noreferrer">Sphinx 9.1.0</a></p>
 </div>

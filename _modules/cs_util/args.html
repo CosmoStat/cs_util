@@ -167,14 +167,14 @@
 
     <div id="content" role="main">
       <h1>Source code for cs_util.args</h1><div class="highlight"><pre>
-<span></span><code><span id="line-1"><span class="sd">&quot;&quot;&quot;ARGS.</span>
+<span></span><code><span id="line-1"><span class="sd">"""ARGS.</span>
 </span><span id="line-2">
 </span><span id="line-3"><span class="sd">:Description: Handling of command line arguments.</span>
 </span><span id="line-4">
 </span><span id="line-5"><span class="sd">:Author: Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;</span>
 </span><span id="line-6">
 </span><span id="line-7">
-</span><span id="line-8"><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-8"><span class="sd">"""</span>
 </span><span id="line-9">
 </span><span id="line-10"><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 </span><span id="line-11"><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -186,7 +186,7 @@
 <div class="viewcode-block" id="parse_options">
 <a class="viewcode-back" href="../../cs_util.args.html#cs_util.args.parse_options">[docs]</a>
 </span><span id="line-17"><span class="k">def</span><span class="w"> </span><span class="nf">parse_options</span><span class="p">(</span><span class="n">p_def</span><span class="p">,</span> <span class="n">short_options</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">help_strings</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="line-18"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse command line options.</span>
+</span><span id="line-18"><span class="w">    </span><span class="sd">"""Parse command line options.</span>
 </span><span id="line-19">
 </span><span id="line-20"><span class="sd">    Parameters</span>
 </span><span id="line-21"><span class="sd">    ----------</span>
@@ -207,11 +207,11 @@
 </span><span id="line-36"><span class="sd">    options: tuple</span>
 </span><span id="line-37"><span class="sd">        Command line options</span>
 </span><span id="line-38">
-</span><span id="line-39"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-39"><span class="sd">    """</span>
 </span><span id="line-40">    <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="line-41">        <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 </span><span id="line-42">
-</span><span id="line-43">    <span class="n">usage</span> <span class="o">=</span> <span class="s2">&quot;%prog [OPTIONS]&quot;</span>
+</span><span id="line-43">    <span class="n">usage</span> <span class="o">=</span> <span class="s2">"%prog [OPTIONS]"</span>
 </span><span id="line-44">    <span class="n">parser</span> <span class="o">=</span> <span class="n">OptionParser</span><span class="p">(</span><span class="n">usage</span><span class="o">=</span><span class="n">usage</span><span class="p">)</span>
 </span><span id="line-45">
 </span><span id="line-46">    <span class="c1"># Loop over default parameter values</span>
@@ -219,25 +219,25 @@
 </span><span id="line-48">        <span class="c1"># Process if help string exists</span>
 </span><span id="line-49">        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">help_strings</span><span class="p">:</span>
 </span><span id="line-50">            <span class="c1"># Set short option</span>
-</span><span id="line-51">            <span class="n">short</span> <span class="o">=</span> <span class="n">short_options</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">short_options</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+</span><span id="line-51">            <span class="n">short</span> <span class="o">=</span> <span class="n">short_options</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">short_options</span> <span class="k">else</span> <span class="s2">""</span>
 </span><span id="line-52">
 </span><span id="line-53">            <span class="c1"># Set type</span>
-</span><span id="line-54">            <span class="n">typ</span> <span class="o">=</span> <span class="n">types</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">types</span> <span class="k">else</span> <span class="s2">&quot;string&quot;</span>
+</span><span id="line-54">            <span class="n">typ</span> <span class="o">=</span> <span class="n">types</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">types</span> <span class="k">else</span> <span class="s2">"string"</span>
 </span><span id="line-55">
 </span><span id="line-56">            <span class="c1"># Special case: bool type</span>
-</span><span id="line-57">            <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="s2">&quot;bool&quot;</span><span class="p">:</span>
+</span><span id="line-57">            <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="s2">"bool"</span><span class="p">:</span>
 </span><span id="line-58">                <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
-</span><span id="line-59">                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">short</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-</span><span id="line-60">                    <span class="sa">f</span><span class="s2">&quot;--</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span id="line-59">                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">short</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+</span><span id="line-60">                    <span class="sa">f</span><span class="s2">"--</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
 </span><span id="line-61">                    <span class="n">dest</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
 </span><span id="line-62">                    <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span id="line-63">                    <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+</span><span id="line-63">                    <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">,</span>
 </span><span id="line-64">                    <span class="n">help</span><span class="o">=</span><span class="n">help_strings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p_def</span><span class="p">[</span><span class="n">key</span><span class="p">]),</span>
 </span><span id="line-65">                <span class="p">)</span>
 </span><span id="line-66">            <span class="k">else</span><span class="p">:</span>
 </span><span id="line-67">                <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
 </span><span id="line-68">                    <span class="n">short</span><span class="p">,</span>
-</span><span id="line-69">                    <span class="sa">f</span><span class="s2">&quot;--</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span id="line-69">                    <span class="sa">f</span><span class="s2">"--</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
 </span><span id="line-70">                    <span class="n">dest</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
 </span><span id="line-71">                    <span class="nb">type</span><span class="o">=</span><span class="n">typ</span><span class="p">,</span>
 </span><span id="line-72">                    <span class="n">default</span><span class="o">=</span><span class="n">p_def</span><span class="p">[</span><span class="n">key</span><span class="p">],</span>
@@ -246,11 +246,11 @@
 </span><span id="line-75">
 </span><span id="line-76">    <span class="c1"># Add verbose option</span>
 </span><span id="line-77">    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
-</span><span id="line-78">        <span class="s2">&quot;-v&quot;</span><span class="p">,</span>
-</span><span id="line-79">        <span class="s2">&quot;--verbose&quot;</span><span class="p">,</span>
-</span><span id="line-80">        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;verbose&quot;</span><span class="p">,</span>
-</span><span id="line-81">        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
-</span><span id="line-82">        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;verbose output&quot;</span><span class="p">,</span>
+</span><span id="line-78">        <span class="s2">"-v"</span><span class="p">,</span>
+</span><span id="line-79">        <span class="s2">"--verbose"</span><span class="p">,</span>
+</span><span id="line-80">        <span class="n">dest</span><span class="o">=</span><span class="s2">"verbose"</span><span class="p">,</span>
+</span><span id="line-81">        <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">,</span>
+</span><span id="line-82">        <span class="n">help</span><span class="o">=</span><span class="s2">"verbose output"</span><span class="p">,</span>
 </span><span id="line-83">    <span class="p">)</span>
 </span><span id="line-84">
 </span><span id="line-85">    <span class="n">options_values</span><span class="p">,</span> <span class="n">my_args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
@@ -272,14 +272,14 @@
 <div class="viewcode-block" id="my_string_split">
 <a class="viewcode-back" href="../../cs_util.args.html#cs_util.args.my_string_split">[docs]</a>
 </span><span id="line-100"><span class="k">def</span><span class="w"> </span><span class="nf">my_string_split</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">num</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="line-101"><span class="w">    </span><span class="sd">&quot;&quot;&quot;My String Split.</span>
+</span><span id="line-101"><span class="w">    </span><span class="sd">"""My String Split.</span>
 </span><span id="line-102">
 </span><span id="line-103"><span class="sd">    Split a *string* into a list of strings. Choose as separator</span>
 </span><span id="line-104"><span class="sd">    the first in the list [space, underscore] that occurs in the string.</span>
 </span><span id="line-105"><span class="sd">    (Thus, if both occur, use space.)</span>
 </span><span id="line-106">
 </span><span id="line-107"><span class="sd">    Handles quoted strings: entries containing spaces can be enclosed</span>
-</span><span id="line-108"><span class="sd">    in double quotes, e.g., &#39;value1 &quot;entry with spaces&quot; value3&#39;.</span>
+</span><span id="line-108"><span class="sd">    in double quotes, e.g., 'value1 "entry with spaces" value3'.</span>
 </span><span id="line-109">
 </span><span id="line-110"><span class="sd">    Parameters</span>
 </span><span id="line-111"><span class="sd">    ----------</span>
@@ -292,7 +292,7 @@
 </span><span id="line-118"><span class="sd">    stop : bool</span>
 </span><span id="line-119"><span class="sd">        Stop programs with error if True, return None and continues otherwise</span>
 </span><span id="line-120"><span class="sd">    sep : bool</span>
-</span><span id="line-121"><span class="sd">        Separator, try &#39; &#39;, &#39;_&#39;, and &#39;.&#39; if None (default)</span>
+</span><span id="line-121"><span class="sd">        Separator, try ' ', '_', and '.' if None (default)</span>
 </span><span id="line-122">
 </span><span id="line-123"><span class="sd">    Raises</span>
 </span><span id="line-124"><span class="sd">    ------</span>
@@ -305,17 +305,17 @@
 </span><span id="line-131"><span class="sd">    list</span>
 </span><span id="line-132"><span class="sd">        List of string on success, and None if failed</span>
 </span><span id="line-133">
-</span><span id="line-134"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-134"><span class="sd">    """</span>
 </span><span id="line-135">    <span class="k">if</span> <span class="n">string</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="line-136">        <span class="k">return</span> <span class="kc">None</span>
 </span><span id="line-137">
 </span><span id="line-138">    <span class="c1"># Handle quoted strings with shlex</span>
-</span><span id="line-139">    <span class="k">if</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">in</span> <span class="n">string</span> <span class="ow">or</span> <span class="s2">&quot;&#39;&quot;</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
+</span><span id="line-139">    <span class="k">if</span> <span class="s1">'"'</span> <span class="ow">in</span> <span class="n">string</span> <span class="ow">or</span> <span class="s2">"'"</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
 </span><span id="line-140">        <span class="k">try</span><span class="p">:</span>
 </span><span id="line-141">            <span class="n">res</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 </span><span id="line-142">            <span class="k">if</span> <span class="n">num</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">num</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="ow">and</span> <span class="n">stop</span><span class="p">:</span>
 </span><span id="line-143">                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="line-144">                    <span class="sa">f</span><span class="s2">&quot;String has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="si">}</span><span class="s2"> elements, required is </span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="line-144">                    <span class="sa">f</span><span class="s2">"String has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="si">}</span><span class="s2"> elements, required is </span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">"</span>
 </span><span id="line-145">                <span class="p">)</span>
 </span><span id="line-146">            <span class="k">return</span> <span class="n">res</span>
 </span><span id="line-147">        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
@@ -323,29 +323,29 @@
 </span><span id="line-149">            <span class="k">pass</span>
 </span><span id="line-150">
 </span><span id="line-151">    <span class="k">if</span> <span class="n">sep</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="line-152">        <span class="n">has_space</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-</span><span id="line-153">        <span class="n">has_underscore</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
-</span><span id="line-154">        <span class="n">has_dot</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+</span><span id="line-152">        <span class="n">has_space</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
+</span><span id="line-153">        <span class="n">has_underscore</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)</span>
+</span><span id="line-154">        <span class="n">has_dot</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
 </span><span id="line-155">
 </span><span id="line-156">        <span class="k">if</span> <span class="n">has_space</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-</span><span id="line-157">            <span class="n">my_sep</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
+</span><span id="line-157">            <span class="n">my_sep</span> <span class="o">=</span> <span class="s2">" "</span>
 </span><span id="line-158">        <span class="k">elif</span> <span class="n">has_underscore</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-</span><span id="line-159">            <span class="n">my_sep</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span>
+</span><span id="line-159">            <span class="n">my_sep</span> <span class="o">=</span> <span class="s2">"_"</span>
 </span><span id="line-160">        <span class="k">elif</span> <span class="n">has_dot</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-</span><span id="line-161">            <span class="n">my_sep</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
+</span><span id="line-161">            <span class="n">my_sep</span> <span class="o">=</span> <span class="s2">"."</span>
 </span><span id="line-162">        <span class="k">else</span><span class="p">:</span>
 </span><span id="line-163">            <span class="c1"># no separator found, does string consist of only one element?</span>
 </span><span id="line-164">            <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 </span><span id="line-165">                <span class="n">my_sep</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="line-166">            <span class="k">else</span><span class="p">:</span>
 </span><span id="line-167">                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="line-168">                    <span class="s2">&quot;No separator (&#39; &#39;, &#39;_&#39;, or &#39;.&#39;) found in string&quot;</span>
-</span><span id="line-169">                    <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; &#39;</span><span class="si">{</span><span class="n">string</span><span class="si">}</span><span class="s2">&#39;, cannot split&quot;</span>
+</span><span id="line-168">                    <span class="s2">"No separator (' ', '_', or '.') found in string"</span>
+</span><span id="line-169">                    <span class="o">+</span> <span class="sa">f</span><span class="s2">" '</span><span class="si">{</span><span class="n">string</span><span class="si">}</span><span class="s2">', cannot split"</span>
 </span><span id="line-170">                <span class="p">)</span>
 </span><span id="line-171">    <span class="k">else</span><span class="p">:</span>
 </span><span id="line-172">        <span class="k">if</span> <span class="ow">not</span> <span class="n">string</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">sep</span><span class="p">):</span>
 </span><span id="line-173">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="line-174">                <span class="sa">f</span><span class="s2">&quot;No separator &#39;</span><span class="si">{</span><span class="n">sep</span><span class="si">}</span><span class="s2">&#39; found in string &#39;</span><span class="si">{</span><span class="n">string</span><span class="si">}</span><span class="s2">&#39; cannot split&quot;</span>
+</span><span id="line-174">                <span class="sa">f</span><span class="s2">"No separator '</span><span class="si">{</span><span class="n">sep</span><span class="si">}</span><span class="s2">' found in string '</span><span class="si">{</span><span class="n">string</span><span class="si">}</span><span class="s2">' cannot split"</span>
 </span><span id="line-175">            <span class="p">)</span>
 </span><span id="line-176">        <span class="n">my_sep</span> <span class="o">=</span> <span class="n">sep</span>
 </span><span id="line-177">
@@ -353,7 +353,7 @@
 </span><span id="line-179">
 </span><span id="line-180">    <span class="k">if</span> <span class="n">num</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">num</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="ow">and</span> <span class="n">stop</span><span class="p">:</span>
 </span><span id="line-181">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="line-182">            <span class="sa">f</span><span class="s2">&quot;String has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="si">}</span><span class="s2"> elements, required is </span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="line-182">            <span class="sa">f</span><span class="s2">"String has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="si">}</span><span class="s2"> elements, required is </span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">"</span>
 </span><span id="line-183">        <span class="p">)</span>
 </span><span id="line-184">
 </span><span id="line-185">    <span class="k">return</span> <span class="n">res</span></div>
@@ -363,7 +363,7 @@
 <div class="viewcode-block" id="read_param_script">
 <a class="viewcode-back" href="../../cs_util.args.html#cs_util.args.read_param_script">[docs]</a>
 </span><span id="line-188"><span class="k">def</span><span class="w"> </span><span class="nf">read_param_script</span><span class="p">(</span><span class="n">params_in_path</span><span class="p">,</span> <span class="n">params_def</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-</span><span id="line-189"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Read Params Scritpt.</span>
+</span><span id="line-189"><span class="w">    </span><span class="sd">"""Read Params Scritpt.</span>
 </span><span id="line-190">
 </span><span id="line-191"><span class="sd">    Reads a python parameter script, or prompts user for input if file does not</span>
 </span><span id="line-192"><span class="sd">    exist.</span>
@@ -383,7 +383,7 @@
 </span><span id="line-206"><span class="sd">    dict :</span>
 </span><span id="line-207"><span class="sd">        updated parameters</span>
 </span><span id="line-208">
-</span><span id="line-209"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-209"><span class="sd">    """</span>
 </span><span id="line-210">    <span class="n">params_in</span> <span class="o">=</span> <span class="p">{}</span>
 </span><span id="line-211">    <span class="n">params_out</span> <span class="o">=</span> <span class="p">{}</span>
 </span><span id="line-212">    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">params_def</span><span class="p">:</span>
@@ -391,7 +391,7 @@
 </span><span id="line-214">
 </span><span id="line-215">    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">params_in_path</span><span class="p">):</span>
 </span><span id="line-216">        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-</span><span id="line-217">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reading parameter script </span><span class="si">{</span><span class="n">params_in_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="line-217">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Reading parameter script </span><span class="si">{</span><span class="n">params_in_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="line-218">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">params_in_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 </span><span id="line-219">            <span class="n">exec</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </span><span id="line-220">        <span class="c1"># Set instance parameters, copy from above</span>
@@ -399,12 +399,12 @@
 </span><span id="line-222">            <span class="n">params_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">params_in</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 </span><span id="line-223">    <span class="k">else</span><span class="p">:</span>
 </span><span id="line-224">        <span class="nb">print</span><span class="p">(</span>
-</span><span id="line-225">            <span class="sa">f</span><span class="s2">&quot;Configuration script </span><span class="si">{</span><span class="n">params_in_path</span><span class="si">}</span><span class="s2"> not found, asking for user input&quot;</span>
+</span><span id="line-225">            <span class="sa">f</span><span class="s2">"Configuration script </span><span class="si">{</span><span class="n">params_in_path</span><span class="si">}</span><span class="s2"> not found, asking for user input"</span>
 </span><span id="line-226">        <span class="p">)</span>
 </span><span id="line-227">        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">params_def</span><span class="p">:</span>
-</span><span id="line-228">            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">? [</span><span class="si">{</span><span class="n">params_def</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">] &quot;</span>
+</span><span id="line-228">            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">? [</span><span class="si">{</span><span class="n">params_def</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">] "</span>
 </span><span id="line-229">            <span class="n">val_user</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-</span><span id="line-230">            <span class="k">if</span> <span class="n">val_user</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+</span><span id="line-230">            <span class="k">if</span> <span class="n">val_user</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
 </span><span id="line-231">                <span class="n">params_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_user</span>
 </span><span id="line-232">
 </span><span id="line-233">    <span class="k">return</span> <span class="n">params_out</span></div>
@@ -416,7 +416,7 @@
       </div><footer class="py-6 border-t border-border md:py-0">
     <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
       <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 07 Jul, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
+        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 05 Sep, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
     href="https://www.sphinx-doc.org"
     rel="noreferrer">Sphinx 9.1.0</a></p>
 </div>

@@ -382,9 +382,11 @@
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="cs_util.plots.html#cs_util.plots.figure">figure() (in module cs_util.plots)</a>
 </li>
+      <li><a href="cs_util.plots.html#cs_util.plots.FootprintPlotter">FootprintPlotter (class in cs_util.plots)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
-      <li><a href="cs_util.plots.html#cs_util.plots.FootprintPlotter">FootprintPlotter (class in cs_util.plots)</a>
+      <li><a href="cs_util.tests.test_plots.html#cs_util.tests.test_plots.FootprintPlotterTestCase">FootprintPlotterTestCase (class in cs_util.tests.test_plots)</a>
 </li>
       <li><a href="cs_util.size.html#cs_util.size.fwhm_to_sigma">fwhm_to_sigma() (in module cs_util.size)</a>
 </li>
@@ -510,6 +512,8 @@
 </li>
       <li><a href="cs_util.plots.html#cs_util.plots.FootprintPlotter.plot_all_regions">plot_all_regions() (FootprintPlotter method)</a>
 </li>
+      <li><a href="cs_util.plots.html#cs_util.plots.FootprintPlotter.plot_area">plot_area() (FootprintPlotter method)</a>
+</li>
       <li><a href="cs_util.plots.html#cs_util.plots.plot_data_1d">plot_data_1d() (in module cs_util.plots)</a>
 </li>
   </ul></td>
@@ -566,6 +570,8 @@
 </li>
         <li><a href="cs_util.tests.test_cfis.html#cs_util.tests.test_cfis.CfisTestCase.setUp">(CfisTestCase method)</a>
 </li>
+        <li><a href="cs_util.tests.test_plots.html#cs_util.tests.test_plots.FootprintPlotterTestCase.setUp">(FootprintPlotterTestCase method)</a>
+</li>
         <li><a href="cs_util.tests.test_logging.html#cs_util.tests.test_logging.LoggingTestCase.setUp">(LoggingTestCase method)</a>
 </li>
         <li><a href="cs_util.tests.test_plots.html#cs_util.tests.test_plots.PlotsTestCase.setUp">(PlotsTestCase method)</a>
@@ -617,6 +623,8 @@
 </li>
         <li><a href="cs_util.tests.test_cfis.html#cs_util.tests.test_cfis.CfisTestCase.tearDown">(CfisTestCase method)</a>
 </li>
+        <li><a href="cs_util.tests.test_plots.html#cs_util.tests.test_plots.FootprintPlotterTestCase.tearDown">(FootprintPlotterTestCase method)</a>
+</li>
         <li><a href="cs_util.tests.test_logging.html#cs_util.tests.test_logging.LoggingTestCase.tearDown">(LoggingTestCase method)</a>
 </li>
         <li><a href="cs_util.tests.test_plots.html#cs_util.tests.test_plots.PlotsTestCase.tearDown">(PlotsTestCase method)</a>
@@ -642,12 +650,14 @@
 </li>
       <li><a href="cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.test_constants">test_constants() (SizeTestCase method)</a>
 </li>
+      <li><a href="cs_util.tests.test_plots.html#cs_util.tests.test_plots.FootprintPlotterTestCase.test_create_hsp_map">test_create_hsp_map() (FootprintPlotterTestCase method)</a>
+</li>
       <li><a href="cs_util.tests.test_plots.html#cs_util.tests.test_plots.PlotsTestCase.test_figure">test_figure() (PlotsTestCase method)</a>
+</li>
+      <li><a href="cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.test_fwhm_is_twice_r50">test_fwhm_is_twice_r50() (SizeTestCase method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
-      <li><a href="cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.test_fwhm_is_twice_r50">test_fwhm_is_twice_r50() (SizeTestCase method)</a>
-</li>
       <li><a href="cs_util.tests.test_cfis.html#cs_util.tests.test_cfis.CfisTestCase.test_get_tile_coord_from_nixy">test_get_tile_coord_from_nixy() (CfisTestCase method)</a>
 </li>
       <li><a href="cs_util.tests.test_cfis.html#cs_util.tests.test_cfis.CfisTestCase.test_get_tile_number">test_get_tile_number() (CfisTestCase method)</a>
@@ -664,7 +674,13 @@
 </li>
       <li><a href="cs_util.tests.test_shape.html#cs_util.tests.test_shape.ShapeTestCase.test_orientation_preserved">test_orientation_preserved() (ShapeTestCase method)</a>
 </li>
+      <li><a href="cs_util.tests.test_plots.html#cs_util.tests.test_plots.FootprintPlotterTestCase.test_plot_area">test_plot_area() (FootprintPlotterTestCase method)</a>
+</li>
+      <li><a href="cs_util.tests.test_plots.html#cs_util.tests.test_plots.FootprintPlotterTestCase.test_plot_area_exists">test_plot_area_exists() (FootprintPlotterTestCase method)</a>
+</li>
       <li><a href="cs_util.tests.test_plots.html#cs_util.tests.test_plots.PlotsTestCase.test_plot_histograms">test_plot_histograms() (PlotsTestCase method)</a>
+</li>
+      <li><a href="cs_util.tests.test_plots.html#cs_util.tests.test_plots.FootprintPlotterTestCase.test_plot_region_forwards_to_plot_area">test_plot_region_forwards_to_plot_area() (FootprintPlotterTestCase method)</a>
 </li>
       <li><a href="cs_util.tests.test_shape.html#cs_util.tests.test_shape.ShapeTestCase.test_round_trips">test_round_trips() (ShapeTestCase method)</a>
 
@@ -741,7 +757,7 @@
       </div><footer class="py-6 border-t border-border md:py-0">
     <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
       <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 07 Jul, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
+        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 05 Sep, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
     href="https://www.sphinx-doc.org"
     rel="noreferrer">Sphinx 9.1.0</a></p>
 </div>

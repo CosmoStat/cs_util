@@ -167,7 +167,7 @@
 
     <div id="content" role="main">
       <h1>Source code for cs_util.size</h1><div class="highlight"><pre>
-<span></span><code><span id="line-1"><span class="sd">&quot;&quot;&quot;SIZE.</span>
+<span></span><code><span id="line-1"><span class="sd">"""SIZE.</span>
 </span><span id="line-2">
 </span><span id="line-3"><span class="sd">:Name: size.py</span>
 </span><span id="line-4">
@@ -188,7 +188,7 @@
 </span><span id="line-19">
 </span><span id="line-20"><span class="sd">:Author: Cail Daley &lt;cailmdaley@gmail.com&gt;</span>
 </span><span id="line-21">
-</span><span id="line-22"><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-22"><span class="sd">"""</span>
 </span><span id="line-23">
 </span><span id="line-24"><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="line-25">
@@ -204,7 +204,7 @@
 <div class="viewcode-block" id="T_to_sigma">
 <a class="viewcode-back" href="../../cs_util.size.html#cs_util.size.T_to_sigma">[docs]</a>
 </span><span id="line-35"><span class="k">def</span><span class="w"> </span><span class="nf">T_to_sigma</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-</span><span id="line-36"><span class="w">    </span><span class="sd">&quot;&quot;&quot;T To Sigma.</span>
+</span><span id="line-36"><span class="w">    </span><span class="sd">"""T To Sigma.</span>
 </span><span id="line-37">
 </span><span id="line-38"><span class="sd">    Gaussian scale ``sigma = sqrt(T / 2)`` from the ngmix area</span>
 </span><span id="line-39"><span class="sd">    parameter ``T = 2 sigma^2``.</span>
@@ -219,7 +219,7 @@
 </span><span id="line-48"><span class="sd">    float or numpy.ndarray</span>
 </span><span id="line-49"><span class="sd">        Gaussian scale ``sigma``, in units of ``sqrt(T)``</span>
 </span><span id="line-50">
-</span><span id="line-51"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-51"><span class="sd">    """</span>
 </span><span id="line-52">    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span></div>
 
 </span><span id="line-53">
@@ -227,7 +227,7 @@
 <div class="viewcode-block" id="sigma_to_T">
 <a class="viewcode-back" href="../../cs_util.size.html#cs_util.size.sigma_to_T">[docs]</a>
 </span><span id="line-55"><span class="k">def</span><span class="w"> </span><span class="nf">sigma_to_T</span><span class="p">(</span><span class="n">sigma</span><span class="p">):</span>
-</span><span id="line-56"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sigma To T.</span>
+</span><span id="line-56"><span class="w">    </span><span class="sd">"""Sigma To T.</span>
 </span><span id="line-57">
 </span><span id="line-58"><span class="sd">    ngmix area parameter ``T = 2 sigma^2`` from the Gaussian scale.</span>
 </span><span id="line-59">
@@ -241,7 +241,7 @@
 </span><span id="line-67"><span class="sd">    float or numpy.ndarray</span>
 </span><span id="line-68"><span class="sd">        ngmix area parameter ``T``, in units of ``sigma^2``</span>
 </span><span id="line-69">
-</span><span id="line-70"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-70"><span class="sd">    """</span>
 </span><span id="line-71">    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span></div>
 
 </span><span id="line-72">
@@ -249,7 +249,7 @@
 <div class="viewcode-block" id="sigma_to_r50">
 <a class="viewcode-back" href="../../cs_util.size.html#cs_util.size.sigma_to_r50">[docs]</a>
 </span><span id="line-74"><span class="k">def</span><span class="w"> </span><span class="nf">sigma_to_r50</span><span class="p">(</span><span class="n">sigma</span><span class="p">):</span>
-</span><span id="line-75"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sigma To R50.</span>
+</span><span id="line-75"><span class="w">    </span><span class="sd">"""Sigma To R50.</span>
 </span><span id="line-76">
 </span><span id="line-77"><span class="sd">    Half-light radius ``r50 = sqrt(2 ln 2) sigma`` of a circular</span>
 </span><span id="line-78"><span class="sd">    Gaussian.</span>
@@ -264,7 +264,7 @@
 </span><span id="line-87"><span class="sd">    float or numpy.ndarray</span>
 </span><span id="line-88"><span class="sd">        half-light radius, in units of ``sigma``</span>
 </span><span id="line-89">
-</span><span id="line-90"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-90"><span class="sd">    """</span>
 </span><span id="line-91">    <span class="k">return</span> <span class="n">SIGMA_TO_R50</span> <span class="o">*</span> <span class="n">sigma</span></div>
 
 </span><span id="line-92">
@@ -272,7 +272,7 @@
 <div class="viewcode-block" id="r50_to_sigma">
 <a class="viewcode-back" href="../../cs_util.size.html#cs_util.size.r50_to_sigma">[docs]</a>
 </span><span id="line-94"><span class="k">def</span><span class="w"> </span><span class="nf">r50_to_sigma</span><span class="p">(</span><span class="n">r50</span><span class="p">):</span>
-</span><span id="line-95"><span class="w">    </span><span class="sd">&quot;&quot;&quot;R50 To Sigma.</span>
+</span><span id="line-95"><span class="w">    </span><span class="sd">"""R50 To Sigma.</span>
 </span><span id="line-96">
 </span><span id="line-97"><span class="sd">    Gaussian scale from the half-light radius.</span>
 </span><span id="line-98">
@@ -286,7 +286,7 @@
 </span><span id="line-106"><span class="sd">    float or numpy.ndarray</span>
 </span><span id="line-107"><span class="sd">        Gaussian scale ``sigma``, in units of ``r50``</span>
 </span><span id="line-108">
-</span><span id="line-109"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-109"><span class="sd">    """</span>
 </span><span id="line-110">    <span class="k">return</span> <span class="n">r50</span> <span class="o">/</span> <span class="n">SIGMA_TO_R50</span></div>
 
 </span><span id="line-111">
@@ -294,7 +294,7 @@
 <div class="viewcode-block" id="sigma_to_fwhm">
 <a class="viewcode-back" href="../../cs_util.size.html#cs_util.size.sigma_to_fwhm">[docs]</a>
 </span><span id="line-113"><span class="k">def</span><span class="w"> </span><span class="nf">sigma_to_fwhm</span><span class="p">(</span><span class="n">sigma</span><span class="p">):</span>
-</span><span id="line-114"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sigma To Fwhm.</span>
+</span><span id="line-114"><span class="w">    </span><span class="sd">"""Sigma To Fwhm.</span>
 </span><span id="line-115">
 </span><span id="line-116"><span class="sd">    Full width at half maximum ``FWHM = 2 sqrt(2 ln 2) sigma`` of a</span>
 </span><span id="line-117"><span class="sd">    Gaussian.</span>
@@ -309,7 +309,7 @@
 </span><span id="line-126"><span class="sd">    float or numpy.ndarray</span>
 </span><span id="line-127"><span class="sd">        FWHM, in units of ``sigma``</span>
 </span><span id="line-128">
-</span><span id="line-129"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-129"><span class="sd">    """</span>
 </span><span id="line-130">    <span class="k">return</span> <span class="n">SIGMA_TO_FWHM</span> <span class="o">*</span> <span class="n">sigma</span></div>
 
 </span><span id="line-131">
@@ -317,7 +317,7 @@
 <div class="viewcode-block" id="fwhm_to_sigma">
 <a class="viewcode-back" href="../../cs_util.size.html#cs_util.size.fwhm_to_sigma">[docs]</a>
 </span><span id="line-133"><span class="k">def</span><span class="w"> </span><span class="nf">fwhm_to_sigma</span><span class="p">(</span><span class="n">fwhm</span><span class="p">):</span>
-</span><span id="line-134"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Fwhm To Sigma.</span>
+</span><span id="line-134"><span class="w">    </span><span class="sd">"""Fwhm To Sigma.</span>
 </span><span id="line-135">
 </span><span id="line-136"><span class="sd">    Gaussian scale from the full width at half maximum.</span>
 </span><span id="line-137">
@@ -331,7 +331,7 @@
 </span><span id="line-145"><span class="sd">    float or numpy.ndarray</span>
 </span><span id="line-146"><span class="sd">        Gaussian scale ``sigma``, in units of ``fwhm``</span>
 </span><span id="line-147">
-</span><span id="line-148"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-148"><span class="sd">    """</span>
 </span><span id="line-149">    <span class="k">return</span> <span class="n">fwhm</span> <span class="o">/</span> <span class="n">SIGMA_TO_FWHM</span></div>
 
 </span><span id="line-150">
@@ -339,7 +339,7 @@
 <div class="viewcode-block" id="T_to_r50">
 <a class="viewcode-back" href="../../cs_util.size.html#cs_util.size.T_to_r50">[docs]</a>
 </span><span id="line-152"><span class="k">def</span><span class="w"> </span><span class="nf">T_to_r50</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-</span><span id="line-153"><span class="w">    </span><span class="sd">&quot;&quot;&quot;T To R50.</span>
+</span><span id="line-153"><span class="w">    </span><span class="sd">"""T To R50.</span>
 </span><span id="line-154">
 </span><span id="line-155"><span class="sd">    Half-light radius ``r50 = sqrt(2 ln 2) * sqrt(T / 2)</span>
 </span><span id="line-156"><span class="sd">    = sqrt(ln 2 * T)`` from the ngmix area parameter.</span>
@@ -354,7 +354,7 @@
 </span><span id="line-165"><span class="sd">    float or numpy.ndarray</span>
 </span><span id="line-166"><span class="sd">        half-light radius, in units of ``sqrt(T)``</span>
 </span><span id="line-167">
-</span><span id="line-168"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-168"><span class="sd">    """</span>
 </span><span id="line-169">    <span class="k">return</span> <span class="n">sigma_to_r50</span><span class="p">(</span><span class="n">T_to_sigma</span><span class="p">(</span><span class="n">T</span><span class="p">))</span></div>
 
 </span><span id="line-170">
@@ -362,7 +362,7 @@
 <div class="viewcode-block" id="r50_to_T">
 <a class="viewcode-back" href="../../cs_util.size.html#cs_util.size.r50_to_T">[docs]</a>
 </span><span id="line-172"><span class="k">def</span><span class="w"> </span><span class="nf">r50_to_T</span><span class="p">(</span><span class="n">r50</span><span class="p">):</span>
-</span><span id="line-173"><span class="w">    </span><span class="sd">&quot;&quot;&quot;R50 To T.</span>
+</span><span id="line-173"><span class="w">    </span><span class="sd">"""R50 To T.</span>
 </span><span id="line-174">
 </span><span id="line-175"><span class="sd">    ngmix area parameter ``T = 2 (r50 / sqrt(2 ln 2))^2 = r50^2 / ln 2``</span>
 </span><span id="line-176"><span class="sd">    from the half-light radius.</span>
@@ -377,7 +377,7 @@
 </span><span id="line-185"><span class="sd">    float or numpy.ndarray</span>
 </span><span id="line-186"><span class="sd">        ngmix area parameter ``T``, in units of ``r50^2``</span>
 </span><span id="line-187">
-</span><span id="line-188"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-188"><span class="sd">    """</span>
 </span><span id="line-189">    <span class="k">return</span> <span class="n">sigma_to_T</span><span class="p">(</span><span class="n">r50_to_sigma</span><span class="p">(</span><span class="n">r50</span><span class="p">))</span></div>
 
 </span><span id="line-190">
@@ -385,7 +385,7 @@
 <div class="viewcode-block" id="T_to_fwhm">
 <a class="viewcode-back" href="../../cs_util.size.html#cs_util.size.T_to_fwhm">[docs]</a>
 </span><span id="line-192"><span class="k">def</span><span class="w"> </span><span class="nf">T_to_fwhm</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-</span><span id="line-193"><span class="w">    </span><span class="sd">&quot;&quot;&quot;T To Fwhm.</span>
+</span><span id="line-193"><span class="w">    </span><span class="sd">"""T To Fwhm.</span>
 </span><span id="line-194">
 </span><span id="line-195"><span class="sd">    Full width at half maximum ``FWHM = 2 sqrt(2 ln 2) * sqrt(T / 2)``</span>
 </span><span id="line-196"><span class="sd">    from the ngmix area parameter.</span>
@@ -403,7 +403,7 @@
 </span><span id="line-208"><span class="sd">    float or numpy.ndarray</span>
 </span><span id="line-209"><span class="sd">        FWHM, in units of ``sqrt(T)``</span>
 </span><span id="line-210">
-</span><span id="line-211"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-211"><span class="sd">    """</span>
 </span><span id="line-212">    <span class="k">return</span> <span class="n">sigma_to_fwhm</span><span class="p">(</span><span class="n">T_to_sigma</span><span class="p">(</span><span class="n">T</span><span class="p">))</span></div>
 
 </span></code></pre></div>
@@ -413,7 +413,7 @@
       </div><footer class="py-6 border-t border-border md:py-0">
     <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
       <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 07 Jul, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
+        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 05 Sep, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
     href="https://www.sphinx-doc.org"
     rel="noreferrer">Sphinx 9.1.0</a></p>
 </div>

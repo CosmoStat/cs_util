@@ -167,11 +167,11 @@
 
     <div id="content" role="main">
       <h1>Source code for cs_util.tests.test_size</h1><div class="highlight"><pre>
-<span></span><code><span id="line-1"><span class="sd">&quot;&quot;&quot;UNIT TESTS FOR SIZE SUBPACKAGE.</span>
+<span></span><code><span id="line-1"><span class="sd">"""UNIT TESTS FOR SIZE SUBPACKAGE.</span>
 </span><span id="line-2">
 </span><span id="line-3"><span class="sd">This module contains unit tests for the size subpackage.</span>
 </span><span id="line-4">
-</span><span id="line-5"><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-5"><span class="sd">"""</span>
 </span><span id="line-6">
 </span><span id="line-7"><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="line-8"><span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">testing</span> <span class="k">as</span> <span class="n">npt</span>
@@ -184,12 +184,12 @@
 <div class="viewcode-block" id="SizeTestCase">
 <a class="viewcode-back" href="../../../cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase">[docs]</a>
 </span><span id="line-15"><span class="k">class</span><span class="w"> </span><span class="nc">SizeTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
-</span><span id="line-16"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test case for the ``size`` module.&quot;&quot;&quot;</span>
+</span><span id="line-16"><span class="w">    </span><span class="sd">"""Test case for the ``size`` module."""</span>
 </span><span id="line-17">
 <div class="viewcode-block" id="SizeTestCase.setUp">
 <a class="viewcode-back" href="../../../cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.setUp">[docs]</a>
 </span><span id="line-18">    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-19"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set test parameter values.&quot;&quot;&quot;</span>
+</span><span id="line-19"><span class="w">        </span><span class="sd">"""Set test parameter values."""</span>
 </span><span id="line-20">        <span class="c1"># Unit-sigma Gaussian: T = 2, r50 = 1.17741, FWHM = 2.35482</span>
 </span><span id="line-21">        <span class="bp">self</span><span class="o">.</span><span class="n">_sigma</span> <span class="o">=</span> <span class="mf">1.0</span>
 </span><span id="line-22">        <span class="bp">self</span><span class="o">.</span><span class="n">_T</span> <span class="o">=</span> <span class="mf">2.0</span>
@@ -200,7 +200,7 @@
 <div class="viewcode-block" id="SizeTestCase.tearDown">
 <a class="viewcode-back" href="../../../cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.tearDown">[docs]</a>
 </span><span id="line-26">    <span class="k">def</span><span class="w"> </span><span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-27"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Unset test parameter values.&quot;&quot;&quot;</span>
+</span><span id="line-27"><span class="w">        </span><span class="sd">"""Unset test parameter values."""</span>
 </span><span id="line-28">        <span class="bp">self</span><span class="o">.</span><span class="n">_sigma</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="line-29">        <span class="bp">self</span><span class="o">.</span><span class="n">_T</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="line-30">        <span class="bp">self</span><span class="o">.</span><span class="n">_r50</span> <span class="o">=</span> <span class="kc">None</span>
@@ -210,7 +210,7 @@
 <div class="viewcode-block" id="SizeTestCase.test_constants">
 <a class="viewcode-back" href="../../../cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.test_constants">[docs]</a>
 </span><span id="line-33">    <span class="k">def</span><span class="w"> </span><span class="nf">test_constants</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-34"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the module constants against their closed forms.&quot;&quot;&quot;</span>
+</span><span id="line-34"><span class="w">        </span><span class="sd">"""Test the module constants against their closed forms."""</span>
 </span><span id="line-35">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">SIGMA_TO_R50</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
 </span><span id="line-36">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">SIGMA_TO_FWHM</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
 </span><span id="line-37">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">SIGMA_TO_R50</span><span class="p">,</span> <span class="mf">1.17741</span><span class="p">,</span> <span class="n">decimal</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -220,7 +220,7 @@
 <div class="viewcode-block" id="SizeTestCase.test_unit_sigma_values">
 <a class="viewcode-back" href="../../../cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.test_unit_sigma_values">[docs]</a>
 </span><span id="line-40">    <span class="k">def</span><span class="w"> </span><span class="nf">test_unit_sigma_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-41"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test all conversions on the unit-sigma Gaussian.&quot;&quot;&quot;</span>
+</span><span id="line-41"><span class="w">        </span><span class="sd">"""Test all conversions on the unit-sigma Gaussian."""</span>
 </span><span id="line-42">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">T_to_sigma</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_T</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sigma</span><span class="p">)</span>
 </span><span id="line-43">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">sigma_to_T</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sigma</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_T</span><span class="p">)</span>
 </span><span id="line-44">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">sigma_to_r50</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sigma</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_r50</span><span class="p">)</span>
@@ -232,7 +232,7 @@
 <div class="viewcode-block" id="SizeTestCase.test_T_to_r50_closed_form">
 <a class="viewcode-back" href="../../../cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.test_T_to_r50_closed_form">[docs]</a>
 </span><span id="line-49">    <span class="k">def</span><span class="w"> </span><span class="nf">test_T_to_r50_closed_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-50"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test ``T_to_r50(T) == sqrt(ln 2 * T)``.&quot;&quot;&quot;</span>
+</span><span id="line-50"><span class="w">        </span><span class="sd">"""Test ``T_to_r50(T) == sqrt(ln 2 * T)``."""</span>
 </span><span id="line-51">        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span>
 </span><span id="line-52">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">T_to_r50</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span></div>
 
@@ -240,7 +240,7 @@
 <div class="viewcode-block" id="SizeTestCase.test_inverse_direct_values">
 <a class="viewcode-back" href="../../../cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.test_inverse_direct_values">[docs]</a>
 </span><span id="line-54">    <span class="k">def</span><span class="w"> </span><span class="nf">test_inverse_direct_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-55"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test each inverse converter directly on the unit-sigma case.&quot;&quot;&quot;</span>
+</span><span id="line-55"><span class="w">        </span><span class="sd">"""Test each inverse converter directly on the unit-sigma case."""</span>
 </span><span id="line-56">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">r50_to_sigma</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_r50</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sigma</span><span class="p">)</span>
 </span><span id="line-57">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">fwhm_to_sigma</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fwhm</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sigma</span><span class="p">)</span>
 </span><span id="line-58">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">r50_to_T</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_r50</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_T</span><span class="p">)</span></div>
@@ -249,18 +249,18 @@
 <div class="viewcode-block" id="SizeTestCase.test_nonpositive_T">
 <a class="viewcode-back" href="../../../cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.test_nonpositive_T">[docs]</a>
 </span><span id="line-60">    <span class="k">def</span><span class="w"> </span><span class="nf">test_nonpositive_T</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-61"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that T = 0 maps to size 0 and negative T to NaN.&quot;&quot;&quot;</span>
+</span><span id="line-61"><span class="w">        </span><span class="sd">"""Test that T = 0 maps to size 0 and negative T to NaN."""</span>
 </span><span id="line-62">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">T_to_sigma</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
 </span><span id="line-63">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">T_to_r50</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
 </span><span id="line-64">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_equal</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">T_to_fwhm</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
-</span><span id="line-65">        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+</span><span id="line-65">        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
 </span><span id="line-66">            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">T_to_r50</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)))</span></div>
 
 </span><span id="line-67">
 <div class="viewcode-block" id="SizeTestCase.test_round_trips">
 <a class="viewcode-back" href="../../../cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.test_round_trips">[docs]</a>
 </span><span id="line-68">    <span class="k">def</span><span class="w"> </span><span class="nf">test_round_trips</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-69"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that inverse pairs compose to the identity.&quot;&quot;&quot;</span>
+</span><span id="line-69"><span class="w">        </span><span class="sd">"""Test that inverse pairs compose to the identity."""</span>
 </span><span id="line-70">        <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">])</span>
 </span><span id="line-71">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">r50_to_T</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">T_to_r50</span><span class="p">(</span><span class="n">values</span><span class="p">)),</span> <span class="n">values</span><span class="p">)</span>
 </span><span id="line-72">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">T_to_r50</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">r50_to_T</span><span class="p">(</span><span class="n">values</span><span class="p">)),</span> <span class="n">values</span><span class="p">)</span>
@@ -278,7 +278,7 @@
 <div class="viewcode-block" id="SizeTestCase.test_fwhm_is_twice_r50">
 <a class="viewcode-back" href="../../../cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.test_fwhm_is_twice_r50">[docs]</a>
 </span><span id="line-83">    <span class="k">def</span><span class="w"> </span><span class="nf">test_fwhm_is_twice_r50</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-84"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test ``FWHM = 2 r50`` for a Gaussian, via both paths.&quot;&quot;&quot;</span>
+</span><span id="line-84"><span class="w">        </span><span class="sd">"""Test ``FWHM = 2 r50`` for a Gaussian, via both paths."""</span>
 </span><span id="line-85">        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
 </span><span id="line-86">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">T_to_fwhm</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">size</span><span class="o">.</span><span class="n">T_to_r50</span><span class="p">(</span><span class="n">T</span><span class="p">))</span></div>
 
@@ -286,7 +286,7 @@
 <div class="viewcode-block" id="SizeTestCase.test_array_input">
 <a class="viewcode-back" href="../../../cs_util.tests.test_size.html#cs_util.tests.test_size.SizeTestCase.test_array_input">[docs]</a>
 </span><span id="line-88">    <span class="k">def</span><span class="w"> </span><span class="nf">test_array_input</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-89"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that array input returns arrays of the same shape.&quot;&quot;&quot;</span>
+</span><span id="line-89"><span class="w">        </span><span class="sd">"""Test that array input returns arrays of the same shape."""</span>
 </span><span id="line-90">        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 </span><span id="line-91">        <span class="n">r50</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">T_to_r50</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
 </span><span id="line-92">        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">r50</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -300,7 +300,7 @@
       </div><footer class="py-6 border-t border-border md:py-0">
     <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
       <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 07 Jul, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
+        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 05 Sep, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
     href="https://www.sphinx-doc.org"
     rel="noreferrer">Sphinx 9.1.0</a></p>
 </div>

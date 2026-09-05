@@ -167,14 +167,14 @@
 
     <div id="content" role="main">
       <h1>Source code for cs_util.logging</h1><div class="highlight"><pre>
-<span></span><code><span id="line-1"><span class="sd">&quot;&quot;&quot;LOGGING.</span>
+<span></span><code><span id="line-1"><span class="sd">"""LOGGING.</span>
 </span><span id="line-2">
 </span><span id="line-3"><span class="sd">:Description: This script contains utility methods for job execution and</span>
 </span><span id="line-4"><span class="sd">progress logging.</span>
 </span><span id="line-5">
 </span><span id="line-6"><span class="sd">:Author: Martin Kilbinger &lt;martin.kilblinger@cea.fr&gt;</span>
 </span><span id="line-7">
-</span><span id="line-8"><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-8"><span class="sd">"""</span>
 </span><span id="line-9">
 </span><span id="line-10"><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 </span><span id="line-11"><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
@@ -183,10 +183,10 @@
 <div class="viewcode-block" id="log_command">
 <a class="viewcode-back" href="../../cs_util.logging.html#cs_util.logging.log_command">[docs]</a>
 </span><span id="line-14"><span class="k">def</span><span class="w"> </span><span class="nf">log_command</span><span class="p">(</span><span class="n">argv</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">close_no_return</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="line-15"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Log Command.</span>
+</span><span id="line-15"><span class="w">    </span><span class="sd">"""Log Command.</span>
 </span><span id="line-16">
 </span><span id="line-17"><span class="sd">    Write command with arguments to a file or stdout.</span>
-</span><span id="line-18"><span class="sd">    Choose name = &#39;sys.stdout&#39; or &#39;sys.stderr&#39; for output on sceen.</span>
+</span><span id="line-18"><span class="sd">    Choose name = 'sys.stdout' or 'sys.stderr' for output on sceen.</span>
 </span><span id="line-19">
 </span><span id="line-20"><span class="sd">    MKDEBUG copied from shapepipe:cfis</span>
 </span><span id="line-21">
@@ -195,7 +195,7 @@
 </span><span id="line-24"><span class="sd">    argv : list</span>
 </span><span id="line-25"><span class="sd">        Command line arguments</span>
 </span><span id="line-26"><span class="sd">    name : str</span>
-</span><span id="line-27"><span class="sd">        Output file name (default: &#39;log_&lt;command&gt;&#39;)</span>
+</span><span id="line-27"><span class="sd">        Output file name (default: 'log_&lt;command&gt;')</span>
 </span><span id="line-28"><span class="sd">    close_no_return : bool</span>
 </span><span id="line-29"><span class="sd">        If True (default), close log file. If False, keep log file open</span>
 </span><span id="line-30"><span class="sd">        and return file handler</span>
@@ -205,25 +205,25 @@
 </span><span id="line-34"><span class="sd">    filehandler</span>
 </span><span id="line-35"><span class="sd">        log file handler (if close_no_return is False)</span>
 </span><span id="line-36">
-</span><span id="line-37"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-37"><span class="sd">    """</span>
 </span><span id="line-38">    <span class="c1"># Set log file path</span>
-</span><span id="line-39">    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;sys.stdout&quot;</span><span class="p">:</span>
+</span><span id="line-39">    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"sys.stdout"</span><span class="p">:</span>
 </span><span id="line-40">        <span class="n">f</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
-</span><span id="line-41">    <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;sys.stderr&quot;</span><span class="p">:</span>
+</span><span id="line-41">    <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"sys.stderr"</span><span class="p">:</span>
 </span><span id="line-42">        <span class="n">f</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
 </span><span id="line-43">    <span class="k">else</span><span class="p">:</span>
 </span><span id="line-44">        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="line-45">            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;log_&quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="line-46">        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+</span><span id="line-45">            <span class="n">name</span> <span class="o">=</span> <span class="s2">"log_"</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="line-46">        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span>
 </span><span id="line-47">
 </span><span id="line-48">    <span class="c1"># Loop over arguments</span>
-</span><span id="line-49">    <span class="n">log</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span id="line-49">    <span class="n">log</span> <span class="o">=</span> <span class="s2">""</span>
 </span><span id="line-50">    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">argv</span><span class="p">:</span>
 </span><span id="line-51">        <span class="c1"># Quote argument if special characters</span>
-</span><span id="line-52">        <span class="k">if</span> <span class="s2">&quot;[&quot;</span> <span class="ow">in</span> <span class="n">a</span> <span class="ow">or</span> <span class="s2">&quot;]&quot;</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
-</span><span id="line-53">            <span class="n">a</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+</span><span id="line-52">        <span class="k">if</span> <span class="s2">"["</span> <span class="ow">in</span> <span class="n">a</span> <span class="ow">or</span> <span class="s2">"]"</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+</span><span id="line-53">            <span class="n">a</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'"</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">"'</span>
 </span><span id="line-54">
-</span><span id="line-55">        <span class="n">log</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">log</span><span class="si">}{</span><span class="n">a</span><span class="si">}</span><span class="s2"> &quot;</span>
+</span><span id="line-55">        <span class="n">log</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">log</span><span class="si">}{</span><span class="n">a</span><span class="si">}</span><span class="s2"> "</span>
 </span><span id="line-56">
 </span><span id="line-57">    <span class="c1"># Write to file except last character (space)</span>
 </span><span id="line-58">    <span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
@@ -233,7 +233,7 @@
 </span><span id="line-62">        <span class="k">return</span> <span class="n">f</span>
 </span><span id="line-63">
 </span><span id="line-64">    <span class="c1"># Close if proper file</span>
-</span><span id="line-65">    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;sys.stdout&quot;</span><span class="p">,</span> <span class="s2">&quot;sys.stderr&quot;</span><span class="p">):</span>
+</span><span id="line-65">    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"sys.stdout"</span><span class="p">,</span> <span class="s2">"sys.stderr"</span><span class="p">):</span>
 </span><span id="line-66">        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 </span></code></pre></div>
@@ -243,7 +243,7 @@
       </div><footer class="py-6 border-t border-border md:py-0">
     <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
       <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 07 Jul, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
+        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 05 Sep, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
     href="https://www.sphinx-doc.org"
     rel="noreferrer">Sphinx 9.1.0</a></p>
 </div>

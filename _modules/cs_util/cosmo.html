@@ -167,7 +167,7 @@
 
     <div id="content" role="main">
       <h1>Source code for cs_util.cosmo</h1><div class="highlight"><pre>
-<span></span><code><span id="line-1"><span class="sd">&quot;&quot;&quot;COSMO.</span>
+<span></span><code><span id="line-1"><span class="sd">"""COSMO.</span>
 </span><span id="line-2">
 </span><span id="line-3"><span class="sd">:Name: cosmo.py</span>
 </span><span id="line-4">
@@ -179,13 +179,13 @@
 </span><span id="line-10"><span class="sd">              (``get_theo_c_ell``, ``c_ell_to_xi``, ``get_theo_xi``), and</span>
 </span><span id="line-11"><span class="sd">              CCL/CAMB/CosmoCov parameter conversion — was consolidated here</span>
 </span><span id="line-12"><span class="sd">              from ``sp_validation.cosmology`` so that ``cs_util`` is the</span>
-</span><span id="line-13"><span class="sd">              single home for the collaboration&#39;s cosmology primitives.</span>
+</span><span id="line-13"><span class="sd">              single home for the collaboration's cosmology primitives.</span>
 </span><span id="line-14">
 </span><span id="line-15"><span class="sd">:Authors: Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;</span>
 </span><span id="line-16"><span class="sd">          Axel Guinot</span>
 </span><span id="line-17"><span class="sd">          Cail Daley</span>
 </span><span id="line-18"><span class="sd">          Sacha Guerrini</span>
-</span><span id="line-19"><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-19"><span class="sd">"""</span>
 </span><span id="line-20">
 </span><span id="line-21"><span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
 </span><span id="line-22">
@@ -202,7 +202,7 @@
 <div class="viewcode-block" id="get_cosmo_default">
 <a class="viewcode-back" href="../../cs_util.cosmo.html#cs_util.cosmo.get_cosmo_default">[docs]</a>
 </span><span id="line-33"><span class="k">def</span><span class="w"> </span><span class="nf">get_cosmo_default</span><span class="p">():</span>
-</span><span id="line-34"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get Cosmo Default.</span>
+</span><span id="line-34"><span class="w">    </span><span class="sd">"""Get Cosmo Default.</span>
 </span><span id="line-35">
 </span><span id="line-36"><span class="sd">    Return default cosmology.</span>
 </span><span id="line-37">
@@ -211,7 +211,7 @@
 </span><span id="line-40"><span class="sd">    Cosmology</span>
 </span><span id="line-41"><span class="sd">        pyccl cosmology object</span>
 </span><span id="line-42">
-</span><span id="line-43"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-43"><span class="sd">    """</span>
 </span><span id="line-44">    <span class="n">cos</span> <span class="o">=</span> <span class="n">ccl</span><span class="o">.</span><span class="n">Cosmology</span><span class="p">(</span>
 </span><span id="line-45">        <span class="n">Omega_c</span><span class="o">=</span><span class="mf">0.27</span><span class="p">,</span>
 </span><span id="line-46">        <span class="n">Omega_b</span><span class="o">=</span><span class="mf">0.045</span><span class="p">,</span>
@@ -233,7 +233,7 @@
 <div class="viewcode-block" id="sigma_crit">
 <a class="viewcode-back" href="../../cs_util.cosmo.html#cs_util.cosmo.sigma_crit">[docs]</a>
 </span><span id="line-61"><span class="k">def</span><span class="w"> </span><span class="nf">sigma_crit</span><span class="p">(</span><span class="n">z_lens</span><span class="p">,</span> <span class="n">z_source</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">d_lens</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d_source</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="line-62"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sigma Crit.</span>
+</span><span id="line-62"><span class="w">    </span><span class="sd">"""Sigma Crit.</span>
 </span><span id="line-63">
 </span><span id="line-64"><span class="sd">    Critical surface mass density.</span>
 </span><span id="line-65">
@@ -257,7 +257,7 @@
 </span><span id="line-83"><span class="sd">    astropy.units.Quantity</span>
 </span><span id="line-84"><span class="sd">        critical surface mass density with units of M_sol / pc^2</span>
 </span><span id="line-85">
-</span><span id="line-86"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-86"><span class="sd">    """</span>
 </span><span id="line-87">    <span class="n">unit_return</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">Msun</span> <span class="o">/</span> <span class="n">units</span><span class="o">.</span><span class="n">pc</span><span class="o">**</span><span class="mi">2</span>
 </span><span id="line-88">
 </span><span id="line-89">    <span class="c1"># Return 0 if lens behind source</span>
@@ -292,7 +292,7 @@
 </span><span id="line-115">    <span class="n">d_lens</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-116">    <span class="n">d_source_arr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-117"><span class="p">):</span>
-</span><span id="line-118"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sigma Crit Eff.</span>
+</span><span id="line-118"><span class="w">    </span><span class="sd">"""Sigma Crit Eff.</span>
 </span><span id="line-119">
 </span><span id="line-120"><span class="sd">    Effective critical surface mass density, which</span>
 </span><span id="line-121"><span class="sd">    is sigma_crit(z_lens, z_source) weighted by nz_source.</span>
@@ -326,7 +326,7 @@
 </span><span id="line-149"><span class="sd">    astropy.units.Quantity</span>
 </span><span id="line-150"><span class="sd">        effective critical surface mass density with units of M_sol / pc^2</span>
 </span><span id="line-151">
-</span><span id="line-152"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-152"><span class="sd">    """</span>
 </span><span id="line-153">    <span class="n">n_source</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">z_source_arr</span><span class="p">)</span>
 </span><span id="line-154">
 </span><span id="line-155">    <span class="k">if</span> <span class="n">d_source_arr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -334,7 +334,7 @@
 </span><span id="line-157">
 </span><span id="line-158">    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nz_source_arr</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_source</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d_source_arr</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_source</span><span class="p">):</span>
 </span><span id="line-159">        <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span>
-</span><span id="line-160">            <span class="s2">&quot;Lists for source z, n(z), and/or d_ang have different lenghts&quot;</span>
+</span><span id="line-160">            <span class="s2">"Lists for source z, n(z), and/or d_ang have different lenghts"</span>
 </span><span id="line-161">        <span class="p">)</span>
 </span><span id="line-162">
 </span><span id="line-163">    <span class="n">sigma_cr_arr</span> <span class="o">=</span> <span class="p">[]</span>
@@ -371,7 +371,7 @@
 </span><span id="line-191">    <span class="n">d_lens</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-192">    <span class="n">d_source_arr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-193"><span class="p">):</span>
-</span><span id="line-194"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sigma Crit M1 Eff.</span>
+</span><span id="line-194"><span class="w">    </span><span class="sd">"""Sigma Crit M1 Eff.</span>
 </span><span id="line-195">
 </span><span id="line-196"><span class="sd">    Effective inverse critical surface mass density, which</span>
 </span><span id="line-197"><span class="sd">    is sigma_crit^{-1}(z_lens, z_source) weighted by nz_source.</span>
@@ -407,7 +407,7 @@
 </span><span id="line-227"><span class="sd">        effective inverse critical surface mass density with units of</span>
 </span><span id="line-228"><span class="sd">        M_sol / pc^2</span>
 </span><span id="line-229">
-</span><span id="line-230"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-230"><span class="sd">    """</span>
 </span><span id="line-231">    <span class="n">n_source</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">z_source_arr</span><span class="p">)</span>
 </span><span id="line-232">
 </span><span id="line-233">    <span class="k">if</span> <span class="n">d_source_arr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -415,7 +415,7 @@
 </span><span id="line-235">
 </span><span id="line-236">    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nz_source_arr</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_source</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d_source_arr</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_source</span><span class="p">):</span>
 </span><span id="line-237">        <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span>
-</span><span id="line-238">            <span class="s2">&quot;Lists for source z, n(z), and/or d_ang have different lenghts&quot;</span>
+</span><span id="line-238">            <span class="s2">"Lists for source z, n(z), and/or d_ang have different lenghts"</span>
 </span><span id="line-239">        <span class="p">)</span>
 </span><span id="line-240">
 </span><span id="line-241">    <span class="n">sigma_cr_m1_arr</span> <span class="o">=</span> <span class="p">[]</span>
@@ -457,7 +457,7 @@
 </span><span id="line-274">    <span class="n">z</span><span class="p">,</span>
 </span><span id="line-275">    <span class="n">dndz</span><span class="p">,</span>
 </span><span id="line-276"><span class="p">):</span>
-</span><span id="line-277"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Xipm Theo.</span>
+</span><span id="line-277"><span class="w">    </span><span class="sd">"""Xipm Theo.</span>
 </span><span id="line-278">
 </span><span id="line-279"><span class="sd">    Return theoretical prediction of the shear two-point correlation function.</span>
 </span><span id="line-280">
@@ -479,7 +479,7 @@
 </span><span id="line-296"><span class="sd">    numpy.ndarray</span>
 </span><span id="line-297"><span class="sd">        xi_-</span>
 </span><span id="line-298">
-</span><span id="line-299"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-299"><span class="sd">    """</span>
 </span><span id="line-300">    <span class="c1"># Create objects to represent tracers of the weak lensing signal with this</span>
 </span><span id="line-301">    <span class="c1"># number density (with has_intrinsic_alignment=False)</span>
 </span><span id="line-302">    <span class="n">lens_tr</span> <span class="o">=</span> <span class="n">ccl</span><span class="o">.</span><span class="n">WeakLensingTracer</span><span class="p">(</span><span class="n">cos</span><span class="p">,</span> <span class="n">dndz</span><span class="o">=</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">dndz</span><span class="p">))</span>
@@ -490,19 +490,19 @@
 </span><span id="line-307">    <span class="n">ell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">10000</span><span class="p">),</span> <span class="mi">1000</span><span class="p">)</span>
 </span><span id="line-308">    <span class="n">cl</span> <span class="o">=</span> <span class="n">ccl</span><span class="o">.</span><span class="n">angular_cl</span><span class="p">(</span><span class="n">cos</span><span class="p">,</span> <span class="n">lens_tr</span><span class="p">,</span> <span class="n">lens_tr</span><span class="p">,</span> <span class="n">ell</span><span class="p">)</span>
 </span><span id="line-309">
-</span><span id="line-310">    <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;Bessel&quot;</span>
+</span><span id="line-310">    <span class="n">method</span> <span class="o">=</span> <span class="s2">"Bessel"</span>
 </span><span id="line-311">
 </span><span id="line-312">    <span class="n">xipm</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="line-313">    <span class="k">for</span> <span class="n">corr_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;GG+&quot;</span><span class="p">,</span> <span class="s2">&quot;GG-&quot;</span><span class="p">):</span>
+</span><span id="line-313">    <span class="k">for</span> <span class="n">corr_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"GG+"</span><span class="p">,</span> <span class="s2">"GG-"</span><span class="p">):</span>
 </span><span id="line-314">        <span class="n">xipm</span><span class="p">[</span><span class="n">corr_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">ccl</span><span class="o">.</span><span class="n">correlation</span><span class="p">(</span>
 </span><span id="line-315">            <span class="n">cos</span><span class="p">,</span>
 </span><span id="line-316">            <span class="n">ell</span><span class="o">=</span><span class="n">ell</span><span class="p">,</span>
 </span><span id="line-317">            <span class="n">C_ell</span><span class="o">=</span><span class="n">cl</span><span class="p">,</span>
-</span><span id="line-318">            <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;deg&quot;</span><span class="p">),</span>
+</span><span id="line-318">            <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">"deg"</span><span class="p">),</span>
 </span><span id="line-319">            <span class="nb">type</span><span class="o">=</span><span class="n">corr_type</span><span class="p">,</span>
 </span><span id="line-320">        <span class="p">)</span>
 </span><span id="line-321">
-</span><span id="line-322">    <span class="k">return</span> <span class="n">xipm</span><span class="p">[</span><span class="s2">&quot;GG+&quot;</span><span class="p">],</span> <span class="n">xipm</span><span class="p">[</span><span class="s2">&quot;GG-&quot;</span><span class="p">]</span></div>
+</span><span id="line-322">    <span class="k">return</span> <span class="n">xipm</span><span class="p">[</span><span class="s2">"GG+"</span><span class="p">],</span> <span class="n">xipm</span><span class="p">[</span><span class="s2">"GG-"</span><span class="p">]</span></div>
 
 </span><span id="line-323">
 </span><span id="line-324">
@@ -519,29 +519,29 @@
 </span><span id="line-335"><span class="c1">#</span>
 </span><span id="line-336"><span class="c1"># Note on sigma_8 / A_s consistency:</span>
 </span><span id="line-337"><span class="c1"># CAMB with A_s=2.1e-9 and m_nu=0.06 eV derives sigma_8 ~ 0.806, not 0.8102.</span>
-</span><span id="line-338"><span class="c1"># This ~0.5% difference arises from Planck&#39;s MCMC marginalization details.</span>
+</span><span id="line-338"><span class="c1"># This ~0.5% difference arises from Planck's MCMC marginalization details.</span>
 </span><span id="line-339"><span class="c1"># Policy: Use sigma_8=0.8102 for codes taking sigma_8 directly (CosmoCov, CCL);</span>
 </span><span id="line-340"><span class="c1">#         use A_s=2.1e-9 for CAMB-based predictions.</span>
 </span><span id="line-341"><span class="c1"># =============================================================================</span>
 </span><span id="line-342"><span class="n">PLANCK18</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="line-343">    <span class="s2">&quot;Omega_m&quot;</span><span class="p">:</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">Om0</span><span class="p">,</span>  <span class="c1"># 0.30966</span>
+</span><span id="line-343">    <span class="s2">"Omega_m"</span><span class="p">:</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">Om0</span><span class="p">,</span>  <span class="c1"># 0.30966</span>
 </span><span id="line-344">    <span class="c1"># Flat-universe dark-energy density (1 - Omega_m = 0.69034, matching the</span>
-</span><span id="line-345">    <span class="c1"># paper-era planck18.json and CosmoCov&#39;s flat-LCDM convention; astropy&#39;s</span>
+</span><span id="line-345">    <span class="c1"># paper-era planck18.json and CosmoCov's flat-LCDM convention; astropy's</span>
 </span><span id="line-346">    <span class="c1"># Ode0 = 0.68885 differs by the radiation/neutrino contributions).</span>
-</span><span id="line-347">    <span class="s2">&quot;Omega_v&quot;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">Om0</span><span class="p">,</span>  <span class="c1"># 0.69034</span>
-</span><span id="line-348">    <span class="s2">&quot;Omega_b&quot;</span><span class="p">:</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">Ob0</span><span class="p">,</span>  <span class="c1"># 0.04897</span>
-</span><span id="line-349">    <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">h</span><span class="p">,</span>  <span class="c1"># 0.6766</span>
-</span><span id="line-350">    <span class="s2">&quot;n_s&quot;</span><span class="p">:</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">],</span>  <span class="c1"># 0.9665</span>
-</span><span id="line-351">    <span class="s2">&quot;sigma_8&quot;</span><span class="p">:</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">&quot;sigma8&quot;</span><span class="p">],</span>  <span class="c1"># 0.8102</span>
-</span><span id="line-352">    <span class="s2">&quot;A_s&quot;</span><span class="p">:</span> <span class="mf">2.1e-9</span><span class="p">,</span>  <span class="c1"># ln(10^10 A_s) = 3.047</span>
-</span><span id="line-353">    <span class="s2">&quot;m_nu&quot;</span><span class="p">:</span> <span class="mf">0.06</span><span class="p">,</span>  <span class="c1"># eV, sum of neutrino masses</span>
-</span><span id="line-354">    <span class="s2">&quot;w0&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span>
-</span><span id="line-355">    <span class="s2">&quot;wa&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+</span><span id="line-347">    <span class="s2">"Omega_v"</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">Om0</span><span class="p">,</span>  <span class="c1"># 0.69034</span>
+</span><span id="line-348">    <span class="s2">"Omega_b"</span><span class="p">:</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">Ob0</span><span class="p">,</span>  <span class="c1"># 0.04897</span>
+</span><span id="line-349">    <span class="s2">"h"</span><span class="p">:</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">h</span><span class="p">,</span>  <span class="c1"># 0.6766</span>
+</span><span id="line-350">    <span class="s2">"n_s"</span><span class="p">:</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">"n"</span><span class="p">],</span>  <span class="c1"># 0.9665</span>
+</span><span id="line-351">    <span class="s2">"sigma_8"</span><span class="p">:</span> <span class="n">Planck18</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">"sigma8"</span><span class="p">],</span>  <span class="c1"># 0.8102</span>
+</span><span id="line-352">    <span class="s2">"A_s"</span><span class="p">:</span> <span class="mf">2.1e-9</span><span class="p">,</span>  <span class="c1"># ln(10^10 A_s) = 3.047</span>
+</span><span id="line-353">    <span class="s2">"m_nu"</span><span class="p">:</span> <span class="mf">0.06</span><span class="p">,</span>  <span class="c1"># eV, sum of neutrino masses</span>
+</span><span id="line-354">    <span class="s2">"w0"</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span>
+</span><span id="line-355">    <span class="s2">"wa"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="line-356"><span class="p">}</span>
 </span><span id="line-357">
 </span><span id="line-358">
 </span><span id="line-359"><span class="k">def</span><span class="w"> </span><span class="nf">_ccl_to_camb</span><span class="p">(</span><span class="n">cosmo</span><span class="p">):</span>
-</span><span id="line-360"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert CCL cosmology object to CAMB parameter format.</span>
+</span><span id="line-360"><span class="w">    </span><span class="sd">"""Convert CCL cosmology object to CAMB parameter format.</span>
 </span><span id="line-361">
 </span><span id="line-362"><span class="sd">    Parameters</span>
 </span><span id="line-363"><span class="sd">    ----------</span>
@@ -552,23 +552,23 @@
 </span><span id="line-368"><span class="sd">    -------</span>
 </span><span id="line-369"><span class="sd">    dict</span>
 </span><span id="line-370"><span class="sd">        CAMB parameters dictionary with As properly set</span>
-</span><span id="line-371"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-371"><span class="sd">    """</span>
 </span><span id="line-372">
-</span><span id="line-373">    <span class="n">h</span> <span class="o">=</span> <span class="n">cosmo</span><span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">]</span>
+</span><span id="line-373">    <span class="n">h</span> <span class="o">=</span> <span class="n">cosmo</span><span class="p">[</span><span class="s2">"h"</span><span class="p">]</span>
 </span><span id="line-374">    <span class="n">camb_params</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="line-375">        <span class="s2">&quot;H0&quot;</span><span class="p">:</span> <span class="n">h</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
-</span><span id="line-376">        <span class="s2">&quot;ombh2&quot;</span><span class="p">:</span> <span class="n">cosmo</span><span class="p">[</span><span class="s2">&quot;Omega_b&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
-</span><span id="line-377">        <span class="s2">&quot;omch2&quot;</span><span class="p">:</span> <span class="n">cosmo</span><span class="p">[</span><span class="s2">&quot;Omega_c&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
-</span><span id="line-378">        <span class="s2">&quot;ns&quot;</span><span class="p">:</span> <span class="n">cosmo</span><span class="p">[</span><span class="s2">&quot;n_s&quot;</span><span class="p">],</span>
+</span><span id="line-375">        <span class="s2">"H0"</span><span class="p">:</span> <span class="n">h</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
+</span><span id="line-376">        <span class="s2">"ombh2"</span><span class="p">:</span> <span class="n">cosmo</span><span class="p">[</span><span class="s2">"Omega_b"</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="line-377">        <span class="s2">"omch2"</span><span class="p">:</span> <span class="n">cosmo</span><span class="p">[</span><span class="s2">"Omega_c"</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="line-378">        <span class="s2">"ns"</span><span class="p">:</span> <span class="n">cosmo</span><span class="p">[</span><span class="s2">"n_s"</span><span class="p">],</span>
 </span><span id="line-379">    <span class="p">}</span>
 </span><span id="line-380">
 </span><span id="line-381">    <span class="c1"># Handle normalization: prefer As, but convert sigma8 to As if needed</span>
-</span><span id="line-382">    <span class="n">As_val</span> <span class="o">=</span> <span class="n">cosmo</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="s2">&quot;A_s&quot;</span><span class="p">)</span>
-</span><span id="line-383">    <span class="n">sigma8_val</span> <span class="o">=</span> <span class="n">cosmo</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="s2">&quot;sigma8&quot;</span><span class="p">)</span>
+</span><span id="line-382">    <span class="n">As_val</span> <span class="o">=</span> <span class="n">cosmo</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="s2">"A_s"</span><span class="p">)</span>
+</span><span id="line-383">    <span class="n">sigma8_val</span> <span class="o">=</span> <span class="n">cosmo</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="s2">"sigma8"</span><span class="p">)</span>
 </span><span id="line-384">
 </span><span id="line-385">    <span class="k">if</span> <span class="n">As_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">As_val</span><span class="p">):</span>
 </span><span id="line-386">        <span class="c1"># Use As directly</span>
-</span><span id="line-387">        <span class="n">camb_params</span><span class="p">[</span><span class="s2">&quot;As&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">As_val</span>
+</span><span id="line-387">        <span class="n">camb_params</span><span class="p">[</span><span class="s2">"As"</span><span class="p">]</span> <span class="o">=</span> <span class="n">As_val</span>
 </span><span id="line-388">    <span class="k">elif</span> <span class="n">sigma8_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="line-389">        <span class="c1"># Convert sigma8 to As using iterative CAMB calculation</span>
 </span><span id="line-390">        <span class="c1"># see https://cosmocoffee.info/viewtopic.php?t=475</span>
@@ -576,7 +576,7 @@
 </span><span id="line-392">
 </span><span id="line-393">        <span class="c1"># Step 1: Calculate current sigma8 with fiducial As</span>
 </span><span id="line-394">        <span class="n">temp_params</span> <span class="o">=</span> <span class="n">camb_params</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</span><span id="line-395">        <span class="n">temp_params</span><span class="p">[</span><span class="s2">&quot;As&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">As_fiducial</span>
+</span><span id="line-395">        <span class="n">temp_params</span><span class="p">[</span><span class="s2">"As"</span><span class="p">]</span> <span class="o">=</span> <span class="n">As_fiducial</span>
 </span><span id="line-396">
 </span><span id="line-397">        <span class="n">pars</span> <span class="o">=</span> <span class="n">camb</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="o">**</span><span class="n">temp_params</span><span class="p">)</span>
 </span><span id="line-398">        <span class="n">pars</span><span class="o">.</span><span class="n">set_matter_power</span><span class="p">(</span><span class="n">redshifts</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">kmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
@@ -586,10 +586,10 @@
 </span><span id="line-402">        <span class="c1"># Step 2: Scale As to match target sigma8</span>
 </span><span id="line-403">        <span class="c1"># As scales as sigma8^2</span>
 </span><span id="line-404">        <span class="n">As_scaled</span> <span class="o">=</span> <span class="n">As_fiducial</span> <span class="o">*</span> <span class="p">(</span><span class="n">sigma8_val</span> <span class="o">/</span> <span class="n">sigma8_current</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-</span><span id="line-405">        <span class="n">camb_params</span><span class="p">[</span><span class="s2">&quot;As&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">As_scaled</span>
+</span><span id="line-405">        <span class="n">camb_params</span><span class="p">[</span><span class="s2">"As"</span><span class="p">]</span> <span class="o">=</span> <span class="n">As_scaled</span>
 </span><span id="line-406">
 </span><span id="line-407">        <span class="c1"># Step 3: Verify the result</span>
-</span><span id="line-408">        <span class="n">temp_params</span><span class="p">[</span><span class="s2">&quot;As&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">As_scaled</span>
+</span><span id="line-408">        <span class="n">temp_params</span><span class="p">[</span><span class="s2">"As"</span><span class="p">]</span> <span class="o">=</span> <span class="n">As_scaled</span>
 </span><span id="line-409">        <span class="n">pars</span> <span class="o">=</span> <span class="n">camb</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="o">**</span><span class="n">temp_params</span><span class="p">)</span>
 </span><span id="line-410">        <span class="n">pars</span><span class="o">.</span><span class="n">set_matter_power</span><span class="p">(</span><span class="n">redshifts</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">kmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
 </span><span id="line-411">        <span class="n">results</span> <span class="o">=</span> <span class="n">camb</span><span class="o">.</span><span class="n">get_results</span><span class="p">(</span><span class="n">pars</span><span class="p">)</span>
@@ -599,15 +599,15 @@
 </span><span id="line-415">        <span class="n">relative_error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma8_final</span> <span class="o">-</span> <span class="n">sigma8_val</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma8_val</span>
 </span><span id="line-416">        <span class="k">if</span> <span class="n">relative_error</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>
 </span><span id="line-417">            <span class="nb">print</span><span class="p">(</span>
-</span><span id="line-418">                <span class="sa">f</span><span class="s2">&quot;Warning: CAMB sigma8 conversion accuracy: target=</span><span class="si">{</span><span class="n">sigma8_val</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
-</span><span id="line-419">                <span class="sa">f</span><span class="s2">&quot;achieved=</span><span class="si">{</span><span class="n">sigma8_final</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, error=</span><span class="si">{</span><span class="n">relative_error</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="line-418">                <span class="sa">f</span><span class="s2">"Warning: CAMB sigma8 conversion accuracy: target=</span><span class="si">{</span><span class="n">sigma8_val</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, "</span>
+</span><span id="line-419">                <span class="sa">f</span><span class="s2">"achieved=</span><span class="si">{</span><span class="n">sigma8_final</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, error=</span><span class="si">{</span><span class="n">relative_error</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span>
 </span><span id="line-420">            <span class="p">)</span>
 </span><span id="line-421">    <span class="k">else</span><span class="p">:</span>
 </span><span id="line-422">        <span class="c1"># No normalization specified, use CAMB default</span>
 </span><span id="line-423">        <span class="k">pass</span>
 </span><span id="line-424">
 </span><span id="line-425">    <span class="c1"># Add dark energy parameters if they exist</span>
-</span><span id="line-426">    <span class="k">for</span> <span class="n">camb_key</span><span class="p">,</span> <span class="n">cosmo_key</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="s2">&quot;w0&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;wa&quot;</span><span class="p">,</span> <span class="s2">&quot;wa&quot;</span><span class="p">)]:</span>
+</span><span id="line-426">    <span class="k">for</span> <span class="n">camb_key</span><span class="p">,</span> <span class="n">cosmo_key</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"w"</span><span class="p">,</span> <span class="s2">"w0"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"wa"</span><span class="p">,</span> <span class="s2">"wa"</span><span class="p">)]:</span>
 </span><span id="line-427">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cosmo</span><span class="o">.</span><span class="n">_params</span><span class="p">,</span> <span class="n">cosmo_key</span><span class="p">):</span>
 </span><span id="line-428">            <span class="n">camb_params</span><span class="p">[</span><span class="n">camb_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">cosmo</span><span class="p">[</span><span class="n">cosmo_key</span><span class="p">]</span>
 </span><span id="line-429">
@@ -615,7 +615,7 @@
 </span><span id="line-431">
 </span><span id="line-432">
 </span><span id="line-433"><span class="k">def</span><span class="w"> </span><span class="nf">_camb_to_ccl</span><span class="p">(</span><span class="n">camb_params</span><span class="p">):</span>
-</span><span id="line-434"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert CAMB parameter format to CCL parameter dictionary.</span>
+</span><span id="line-434"><span class="w">    </span><span class="sd">"""Convert CAMB parameter format to CCL parameter dictionary.</span>
 </span><span id="line-435">
 </span><span id="line-436"><span class="sd">    Parameters</span>
 </span><span id="line-437"><span class="sd">    ----------</span>
@@ -627,33 +627,33 @@
 </span><span id="line-443"><span class="sd">    -------</span>
 </span><span id="line-444"><span class="sd">    dict</span>
 </span><span id="line-445"><span class="sd">        CCL parameters dictionary</span>
-</span><span id="line-446"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="line-447">    <span class="n">h</span> <span class="o">=</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">&quot;H0&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">100.0</span>
+</span><span id="line-446"><span class="sd">    """</span>
+</span><span id="line-447">    <span class="n">h</span> <span class="o">=</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">"H0"</span><span class="p">]</span> <span class="o">/</span> <span class="mf">100.0</span>
 </span><span id="line-448">    <span class="n">ccl_params</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="line-449">        <span class="s2">&quot;Omega_c&quot;</span><span class="p">:</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">&quot;omch2&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
-</span><span id="line-450">        <span class="s2">&quot;Omega_b&quot;</span><span class="p">:</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">&quot;ombh2&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
-</span><span id="line-451">        <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="n">h</span><span class="p">,</span>
-</span><span id="line-452">        <span class="s2">&quot;n_s&quot;</span><span class="p">:</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">&quot;ns&quot;</span><span class="p">],</span>
+</span><span id="line-449">        <span class="s2">"Omega_c"</span><span class="p">:</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">"omch2"</span><span class="p">]</span> <span class="o">/</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="line-450">        <span class="s2">"Omega_b"</span><span class="p">:</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">"ombh2"</span><span class="p">]</span> <span class="o">/</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="line-451">        <span class="s2">"h"</span><span class="p">:</span> <span class="n">h</span><span class="p">,</span>
+</span><span id="line-452">        <span class="s2">"n_s"</span><span class="p">:</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">"ns"</span><span class="p">],</span>
 </span><span id="line-453">        <span class="o">**</span><span class="p">{</span>
 </span><span id="line-454">            <span class="n">k</span><span class="p">:</span> <span class="n">camb_params</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
-</span><span id="line-455">            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;w0&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;wa&quot;</span><span class="p">,</span> <span class="s2">&quot;wa&quot;</span><span class="p">)]</span>
+</span><span id="line-455">            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"w0"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"wa"</span><span class="p">,</span> <span class="s2">"wa"</span><span class="p">)]</span>
 </span><span id="line-456">            <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">camb_params</span>
 </span><span id="line-457">        <span class="p">},</span>
 </span><span id="line-458">    <span class="p">}</span>
 </span><span id="line-459">
 </span><span id="line-460">    <span class="c1"># CCL accepts either A_s or sigma8 directly</span>
-</span><span id="line-461">    <span class="k">if</span> <span class="s2">&quot;As&quot;</span> <span class="ow">in</span> <span class="n">camb_params</span><span class="p">:</span>
-</span><span id="line-462">        <span class="n">ccl_params</span><span class="p">[</span><span class="s2">&quot;A_s&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">&quot;As&quot;</span><span class="p">]</span>
-</span><span id="line-463">    <span class="k">elif</span> <span class="s2">&quot;sigma8&quot;</span> <span class="ow">in</span> <span class="n">camb_params</span><span class="p">:</span>
-</span><span id="line-464">        <span class="n">ccl_params</span><span class="p">[</span><span class="s2">&quot;sigma8&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">&quot;sigma8&quot;</span><span class="p">]</span>
+</span><span id="line-461">    <span class="k">if</span> <span class="s2">"As"</span> <span class="ow">in</span> <span class="n">camb_params</span><span class="p">:</span>
+</span><span id="line-462">        <span class="n">ccl_params</span><span class="p">[</span><span class="s2">"A_s"</span><span class="p">]</span> <span class="o">=</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">"As"</span><span class="p">]</span>
+</span><span id="line-463">    <span class="k">elif</span> <span class="s2">"sigma8"</span> <span class="ow">in</span> <span class="n">camb_params</span><span class="p">:</span>
+</span><span id="line-464">        <span class="n">ccl_params</span><span class="p">[</span><span class="s2">"sigma8"</span><span class="p">]</span> <span class="o">=</span> <span class="n">camb_params</span><span class="p">[</span><span class="s2">"sigma8"</span><span class="p">]</span>
 </span><span id="line-465">    <span class="k">else</span><span class="p">:</span>
-</span><span id="line-466">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Must provide either &#39;As&#39; or &#39;sigma8&#39; in camb_params&quot;</span><span class="p">)</span>
+</span><span id="line-466">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Must provide either 'As' or 'sigma8' in camb_params"</span><span class="p">)</span>
 </span><span id="line-467">
 </span><span id="line-468">    <span class="k">return</span> <span class="n">ccl_params</span>
 </span><span id="line-469">
 </span><span id="line-470">
 </span><span id="line-471"><span class="k">def</span><span class="w"> </span><span class="nf">_cosmocov_to_ccl</span><span class="p">(</span><span class="n">cosmocov_params</span><span class="p">):</span>
-</span><span id="line-472"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert CosmoCov parameter format to CCL parameter dictionary.</span>
+</span><span id="line-472"><span class="w">    </span><span class="sd">"""Convert CosmoCov parameter format to CCL parameter dictionary.</span>
 </span><span id="line-473">
 </span><span id="line-474"><span class="sd">    Parameters</span>
 </span><span id="line-475"><span class="sd">    ----------</span>
@@ -665,19 +665,19 @@
 </span><span id="line-481"><span class="sd">    -------</span>
 </span><span id="line-482"><span class="sd">    dict</span>
 </span><span id="line-483"><span class="sd">        CCL parameters dictionary</span>
-</span><span id="line-484"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="line-485">    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Omega_m&quot;</span><span class="p">,</span> <span class="s2">&quot;omb&quot;</span><span class="p">,</span> <span class="s2">&quot;h0&quot;</span><span class="p">,</span> <span class="s2">&quot;n_spec&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma_8&quot;</span><span class="p">]</span>
+</span><span id="line-484"><span class="sd">    """</span>
+</span><span id="line-485">    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Omega_m"</span><span class="p">,</span> <span class="s2">"omb"</span><span class="p">,</span> <span class="s2">"h0"</span><span class="p">,</span> <span class="s2">"n_spec"</span><span class="p">,</span> <span class="s2">"sigma_8"</span><span class="p">]</span>
 </span><span id="line-486">    <span class="n">missing_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">required_params</span> <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cosmocov_params</span><span class="p">]</span>
 </span><span id="line-487">    <span class="k">if</span> <span class="n">missing_params</span><span class="p">:</span>
-</span><span id="line-488">        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing required cosmological parameters: </span><span class="si">{</span><span class="n">missing_params</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="line-488">        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Missing required cosmological parameters: </span><span class="si">{</span><span class="n">missing_params</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="line-489">
 </span><span id="line-490">    <span class="n">ccl_params</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="line-491">        <span class="s2">&quot;Omega_c&quot;</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">&quot;Omega_m&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">&quot;omb&quot;</span><span class="p">],</span>
-</span><span id="line-492">        <span class="s2">&quot;Omega_b&quot;</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">&quot;omb&quot;</span><span class="p">],</span>
-</span><span id="line-493">        <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">&quot;h0&quot;</span><span class="p">],</span>
-</span><span id="line-494">        <span class="s2">&quot;sigma8&quot;</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">&quot;sigma_8&quot;</span><span class="p">],</span>
-</span><span id="line-495">        <span class="s2">&quot;n_s&quot;</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">&quot;n_spec&quot;</span><span class="p">],</span>
-</span><span id="line-496">        <span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;w0&quot;</span><span class="p">,</span> <span class="s2">&quot;wa&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">cosmocov_params</span><span class="p">},</span>
+</span><span id="line-491">        <span class="s2">"Omega_c"</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">"Omega_m"</span><span class="p">]</span> <span class="o">-</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">"omb"</span><span class="p">],</span>
+</span><span id="line-492">        <span class="s2">"Omega_b"</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">"omb"</span><span class="p">],</span>
+</span><span id="line-493">        <span class="s2">"h"</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">"h0"</span><span class="p">],</span>
+</span><span id="line-494">        <span class="s2">"sigma8"</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">"sigma_8"</span><span class="p">],</span>
+</span><span id="line-495">        <span class="s2">"n_s"</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="s2">"n_spec"</span><span class="p">],</span>
+</span><span id="line-496">        <span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">cosmocov_params</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"w0"</span><span class="p">,</span> <span class="s2">"wa"</span><span class="p">]</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">cosmocov_params</span><span class="p">},</span>
 </span><span id="line-497">    <span class="p">}</span>
 </span><span id="line-498">
 </span><span id="line-499">    <span class="k">return</span> <span class="n">ccl_params</span>
@@ -694,13 +694,13 @@
 </span><span id="line-508">    <span class="n">w0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-509">    <span class="n">wa</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-510">    <span class="n">mnu</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-</span><span id="line-511">    <span class="n">transfer_function</span><span class="o">=</span><span class="s2">&quot;boltzmann_camb&quot;</span><span class="p">,</span>
-</span><span id="line-512">    <span class="n">matter_power_spectrum</span><span class="o">=</span><span class="s2">&quot;halofit&quot;</span><span class="p">,</span>
+</span><span id="line-511">    <span class="n">transfer_function</span><span class="o">=</span><span class="s2">"boltzmann_camb"</span><span class="p">,</span>
+</span><span id="line-512">    <span class="n">matter_power_spectrum</span><span class="o">=</span><span class="s2">"halofit"</span><span class="p">,</span>
 </span><span id="line-513">    <span class="n">cosmocov_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-514">    <span class="n">camb_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-515">    <span class="n">extra_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-516"><span class="p">):</span>
-</span><span id="line-517"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get CCL cosmology object with user-specified parameters.</span>
+</span><span id="line-517"><span class="w">    </span><span class="sd">"""Get CCL cosmology object with user-specified parameters.</span>
 </span><span id="line-518">
 </span><span id="line-519"><span class="sd">    Defaults to astropy Planck18 cosmology (Table 2: TT,TE,EE+lowE+lensing+BAO).</span>
 </span><span id="line-520"><span class="sd">    Can also use CosmoCov or CAMB parameter formats.</span>
@@ -723,9 +723,9 @@
 </span><span id="line-537"><span class="sd">        Dark energy equation of state evolution parameter (defaults to 0.0)</span>
 </span><span id="line-538"><span class="sd">    mnu : float, default=None</span>
 </span><span id="line-539"><span class="sd">        Total neutrino mass in eV (defaults to 0.06 eV)</span>
-</span><span id="line-540"><span class="sd">    transfer_function : str, default=&#39;boltzmann_camb&#39;</span>
+</span><span id="line-540"><span class="sd">    transfer_function : str, default='boltzmann_camb'</span>
 </span><span id="line-541"><span class="sd">        Transfer function to use</span>
-</span><span id="line-542"><span class="sd">    matter_power_spectrum : str, default=&#39;halofit&#39;</span>
+</span><span id="line-542"><span class="sd">    matter_power_spectrum : str, default='halofit'</span>
 </span><span id="line-543"><span class="sd">        Matter power spectrum to use</span>
 </span><span id="line-544"><span class="sd">    cosmocov_params : dict, optional</span>
 </span><span id="line-545"><span class="sd">        Parameters in CosmoCov format (Omega_m, omb, h0, sigma_8, n_spec)</span>
@@ -742,37 +742,37 @@
 </span><span id="line-556"><span class="sd">    -------</span>
 </span><span id="line-557"><span class="sd">    Cosmology</span>
 </span><span id="line-558"><span class="sd">        pyccl cosmology object</span>
-</span><span id="line-559"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-559"><span class="sd">    """</span>
 </span><span id="line-560">    <span class="c1"># Check for parameter format conflicts</span>
 </span><span id="line-561">    <span class="k">if</span> <span class="n">cosmocov_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">camb_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="line-562">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="line-563">            <span class="s2">&quot;Cannot provide both cosmocov_params and camb_params. Choose one format.&quot;</span>
+</span><span id="line-563">            <span class="s2">"Cannot provide both cosmocov_params and camb_params. Choose one format."</span>
 </span><span id="line-564">        <span class="p">)</span>
 </span><span id="line-565">
 </span><span id="line-566">    <span class="c1"># Convert parameters to CCL format</span>
 </span><span id="line-567">    <span class="k">if</span> <span class="n">cosmocov_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="line-568">        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using CosmoCov parameters to create CCL cosmology.&quot;</span><span class="p">)</span>
+</span><span id="line-568">        <span class="nb">print</span><span class="p">(</span><span class="s2">"Using CosmoCov parameters to create CCL cosmology."</span><span class="p">)</span>
 </span><span id="line-569">        <span class="n">ccl_params</span> <span class="o">=</span> <span class="n">_cosmocov_to_ccl</span><span class="p">(</span><span class="n">cosmocov_params</span><span class="p">)</span>
 </span><span id="line-570">    <span class="k">elif</span> <span class="n">camb_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="line-571">        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using CAMB parameters to create CCL cosmology.&quot;</span><span class="p">)</span>
+</span><span id="line-571">        <span class="nb">print</span><span class="p">(</span><span class="s2">"Using CAMB parameters to create CCL cosmology."</span><span class="p">)</span>
 </span><span id="line-572">        <span class="n">ccl_params</span> <span class="o">=</span> <span class="n">_camb_to_ccl</span><span class="p">(</span><span class="n">camb_params</span><span class="p">)</span>
 </span><span id="line-573">    <span class="k">else</span><span class="p">:</span>
 </span><span id="line-574">        <span class="n">ccl_params</span> <span class="o">=</span> <span class="p">{}</span>
 </span><span id="line-575">
 </span><span id="line-576">    <span class="c1"># Planck 2018 defaults from astropy (see PLANCK18 dict at module level)</span>
 </span><span id="line-577">    <span class="n">planck_defaults</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="line-578">        <span class="s2">&quot;Omega_m&quot;</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">&quot;Omega_m&quot;</span><span class="p">],</span>
-</span><span id="line-579">        <span class="s2">&quot;Omega_b&quot;</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">&quot;Omega_b&quot;</span><span class="p">],</span>
-</span><span id="line-580">        <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">],</span>
-</span><span id="line-581">        <span class="s2">&quot;sig8&quot;</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">&quot;sigma_8&quot;</span><span class="p">],</span>
-</span><span id="line-582">        <span class="s2">&quot;ns&quot;</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">&quot;n_s&quot;</span><span class="p">],</span>
-</span><span id="line-583">        <span class="s2">&quot;w0&quot;</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">&quot;w0&quot;</span><span class="p">],</span>
-</span><span id="line-584">        <span class="s2">&quot;wa&quot;</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">&quot;wa&quot;</span><span class="p">],</span>
-</span><span id="line-585">        <span class="s2">&quot;mnu&quot;</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">&quot;m_nu&quot;</span><span class="p">],</span>
+</span><span id="line-578">        <span class="s2">"Omega_m"</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">"Omega_m"</span><span class="p">],</span>
+</span><span id="line-579">        <span class="s2">"Omega_b"</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">"Omega_b"</span><span class="p">],</span>
+</span><span id="line-580">        <span class="s2">"h"</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">"h"</span><span class="p">],</span>
+</span><span id="line-581">        <span class="s2">"sig8"</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">"sigma_8"</span><span class="p">],</span>
+</span><span id="line-582">        <span class="s2">"ns"</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">"n_s"</span><span class="p">],</span>
+</span><span id="line-583">        <span class="s2">"w0"</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">"w0"</span><span class="p">],</span>
+</span><span id="line-584">        <span class="s2">"wa"</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">"wa"</span><span class="p">],</span>
+</span><span id="line-585">        <span class="s2">"mnu"</span><span class="p">:</span> <span class="n">PLANCK18</span><span class="p">[</span><span class="s2">"m_nu"</span><span class="p">],</span>
 </span><span id="line-586">    <span class="p">}</span>
 </span><span id="line-587">
-</span><span id="line-588">    <span class="n">mnu</span> <span class="o">=</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mnu&quot;</span><span class="p">,</span> <span class="n">mnu</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">&quot;mnu&quot;</span><span class="p">])</span>
-</span><span id="line-589">    <span class="n">h</span> <span class="o">=</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="n">h</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">])</span>
+</span><span id="line-588">    <span class="n">mnu</span> <span class="o">=</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mnu"</span><span class="p">,</span> <span class="n">mnu</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">"mnu"</span><span class="p">])</span>
+</span><span id="line-589">    <span class="n">h</span> <span class="o">=</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"h"</span><span class="p">,</span> <span class="n">h</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">"h"</span><span class="p">])</span>
 </span><span id="line-590">    <span class="n">pars</span> <span class="o">=</span> <span class="n">camb</span><span class="o">.</span><span class="n">CAMBparams</span><span class="p">()</span>
 </span><span id="line-591">
 </span><span id="line-592">    <span class="n">pars</span><span class="o">.</span><span class="n">set_cosmology</span><span class="p">(</span>
@@ -783,20 +783,20 @@
 </span><span id="line-597">    <span class="n">Omega_nu</span> <span class="o">=</span> <span class="n">pars</span><span class="o">.</span><span class="n">omeganu</span>
 </span><span id="line-598">
 </span><span id="line-599">    <span class="n">combined_params</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="line-600">        <span class="s2">&quot;Omega_c&quot;</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-</span><span id="line-601">            <span class="s2">&quot;Omega_c&quot;</span><span class="p">,</span>
-</span><span id="line-602">            <span class="p">(</span><span class="n">Omega_m</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">&quot;Omega_m&quot;</span><span class="p">])</span>
-</span><span id="line-603">            <span class="o">-</span> <span class="p">(</span><span class="n">Omega_b</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">&quot;Omega_b&quot;</span><span class="p">])</span>
+</span><span id="line-600">        <span class="s2">"Omega_c"</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span><span id="line-601">            <span class="s2">"Omega_c"</span><span class="p">,</span>
+</span><span id="line-602">            <span class="p">(</span><span class="n">Omega_m</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">"Omega_m"</span><span class="p">])</span>
+</span><span id="line-603">            <span class="o">-</span> <span class="p">(</span><span class="n">Omega_b</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">"Omega_b"</span><span class="p">])</span>
 </span><span id="line-604">            <span class="o">-</span> <span class="n">Omega_nu</span><span class="p">,</span>
 </span><span id="line-605">        <span class="p">),</span>
-</span><span id="line-606">        <span class="s2">&quot;Omega_b&quot;</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Omega_b&quot;</span><span class="p">,</span> <span class="n">Omega_b</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">&quot;Omega_b&quot;</span><span class="p">]),</span>
-</span><span id="line-607">        <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="n">h</span><span class="p">,</span>
-</span><span id="line-608">        <span class="s2">&quot;sigma8&quot;</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sigma8&quot;</span><span class="p">,</span> <span class="n">sig8</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">&quot;sig8&quot;</span><span class="p">]),</span>
-</span><span id="line-609">        <span class="s2">&quot;n_s&quot;</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;n_s&quot;</span><span class="p">,</span> <span class="n">ns</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">&quot;ns&quot;</span><span class="p">]),</span>
-</span><span id="line-610">        <span class="s2">&quot;w0&quot;</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;w0&quot;</span><span class="p">,</span> <span class="n">w0</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">&quot;w0&quot;</span><span class="p">]),</span>
-</span><span id="line-611">        <span class="s2">&quot;wa&quot;</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;wa&quot;</span><span class="p">,</span> <span class="n">wa</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">&quot;wa&quot;</span><span class="p">]),</span>
-</span><span id="line-612">        <span class="s2">&quot;m_nu&quot;</span><span class="p">:</span> <span class="n">mnu</span><span class="p">,</span>
-</span><span id="line-613">        <span class="s2">&quot;extra_parameters&quot;</span><span class="p">:</span> <span class="n">extra_params</span><span class="p">,</span>
+</span><span id="line-606">        <span class="s2">"Omega_b"</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Omega_b"</span><span class="p">,</span> <span class="n">Omega_b</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">"Omega_b"</span><span class="p">]),</span>
+</span><span id="line-607">        <span class="s2">"h"</span><span class="p">:</span> <span class="n">h</span><span class="p">,</span>
+</span><span id="line-608">        <span class="s2">"sigma8"</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sigma8"</span><span class="p">,</span> <span class="n">sig8</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">"sig8"</span><span class="p">]),</span>
+</span><span id="line-609">        <span class="s2">"n_s"</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"n_s"</span><span class="p">,</span> <span class="n">ns</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">"ns"</span><span class="p">]),</span>
+</span><span id="line-610">        <span class="s2">"w0"</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"w0"</span><span class="p">,</span> <span class="n">w0</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">"w0"</span><span class="p">]),</span>
+</span><span id="line-611">        <span class="s2">"wa"</span><span class="p">:</span> <span class="n">ccl_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"wa"</span><span class="p">,</span> <span class="n">wa</span> <span class="ow">or</span> <span class="n">planck_defaults</span><span class="p">[</span><span class="s2">"wa"</span><span class="p">]),</span>
+</span><span id="line-612">        <span class="s2">"m_nu"</span><span class="p">:</span> <span class="n">mnu</span><span class="p">,</span>
+</span><span id="line-613">        <span class="s2">"extra_parameters"</span><span class="p">:</span> <span class="n">extra_params</span><span class="p">,</span>
 </span><span id="line-614">    <span class="p">}</span>
 </span><span id="line-615">
 </span><span id="line-616">    <span class="k">return</span> <span class="n">ccl</span><span class="o">.</span><span class="n">Cosmology</span><span class="p">(</span>
@@ -813,7 +813,7 @@
 </span><span id="line-624">    <span class="n">ell</span><span class="p">,</span>
 </span><span id="line-625">    <span class="n">z</span><span class="p">,</span>
 </span><span id="line-626">    <span class="n">nz</span><span class="p">,</span>
-</span><span id="line-627">    <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;ccl&quot;</span><span class="p">,</span>
+</span><span id="line-627">    <span class="n">backend</span><span class="o">=</span><span class="s2">"ccl"</span><span class="p">,</span>
 </span><span id="line-628">    <span class="n">cosmo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-629">    <span class="n">Omega_b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-630">    <span class="n">Omega_m</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -823,7 +823,7 @@
 </span><span id="line-634">    <span class="n">w0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-635">    <span class="n">wa</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-636"><span class="p">):</span>
-</span><span id="line-637"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate theoretical angular power spectrum C_ell for weak lensing.</span>
+</span><span id="line-637"><span class="w">    </span><span class="sd">"""Calculate theoretical angular power spectrum C_ell for weak lensing.</span>
 </span><span id="line-638">
 </span><span id="line-639"><span class="sd">    Parameters</span>
 </span><span id="line-640"><span class="sd">    ----------</span>
@@ -833,8 +833,8 @@
 </span><span id="line-644"><span class="sd">        Redshifts for n(z) distribution</span>
 </span><span id="line-645"><span class="sd">    nz : array</span>
 </span><span id="line-646"><span class="sd">        n(z) redshift distribution. If nz.shape[1] &gt; 1, assumes multiple tomographic bins. Input shape (n_z, n_tomo_bins).</span>
-</span><span id="line-647"><span class="sd">    backend : str, default=&quot;ccl&quot;</span>
-</span><span id="line-648"><span class="sd">        Backend to use: &quot;ccl&quot; or &quot;camb&quot;</span>
+</span><span id="line-647"><span class="sd">    backend : str, default="ccl"</span>
+</span><span id="line-648"><span class="sd">        Backend to use: "ccl" or "camb"</span>
 </span><span id="line-649"><span class="sd">    cosmo : ccl.Cosmology, optional</span>
 </span><span id="line-650"><span class="sd">        CCL cosmology object. If None, will create using individual parameters.</span>
 </span><span id="line-651"><span class="sd">    Omega_b : float, optional</span>
@@ -856,7 +856,7 @@
 </span><span id="line-667"><span class="sd">    -------</span>
 </span><span id="line-668"><span class="sd">    cl : dict</span>
 </span><span id="line-669"><span class="sd">        Angular power spectrum in dictionary indexed by the tomographic bin keys.</span>
-</span><span id="line-670"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-670"><span class="sd">    """</span>
 </span><span id="line-671">    <span class="k">if</span> <span class="n">cosmo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="line-672">        <span class="n">cosmo</span> <span class="o">=</span> <span class="n">get_cosmo</span><span class="p">(</span>
 </span><span id="line-673">            <span class="n">Omega_b</span><span class="o">=</span><span class="n">Omega_b</span><span class="p">,</span>
@@ -868,26 +868,26 @@
 </span><span id="line-679">            <span class="n">wa</span><span class="o">=</span><span class="n">wa</span><span class="p">,</span>
 </span><span id="line-680">        <span class="p">)</span>
 </span><span id="line-681">
-</span><span id="line-682">    <span class="k">assert</span> <span class="n">nz</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;nz first axis (</span><span class="si">{</span><span class="n">nz</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">) must match z (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+</span><span id="line-682">    <span class="k">assert</span> <span class="n">nz</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"nz first axis (</span><span class="si">{</span><span class="n">nz</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">) must match z (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span>
 </span><span id="line-683">    <span class="n">n_tomo_bins</span> <span class="o">=</span> <span class="n">nz</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nz</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">1</span>
-</span><span id="line-684">    <span class="c1"># Add a new axis to nz if it&#39;s a single tomographic bin for consistent indexing</span>
+</span><span id="line-684">    <span class="c1"># Add a new axis to nz if it's a single tomographic bin for consistent indexing</span>
 </span><span id="line-685">    <span class="k">if</span> <span class="n">n_tomo_bins</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">nz</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 </span><span id="line-686">        <span class="n">nz</span> <span class="o">=</span> <span class="n">nz</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
 </span><span id="line-687">    <span class="n">tomo_bin_pairs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations_with_replacement</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_tomo_bins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
 </span><span id="line-688">    <span class="n">cl</span> <span class="o">=</span> <span class="p">{}</span>
 </span><span id="line-689">
-</span><span id="line-690">    <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">&quot;ccl&quot;</span><span class="p">:</span>
+</span><span id="line-690">    <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">"ccl"</span><span class="p">:</span>
 </span><span id="line-691">        <span class="n">tracers</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="line-692">            <span class="sa">f</span><span class="s2">&quot;W</span><span class="si">{</span><span class="n">bin_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">ccl</span><span class="o">.</span><span class="n">WeakLensingTracer</span><span class="p">(</span><span class="n">cosmo</span><span class="p">,</span> <span class="n">dndz</span><span class="o">=</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">nz</span><span class="p">[:,</span> <span class="n">bin_key</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+</span><span id="line-692">            <span class="sa">f</span><span class="s2">"W</span><span class="si">{</span><span class="n">bin_key</span><span class="si">}</span><span class="s2">"</span><span class="p">:</span> <span class="n">ccl</span><span class="o">.</span><span class="n">WeakLensingTracer</span><span class="p">(</span><span class="n">cosmo</span><span class="p">,</span> <span class="n">dndz</span><span class="o">=</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">nz</span><span class="p">[:,</span> <span class="n">bin_key</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
 </span><span id="line-693">            <span class="k">for</span> <span class="n">bin_key</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_tomo_bins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </span><span id="line-694">        <span class="p">}</span>
 </span><span id="line-695">
 </span><span id="line-696">        <span class="k">for</span> <span class="n">bin_key1</span><span class="p">,</span> <span class="n">bin_key2</span> <span class="ow">in</span> <span class="n">tomo_bin_pairs</span><span class="p">:</span>
-</span><span id="line-697">            <span class="n">cl</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;W</span><span class="si">{</span><span class="n">bin_key1</span><span class="si">}</span><span class="s2">xW</span><span class="si">{</span><span class="n">bin_key2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ccl</span><span class="o">.</span><span class="n">angular_cl</span><span class="p">(</span>
-</span><span id="line-698">                <span class="n">cosmo</span><span class="p">,</span> <span class="n">tracers</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;W</span><span class="si">{</span><span class="n">bin_key1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span> <span class="n">tracers</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;W</span><span class="si">{</span><span class="n">bin_key2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span> <span class="n">ell</span>
+</span><span id="line-697">            <span class="n">cl</span><span class="p">[</span><span class="sa">f</span><span class="s2">"W</span><span class="si">{</span><span class="n">bin_key1</span><span class="si">}</span><span class="s2">xW</span><span class="si">{</span><span class="n">bin_key2</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ccl</span><span class="o">.</span><span class="n">angular_cl</span><span class="p">(</span>
+</span><span id="line-698">                <span class="n">cosmo</span><span class="p">,</span> <span class="n">tracers</span><span class="p">[</span><span class="sa">f</span><span class="s2">"W</span><span class="si">{</span><span class="n">bin_key1</span><span class="si">}</span><span class="s2">"</span><span class="p">],</span> <span class="n">tracers</span><span class="p">[</span><span class="sa">f</span><span class="s2">"W</span><span class="si">{</span><span class="n">bin_key2</span><span class="si">}</span><span class="s2">"</span><span class="p">],</span> <span class="n">ell</span>
 </span><span id="line-699">            <span class="p">)</span>
 </span><span id="line-700">
-</span><span id="line-701">    <span class="k">elif</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">&quot;camb&quot;</span><span class="p">:</span>
+</span><span id="line-701">    <span class="k">elif</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">"camb"</span><span class="p">:</span>
 </span><span id="line-702">        <span class="c1"># Convert CCL cosmology to CAMB parameters</span>
 </span><span id="line-703">        <span class="kn">import</span><span class="w"> </span><span class="nn">camb</span>
 </span><span id="line-704">
@@ -901,8 +901,8 @@
 </span><span id="line-712">        <span class="p">)</span>
 </span><span id="line-713">
 </span><span id="line-714">        <span class="c1"># Adjust for neutrino contribution</span>
-</span><span id="line-715">        <span class="k">if</span> <span class="s2">&quot;mnu&quot;</span> <span class="ow">in</span> <span class="n">camb_kwargs</span> <span class="ow">and</span> <span class="n">camb_kwargs</span><span class="p">[</span><span class="s2">&quot;mnu&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="line-716">            <span class="n">omch2_adj</span> <span class="o">=</span> <span class="n">camb_kwargs</span><span class="p">[</span><span class="s2">&quot;omch2&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">pars</span><span class="o">.</span><span class="n">omeganu</span> <span class="o">*</span> <span class="p">(</span><span class="n">pars</span><span class="o">.</span><span class="n">H0</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+</span><span id="line-715">        <span class="k">if</span> <span class="s2">"mnu"</span> <span class="ow">in</span> <span class="n">camb_kwargs</span> <span class="ow">and</span> <span class="n">camb_kwargs</span><span class="p">[</span><span class="s2">"mnu"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="line-716">            <span class="n">omch2_adj</span> <span class="o">=</span> <span class="n">camb_kwargs</span><span class="p">[</span><span class="s2">"omch2"</span><span class="p">]</span> <span class="o">-</span> <span class="n">pars</span><span class="o">.</span><span class="n">omeganu</span> <span class="o">*</span> <span class="p">(</span><span class="n">pars</span><span class="o">.</span><span class="n">H0</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
 </span><span id="line-717">            <span class="n">pars</span><span class="o">.</span><span class="n">set_cosmology</span><span class="p">(</span><span class="n">omch2</span><span class="o">=</span><span class="n">omch2_adj</span><span class="p">)</span>
 </span><span id="line-718">
 </span><span id="line-719">        <span class="c1"># Set up lensing source window</span>
@@ -910,7 +910,7 @@
 </span><span id="line-721">        <span class="n">pars</span><span class="o">.</span><span class="n">set_for_lmax</span><span class="p">(</span><span class="n">ell</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
 </span><span id="line-722">
 </span><span id="line-723">        <span class="n">pars</span><span class="o">.</span><span class="n">SourceWindows</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="line-724">            <span class="n">camb</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">SplinedSourceWindow</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">W</span><span class="o">=</span><span class="n">nz</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">source_type</span><span class="o">=</span><span class="s2">&quot;lensing&quot;</span><span class="p">)</span>
+</span><span id="line-724">            <span class="n">camb</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">SplinedSourceWindow</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">W</span><span class="o">=</span><span class="n">nz</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">source_type</span><span class="o">=</span><span class="s2">"lensing"</span><span class="p">)</span>
 </span><span id="line-725">            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </span><span id="line-726">        <span class="p">]</span>
 </span><span id="line-727">
@@ -920,13 +920,13 @@
 </span><span id="line-731">
 </span><span id="line-732">        <span class="c1"># Interpolate to match input ell array</span>
 </span><span id="line-733">        <span class="c1"># CAMB returns C_ell for ell = 0, 1, 2, ..., lmax</span>
-</span><span id="line-734">        <span class="n">ell_camb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">theory_cls</span><span class="p">[</span><span class="s2">&quot;W1xW1&quot;</span><span class="p">]))</span>
+</span><span id="line-734">        <span class="n">ell_camb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">theory_cls</span><span class="p">[</span><span class="s2">"W1xW1"</span><span class="p">]))</span>
 </span><span id="line-735">        <span class="k">for</span> <span class="n">bin_key1</span><span class="p">,</span> <span class="n">bin_key2</span> <span class="ow">in</span> <span class="n">tomo_bin_pairs</span><span class="p">:</span>
-</span><span id="line-736">            <span class="n">cl_full</span> <span class="o">=</span> <span class="n">theory_cls</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;W</span><span class="si">{</span><span class="n">bin_key1</span><span class="si">}</span><span class="s2">xW</span><span class="si">{</span><span class="n">bin_key2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
-</span><span id="line-737">            <span class="n">cl</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;W</span><span class="si">{</span><span class="n">bin_key1</span><span class="si">}</span><span class="s2">xW</span><span class="si">{</span><span class="n">bin_key2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">ell</span><span class="p">,</span> <span class="n">ell_camb</span><span class="p">,</span> <span class="n">cl_full</span><span class="p">)</span>
+</span><span id="line-736">            <span class="n">cl_full</span> <span class="o">=</span> <span class="n">theory_cls</span><span class="p">[</span><span class="sa">f</span><span class="s2">"W</span><span class="si">{</span><span class="n">bin_key1</span><span class="si">}</span><span class="s2">xW</span><span class="si">{</span><span class="n">bin_key2</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span>
+</span><span id="line-737">            <span class="n">cl</span><span class="p">[</span><span class="sa">f</span><span class="s2">"W</span><span class="si">{</span><span class="n">bin_key1</span><span class="si">}</span><span class="s2">xW</span><span class="si">{</span><span class="n">bin_key2</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">ell</span><span class="p">,</span> <span class="n">ell_camb</span><span class="p">,</span> <span class="n">cl_full</span><span class="p">)</span>
 </span><span id="line-738">
 </span><span id="line-739">    <span class="k">else</span><span class="p">:</span>
-</span><span id="line-740">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown backend: </span><span class="si">{</span><span class="n">backend</span><span class="si">}</span><span class="s2">. Must be &#39;ccl&#39; or &#39;camb&#39;&quot;</span><span class="p">)</span>
+</span><span id="line-740">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown backend: </span><span class="si">{</span><span class="n">backend</span><span class="si">}</span><span class="s2">. Must be 'ccl' or 'camb'"</span><span class="p">)</span>
 </span><span id="line-741">
 </span><span id="line-742">    <span class="k">return</span> <span class="n">cl</span></div>
 
@@ -935,7 +935,7 @@
 <div class="viewcode-block" id="c_ell_to_xi">
 <a class="viewcode-back" href="../../cs_util.cosmo.html#cs_util.cosmo.c_ell_to_xi">[docs]</a>
 </span><span id="line-745"><span class="k">def</span><span class="w"> </span><span class="nf">c_ell_to_xi</span><span class="p">(</span><span class="n">cosmo</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">ell</span><span class="p">,</span> <span class="n">cl</span><span class="p">):</span>
-</span><span id="line-746"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert angular power spectrum to correlation functions using CCL.</span>
+</span><span id="line-746"><span class="w">    </span><span class="sd">"""Convert angular power spectrum to correlation functions using CCL.</span>
 </span><span id="line-747">
 </span><span id="line-748"><span class="sd">    Parameters</span>
 </span><span id="line-749"><span class="sd">    ----------</span>
@@ -952,14 +952,14 @@
 </span><span id="line-760"><span class="sd">    -------</span>
 </span><span id="line-761"><span class="sd">    xip, xim : arrays</span>
 </span><span id="line-762"><span class="sd">        xi+ and xi- correlation functions</span>
-</span><span id="line-763"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-763"><span class="sd">    """</span>
 </span><span id="line-764">    <span class="n">theta_deg</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">/</span> <span class="mf">60.0</span>  <span class="c1"># arcmin to degrees</span>
 </span><span id="line-765">
 </span><span id="line-766">    <span class="n">xip</span> <span class="o">=</span> <span class="n">ccl</span><span class="o">.</span><span class="n">correlation</span><span class="p">(</span>
-</span><span id="line-767">        <span class="n">cosmo</span><span class="p">,</span> <span class="n">ell</span><span class="o">=</span><span class="n">ell</span><span class="p">,</span> <span class="n">C_ell</span><span class="o">=</span><span class="n">cl</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta_deg</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;GG+&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Bessel&quot;</span>
+</span><span id="line-767">        <span class="n">cosmo</span><span class="p">,</span> <span class="n">ell</span><span class="o">=</span><span class="n">ell</span><span class="p">,</span> <span class="n">C_ell</span><span class="o">=</span><span class="n">cl</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta_deg</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"GG+"</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"Bessel"</span>
 </span><span id="line-768">    <span class="p">)</span>
 </span><span id="line-769">    <span class="n">xim</span> <span class="o">=</span> <span class="n">ccl</span><span class="o">.</span><span class="n">correlation</span><span class="p">(</span>
-</span><span id="line-770">        <span class="n">cosmo</span><span class="p">,</span> <span class="n">ell</span><span class="o">=</span><span class="n">ell</span><span class="p">,</span> <span class="n">C_ell</span><span class="o">=</span><span class="n">cl</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta_deg</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;GG-&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Bessel&quot;</span>
+</span><span id="line-770">        <span class="n">cosmo</span><span class="p">,</span> <span class="n">ell</span><span class="o">=</span><span class="n">ell</span><span class="p">,</span> <span class="n">C_ell</span><span class="o">=</span><span class="n">cl</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta_deg</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"GG-"</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"Bessel"</span>
 </span><span id="line-771">    <span class="p">)</span>
 </span><span id="line-772">
 </span><span id="line-773">    <span class="k">return</span> <span class="n">xip</span><span class="p">,</span> <span class="n">xim</span></div>
@@ -980,11 +980,11 @@
 </span><span id="line-785">    <span class="n">ell_min</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 </span><span id="line-786">    <span class="n">ell_max</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
 </span><span id="line-787">    <span class="n">n_ell</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
-</span><span id="line-788">    <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;ccl&quot;</span><span class="p">,</span>
+</span><span id="line-788">    <span class="n">backend</span><span class="o">=</span><span class="s2">"ccl"</span><span class="p">,</span>
 </span><span id="line-789">    <span class="n">cosmo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 </span><span id="line-790">    <span class="o">**</span><span class="n">cosmo_kwargs</span><span class="p">,</span>
 </span><span id="line-791"><span class="p">):</span>
-</span><span id="line-792"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate theoretical xi+/xi- using individual parameters.</span>
+</span><span id="line-792"><span class="w">    </span><span class="sd">"""Calculate theoretical xi+/xi- using individual parameters.</span>
 </span><span id="line-793">
 </span><span id="line-794"><span class="sd">    Parameters</span>
 </span><span id="line-795"><span class="sd">    ----------</span>
@@ -1010,8 +1010,8 @@
 </span><span id="line-815"><span class="sd">        Maximum ell for power spectrum calculation</span>
 </span><span id="line-816"><span class="sd">    n_ell : int, default=500</span>
 </span><span id="line-817"><span class="sd">        Number of ell bins</span>
-</span><span id="line-818"><span class="sd">    backend : str, default=&quot;ccl&quot;</span>
-</span><span id="line-819"><span class="sd">        Backend to use: &quot;ccl&quot; or &quot;camb&quot;</span>
+</span><span id="line-818"><span class="sd">    backend : str, default="ccl"</span>
+</span><span id="line-819"><span class="sd">        Backend to use: "ccl" or "camb"</span>
 </span><span id="line-820"><span class="sd">    **cosmo_kwargs</span>
 </span><span id="line-821"><span class="sd">        Additional arguments passed to backend</span>
 </span><span id="line-822">
@@ -1019,7 +1019,7 @@
 </span><span id="line-824"><span class="sd">    -------</span>
 </span><span id="line-825"><span class="sd">    dict</span>
 </span><span id="line-826"><span class="sd">        Theoretical xi+ and xi- correlation functions per tomographic bin combinations</span>
-</span><span id="line-827"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-827"><span class="sd">    """</span>
 </span><span id="line-828">    <span class="c1"># Create ell array for C_ell calculation</span>
 </span><span id="line-829">    <span class="n">ell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">ell_min</span><span class="p">,</span> <span class="n">ell_max</span><span class="p">,</span> <span class="n">n_ell</span><span class="p">)</span>
 </span><span id="line-830">
@@ -1042,7 +1042,7 @@
       </div><footer class="py-6 border-t border-border md:py-0">
     <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
       <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 07 Jul, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
+        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 05 Sep, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
     href="https://www.sphinx-doc.org"
     rel="noreferrer">Sphinx 9.1.0</a></p>
 </div>

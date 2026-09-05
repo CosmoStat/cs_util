@@ -167,11 +167,11 @@
 
     <div id="content" role="main">
       <h1>Source code for cs_util.tests.test_canfar</h1><div class="highlight"><pre>
-<span></span><code><span id="line-1"><span class="sd">&quot;&quot;&quot;UNIT TESTS FOR CANFAR SUBPACKAGE.</span>
+<span></span><code><span id="line-1"><span class="sd">"""UNIT TESTS FOR CANFAR SUBPACKAGE.</span>
 </span><span id="line-2">
 </span><span id="line-3"><span class="sd">This module contains unit tests for the canfar subpackage.</span>
 </span><span id="line-4">
-</span><span id="line-5"><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="line-5"><span class="sd">"""</span>
 </span><span id="line-6">
 </span><span id="line-7"><span class="kn">from</span><span class="w"> </span><span class="nn">unittest</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestCase</span>
 </span><span id="line-8">
@@ -185,20 +185,20 @@
 <div class="viewcode-block" id="CanfarTestCase">
 <a class="viewcode-back" href="../../../cs_util.tests.test_canfar.html#cs_util.tests.test_canfar.CanfarTestCase">[docs]</a>
 </span><span id="line-16"><span class="k">class</span><span class="w"> </span><span class="nc">CanfarTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
-</span><span id="line-17"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test case for the ``canfar`` module.&quot;&quot;&quot;</span>
+</span><span id="line-17"><span class="w">    </span><span class="sd">"""Test case for the ``canfar`` module."""</span>
 </span><span id="line-18">
 <div class="viewcode-block" id="CanfarTestCase.setUp">
 <a class="viewcode-back" href="../../../cs_util.tests.test_canfar.html#cs_util.tests.test_canfar.CanfarTestCase.setUp">[docs]</a>
 </span><span id="line-19">    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-20"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set test parameter values.&quot;&quot;&quot;</span>
-</span><span id="line-21">        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_ok</span> <span class="o">=</span> <span class="s2">&quot;vcp&quot;</span>
-</span><span id="line-22">        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_nok</span> <span class="o">=</span> <span class="s2">&quot;vxx&quot;</span></div>
+</span><span id="line-20"><span class="w">        </span><span class="sd">"""Set test parameter values."""</span>
+</span><span id="line-21">        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_ok</span> <span class="o">=</span> <span class="s2">"vcp"</span>
+</span><span id="line-22">        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_nok</span> <span class="o">=</span> <span class="s2">"vxx"</span></div>
 
 </span><span id="line-23">
 <div class="viewcode-block" id="CanfarTestCase.tearDown">
 <a class="viewcode-back" href="../../../cs_util.tests.test_canfar.html#cs_util.tests.test_canfar.CanfarTestCase.tearDown">[docs]</a>
 </span><span id="line-24">    <span class="k">def</span><span class="w"> </span><span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-25"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Unset test parameter values.&quot;&quot;&quot;</span>
+</span><span id="line-25"><span class="w">        </span><span class="sd">"""Unset test parameter values."""</span>
 </span><span id="line-26">        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_ok</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="line-27">        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_nok</span> <span class="o">=</span> <span class="kc">None</span></div>
 
@@ -206,16 +206,16 @@
 <div class="viewcode-block" id="CanfarTestCase.test_init_vos">
 <a class="viewcode-back" href="../../../cs_util.tests.test_canfar.html#cs_util.tests.test_canfar.CanfarTestCase.test_init_vos">[docs]</a>
 </span><span id="line-29">    <span class="k">def</span><span class="w"> </span><span class="nf">test_init_vos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="line-30"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test ``cs_util.canfar.vosHandler()`` with</span>
+</span><span id="line-30"><span class="w">        </span><span class="sd">"""Test ``cs_util.canfar.vosHandler()`` with</span>
 </span><span id="line-31"><span class="sd">        vos command strings.</span>
 </span><span id="line-32">
-</span><span id="line-33"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="line-33"><span class="sd">        """</span>
 </span><span id="line-34">        <span class="c1"># Test whether command is set</span>
 </span><span id="line-35">        <span class="n">vos</span> <span class="o">=</span> <span class="n">canfar</span><span class="o">.</span><span class="n">vosHandler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cmd_ok</span><span class="p">)</span>
 </span><span id="line-36">        <span class="n">npt</span><span class="o">.</span><span class="n">assert_equal</span><span class="p">(</span>
 </span><span id="line-37">            <span class="n">vos</span><span class="o">.</span><span class="n">command</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
 </span><span id="line-38">            <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_ok</span><span class="p">,</span>
-</span><span id="line-39">            <span class="s2">&quot;vos command not set&quot;</span><span class="p">,</span>
+</span><span id="line-39">            <span class="s2">"vos command not set"</span><span class="p">,</span>
 </span><span id="line-40">        <span class="p">)</span>
 </span><span id="line-41">
 </span><span id="line-42">        <span class="c1"># Test error for invalid command</span>
@@ -230,7 +230,7 @@
       </div><footer class="py-6 border-t border-border md:py-0">
     <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
       <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 07 Jul, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
+        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt;&nbsp;Last updated: 05 Sep, 2026.&nbsp;Built with <a class="font-medium underline underline-offset-4"
     href="https://www.sphinx-doc.org"
     rel="noreferrer">Sphinx 9.1.0</a></p>
 </div>
