@@ -21,6 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    concurrency:
+      group: gh-pages-${{ github.ref }}
+      cancel-in-progress: true
 
     steps:
       - name: Checkout
