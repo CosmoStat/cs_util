@@ -1,0 +1,48 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": [
+    "THE ONLY Renovate config file — do not add another (a second config file such as .github/renovate.json5 silently shadows this one; see the same note in shapepipe).",
+    "Low-noise dependency updates, same policy as shapepipe and sp_validation. cs_util has no lockfile (pip-installed in CI), so Renovate only touches pyproject floor ranges when a dependency's latest release falls outside the declared range; in-range releases need no PR. No minimumReleaseAge: CI (pip install + pytest on the ubuntu/macos x py3.10/3.12 matrix) is the automerge gate.",
+    "Noise: all non-major updates grouped into one weekly PR that automerges when CI is green; majors are gated behind an explicit dashboard-approval tick. Security fixes (GitHub + OSV alerts) automerge on green CI without waiting for the weekly schedule.",
+    "python is guarded: Renovate classes 3.12 -> 3.14 as 'minor', so the major-only approval rule wouldn't catch it — its own packageRule adds dependencyDashboardApproval so a bump sits as an unchecked dashboard item until someone deliberately ticks it."
+  ],
+  "extends": [
+    "config:recommended",
+    "group:allNonMajor",
+    "schedule:weekly",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "rangeStrategy": "update-lockfile",
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "automerge": true,
+    "labels": [
+      "security"
+    ]
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "matchPackageNames": [
+        "python"
+      ],
+      "groupName": "python",
+      "automerge": false,
+      "dependencyDashboardApproval": true
+    }
+  ]
+}
