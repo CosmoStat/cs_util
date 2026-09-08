@@ -37,7 +37,7 @@
       "dependencyDashboardApproval": true
     },
     {
-      "matchPackageNames": [
+      "matchDepNames": [
         "python"
       ],
       "groupName": "python",
