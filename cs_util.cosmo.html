@@ -176,8 +176,8 @@ Sacha Guerrini</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>z_lens</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – lens redshift</p></li>
-<li><p><strong>z_source</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – source redshift</p></li>
+<li><p><strong>z_lens</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – lens redshift</p></li>
+<li><p><strong>z_source</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – source redshift</p></li>
 <li><p><strong>cos</strong> (<em>pyccl.core.Cosmology</em>) – cosmological parameters</p></li>
 <li><p><strong>d_lens</strong> (<a class="reference external" href="https://docs.astropy.org/en/latest/api/astropy.units.Quantity.html#astropy.units.Quantity" title="(in Astropy v8.1)"><em>astropy.units.Quantity</em></a><em>, </em><em>optional</em>) – precomputed anguar diameter distance to lens, computed from z_lens
 if <code class="docutils literal notranslate"><span class="pre">None</span></code> (default)</p></li>
@@ -202,19 +202,19 @@ is sigma_crit(z_lens, z_source) weighted by nz_source.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>z_lens</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – lens redshift</p></li>
-<li><p><strong>z_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – source redshifts</p></li>
-<li><p><strong>nz_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – number of galaxies at z_source</p></li>
+<li><p><strong>z_lens</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – lens redshift</p></li>
+<li><p><strong>z_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – source redshifts</p></li>
+<li><p><strong>nz_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – number of galaxies at z_source</p></li>
 <li><p><strong>cos</strong> (<em>pyccl.core.Cosmology</em>) – cosmological parameters</p></li>
 <li><p><strong>d_lens</strong> (<a class="reference external" href="https://docs.astropy.org/en/latest/api/astropy.units.Quantity.html#astropy.units.Quantity" title="(in Astropy v8.1)"><em>astropy.units.Quantity</em></a><em>, </em><em>optional</em>) – precomputed anguar diameter distance to lens;
 computed from z_lens if <code class="docutils literal notranslate"><span class="pre">None</span></code> (default)</p></li>
-<li><p><strong>d_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>, </em><em>optional</em>) – precompuated angular diameter distances to sources;
+<li><p><strong>d_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>, </em><em>optional</em>) – precompuated angular diameter distances to sources;
 computed from z_source_arr if <code class="docutils literal notranslate"><span class="pre">None</span></code> (default);
 needs to be list of astropy.units.Quantity</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IndexError" title="(in Python v3.14)"><strong>IndexError</strong></a> – If lists <code class="docutils literal notranslate"><span class="pre">z_source_arr</span></code>, <code class="docutils literal notranslate"><span class="pre">nz_source_arr</span></code>, and d_source_arr
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#IndexError" title="(in Python v3.14)"><strong>IndexError</strong></a> – If lists <code class="docutils literal notranslate"><span class="pre">z_source_arr</span></code>, <code class="docutils literal notranslate"><span class="pre">nz_source_arr</span></code>, and d_source_arr
 do not match</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -235,19 +235,19 @@ See Eq. (17) in <span class="bibtex-citation" id="id1">[<a class="reference inte
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>z_lens</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – lens redshift</p></li>
-<li><p><strong>z_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – source redshifts</p></li>
-<li><p><strong>nz_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – number of galaxies at z_source</p></li>
+<li><p><strong>z_lens</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – lens redshift</p></li>
+<li><p><strong>z_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – source redshifts</p></li>
+<li><p><strong>nz_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – number of galaxies at z_source</p></li>
 <li><p><strong>cos</strong> (<em>pyccl.core.Cosmology</em>) – cosmological parameters</p></li>
 <li><p><strong>d_lens</strong> (<a class="reference external" href="https://docs.astropy.org/en/latest/api/astropy.units.Quantity.html#astropy.units.Quantity" title="(in Astropy v8.1)"><em>astropy.units.Quantity</em></a><em>, </em><em>optional</em>) – precomputed anguar diameter distance to lens;
 computed from z_lens if <code class="docutils literal notranslate"><span class="pre">None</span></code> (default)</p></li>
-<li><p><strong>d_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – precomputed anguar diameter distance to sources;
+<li><p><strong>d_source_arr</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – precomputed anguar diameter distance to sources;
 computed from z_source_arr if <code class="docutils literal notranslate"><span class="pre">None</span></code> (default);
 needs to be list of astropy.units.Quantity</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IndexError" title="(in Python v3.14)"><strong>IndexError</strong></a> – If lists <code class="docutils literal notranslate"><span class="pre">z_source_arr</span></code>, <code class="docutils literal notranslate"><span class="pre">nz_source_arr</span></code>, and <code class="docutils literal notranslate"><span class="pre">d_source_arr</span></code>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#IndexError" title="(in Python v3.14)"><strong>IndexError</strong></a> – If lists <code class="docutils literal notranslate"><span class="pre">z_source_arr</span></code>, <code class="docutils literal notranslate"><span class="pre">nz_source_arr</span></code>, and <code class="docutils literal notranslate"><span class="pre">d_source_arr</span></code>
 do not match</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -267,10 +267,10 @@ M_sol / pc^2</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>theta</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – angular scales, list of type astropy.units.Quantity</p></li>
+<li><p><strong>theta</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – angular scales, list of type astropy.units.Quantity</p></li>
 <li><p><strong>cos</strong> (<em>pyccl.core.Cosmology</em>) – cosmological parameters</p></li>
-<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – redshift centers</p></li>
-<li><p><strong>dndz</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – number of galaxies for each z (arbitrary normalisation)</p></li>
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – redshift centers</p></li>
+<li><p><strong>dndz</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>) – number of galaxies for each z (arbitrary normalisation)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -291,23 +291,23 @@ Can also use CosmoCov or CAMB parameter formats.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Omega_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Matter density parameter (defaults to Planck18: 0.30966)</p></li>
-<li><p><strong>Omega_b</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Baryon density parameter (defaults to Planck18: 0.04897)</p></li>
-<li><p><strong>h</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Reduced Hubble constant (defaults to Planck18: 0.6766)</p></li>
-<li><p><strong>sig8</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – RMS matter fluctuation amplitude at 8 Mpc/h (defaults to Planck18: 0.8102)</p></li>
-<li><p><strong>ns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Scalar spectral index (defaults to Planck18: 0.9665)</p></li>
-<li><p><strong>w0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Dark energy equation of state parameter (defaults to -1.0)</p></li>
-<li><p><strong>wa</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Dark energy equation of state evolution parameter (defaults to 0.0)</p></li>
-<li><p><strong>mnu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Total neutrino mass in eV (defaults to 0.06 eV)</p></li>
-<li><p><strong>transfer_function</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default='boltzmann_camb'</em>) – Transfer function to use</p></li>
-<li><p><strong>matter_power_spectrum</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default='halofit'</em>) – Matter power spectrum to use</p></li>
-<li><p><strong>cosmocov_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>, </em><em>optional</em>) – Parameters in CosmoCov format (Omega_m, omb, h0, sigma_8, n_spec)
+<li><p><strong>Omega_m</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Matter density parameter (defaults to Planck18: 0.30966)</p></li>
+<li><p><strong>Omega_b</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Baryon density parameter (defaults to Planck18: 0.04897)</p></li>
+<li><p><strong>h</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Reduced Hubble constant (defaults to Planck18: 0.6766)</p></li>
+<li><p><strong>sig8</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – RMS matter fluctuation amplitude at 8 Mpc/h (defaults to Planck18: 0.8102)</p></li>
+<li><p><strong>ns</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Scalar spectral index (defaults to Planck18: 0.9665)</p></li>
+<li><p><strong>w0</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Dark energy equation of state parameter (defaults to -1.0)</p></li>
+<li><p><strong>wa</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Dark energy equation of state evolution parameter (defaults to 0.0)</p></li>
+<li><p><strong>mnu</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Total neutrino mass in eV (defaults to 0.06 eV)</p></li>
+<li><p><strong>transfer_function</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default='boltzmann_camb'</em>) – Transfer function to use</p></li>
+<li><p><strong>matter_power_spectrum</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default='halofit'</em>) – Matter power spectrum to use</p></li>
+<li><p><strong>cosmocov_params</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>, </em><em>optional</em>) – Parameters in CosmoCov format (Omega_m, omb, h0, sigma_8, n_spec)
 If provided, entries override above parameters. Mutually exclusive with
 camb_params.</p></li>
-<li><p><strong>camb_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>, </em><em>optional</em>) – Parameters in CAMB format (H0, ombh2, omch2, ns, sigma8)
+<li><p><strong>camb_params</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>, </em><em>optional</em>) – Parameters in CAMB format (H0, ombh2, omch2, ns, sigma8)
 If provided, entries override above parameters. Mutually exclusive with
 cosmocov_params.</p></li>
-<li><p><strong>extra_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>, </em><em>optional</em>) – Additional parameters to pass to CCL (e.g., for CAMB non-linear settings)</p></li>
+<li><p><strong>extra_params</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>, </em><em>optional</em>) – Additional parameters to pass to CCL (e.g., for CAMB non-linear settings)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -328,22 +328,22 @@ cosmocov_params.</p></li>
 <li><p><strong>ell</strong> (<em>array</em>) – Multipole moments (e.g., np.arange(2, 2000))</p></li>
 <li><p><strong>z</strong> (<em>array</em>) – Redshifts for n(z) distribution</p></li>
 <li><p><strong>nz</strong> (<em>array</em>) – n(z) redshift distribution. If nz.shape[1] &gt; 1, assumes multiple tomographic bins. Input shape (n_z, n_tomo_bins).</p></li>
-<li><p><strong>backend</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default="ccl"</em>) – Backend to use: “ccl” or “camb”</p></li>
+<li><p><strong>backend</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default="ccl"</em>) – Backend to use: “ccl” or “camb”</p></li>
 <li><p><strong>cosmo</strong> (<em>ccl.Cosmology</em><em>, </em><em>optional</em>) – CCL cosmology object. If None, will create using individual parameters.</p></li>
-<li><p><strong>Omega_b</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Baryon density parameter (defaults to Planck 2018)</p></li>
-<li><p><strong>Omega_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Matter density parameter (defaults to Planck 2018)</p></li>
-<li><p><strong>h</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Reduced Hubble constant (defaults to Planck 2018)</p></li>
-<li><p><strong>sig8</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – RMS matter fluctuation amplitude at 8 Mpc/h (defaults to Planck 2018)</p></li>
-<li><p><strong>ns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Scalar spectral index (defaults to Planck 2018)</p></li>
-<li><p><strong>w0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Dark energy equation of state parameter (defaults to -1.0)</p></li>
-<li><p><strong>wa</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Dark energy equation of state evolution parameter (defaults to 0.0)</p></li>
+<li><p><strong>Omega_b</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Baryon density parameter (defaults to Planck 2018)</p></li>
+<li><p><strong>Omega_m</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Matter density parameter (defaults to Planck 2018)</p></li>
+<li><p><strong>h</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Reduced Hubble constant (defaults to Planck 2018)</p></li>
+<li><p><strong>sig8</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – RMS matter fluctuation amplitude at 8 Mpc/h (defaults to Planck 2018)</p></li>
+<li><p><strong>ns</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Scalar spectral index (defaults to Planck 2018)</p></li>
+<li><p><strong>w0</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Dark energy equation of state parameter (defaults to -1.0)</p></li>
+<li><p><strong>wa</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Dark energy equation of state evolution parameter (defaults to 0.0)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>cl</strong> – Angular power spectrum in dictionary indexed by the tomographic bin keys.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -378,15 +378,15 @@ cosmocov_params.</p></li>
 <li><p><strong>theta</strong> (<em>array</em>) – Angular separations in arcminutes</p></li>
 <li><p><strong>z</strong> (<em>array</em>) – Redshift array</p></li>
 <li><p><strong>nz</strong> (<em>array</em>) – n(z) redshift distribution. If nz.shape[1] &gt; 1, assumes multiple tomographic bins. Input shape: (n_z, n_tomo_bins)</p></li>
-<li><p><strong>Omega_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Matter density parameter (defaults to Planck 2018)</p></li>
-<li><p><strong>h</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Reduced Hubble constant (defaults to Planck 2018)</p></li>
-<li><p><strong>Omega_b</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Baryon density parameter (defaults to Planck 2018)</p></li>
-<li><p><strong>sig8</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – RMS matter fluctuation amplitude at 8 Mpc/h (defaults to Planck 2018)</p></li>
-<li><p><strong>ns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Scalar spectral index (defaults to Planck 2018)</p></li>
-<li><p><strong>ell_min</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=0</em>) – Minimum ell for power spectrum calculation</p></li>
-<li><p><strong>ell_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=20000</em>) – Maximum ell for power spectrum calculation</p></li>
-<li><p><strong>n_ell</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=500</em>) – Number of ell bins</p></li>
-<li><p><strong>backend</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default="ccl"</em>) – Backend to use: “ccl” or “camb”</p></li>
+<li><p><strong>Omega_m</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Matter density parameter (defaults to Planck 2018)</p></li>
+<li><p><strong>h</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Reduced Hubble constant (defaults to Planck 2018)</p></li>
+<li><p><strong>Omega_b</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Baryon density parameter (defaults to Planck 2018)</p></li>
+<li><p><strong>sig8</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – RMS matter fluctuation amplitude at 8 Mpc/h (defaults to Planck 2018)</p></li>
+<li><p><strong>ns</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=None</em>) – Scalar spectral index (defaults to Planck 2018)</p></li>
+<li><p><strong>ell_min</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=0</em>) – Minimum ell for power spectrum calculation</p></li>
+<li><p><strong>ell_max</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=20000</em>) – Maximum ell for power spectrum calculation</p></li>
+<li><p><strong>n_ell</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=500</em>) – Number of ell bins</p></li>
+<li><p><strong>backend</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default="ccl"</em>) – Backend to use: “ccl” or “camb”</p></li>
 <li><p><strong>**cosmo_kwargs</strong> – Additional arguments passed to backend</p></li>
 </ul>
 </dd>
@@ -394,7 +394,7 @@ cosmocov_params.</p></li>
 <dd class="field-even"><p>Theoretical xi+ and xi- correlation functions per tomographic bin combinations</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -419,7 +419,7 @@ cosmocov_params.</p></li>
 </div><footer class="py-6 border-t border-border md:py-0">
 <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
 <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt; Last updated: 08 Sep, 2026. Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 9.1.0</a></p>
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2022, Martin Kilbinger &lt;martin.kilbinger@cea.fr&gt; Last updated: 25 Sep, 2026. Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 9.1.0</a></p>
 </div>
 </div>
 </footer>
