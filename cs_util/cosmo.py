@@ -716,8 +716,9 @@ def get_theo_c_ell(
             omch2_adj = camb_kwargs["omch2"] - pars.omeganu * (pars.H0 / 100) ** 2
             pars.set_cosmology(omch2=omch2_adj)
 
-        # Set up lensing source window
-        pars.min_l = ell.min()
+        # Set up lensing source window. CAMB's min_l is the scalar-C_ell floor
+        # (1 or 2 only), so leave it at its default; ell below ell.min() are
+        # computed and discarded by the interpolation.
         pars.set_for_lmax(ell.max())
 
         pars.SourceWindows = [
