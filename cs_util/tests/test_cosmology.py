@@ -387,6 +387,13 @@ class TestGetTheoCell:
         except ImportError:
             pytest.skip("CAMB not available")
 
+    def test_camb_backend_ell_range_independent(self, fast_redshift_data):
+        """CAMB C_ell at a given ell does not depend on the requested ell range."""
+        z, nz = fast_redshift_data
+        cl_wide = cosmology.get_theo_c_ell(np.array([10, 100, 1000]), z, nz, backend="camb")
+        cl_high = cosmology.get_theo_c_ell(np.array([100, 1000]), z, nz, backend="camb")
+        npt.assert_allclose(cl_high["W1xW1"], cl_wide["W1xW1"][1:], rtol=1e-6)
+
     def test_invalid_backend(self, fast_ell_array, fast_redshift_data):
         """Test error with invalid backend."""
         z, nz = fast_redshift_data
