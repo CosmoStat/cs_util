@@ -15,15 +15,16 @@ dependencies = [
 	"numpy>=1.26.4",
 	"matplotlib>=3.8.4",
 	"swig>=4.2.1",
-	"scipy>=1.13.0",
+	# scipy 1.18.0 alone returns a shape-(1,) array from
+	# RectBivariateSpline(scalar, scalar, grid=False), which breaks the BBN Y_He
+	# predictor of camb < 2.0; scipy 1.18.1 restores the 0-d result.
+	"scipy>=1.13.0,!=1.18.0",
 	"vos>=3.6.1",
 	"keyring>=25.2.0",
-	# pyccl 3.3.5 is the first release that runs its boltzmann_camb path on camb 2
+	# pyccl 3.3.5 is the first release whose boltzmann_camb path runs on camb 2
 	# (LSSTDESC/CCL#1303); pyccl declares no camb dependency, so the floor lives here.
 	"pyccl>=3.3.5",
-	# camb 2.0 is the first release whose BBN Y_He predictor tolerates scipy
-	# 1.18.0's shape-(1,) spline output; older camb fails set_cosmology there.
-	"camb>=2.0",
+	"camb>=1.5.9",
 	"healpy>=1.16.0",
 	"healsparse>=1.8.0",
 	]
