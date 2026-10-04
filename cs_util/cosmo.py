@@ -371,12 +371,36 @@ def _ccl_to_camb(cosmo):
     """
 
     h = cosmo["h"]
+    masses = np.atleast_1d(cosmo["m_nu"])
+    masses = masses[masses > 0]
+    mnu = float(np.sum(masses))
+    n_massive = len(masses)
     camb_params = {
         "H0": h * 100,
         "ombh2": cosmo["Omega_b"] * h**2,
         "omch2": cosmo["Omega_c"] * h**2,
         "ns": cosmo["n_s"],
+        "mnu": mnu,
+        "num_massive_neutrinos": n_massive,
+        "nnu": cosmo["Neff"],
+        "TCMB": cosmo["T_CMB"],
+        "omk": cosmo["Omega_k"],
+        "w": cosmo["w0"],
+        "wa": cosmo["wa"],
     }
+
+    # Match CCL's resolved species (including explicit mass arrays), rather
+    # than CAMB's default single 0.06-eV species. As in pyccl.boltzmann,
+    # degeneracies encode T_ncdm relative to the standard neutrino temperature.
+    degeneracy = (cosmo["T_ncdm"] / (4 / 11) ** (1 / 3)) ** 4
+    camb_params.update(
+        omnuh2=cosmo["Omega_nu_mass"] * h**2,
+        num_nu_massless=cosmo["N_nu_rel"],
+        nu_mass_eigenstates=n_massive,
+        nu_mass_numbers=np.ones(n_massive, dtype=int),
+        nu_mass_fractions=masses / mnu if n_massive else [],
+        nu_mass_degeneracies=np.full(n_massive, degeneracy),
+    )
 
     # Handle normalization: prefer As, but convert sigma8 to As if needed
     As_val = cosmo.__getitem__("A_s")
@@ -421,11 +445,6 @@ def _ccl_to_camb(cosmo):
     else:
         # No normalization specified, use CAMB default
         pass
-
-    # Add dark energy parameters if they exist
-    for camb_key, cosmo_key in [("w", "w0"), ("wa", "wa")]:
-        if hasattr(cosmo._params, cosmo_key):
-            camb_params[camb_key] = cosmo[cosmo_key]
 
     return camb_params
 
@@ -711,10 +730,7 @@ def get_theo_c_ell(
             NonLinear=camb.model.NonLinear_both,
         )
 
-        # Adjust for neutrino contribution
-        if "mnu" in camb_kwargs and camb_kwargs["mnu"] > 0:
-            omch2_adj = camb_kwargs["omch2"] - pars.omeganu * (pars.H0 / 100) ** 2
-            pars.set_cosmology(omch2=omch2_adj)
+        # CCL's Omega_c and CAMB's omch2 both exclude massive neutrinos.
 
         # Set up lensing source window. CAMB's min_l is the scalar-C_ell floor
         # (1 or 2 only), so leave it at its default; ell below ell.min() are
