@@ -731,7 +731,6 @@ def get_theo_c_ell(
         )
 
         # CCL's Omega_c and CAMB's omch2 both exclude massive neutrinos.
-        # Do not subtract their density or reset set_cosmology here.
 
         # Set up lensing source window. CAMB's min_l is the scalar-C_ell floor
         # (1 or 2 only), so leave it at its default; ell below ell.min() are
